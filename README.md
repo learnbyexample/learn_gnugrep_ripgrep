@@ -2,6 +2,10 @@
 
 Example based guide to mastering GNU grep and ripgrep.
 
+<p align="center">
+    <img src="./images/grep.png" width="320px" height="400px" />
+</p>
+
 The book also includes exercises to test your understanding, which is presented together as a single file in this repo - [Exercises.md](./exercises/Exercises.md)
 
 See [Version_changes.md](./Version_changes.md) to keep track of changes made to the book.
