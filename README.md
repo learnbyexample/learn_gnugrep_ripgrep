@@ -1,16 +1,22 @@
-<br>
+# GNU GREP and RIPGREP
 
-:warning: :construction: Work in progress, book expected to be released before May 15...
+Example based guide to mastering GNU grep and ripgrep.
 
-<br>
+The book also includes exercises to test your understanding, which is presented together as a single file in this repo - [Exercises.md](./exercises/Exercises.md)
 
-Example based guide to mastering GNU grep and ripgrep
+See [Version_changes.md](./Version_changes.md) to keep track of changes made to the book.
 
 <br>
 
 # E-book
 
-stay tuned...
+You can purchase the book using these links:
+
+* https://gumroad.com/l/gnugrep_ripgrep
+* https://leanpub.com/gnugrep_ripgrep
+* https://www.instamojo.com/learnbyexample/gnu-grep-and-ripgrep/
+
+For a preview of the book, see [sample chapters](https://github.com/learnbyexample/learn_gnugrep_ripgrep/blob/master/sample_chapters/grep_sample_v1p0.pdf)
 
 <br>
 
