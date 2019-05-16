@@ -462,53 +462,5 @@ rg -g='!*.py' --files
 
 rg -g='!scripts' --files
 
-time grep -r 'include' > ../f1
-
-time rg -uuu 'include' > ../f2
-
-time grep -rw 'user' > ../f1
-
-time rg -uuu -w 'user' > ../f2
-
-time grep --exclude-dir='drivers' -rw 'user' > ../f1
-
-time rg -g='!drivers' -uuu -w 'user' > ../f2
-
-time grep -r '\bfor\b.*\bint\b' > ../f1
-
-time rg -uuu '\bfor\b.*\bint\b' > ../f2
-
-time grep -rP '\bfor\b(?!.*\bint\b)' > ../f1
-
-time rg -uuu -P '\bfor\b(?!.*\bint\b)' > ../f2
-
 perl -0777 -pe 'print $_ x 2000' scarlet_pimpernel.txt | shuf > large.txt
-
-time LC_ALL=C grep -iw 'there' large.txt > f1
-
-time rg -iw 'there' large.txt > f2
-
-time LC_ALL=C grep -iwE '[a-z]+[on]{2,}[grw]' large.txt > f1
-
-time rg -iw '[a-z]+[on]{2,}[grw]' large.txt > f2
-
-time LC_ALL=C grep -wP '(\w++).*?\1' large.txt > f1
-
-time rg -wP '(\w++).*?\1' large.txt > f2
-
-time rg --no-pcre2-unicode -wP '(\w++).*?\1' large.txt > f3
-
-time LC_ALL=C sed 's/\bcat\b/dog/g' large.txt > f1
-
-time rg --passthru -w 'cat' -r 'dog' large.txt > f2
-
-time LC_ALL=C sed -E 's/\b(\w+)(\s+\1)+\b/\1/g' large.txt > f1
-
-time rg --passthru -P '\b(\w+)(\s+\1)+\b' -r '$1' large.txt > f2
-
-time rg --passthru -wP '(\w+)(\s+\1)+' -r '$1' large.txt > f3
-
-time rg --no-pcre2-unicode --passthru -wP '(\w+)(\s+\1)+' -r '$1' large.txt > f4
-
-rm f[1-4]
 
