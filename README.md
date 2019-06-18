@@ -20,7 +20,7 @@ You can purchase the book using these links:
 * https://leanpub.com/gnugrep_ripgrep
 * https://www.instamojo.com/learnbyexample/gnu-grep-and-ripgrep/
 
-For a preview of the book, see [sample chapters](https://github.com/learnbyexample/learn_gnugrep_ripgrep/blob/master/sample_chapters/grep_sample_v1p0.pdf)
+For a preview of the book, see [sample chapters](https://github.com/learnbyexample/learn_gnugrep_ripgrep/blob/master/sample_chapters/grep_sample_v1p2.pdf)
 
 <br>
 
@@ -48,12 +48,12 @@ For a preview of the book, see [sample chapters](https://github.com/learnbyexamp
 * [tex.stackexchange](https://tex.stackexchange.com/) - for help on `pandoc` and `tex` related questions
 * Cover image
     * [draw.io](https://about.draw.io/)
-    * [finding a needle in a haystack](https://commons.wikimedia.org/wiki/File:Wikipe-tan_on_the_haystack.png) by [Mikael Häggström](https://commons.wikimedia.org/wiki/User:Mikael_H%C3%A4ggstr%C3%B6m) under [Creative Commons Attribution-Share Alike 3.0 Unported](https://creativecommons.org/licenses/by-sa/3.0/deed.en) (modified to remove Wikimedia logo)
+    * [detective](https://www.flickr.com/photos/32068925@N08/3028314931) by [olarte.ollie](https://www.flickr.com/photos/ollieolarte/) under [Creative Commons Attribution-Share Alike 2.0 Generic](https://creativecommons.org/licenses/by-sa/2.0/)
     * [train icon](https://www.iconfinder.com/icons/4213874/metro_train_transport_transportation_travelling_vehicle_icon) by [Yasir Masood](https://www.iconfinder.com/Muhammad_Auns) under [Creative Commons Attribution 3.0 Unported](https://creativecommons.org/licenses/by/3.0/)
     * [plane icon](https://www.iconfinder.com/icons/3671993/airplane_filled_fly_plane_sky_travel_icon) by [Pondok Multimedia](https://www.iconfinder.com/Ontimedia)
 * [softwareengineering.stackexchange](https://softwareengineering.stackexchange.com/questions/39/whats-your-favourite-quote-about-programming) and [skolakoda](https://skolakoda.org/programming-quotes) for programming quotes
 * [Warning](https://commons.wikimedia.org/wiki/File:Warning_icon.svg) and [Info](https://commons.wikimedia.org/wiki/File:Info_icon_002.svg) icons by [Amada44](https://commons.wikimedia.org/wiki/User:Amada44) under public domain
-* [Andrew Gallant](https://blog.burntsushi.net/about/) (author of `ripgrep`) for critical feedback
+* [Andrew Gallant](https://blog.burntsushi.net/about/) (author of `ripgrep`) and [mikeblas](https://old.reddit.com/user/mikeblas) for critical feedback
 
 Special thanks to all my friends and online acquaintances for their help, support and encouragement, especially during difficult times.
 
