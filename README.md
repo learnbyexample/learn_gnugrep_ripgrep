@@ -24,6 +24,18 @@ For a preview of the book, see [sample chapters](https://github.com/learnbyexamp
 
 <br>
 
+# Feedback
+
+Please open an issue if you spot any typo/errors.
+
+I'd also highly appreciate your feedback about the book.
+
+Goodreads: https://www.goodreads.com/book/show/47406700-gnu-grep-and-ripgrep
+
+Twitter: https://twitter.com/learn_byexample
+
+<br>
+
 # Table of Contents
 
 1) Preface
