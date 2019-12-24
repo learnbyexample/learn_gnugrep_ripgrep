@@ -18,7 +18,8 @@ You can purchase the book using these links:
 
 * https://gumroad.com/l/gnugrep_ripgrep
 * https://leanpub.com/gnugrep_ripgrep
-* https://www.instamojo.com/learnbyexample/gnu-grep-and-ripgrep/
+* You can also get the book as part of **Awesome Regex** bundle from https://leanpub.com/b/regex
+* See https://learnbyexample.github.io/books/ for list of other books
 
 For a preview of the book, see [sample chapters](https://github.com/learnbyexample/learn_gnugrep_ripgrep/blob/master/sample_chapters/grep_sample_v1p2.pdf)
 
