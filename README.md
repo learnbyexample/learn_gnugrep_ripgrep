@@ -18,10 +18,12 @@ You can purchase the book using these links:
 
 * https://gumroad.com/l/gnugrep_ripgrep
 * https://leanpub.com/gnugrep_ripgrep
-* You can also get the book as part of **Awesome Regex** bundle from https://leanpub.com/b/regex
+* You can also get the book as part of **Awesome Regex** bundle from https://leanpub.com/b/regex or https://gumroad.com/l/regex
 * See https://learnbyexample.github.io/books/ for list of other books
 
 For a preview of the book, see [sample chapters](https://github.com/learnbyexample/learn_gnugrep_ripgrep/blob/master/sample_chapters/grep_sample_v1p2.pdf)
+
+The book can also be [viewed as a single markdown file in this repo](./gnu_grep.md). See my blogpost on [generating pdf from markdown using pandoc](https://learnbyexample.github.io/tutorial/ebook-generation/customizing-pandoc/) if you are interested in the ebook creation process.
 
 <br>
 
@@ -73,5 +75,7 @@ Special thanks to all my friends and online acquaintances for their help, suppor
 <br>
 
 # License
+
+The book is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 The code snippets are licensed under MIT, see [LICENSE](./LICENSE) file
