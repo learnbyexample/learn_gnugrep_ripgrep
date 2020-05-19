@@ -1,30 +1,44 @@
+## Installation
+
 link='https://github.com/BurntSushi/ripgrep/releases/'
 
-link="$link"'download/11.0.1/ripgrep_11.0.1_amd64.deb'
+link="$link"'download/12.1.0/ripgrep_12.1.0_amd64.deb'
 
 wget "$link"
 
-sudo gdebi ripgrep_11.0.1_amd64.deb 
+sudo gdebi ripgrep_12.1.0_amd64.deb 
 
 rg --version
 
+## Default behavior
+
 rg 'repo' nested_group.txt
 
-rg 're'
+rg 'a' scripts
+
+## Options overview
 
 man rg
+
+## Literal search
 
 rg -F 'twice' programming_quotes.txt
 
 echo 'int a[5]' | rg -F 'a[5]'
 
+## Case insensitive search
+
 rg -i 'jam' programming_quotes.txt
 
 printf 'Cat\ncOnCaT\nscatter\ncut' | rg -i 'cat'
 
+## Invert matching lines
+
 seq 5 | rg -v '3'
 
 printf 'goal\nrate\neat\npit' | rg -v 'at'
+
+## Line number and count
 
 rg -n 'twice' programming_quotes.txt
 
@@ -40,11 +54,15 @@ cat <(seq 15) programming_quotes.txt | rg -c '1'
 
 rg -c '1' *
 
-grep -c '1' *
+rg -c --include-zero '1' *
+
+## Limiting output lines
 
 rg -m3 'in' programming_quotes.txt
 
 seq 1000 | rg -m4 '2'
+
+## Multiple search strings
 
 rg -e '1' -e 'two' programming_quotes.txt
 
@@ -56,6 +74,8 @@ rg -f search_strings.txt -e 'twice' programming_quotes.txt
 
 rg 'in' programming_quotes.txt | rg 'not'
 
+## Filename instead of matching lines
+
 rg -l 'are' programming_quotes.txt search_strings.txt
 
 rg -l 'xyz' programming_quotes.txt search_strings.txt
@@ -65,6 +85,8 @@ rg -l '1' programming_quotes.txt search_strings.txt
 rg --files-without-match 'xyz' programming_quotes.txt search_strings.txt
 
 rg --files-without-match 'are' programming_quotes.txt search_strings.txt
+
+## Filename prefix for matching lines
 
 rg '1' programming_quotes.txt
 
@@ -82,6 +104,8 @@ rg --vimgrep '1' *.txt
 
 vim -q <(rg --vimgrep '1' *.txt)
 
+## Colored output
+
 rg -e '1' -e 'worth' *.txt
 
 rg --color=never 'twice' programming_quotes.txt
@@ -95,6 +119,8 @@ rg --colors 'match:bg:magenta' 'not' programming_quotes.txt
 rg --colors 'match:style:underline' 'not' programming_quotes.txt
 
 rg --color=always 'in' programming_quotes.txt | rg --colors 'match:fg:blue' 'not'
+
+## Match whole word or line
 
 printf 'par value\nheir apparent\n' | rg 'par'
 
@@ -112,11 +138,15 @@ rg -Fvxf colors_1 colors_2
 
 rg -Fvxf colors_2 colors_1
 
+## Extract only matching portion
+
 rg -o -e 'twice' -e 'hard' programming_quotes.txt
 
 rg -c 'in' programming_quotes.txt
 
 rg -co 'in' programming_quotes.txt
+
+## Context matching
 
 rg -A2 'blue' context.txt
 
@@ -132,7 +162,9 @@ rg -A4 'blue' context.txt
 
 seq 29 | rg --context-separator='*****' -A1 '3'
 
-seq 29 | rg --context-separator='' -A1 '3'
+seq 29 | rg --no-context-separator -A1 '3'
+
+## Scripting options
 
 rg -q 'the the' find.md
 
@@ -162,15 +194,21 @@ rg --no-messages 'a(' find.md 2> /dev/null
 
 echo $?
 
+## Byte offset
+
 rg -Nb 'is' find.md
 
 rg -Nob 'is' find.md
+
+## Line Anchors
 
 printf 'spared no one\npar\nspar\ndare' | rg '^pa'
 
 printf 'spared no one\npar\nspar\ndare' | rg 'ar$'
 
 printf 'spared no one\npar\nspar\ndare' | rg '^par$'
+
+## Word Anchors
 
 rg '\bpar' word_anchors.txt
 
@@ -188,6 +226,8 @@ printf 'copper' | rg '\b' -r ':'
 
 printf 'copper' | rg '\B' -r ':'
 
+## String anchors
+
 printf 'hi-hello;top\nfoo-spot\n' | rg -U '\Ahi'
 
 printf 'hi-hello;top\nfoo-spot\n' | rg -U '\Afoo'
@@ -199,6 +239,8 @@ printf 'hi-hello;top\nfoo-spot\n' | rg -U 'pot\n\z'
 printf 'hi-hello;top\nfoo-spot\n' | rg -U 'pot$'
 
 printf 'hi-hello;top\nfoo-spot\n' | rg -U 'top$'
+
+## Alternation
 
 printf 'I like cats\nI like parrots\nI like dogs' | rg 'cat|dog'
 
@@ -218,19 +260,27 @@ echo 'best years' | rg 'year|years' -r 'X'
 
 echo 'best years' | rg 'years|year' -r 'X'
 
+## Grouping
+
 printf 'red\nreform\nread\narrest' | rg 're(form|st)'
 
 printf 'sub par\nspare\npart time' | rg '\b(par|part)\b'
 
+## Escaping metacharacters
+
 echo 'a^2 + b^2 - C*3' | rg 'b\^2'
 
 printf '(a/b) + c\n3 + (a/b) - c' | rg '^\(a/b\)'
+
+## The dot meta character
 
 echo 'tac tin cot abc:tuv excite' | rg -o 'c.t'
 
 printf '42\t33\n' | rg '2.3' -r '8'
 
 rg -Nx 'c..(t|l)y' words.txt
+
+## Greedy Quantifiers
 
 printf 'sub par\nspare\npart time' | rg -w 'part?'
 
@@ -272,7 +322,11 @@ echo 'car bat cod map scat dot abacus' | rg -o 'c.*t'
 
 echo 'car bat cod map scat dot abacus' | rg -o 'c.*at'
 
-echo 'car bat cod map scat dot abacus' | rg -o 'b.*m*'
+echo 'foo123312baz' | rg -o 'o(1|2|3)+(12baz)?'
+
+echo 'foo123312baz' | rg -o 'o(1|2|3)+12baz'
+
+## Non-greedy quantifiers
 
 echo 'foot' | rg 'f.??o' -r 'X'
 
@@ -280,9 +334,9 @@ echo 'frost' | rg 'f.??o' -r 'X'
 
 echo 'foo 314' | rg -o '\d{2,5}?'
 
-echo 'that is quite a fabricated tale' | rg -o 't.*a'
-
 echo 'that is quite a fabricated tale' | rg -o 't.*?a'
+
+## Character classes
 
 printf 'meeting\ncute\nboat\nsite\nfoot' | rg '[aeo]+t'
 
@@ -336,13 +390,15 @@ echo 'int a[5]' | rg '[x\[.y]'
 
 echo 'f*(a^b) - 3*(a+b)/(a-b)' | rg -o 'a[+^]b'
 
+## Backreferences
+
 echo '[52] apples [and] [31] mangoes' | rg '\[(\d+)]' -r '$1'
 
 echo '52 apples and 31 mangoes' | rg '\d+' -r '(${0}4)'
 
 echo '_foo_ __123__ _baz_' | rg '(_)?_' -r '$1'
 
-echo 'a,b 42,24' | rg '(\w+),(\w+)' -r '$2,$1'
+echo 'good,bad 42,24' | rg '(\w+),(\w+)' -r '$2,$1'
 
 echo '1,2,3,4,5,6,7' | rg '^(([^,]+,){3})([^,]+)' -r '$1($3)'
 
@@ -359,6 +415,10 @@ echo 'foo=42, bar=314, baz:512' | rg -o '=(\d+)' -r '$1'
 echo '42 foo-5, baz3; x-83, y-20: f12' | rg -o '\-(\d+)[:;]' -r '$1'
 
 echo 'cat scatter cater scat' | rg -o '(?:cat.*?){2}(cat[a-z]*)' -r '$1'
+
+echo 'a b a' | rg 'a' -r '$${a}'
+
+## Modifiers
 
 echo 'Cat cOnCaT scatter cut' | rg '(?i)cat' -r 'X'
 
@@ -384,6 +444,8 @@ echo 'foo a#b 123' | rg -o '(?x)a#.'
 
 echo 'foo a#b 123' | rg -o '(?x)a\#.'
 
+## Unicode
+
 echo 'fox:αλεπού,eagle:αετός' | rg '\p{L}+' -r '($0)'
 
 echo 'fox:αλεπού,eagle:αετός' | rg -o '\p{Greek}+'
@@ -399,6 +461,8 @@ echo 'a cat and a dog' | rg 't\x20a'
 echo 'fox:αλεπού,eagle:αετός' | rg -o '[\x61-\x7a]+'
 
 echo 'fox:αλεπού,eagle:αετός' | rg -o '[\x{3b1}-\x{3bb}]+'
+
+## PCRE2
 
 echo '1a42z' | grep -oP '[a-z]*'
 
@@ -416,7 +480,7 @@ echo 'cat scatter cater scat' | rg -oP '(cat.*?){2}\Kcat[a-z]*'
 
 echo 'fox,cat,dog,parrot' | rg -qP 'at((?!go).)*par' && echo 'Match'
 
-echo 'a a a walking for for a cause' | rg -P '\b(\w+)( \1)+\b' -r '$1'
+echo 'aa a a a 42 f_1 f_1 f_13.14' | rg -P '\b(\w+)( \1)+\b' -r '$1'
 
 expr='(a^b)'
 
@@ -424,7 +488,31 @@ echo 'f*(2-a/b) - 3*(a^b)-42' | rg -oP '\S*\Q'"$expr"'\E\S*'
 
 echo 'car bat cod map' | rg -o '(bat|map)(*SKIP)(*F)|\w+'
 
-echo 'car bat cod map' | rg -o --auto-hybrid-regex '(bat|map)(*SKIP)(*F)|\w+'
+echo 'car bat cod map' | rg -o --engine=auto '(bat|map)(*SKIP)(*F)|\w+'
+
+## Recursive options
+
+mkdir recursive_matching && cd $_
+
+printf 'hide\nobscure\nconceal\ncover\nblot\nshield' > patterns.txt
+
+grep -Ff patterns.txt ../bre_ere/words.txt > .hidden
+
+grep -E '([as]([b-g]|po)[r-t]){2}' ../bre_ere/words.txt > nested_group.txt
+
+echo 'how are you?' > normal.txt
+
+echo 'how dare you!' > 'filename with spaces.txt'
+
+mkdir scripts
+
+echo 'yrneaolrknzcyr 86960' > scripts/.key
+
+echo "tr 'a-z0-9' 'n-za-m5-90-4' < .key" > scripts/decode.sh
+
+printf "import math\n\nprint(math.pi)\n" > scripts/pi.py
+
+ln -s ../context_matching/
 
 tree -al
 
@@ -462,5 +550,11 @@ rg -g='!*.py' --files
 
 rg -g='!scripts' --files
 
-perl -0777 -pe 'print $_ x 2000' scarlet_pimpernel.txt | shuf > large.txt
+## Speed comparison
+
+time grep -rw 'user' > ../f1
+
+time rg -uuu -w 'user' > ../f2
+
+diff -sq <(sort ../f1) <(sort ../f2)
 

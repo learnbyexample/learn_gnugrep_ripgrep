@@ -1,3 +1,5 @@
+## Scripting options
+
 cat find.md
 
 grep -wE '(\w+) \1' find.md
@@ -34,6 +36,8 @@ grep -sE 'a(' find.md 2> /dev/null
 
 echo $?
 
+## Multiline matching
+
 grep -zowE '(\w+)\s+\1' find.md | od -c
 
 grep -zowE '(\w+)\s+\1' find.md | sed 's/\x0/\n---\n/g'
@@ -42,6 +46,8 @@ printf 'dark red\nteal\0a2\0spared' | grep -z 'red' | sed 's/\x0/\n---\n/g'
 
 printf 'dark red\nteal\0a2\0spared' | grep -z 'red' | od -c
 
+## Byte offset
+
 grep -b 'is' find.md
 
 grep -b 'it' find.md
@@ -49,6 +55,8 @@ grep -b 'it' find.md
 grep -ob 'art\b' find.md
 
 awk '/is/{print NR, index($0, "is")-1}' find.md
+
+## --label
 
 echo 'red and blue' | grep -c 'and' - find.md
 

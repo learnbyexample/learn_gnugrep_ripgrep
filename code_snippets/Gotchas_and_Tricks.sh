@@ -1,3 +1,5 @@
+## Shell quoting
+
 echo 'a cat and a dog' | grep and a
 
 echo 'a cat and a dog' | grep 'and a'
@@ -18,6 +20,8 @@ echo '\S*\Q'"$expr"'\E\S*'
 
 echo 'f*(2-a/b) - 3*(a^b)-42' | grep -oP '\S*\Q'"$expr"'\E\S*'
 
+## Patterns starting with hyphen
+
 printf '-2+3=1\n'
 
 echo '5*3-2=13' | grep '-2'
@@ -32,6 +36,8 @@ printf 'boat\nsite\nfoot' | grep '[aeo]+t'
 
 printf 'boat\nsite\nfoot' | grep '[aeo]+t' -E
 
+## Word boundary differences
+
 echo '*$' | grep '\b\$\b'
 
 echo '*$' | grep -w '\$'
@@ -42,23 +48,39 @@ echo 'I have 12, he has 2!' | grep -o '\<..\>'
 
 echo 'I have 12, he has 2!' | grep -ow '..'
 
-mkdir gotchas_tricks && cd $_
+## Faster execution for ASCII input
 
-wget https://www.gutenberg.org/files/60/60.txt -O scarlet_pimpernel.txt
+time grep -xE '([a-d][r-z]){3}' words.txt > f1
 
-file scarlet_pimpernel.txt 
+time LC_ALL=C grep -xE '([a-d][r-z]){3}' words.txt > f2
 
-time grep -wE '([a-d][r-z]){3}' scarlet_pimpernel.txt > f1
+diff -s f1 f2
 
-time LC_ALL=C grep -wE '([a-d][r-z]){3}' scarlet_pimpernel.txt > f2
+time grep -xE '([a-z]..)\1' words.txt > f1
 
-cd ../bre_ere/
+time LC_ALL=C grep -xE '([a-z]..)\1' words.txt > f2
+
+rm f[12]
+
+/bin/grep --version | head -n1
+
+time /bin/grep -wE '([a-d][r-z]){3}' words.txt > f1
+
+grep --version | head -n1
+
+time grep -wE '([a-d][r-z]){3}' words.txt > f2
+
+rm f[12]
+
+## Speed benefits with PCRE
 
 time LC_ALL=C grep -xE '([a-z]..)\1' words.txt > f1
 
 time LC_ALL=C grep -xP '([a-z]..)\1' words.txt > f2
 
 rm f[12]
+
+## Parallel execution
 
 wget https://github.com/torvalds/linux/archive/v4.19.tar.gz
 
@@ -78,15 +100,5 @@ diff -sq <(sort ../f1) <(sort ../f2)
 
 diff -sq <(sort ../f1) <(sort ../f3)
 
-cd ..
-
-/bin/grep --version | head -n1
-
-time /bin/grep -wE '([a-d][r-z]){3}' scarlet_pimpernel.txt > f1
-
-grep --version | head -n1
-
-time grep -wE '([a-d][r-z]){3}' scarlet_pimpernel.txt > f2
-
-rm f[1-3]
+rm ../f[1-3]
 

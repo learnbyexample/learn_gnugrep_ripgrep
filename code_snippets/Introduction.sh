@@ -1,8 +1,10 @@
-wget https://ftp.gnu.org/gnu/grep/grep-3.3.tar.xz
+## Installation
 
-tar -Jxf grep-3.3.tar.xz
+wget https://ftp.gnu.org/gnu/grep/grep-3.4.tar.xz
 
-cd grep-3.3/
+tar -Jxf grep-3.4.tar.xz
+
+cd grep-3.4/
 
 ./configure 
 
@@ -13,6 +15,8 @@ sudo make install
 type -a grep
 
 grep -V | head -n1
+
+## Options overview
 
 man grep
 

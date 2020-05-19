@@ -1,3 +1,5 @@
+## BRE/ERE vs PCRE subtle differences
+
 echo 'a^2 + b^2 - C*3' | grep 'b^2'
 
 echo 'a^2 + b^2 - C*3' | grep -P 'b^2'
@@ -44,6 +46,8 @@ printf 'sub\nbit' | grep -P -f- five_words.txt
 
 grep -P -e 'sub' -e 'bit' five_words.txt 
 
+## String anchors
+
 echo 'hi-hello;top-spot' | grep -oP '\A\w+'
 
 echo 'hi-hello;top-spot' | grep -oP '\w+\z'
@@ -52,13 +56,17 @@ echo 'hi-hello;top-spot' | grep -zoP '\w+\z'
 
 echo 'hi-hello;top-spot' | grep -zoP '\w+\Z'
 
+## Escape sequences
+
 echo 'Sample123string42with777numbers' | grep -oP '\d+'
 
 echo 'Sample123string42with777numbers' | grep -oP '\D+'
 
-printf 'red\ntea\n' | grep -zP 'n\nt'
+printf 'blue green\nteal\n' | grep -z $'n\nt'
 
-printf 'blue green\nteal brown\n' | grep -zP 'n\nt'
+printf 'blue green\nteal\n' | grep -zP 'n\nt'
+
+## Non-greedy quantifiers
 
 echo 'foot' | grep -oP 'f.?o'
 
@@ -76,17 +84,17 @@ echo 'that is quite a fabricated tale' | grep -oP 't.*?a'
 
 echo 'that is quite a fabricated tale' | grep -oP 't.*?a.*?f'
 
-printf 'abc\nac\nadc\nxabbbcz\nbbb\nabbbbbc' | grep -oP 'ab*c'
+## Possessive quantifiers
 
-printf 'abc\nac\nadc\nxabbbcz\nbbb\nabbbbbc' | grep -oP 'ab*+c'
+printf 'abc\nac\nadc\nxabbbcz\nbbb' | grep -oP 'ab*c'
 
-echo 'feat ft feaeat' | grep -oP 'f[ae]*at'
+printf 'abc\nac\nadc\nxabbbcz\nbbb' | grep -oP 'ab*+c'
 
-echo 'feat ft feaeat' | grep -qP 'f[ae]*+at' || echo 'No match'
+echo '0501 035 154 12 26 98234' | grep -woP '0*+\d{3,}'
 
-echo 'abbbc foooooot' | grep -oP '(?>[bo]+)'
+echo '0501 035 154 12 26 98234' | grep -woP '(?>0*)\d{3,}'
 
-echo 'feat ft feaeat' | grep -qP 'f(?>[ae]*)at' || echo 'No match'
+## Grouping variants
 
 echo '1,2,3,3,5' | grep -P '^([^,]+,){2}([^,]+),\2,'
 
@@ -106,6 +114,8 @@ echo "$row" | grep -oP '(\d{4}-\d{2}-\d{2}).*(?1)'
 
 echo "$row" | grep -oP '(?<date>\d{4}-\d{2}-\d{2}).*(?&date)'
 
+## Lookarounds
+
 echo ':cart<apple-rest;tea' | grep -oP '(?<![:-])\b\w+\b'
 
 echo 'boz42 bezt5 bazbiz' | grep -ioP 'b.z(?!\d)'
@@ -119,6 +129,8 @@ grep -P '(?=.*b)(?=.*e).*t' five_words.txt
 grep -P '(?=.*a)(?=.*e)(?=.*i)(?=.*o).*u' five_words.txt
 
 grep -P '^(?!e)(?=.*a)(?=.*e)(?=.*i)(?=.*o).*u' five_words.txt
+
+## Variable length lookbehind
 
 echo 'pore42 car3 pare7 care5' | grep -oP '(?<=(?:po|ca)re)\d+'
 
@@ -150,6 +162,8 @@ echo 'fox,cat,dog,parrot' | grep -oP '^((?!parrot).)*'
 
 echo 'fox,cat,dog,parrot' | grep -oP '^((?!(.)\2).)*'
 
+## Modifiers
+
 printf 'Cat\ncOnCaT\nscatter\ncut' | grep -P '(?i)cat'
 
 printf 'Cat\ncOnCaT\nscatter\ncut' | grep -iP '(?-i)cat'
@@ -174,6 +188,8 @@ echo 'foo a#b 123' | grep -oP '(?x)a#.'
 
 echo 'foo a#b 123' | grep -oP '(?x)a\#.'
 
+## \Q and \E
+
 echo 'int a[5]' | grep -P '\Qa[5]'
 
 expr='(a^b)'
@@ -184,13 +200,19 @@ echo 'f*(2-a/b) - 3*(a^b)-42' | grep -oP '\S*\Q'"$expr"'\E\S*'
 
 echo '5b-a\b-abc2' | grep -oP '[\Q\-\Eab]*'
 
+## \G anchor
+
 echo '123-87-593 42 foo' | grep -oP '\G\d+-?'
 
 printf '@A-.\tcar' | grep -oP '\G\S'
 
+## Skipping matches
+
 echo 'car bat cod map' | grep -oP '(bat|map)(*SKIP)(*F)|\w+'
 
 echo 'I like2 "mango" and "guava"' | grep -oP '"[^"]+"(*SKIP)(*F)|\w+'
+
+## Recursive matching
 
 eqn0='a + (b * c) - (d / e)'
 
@@ -215,6 +237,8 @@ echo "$eqn2" | grep -oP '(?x) \( (?: [^()]++ | (?0) )++ \)'
 eqn3='(3+a) * ((r-2)*(t+2)/6) + 42 * (a(b(c(d(e)))))'
 
 echo "$eqn3" | grep -oP '(?x) \( (?: [^()]++ | (?0) )++ \)'
+
+## Unicode
 
 echo 'fox:αλεπού,eagle:αετός' | grep -oP '\p{L}+'
 

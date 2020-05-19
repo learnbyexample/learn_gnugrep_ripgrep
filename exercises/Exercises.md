@@ -1,6 +1,6 @@
 # Frequently used options
 
-Create `exercises` directory and within it, create another directory for this chapter, say `freq_options` or `chapter_2`. Input is a file downloaded from internet - https://www.gutenberg.org/files/345/345.txt saved as `dracula.txt`. To solve the exercises, modify the partial command shown just before the expected output.
+Create `exercises` directory and within it, create another directory for this chapter, say `freq_options` or `chapter_2`. Input is a file downloaded from internet — https://www.gutenberg.org/files/345/345.txt saved as `dracula.txt`. To solve the exercises, modify the partial command shown just before the expected output.
 
 **a)** Display all lines containing `ablaze`
 
@@ -76,6 +76,8 @@ $ grep -cx '' dracula.txt
 0
 ```
 
+<br>
+
 # BRE/ERE Regular Expressions
 
 **a)** Extract all pairs of `()` with/without text inside them, provided they do not contain `()` characters inside.
@@ -93,7 +95,7 @@ $ echo '((2 +3)*5)=25 and (4.3/2*()' | grep ##### add your solution here
 
 ```bash
 $ lines='lovely\n1 dentist\n2 lonely\neden\nfly away\ndent'
-$ printf "$lines" | grep ##### add your solution here
+$ printf '%b' "$lines" | grep ##### add your solution here
 lovely
 2 lonely
 dent
@@ -151,21 +153,44 @@ $ printf '4*5]\n(9-2)*[5]\n[5]*3\nr*[5\n' | grep ##### add your solution here
 (9-2)*[5]
 ```
 
-**i)** For the given greedy quantifiers, what would be the equivalent form using `{m,n}` representation?
+**i)** For the given quantifiers, what would be the equivalent form using `{m,n}` representation?
 
 * `?` is same as
 * `*` is same as
 * `+` is same as
 
-**j)** In ERE, `(a*|b*)` is same as `(a|b)*` - True or False?
+**j)** In ERE, `(a*|b*)` is same as `(a|b)*` — True or False?
+
+**k)** `grep -wE '[a-z](on|no)[a-z]'` is same as `grep -wE '[a-z][on]{2}[a-z]'`. True or False? Sample input shown below might help to understand the differences, if any.
+
+```bash
+$ printf 'known\nmood\nknow\npony\ninns\n'
+known
+mood
+know
+pony
+inns
+```
+
+**l)** Display all lines that start with `hand` and ends with no further character or `s` or `y` or `le`.
+
+```bash
+$ lines='handed\nhand\nhandy\nunhand\nhands\nhandle\n'
+$ printf '%b' "$lines" | grep ##### add your solution here
+hand
+handy
+hands
+handle
+```
+
+<br>
 
 # Context matching
 
-Create `exercises/context_matching` directory. Input file is available from [learn_gnugrep_ripgrep repo](https://raw.githubusercontent.com/learnbyexample/learn_gnugrep_ripgrep/master/exercises/palindrome.py), save it as `palindrome.py`
-
-**a)** Display all lines matching `raise` and one line before it.
+**a)** For this question, create `exercises/context_matching` directory and then save [this file from learn_gnugrep_ripgrep repo](https://raw.githubusercontent.com/learnbyexample/learn_gnugrep_ripgrep/master/exercises/palindrome.py) as `palindrome.py`. For this input file, display all lines matching `raise` and one line before it.
 
 ```bash
+$ # assumes 'exercises/context_matching' as CWD
 $ grep ##### add your solution here
     if re.search(r'[^a-zA-Z]', ip_str):
         raise ValueError("Characters other than alphabets and punctuations")
@@ -177,7 +202,7 @@ $ grep ##### add your solution here
 
 ```bash
 $ lines='rat\ndog\nbat\n\n42\n3.14\n\nhi there\nhave a nice day'
-$ printf "$lines" | grep ##### add your solution here
+$ printf '%b' "$lines" | grep ##### add your solution here
 rat
 dog
 bat
@@ -191,11 +216,11 @@ hi there
 have a nice day
 ```
 
+<br>
+
 # Recursive search
 
 For sample directory, a particular version of one of my GitHub repo is used. All the exercises will assume recursive searching, unless otherwise specified. There are no symbolic links.
-
-**a)** List all files containing `xargs` or `python3`
 
 ```bash
 $ # assumes 'exercises' as CWD
@@ -203,7 +228,11 @@ $ mkdir recursive_searching && cd $_
 $ repo='https://github.com/learnbyexample/Command-line-text-processing.git'
 $ git clone -b apr19 "$repo"
 $ cd Command-line-text-processing
+```
 
+**a)** List all files containing `xargs` or `python3`
+
+```bash
 $ grep ##### add your solution here
 gnu_grep.md
 miscellaneous.md
@@ -272,6 +301,8 @@ ruby_one_liners.md
 perl_the_swiss_knife.md
 ```
 
+<br>
+
 # Miscellaneous options
 
 **a)** Use the correct binary option to get output for second command shown below:
@@ -301,6 +332,8 @@ $ printf '2a\nhi' | grep ##### add your solution here
 Match
 ```
 
+<br>
+
 # Perl Compatible Regular Expressions
 
 **a)** Filter all lines that satisfy all of these rules:
@@ -326,26 +359,32 @@ $ echo 'foo,42,baz,3.14,abc' | grep ##### add your solution here
 42,baz,3.14
 ```
 
-**c)** Match lines if it contains `qty` followed by `price` but not if there is **whitespace** or the string **error** between them.
+**c)** Create `exercises/pcre` directory and then save [this file from learn_gnugrep_ripgrep repo](https://github.com/learnbyexample/learn_gnugrep_ripgrep/raw/master/exercises/price.txt) as `price.txt`. For this input file, match lines if it contains `qty` followed by `price` but not if there is **whitespace** or the string **error** between them.
 
 ```bash
-$ grep ##### add your solution here << EOF
+$ # assumes 'exercises/pcre' as CWD
+$ cat price.txt
 23,qty,price,42
 qty price,oh
 3.14,qty,6,errors,9,price,3
 42 qty-6,apple-56,price-234,error
 4,price,3.14,qty,4
 4,qtyprice,3
-EOF
+
+$ grep ##### add your solution here
 23,qty,price,42
 42 qty-6,apple-56,price-234,error
 4,qtyprice,3
 ```
 
-**d)** Correct the command to get output as shown below.
+**d)** Correct the command to get output as shown below. Problem statement is to find sequence of duplicate word characters, with the second occurrence matching just before a newline character.
 
 ```bash
+$ # no output
 $ printf '2\nice\nwater\nNice\n42' | grep -zoP '(\w+).*\1\n'
+
+$ # correct the command to get expected output as shown
+$ printf '2\nice\nwater\nNice\n42' | grep ##### add your solution here
 ice
 water
 Nice
@@ -354,38 +393,33 @@ Nice
 **e)** Extract all whole words except those that start with `p` or `e` or `n`
 
 ```bash
-$ echo 'pip at tea top earn row nice' | grep ##### add your solution here
+$ echo 'a pip at tea top earn row nice' | grep ##### add your solution here
+a
 at
 tea
 top
 row
 ```
 
+<br>
+
 # ripgrep
 
-Would be a good idea to first redo all the exercises using `rg` from all the previous chapters. Then create `exercises/ripgrep` directory. One input file is available from [learn_gnugrep_ripgrep repo](https://github.com/learnbyexample/learn_gnugrep_ripgrep/raw/master/exercises/sample.md), save it as `sample.md`. Directories from previous chapter exercises will also be used. Some exercises will require reading the manual, as those options aren't covered in the chapter.
+Would be a good idea to first redo all the exercises using `rg` from all the previous chapters. Some exercises will require reading the manual, as those options aren't covered in the chapter.
 
-**a)** For `sample.md` input file, match all lines containing `ruby` irrespective of case, but not if it is part of code blocks that are bounded by triple backticks.
-
-```bash
-$ mkdir ripgrep && cd $_
-
-$ rg ##### add your solution here
-3:REPL is a good way to learn RUBY for beginners.
-16:ruby comes loaded with awesome methods. Enjoy learning RuBy.
-```
-
-**b)** Go through the manual and find an option that will change line separator from `\n` to `\r\n`
+**a)** Go through the manual and find an option that will change the line separator from `\n` to `\r\n`. See [Frequently used options](#frequently-used-options) section for details about the input file used here.
 
 ```bash
-$ cd ../freq_options/
+$ # assumes 'exercises/freq_options' as CWD
 
+$ # no output
 $ rg -cx '' dracula.txt
+
 $ rg ##### add your solution here
 2559
 ```
 
-**c)** Commands like `sed` and `perl` require special care if you need to search and replace a text literally. `rg` provides an easier alternative, try these questions.
+**b)** Commands like `sed` and `perl` require special care if you need to search and replace a text literally. `rg` provides an easier alternative, which can be seen with these exercises.
 
 ```bash
 $ # replace [4]* with 2
@@ -401,10 +435,24 @@ b&6
 c
 ```
 
-**d)** Sum all integer numbers (numbers with decimal point should be ignored) if the file also contains the string `is`
+**c)** Create `exercises/ripgrep` directory and then save [this file from learn_gnugrep_ripgrep repo](https://github.com/learnbyexample/learn_gnugrep_ripgrep/raw/master/exercises/sample.md) as `sample.md`. For this input file, match all lines containing `ruby` irrespective of case, but not if it is part of code blocks that are bounded by triple backticks.
 
 ```bash
-$ cd ../ripgrep/
+$ # assumes 'exercises' as CWD
+$ mkdir ripgrep && cd $_
+
+$ rg ##### add your solution here
+3:REPL is a good way to learn RUBY for beginners.
+16:ruby comes loaded with awesome methods. Enjoy learning RuBy.
+```
+
+**d)** Sum all integer numbers (floating-point numbers should be ignored) if the file also contains the string `is`
+
+```bash
+$ # assumes 'exercises/ripgrep' as CWD
+$ # which already has one file named 'sample.md'
+
+$ # create two more files with these commands
 $ echo 'hi,31,3.14,bye' > 'space in filename.txt'
 $ echo 'This is 2 good' > $'weird \n symbols'
 
@@ -414,37 +462,52 @@ $ rg ##### add your solution here | datamash sum 1
 61
 ```
 
-**e)** Default behavior changes depending upon output is intended for terminal or not. Use appropriate option(s) to get the output as shown below.
+**e)** Default behavior changes depending upon output is intended for terminal or not. Use appropriate option(s) to get the output as shown below. Search for `good way` or `bye` in all the files in the given directory and save the output in `out.txt` file.
 
 ```bash
-$ cd ../recursive_searching/Command-line-text-processing/
+$ # assumes 'exercises/ripgrep' as CWD
 
-$ rg ##### add your solution here '#.*\|.*tail' | cat -
-gnu_sed.md
-527:$ # same as: head -n2 poem.txt | tail -n1
+$ rg ##### add your solution here
+$ cat out.txt
+space in filename.txt
+1:hi,31,3.14,bye
 
-gnu_awk.md
-479:$ # same as: head -n2 poem.txt | tail -n1
-
-perl_the_swiss_knife.md
-377:$ # same as: head -n2 poem.txt | tail -n1
+sample.md
+3:REPL is a good way to learn RUBY for beginners.
 ```
 
 **f)** Which option will show both line number and 1-based byte offset of first matching portion for matching lines?
 
 ```bash
-$ rg ##### add your solution here 'xargs' README.md
-27:35:    * cut, tr, basename, dirname, xargs, seq
+$ # assumes 'exercises/ripgrep' as CWD
+
+$ # normal output
+$ rg 'good' sample.md
+3:REPL is a good way to learn RUBY for beginners.
+
+$ # expected output
+$ rg ##### add your solution here
+3:11:REPL is a good way to learn RUBY for beginners.
 ```
 
-**g)** Use appropriate options to get the output as shown below.
+**g)** By default, `ripgrep` uses `\n` as the line separator. Use appropriate option to change the separator to `NUL` and display all lines containing `red` for the given input.
 
 ```bash
-$ printf 'dark red\nteal\0a2\0spared' | rg ##### add your solution here 'red' | \
-> rg ##### add your solution here '\x00' -r $'\n---\n'
+$ printf 'dark red\nteal\n\0brown\n\0spared' | rg ##### add your solution here
+dark red
+teal
+spared
+```
+
+**h)** Use appropriate options to replace all `NUL` characters with `---` and a newline character as shown below.
+
+```bash
+$ printf 'dark red\nteal\n\0brown\n\0spared' | rg ##### add your solution here
 dark red
 teal
 ---
-spared
+brown
 ---
+spared
 ```
+

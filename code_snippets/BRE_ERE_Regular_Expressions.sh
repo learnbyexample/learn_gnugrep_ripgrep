@@ -1,3 +1,5 @@
+## Line Anchors
+
 printf 'spared no one\npar\nspar\ndare' | grep '^pa'
 
 printf 'spared no one\npar\nspar\ndare' | grep 'ar$'
@@ -5,6 +7,8 @@ printf 'spared no one\npar\nspar\ndare' | grep 'ar$'
 printf 'spared no one\npar\nspar\ndare' | grep '^par$'
 
 printf 'spared no one\npar\nspar\ndare' | grep -x 'par'
+
+## Word Anchors
 
 cat word_anchors.txt
 
@@ -22,6 +26,8 @@ grep '\Bpar' word_anchors.txt
 
 grep 'par\B' word_anchors.txt
 
+## Alternation
+
 printf 'I like cats\nI like parrots\nI like dogs' | grep 'cat\|dog'
 
 printf 'I like cats\nI like parrots\nI like dogs' | grep -E 'cat|dog'
@@ -36,13 +42,17 @@ grep --color=auto -E '^|pare' word_anchors.txt
 
 grep --color=auto -E 'sub|put|tar|$' word_anchors.txt
 
-printf 'spared PARTY PaReNt' | grep -ioE 'par|pare|spare'
+echo 'car spared spar' | grep -oE 'are|spared'
 
-printf 'spared PARTY PaReNt' | grep -ioE 'spare|pare|par'
+echo 'car spared spar' | grep -oE 'spared|are'
 
-printf 'spared PARTY PaReNt' | grep -ioE 'spa|pared'
+echo 'pool party 2' | grep -oE 'party|par'
 
-printf 'spared PARTY PaReNt' | grep -ioE 'pared|spa'
+echo 'pool party 2' | grep -oE 'par|party'
+
+echo 'pool party 2' | grep -oP 'par|party'
+
+## Grouping
 
 printf 'red\nreform\nread\narrest' | grep -E 'reform|rest'
 
@@ -54,6 +64,8 @@ printf 'sub par\nspare\npart time' | grep -E '\b(par|part)\b'
 
 printf 'sub par\nspare\npart time' | grep -E '\bpar(|t)\b'
 
+## Escaping metacharacters
+
 echo 'a^2 + b^2 - C*3' | grep 'b^2'
 
 echo '$a = $b + $c' | grep '$b'
@@ -64,7 +76,17 @@ echo '$a = $b + $c' | grep -oF '$' | wc -l
 
 printf '(a/b) + c\n3 + (a/b) - c' | grep '^(a/b)'
 
-printf '(a/b) + c\n3 + (a/b) - c' | grep -E '^\(a/b\)'
+printf '(a/b) + c\n3 + (a/b) - c' | grep -E '^\(a/b)'
+
+## Matching characters like tabs
+
+echo 'attempt' | grep -o 'a\tt'
+
+printf 'go\tto\ngo to' | grep $'go\tto'
+
+printf 'go\tto\ngo to' | grep $'go\x20to'
+
+## The dot meta character
 
 echo 'tac tin cot abc:tuv excite' | grep -o 'c.t'
 
@@ -73,6 +95,8 @@ printf '42\t33\n'
 printf '42\t33\n' | grep -o '2.3'
 
 grep -xE 'c..(t|l)y' words.txt
+
+## Quantifiers
 
 printf 'fed\nfod\nfe:d\nfeed' | grep -wE 'fe.?d'
 
@@ -108,9 +132,15 @@ echo 'a cat and a dog' | grep -E 'cat.*dog|dog.*cat'
 
 echo 'dog and cat' | grep -E 'cat.*dog|dog.*cat'
 
+## Longest match wins
+
 echo 'foot' | grep -oE 'f.?o'
 
 echo 'car bat cod map scat dot abacus' | grep -o '.*'
+
+echo 'foo123312baz' | grep -oE 'o(1|2|3)+(12baz)?'
+
+echo 'foo123312baz' | grep -oP 'o(1|2|3)+(12baz)?'
 
 echo 'car bat cod map scat dot abacus' | grep -o '.*m'
 
@@ -119,6 +149,8 @@ echo 'car bat cod map scat dot abacus' | grep -o 'c.*t'
 echo 'car bat cod map scat dot abacus' | grep -o 'c.*at'
 
 echo 'car bat cod map scat dot abacus' | grep -o 'b.*m*'
+
+## Character classes
 
 printf 'cute\ncat\ncot\ncoat\ncost\nscuttle' | grep 'c[ou]t'
 
@@ -180,6 +212,8 @@ echo 'f*(a^b) - 3*(a+b)/(a-b)' | grep -o 'a[+^]b'
 
 echo '5ba\babc2' | grep -o '[a\b]*'
 
+## Backreferences
+
 grep -xE '([a-z]{3})..\1' words.txt
 
 grep -xE '([a-d]..)\1' words.txt
@@ -188,9 +222,31 @@ echo 'effort flee facade oddball rat tool' | grep -owE '\w*(\w)\1\w*'
 
 printf 'spot the the error\nno issues here' | grep -wE '(\w+)\W+\1'
 
+## Known Bugs
+
 grep -m5 -xiE '([a-z]*([a-z])\2[a-z]*){2}' words.txt
 
 grep -m5 -xiE '[a-z]*([a-z])\1[a-z]*([a-z])\2[a-z]*' words.txt
 
 grep -m5 -xiP '([a-z]*([a-z])\2[a-z]*){2}' words.txt
+
+echo 'cocoa' | grep -E '(\bco){2}'
+
+echo 'cocoa' | grep -E '\bco\bco'
+
+echo 'cocoa' | grep -P '(\bco){2}'
+
+echo 'it line with it here sit too' | grep -oE 'with(.*\bit\b){2}'
+
+echo 'it line with it here sit too' | grep -oE 'with.*\bit\b.*\bit\b'
+
+echo 'it line with it here sit too' | grep -oP 'with(.*\bit\b){2}'
+
+echo 'it line with it here sit too' | grep -oE 'with(.*\<it\>){2}'
+
+echo 'it line with it here it too' | grep -oE 'with(.*\<it\>){2}'
+
+echo 'it line with it here it too sit' | grep -oE 'with(.*\<it\>){2}'
+
+echo 'it line with it here it too sit' | grep -oP 'with(.*\bit\b){2}'
 

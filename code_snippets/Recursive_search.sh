@@ -18,6 +18,8 @@ ln -s ../context_matching/
 
 tree -al
 
+## -r and -R
+
 grep -r '[0-9]'
 
 grep -rh '[0-9]'
@@ -32,6 +34,8 @@ grep -rlx '' . context_matching
 
 grep -Rlx ''
 
+## Customize search path
+
 grep -Rl 'in'
 
 grep -Rl --exclude-dir='scripts' --exclude='.*' 'in'
@@ -41,6 +45,8 @@ grep -Rl --include='*.txt' 'in'
 grep -Rl --include='*.txt' --include='*.py' 'in'
 
 printf '*en\n*.txt' | grep -Rl --exclude-from=- 'in'
+
+## Extended globs
 
 shopt -s extglob globstar 
 
@@ -52,9 +58,13 @@ grep -l 'in' **/*context*
 
 grep -d skip -l 'in' **/*context*
 
+## Using find command
+
 find -L -type f -size -50c
 
 find -L -type f -size -50c -exec grep 'e$' {} +
+
+## Piping filenames
 
 grep -rlZ '[0-9]' | od -c
 
