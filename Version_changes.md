@@ -1,5 +1,18 @@
 <br>
 
+### 1.5
+
+* Command versions updated to **GNU grep 3.4** and **ripgrep 12.1.0**
+* Quantifiers terminology and explanation corrected, it is longest match wins instead of greedy for BRE/ERE
+* Using escape sequences via `bash` feature for BRE/ERE
+* Explicit 'Summary' section for clarity
+* For code snippets in the repo, added chapter sub-headings for clarity
+* Corrected various typos, improved descriptions/comments/examples/exercises/etc
+* Added epub version of the book
+* Updated cover image
+
+<br>
+
 ### 1.2
 
 * Updated cover image
