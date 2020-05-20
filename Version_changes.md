@@ -10,6 +10,7 @@
 * Corrected various typos, improved descriptions/comments/examples/exercises/etc
 * Added epub version of the book
 * Updated cover image
+* For more detailed view of changes, see the [commit changes for the markdown source file](https://github.com/learnbyexample/learn_gnugrep_ripgrep/commit/99d8bdb40ba5ba0f7a67fe266ba355a92a9cd178#diff-bd3e21cd00859a688be8c3d0429b1dc4)
 
 <br>
 
