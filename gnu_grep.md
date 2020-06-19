@@ -64,7 +64,7 @@ Resources mentioned in Acknowledgements section are available under original lic
 
 ## Book version
 
-1.5
+1.6
 
 See [Version_changes.md](https://github.com/learnbyexample/learn_gnugrep_ripgrep/blob/master/Version_changes.md) to track changes across book versions.
 
@@ -854,17 +854,17 @@ part time
 
 ## Escaping metacharacters
 
-You have seen a few metacharacters and escape sequences that help to compose a regular expression. To match the metacharacters literally, i.e. to remove their special meaning, prefix those characters with a `\` character. To indicate a literal `\` character, use `\\`. Some of the metacharacters, like the line anchors, lose their special meaning when not used in their customary positions.
+You have seen a few metacharacters and escape sequences that help to compose a regular expression. To match the metacharacters literally, i.e. to remove their special meaning, prefix those characters with a `\` character. To indicate a literal `\` character, use `\\`. Some of the metacharacters, like the line anchors, lose their special meaning when not used in their customary positions with BRE syntax.
 
 If there are many metacharacters to be escaped, try to work out if the command can be simplified by using `-F` (paired with regular expression like options such as `-e`, `-f`, `-i`, `-w`, `-x`, etc) or by switching between ERE and BRE. Another option is to use PCRE (covered later), which has special constructs to mark whole or portion of pattern to be matched literally — especially useful when using shell variables.
 
 ```bash
-$ # line anchors aren't special away from customary positions
+$ # line anchors aren't special away from customary positions with BRE
 $ echo 'a^2 + b^2 - C*3' | grep 'b^2'
 a^2 + b^2 - C*3
 $ echo '$a = $b + $c' | grep '$b'
 $a = $b + $c
-$ # escape line anchors to match literally at customary positions
+$ # escape line anchors to match literally at customary positions, also for ERE
 $ echo '$a = $b + $c' | grep -o '\$' | wc -l
 3
 $ # or use -F where possible
@@ -1859,7 +1859,7 @@ By default, recursive search options `-r` and `-R` will include hidden files as 
 
 >![info](images/info.svg) `PATTERN` here refers to `glob` or `wildcard` patterns used by shell to expand filenames (not the same as regular expressions). The `PATTERN` applies only to basename of file or directory, not the pathname. Which implies that you cannot use `/` in the globs specified in conjunction with recursive options.
 
-Each of these options can be used multiple times to precisely specify the search paths. To know more about `wildcards` see [wooledge: glob](https://mywiki.wooledge.org/glob) and my own [tutorial on glob](https://github.com/learnbyexample/Linux_command_line/blob/master/Shell.md#wildcards).
+Each of these options can be used multiple times to precisely specify the search paths. These can be used without recursive options too. If you mix `--include` and `--exclude` options, their order of declaration matters. To know more about `wildcards` see [wooledge: glob](https://mywiki.wooledge.org/glob).
 
 ```bash
 $ # without customizing
@@ -3187,7 +3187,7 @@ $ rm f[12]
 
 Using PCRE usually will be faster if search pattern has backreferences.
 
-As mentioned earlier, from `man grep` under **Known Bugs** section (wrt BRE/ERE)
+As mentioned earlier, from `man grep` under **Known Bugs** section (applies to BRE/ERE)
 
 >Large repetition counts in the {n,m} construct may cause grep to use lots of memory. In addition, certain other obscure regular expressions require exponential time and space, and may cause grep to run out of memory. Back-references are very slow, and may require exponential time.
 
@@ -3243,7 +3243,7 @@ With this, chapters on `GNU grep` are done. Would highly suggest to maintain you
 
 # ripgrep
 
-`ripgrep` is definitely becoming a popular alternative (if not the most popular) to `grep` command. Editors like [Visual Studio Code](https://code.visualstudio.com/updates/v1_11) and [Atom](https://github.com/atom/fuzzy-finder/pull/369) are using `ripgrep` to power their search offerings. The major selling point is its default behavior for recursive search and speed. The project doesn't aim to be compatible with POSIX and behavior varies wrt `GNU grep` in terms of features, option names, output style, regular expressions, etc. 
+`ripgrep` is definitely becoming a popular alternative (if not the most popular) to `grep` command. Editors like [Visual Studio Code](https://code.visualstudio.com/updates/v1_11) and [Atom](https://github.com/atom/fuzzy-finder/pull/369) are using `ripgrep` to power their search offerings. The major selling point is its default behavior for recursive search and speed. The project doesn't aim to be compatible with POSIX and behavior varies with respect to `GNU grep` in terms of features, option names, output style, regular expressions, etc. 
 
 **Project links**
 
