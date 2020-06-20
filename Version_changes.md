@@ -1,5 +1,15 @@
 <br>
 
+### 1.6
+
+* Clarified BRE vs ERE difference for line anchor escaping
+* Added more details for `--include` and `--exclude` related options
+* Changed `wrt` to expanded form instead of abbreviation
+* Added workaround for **epub** version for iBooks
+* For more detailed view of changes, see the [commit changes for the markdown source file](https://github.com/learnbyexample/learn_gnugrep_ripgrep/commit/ca6cd9169f206c24e64ba103667dbac44261ed4d#diff-bd3e21cd00859a688be8c3d0429b1dc4)
+
+<br>
+
 ### 1.5
 
 * Command versions updated to **GNU grep 3.4** and **ripgrep 12.1.0**
