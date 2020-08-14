@@ -1,6 +1,0 @@
-23,qty,price,42
-qty price,oh
-3.14,qty,6,errors,9,price,3
-42 qty-6,apple-56,price-234,error
-4,price,3.14,qty,4
-4,qtyprice,3

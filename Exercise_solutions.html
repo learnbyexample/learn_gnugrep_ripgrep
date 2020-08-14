@@ -1,0 +1,600 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Exercise Solutions - GNU GREP and RIPGREP</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Example based guide to mastering GNU GREP and RIPGREP">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="custom.css">
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="cover.html">Cover</a></li><li class="chapter-item expanded affix "><a href="buy.html">Buy PDF/EPUB versions</a></li><li class="chapter-item expanded "><a href="preface.html"><strong aria-hidden="true">1.</strong> Preface</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">2.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="frequently-used-options.html"><strong aria-hidden="true">3.</strong> Frequently used options</a></li><li class="chapter-item expanded "><a href="breere-regular-expressions.html"><strong aria-hidden="true">4.</strong> BRE/ERE Regular Expressions</a></li><li class="chapter-item expanded "><a href="context-matching.html"><strong aria-hidden="true">5.</strong> Context matching</a></li><li class="chapter-item expanded "><a href="recursive-search.html"><strong aria-hidden="true">6.</strong> Recursive search</a></li><li class="chapter-item expanded "><a href="miscellaneous-options.html"><strong aria-hidden="true">7.</strong> Miscellaneous options</a></li><li class="chapter-item expanded "><a href="perl-compatible-regular-expressions.html"><strong aria-hidden="true">8.</strong> Perl Compatible Regular Expressions</a></li><li class="chapter-item expanded "><a href="gotchas-and-tricks.html"><strong aria-hidden="true">9.</strong> Gotchas and Tricks</a></li><li class="chapter-item expanded "><a href="ripgrep.html"><strong aria-hidden="true">10.</strong> ripgrep</a></li><li class="chapter-item expanded "><a href="further-reading.html"><strong aria-hidden="true">11.</strong> Further Reading</a></li><li class="chapter-item expanded "><a href="Exercise_solutions.html" class="active"><strong aria-hidden="true">12.</strong> Exercise Solutions</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">GNU GREP and RIPGREP</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="https://github.com/learnbyexample/learn_gnugrep_ripgrep" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#frequently-used-options" id="frequently-used-options">Frequently used options</a></h1>
+<p>Create <code>exercises</code> directory and within it, create another directory for this chapter, say <code>freq_options</code> or <code>chapter_2</code>. Input is a file downloaded from internet — https://www.gutenberg.org/files/345/345.txt saved as <code>dracula.txt</code>.</p>
+<p><strong>a)</strong> Display all lines containing <code>ablaze</code></p>
+<pre><code class="language-bash">$ mkdir -p exercises/freq_options &amp;&amp; cd $_
+$ wget https://www.gutenberg.org/files/345/345.txt -O dracula.txt
+
+$ grep 'ablaze' dracula.txt
+the room, his face all ablaze with excitement. He rushed up to me and
+</code></pre>
+<p><strong>b)</strong> Display all lines containing <code>abandon</code> as a whole word.</p>
+<pre><code class="language-bash">$ grep -w 'abandon' dracula.txt
+inheritors, being remote, would not be likely to abandon their just
+</code></pre>
+<p><strong>c)</strong> Display all lines that satisfies both of these conditions:</p>
+<ul>
+<li><code>professor</code> matched irrespective of case</li>
+<li>either <code>quip</code> or <code>sleep</code> matched case sensitively</li>
+</ul>
+<pre><code class="language-bash">$ grep -i 'professor' dracula.txt | grep -e 'quip' -e 'sleep'
+equipment of a professor of the healing craft. When we were shown in,
+its potency; and she fell into a deep sleep. When the Professor was
+sleeping, and the Professor seemingly had not moved from his seat at her
+to sleep, and something weaker when she woke from it. The Professor and
+</code></pre>
+<p><strong>d)</strong> Display first three lines containing <code>Count</code></p>
+<pre><code class="language-bash">$ grep -m3 'Count' dracula.txt
+town named by Count Dracula, is a fairly well-known place. I shall enter
+must ask the Count all about them.)
+Count Dracula had directed me to go to the Golden Krone Hotel, which I
+</code></pre>
+<p><strong>e)</strong> Display first six lines containing <code>Harker</code> but not either of <code>Journal</code> or <code>Letter</code></p>
+<pre><code class="language-bash">$ grep -v -e 'Journal' -e 'Letter' dracula.txt | grep -m6 'Harker'
+said, &quot;The Herr Englishman?&quot; &quot;Yes,&quot; I said, &quot;Jonathan Harker.&quot; She
+&quot;I am Dracula; and I bid you welcome, Mr. Harker, to my house. Come in;
+I shall be all alone, and my friend Harker Jonathan--nay, pardon me, I
+Jonathan Harker will not be by my side to correct and aid me. He will be
+&quot;I write by desire of Mr. Jonathan Harker, who is himself not strong
+junior partner of the important firm Hawkins &amp; Harker; and so, as you
+</code></pre>
+<p><strong>f)</strong> Display lines containing <code>Zooelogical Gardens</code> along with line number prefix.</p>
+<pre><code class="language-bash">$ grep -n 'Zooelogical Gardens' dracula.txt
+5597:         _Interview with the Keeper in the Zooelogical Gardens._
+5601:the keeper of the section of the Zooelogical Gardens in which the wolf
+8042:the Zooelogical Gardens a young one may have got loose, or one be bred
+</code></pre>
+<p><strong>g)</strong> Find total count of whole word <code>the</code> (irrespective of case).</p>
+<pre><code class="language-bash">$ grep -iow 'the' dracula.txt | wc -l
+8090
+</code></pre>
+<p><strong>h)</strong> The below code snippet tries to get number of empty lines, but apparently shows wrong result, why?</p>
+<pre><code class="language-bash">$ grep -cx '' dracula.txt
+0
+</code></pre>
+<p>If you use the <code>file</code> command, you'll see that the input file has dos-style line endings. So, there are no empty lines because there's at least <code>\r</code> character in every line other than the newline character.</p>
+<pre><code class="language-bash">$ file dracula.txt 
+dracula.txt: ASCII text, with CRLF line terminators
+
+$ grep -cx $'\r' dracula.txt
+2559
+</code></pre>
+<br>
+<h1><a class="header" href="#breere-regular-expressions" id="breere-regular-expressions">BRE/ERE Regular Expressions</a></h1>
+<p><strong>a)</strong> Extract all pairs of <code>()</code> with/without text inside them, provided they do not contain <code>()</code> characters inside.</p>
+<pre><code class="language-bash">$ echo 'I got (12) apples' | grep -o '([^()]*)'
+(12)
+
+$ echo '((2 +3)*5)=25 and (4.3/2*()' | grep -o '([^()]*)'
+(2 +3)
+()
+</code></pre>
+<p><strong>b)</strong> For the given input, match all lines that start with <code>den</code> or end with <code>ly</code></p>
+<pre><code class="language-bash">$ lines='lovely\n1 dentist\n2 lonely\neden\nfly away\ndent'
+$ printf '%b' &quot;$lines&quot; | grep -E '^den|ly$'
+lovely
+2 lonely
+dent
+</code></pre>
+<p><strong>c)</strong> Extract all whole words that contains <code>42</code> but not at edge of word. Assume a word cannot contain <code>42</code> more than once.</p>
+<pre><code class="language-bash">$ echo 'hi42bye nice1423 bad42 cool_42a 42fake' | grep -oE '\w+42\w+'
+hi42bye
+nice1423
+cool_42a
+</code></pre>
+<p><strong>d)</strong> Each line in given input contains a single word. Match all lines containing <code>car</code> but not as a whole word.</p>
+<pre><code class="language-bash">$ printf 'car\nscar\ncare\npot\nscare\n' | grep -E '\Bcar|car\B'
+scar
+care
+scare
+</code></pre>
+<p><strong>e)</strong> For <code>dracula.txt</code> file, count the total number of lines that contain <code>removed</code> or <code>rested</code> or <code>received</code> or <code>replied</code> or <code>refused</code> or <code>retired</code> as whole words.</p>
+<pre><code class="language-bash">$ grep -wcE 're(mov|st|ceiv|pli|fus|tir)ed' freq_options/dracula.txt
+73
+</code></pre>
+<p><strong>f)</strong> Extract words starting with <code>s</code> and containing <code>e</code> and <code>t</code> in any order.</p>
+<pre><code class="language-bash">$ words='sequoia subtle exhibit sets tests sit'
+$ echo &quot;$words&quot; | grep -ow 's\w*t\w*' | grep 'e'
+subtle
+sets
+</code></pre>
+<p><strong>g)</strong> Extract all whole words having the same first and last character.</p>
+<pre><code class="language-bash">$ echo 'oreo not a pip roar took 22' | grep -owE '\w|(\w)\w*\1'
+oreo
+a
+pip
+roar
+22
+</code></pre>
+<p><strong>h)</strong> Match all lines containing <code>*[5]</code></p>
+<pre><code class="language-bash">$ printf '4*5]\n(9-2)*[5]\n[5]*3\nr*[5\n' | grep -F '*[5]'
+(9-2)*[5]
+</code></pre>
+<p><strong>i)</strong> For the given quantifiers, what would be the equivalent form using <code>{m,n}</code> representation?</p>
+<ul>
+<li><code>?</code> is same as <code>{,1}</code></li>
+<li><code>*</code> is same as <code>{0,}</code></li>
+<li><code>+</code> is same as <code>{1,}</code></li>
+</ul>
+<p><strong>j)</strong> In ERE, <code>(a*|b*)</code> is same as <code>(a|b)*</code> — True or False?</p>
+<p>False. Because <code>(a*|b*)</code> will match only sequences like <code>a</code>, <code>aaa</code>, <code>bb</code>, <code>bbbbbbbb</code>. But <code>(a|b)*</code> can match a mixed sequence like <code>ababbba</code> too.</p>
+<p><strong>k)</strong> <code>grep -wE '[a-z](on|no)[a-z]'</code> is same as <code>grep -wE '[a-z][on]{2}[a-z]'</code>. True or False? Sample input shown below might help to understand the differences, if any.</p>
+<p>False. <code>[on]{2}</code> will also match <code>oo</code> and <code>nn</code>.</p>
+<pre><code class="language-bash">$ printf 'known\nmood\nknow\npony\ninns\n'
+known
+mood
+know
+pony
+inns
+</code></pre>
+<p><strong>l)</strong> Display all lines that start with <code>hand</code> and ends with no further character or <code>s</code> or <code>y</code> or <code>le</code>.</p>
+<pre><code class="language-bash">$ lines='handed\nhand\nhandy\nunhand\nhands\nhandle\n'
+$ printf '%b' &quot;$lines&quot; | grep -xE 'hand([sy]|le)?'
+hand
+handy
+hands
+handle
+</code></pre>
+<br>
+<h1><a class="header" href="#context-matching" id="context-matching">Context matching</a></h1>
+<p><strong>a)</strong> For this question, create <code>exercises/context_matching</code> directory and then save <a href="https://raw.githubusercontent.com/learnbyexample/learn_gnugrep_ripgrep/master/exercises/palindrome.py">this file from learn_gnugrep_ripgrep repo</a> as <code>palindrome.py</code>. For this input file, display all lines matching <code>raise</code> and one line before it.</p>
+<pre><code class="language-bash">$ # assumes 'exercises/context_matching' as CWD
+$ grep -B1 'raise' palindrome.py
+    if re.search(r'[^a-zA-Z]', ip_str):
+        raise ValueError(&quot;Characters other than alphabets and punctuations&quot;)
+    elif len(ip_str) &lt; 3:
+        raise ValueError(&quot;Less than 3 alphabets&quot;)
+</code></pre>
+<p><strong>b)</strong> Input has group of lines with single empty line in between. Change it to double empty lines between groups.</p>
+<pre><code class="language-bash">$ lines='rat\ndog\nbat\n\n42\n3.14\n\nhi there\nhave a nice day'
+$ printf '%b' &quot;$lines&quot; | grep --group-separator=$'\n' -A0 '.'
+rat
+dog
+bat
+
+
+42
+3.14
+
+
+hi there
+have a nice day
+</code></pre>
+<br>
+<h1><a class="header" href="#recursive-search" id="recursive-search">Recursive search</a></h1>
+<p>For sample directory, a particular version of one of my GitHub repo is used. All the exercises will assume recursive searching, unless otherwise specified. There are no symbolic links.</p>
+<pre><code class="language-bash">$ # assumes 'exercises' as CWD
+$ mkdir recursive_searching &amp;&amp; cd $_
+$ repo='https://github.com/learnbyexample/Command-line-text-processing.git'
+$ git clone -b apr19 &quot;$repo&quot;
+$ cd Command-line-text-processing
+</code></pre>
+<p><strong>a)</strong> List all files containing <code>xargs</code> or <code>python3</code></p>
+<pre><code class="language-bash">$ grep -rlE 'xargs|python3'
+gnu_grep.md
+miscellaneous.md
+wheres_my_file.md
+exercises/GNU_grep/ex07_recursive_search/progs/hello.py
+README.md
+</code></pre>
+<p><strong>b)</strong> List all files containing <code>grep</code> but do not list if they are from <code>.git</code> or <code>exercises</code> directories.</p>
+<pre><code class="language-bash">$ grep --exclude-dir='.git' --exclude-dir='exercises' -rl 'grep'
+gnu_grep.md
+sorting_stuff.md
+file_attributes.md
+whats_the_difference.md
+wheres_my_file.md
+gnu_sed.md
+gnu_awk.md
+tail_less_cat_head.md
+README.md
+ruby_one_liners.md
+perl_the_swiss_knife.md
+</code></pre>
+<p><strong>c)</strong> List all files containing <code>baz</code> if the filename ends with <code>.txt</code> but do not search hidden directories.</p>
+<pre><code class="language-bash">$ grep --include='*.txt' --exclude-dir='.*' -rl 'baz'
+exercises/GNU_grep/ex12_regex_character_class_part1/sample_words.txt
+exercises/GNU_grep/ex16_misc_and_extras/sample.txt
+exercises/GNU_grep/ex08_search_pattern_from_file.txt
+</code></pre>
+<p><strong>d)</strong> Search files ending with <code>.md</code> only in current directory (i.e. no recursive searching) and count the total number of occurrences of whole words <code>grep</code> or <code>sed</code> or <code>awk</code>.</p>
+<pre><code class="language-bash">$ grep -owE 'grep|sed|awk' *.md | wc -l
+1532
+</code></pre>
+<p><strong>e)</strong> List all files containing <code>Hello</code> unless the filename ends with <code>.txt</code> or <code>.sh</code></p>
+<pre><code class="language-bash">$ grep --exclude='*.txt' --exclude='*.sh' -rl 'Hello'
+gnu_grep.md
+miscellaneous.md
+file_attributes.md
+whats_the_difference.md
+gnu_sed.md
+gnu_awk.md
+tail_less_cat_head.md
+exercises/GNU_grep/ex07_recursive_search/progs/hello.py
+ruby_one_liners.md
+perl_the_swiss_knife.md
+</code></pre>
+<p><strong>f)</strong> List all files containing whole words <code>awk</code> and <code>perl</code> but not <code>basename</code>. Although not the case here, assume that filenames can contain shell special characters like space, semicolon, newline, etc.</p>
+<pre><code class="language-bash">$ grep -rlwZ 'awk' | xargs -0 grep -lwZ 'perl' | xargs -0 grep -Lw 'basename'
+sorting_stuff.md
+gnu_sed.md
+gnu_awk.md
+ruby_one_liners.md
+perl_the_swiss_knife.md
+</code></pre>
+<br>
+<h1><a class="header" href="#miscellaneous-options" id="miscellaneous-options">Miscellaneous options</a></h1>
+<p><strong>a)</strong> Use the correct binary option to get output for second command shown below:</p>
+<pre><code class="language-bash">$ printf 'hi there\0good day\n' | grep 'good'
+Binary file (standard input) matches
+
+$ printf 'hi there\0good day\n' | grep -a 'good'
+hi theregood day
+</code></pre>
+<p><strong>b)</strong> Read about <code>--line-buffered</code> from the manual (also <a href="https://stackoverflow.com/questions/7161821/how-to-grep-a-continuous-stream">this link</a>) and see it in action with code below:</p>
+<pre><code class="language-bash">$ for i in {1..5}; do seq 12; sleep 1; done | grep '[1-489]' | grep -v '0'
+
+$ for i in {1..5}; do seq 12; sleep 1; done | grep --line-buffered '[1-489]' | grep -v '0'
+</code></pre>
+<p><strong>c)</strong> Consider non-binary input having multiple lines of text. Display <code>Match</code> if input starts with a number and <code>Nope</code> if it doesn't.</p>
+<pre><code class="language-bash">$ printf 'oh\n42' | grep -qz '^[0-9]' &amp;&amp; echo 'Match' || echo 'Nope'
+Nope
+$ printf '2a\nhi' | grep -qz '^[0-9]' &amp;&amp; echo 'Match' || echo 'Nope'
+Match
+</code></pre>
+<br>
+<h1><a class="header" href="#perl-compatible-regular-expressions" id="perl-compatible-regular-expressions">Perl Compatible Regular Expressions</a></h1>
+<p><strong>a)</strong> Filter all lines that satisfy all of these rules:</p>
+<ul>
+<li>should have at least two alphabets</li>
+<li>should have at least 3 digits</li>
+<li>should have at least one special character among <code>%</code> or <code>*</code> or <code>#</code> or <code>$</code></li>
+<li>should not end with a whitespace character</li>
+</ul>
+<pre><code class="language-bash">$ pswds='hunter2\nF2H3u#9\n*X3Yz3.14\t\nr2_d2_42\nA $ C1234'
+$ printf &quot;$pswds&quot; | grep -P '(?=(.*[a-zA-Z]){2})(?=(.*\d){3})(?!.*\s$).*[%*#$]'
+F2H3u#9
+A $ C1234
+</code></pre>
+<p><strong>b)</strong> Extract all fields from second to second last from the given rows having <code>,</code> as delimiter. There shouldn't be empty lines in output.</p>
+<pre><code class="language-bash">$ printf 'foo,abc\ncat,x,dog' | grep -oP ',\K.+(?=,)'
+x
+$ echo 'foo,42,baz,3.14,abc' | grep -oP ',\K.+(?=,)'
+42,baz,3.14
+</code></pre>
+<p><strong>c)</strong> Create <code>exercises/pcre</code> directory and then save <a href="https://github.com/learnbyexample/learn_gnugrep_ripgrep/raw/master/exercises/price.txt">this file from learn_gnugrep_ripgrep repo</a> as <code>price.txt</code>. For this input file, match lines if it contains <code>qty</code> followed by <code>price</code> but not if there is <strong>whitespace</strong> or the string <strong>error</strong> between them.</p>
+<pre><code class="language-bash">$ # assumes 'exercises/pcre' as CWD
+$ cat price.txt
+23,qty,price,42
+qty price,oh
+3.14,qty,6,errors,9,price,3
+42 qty-6,apple-56,price-234,error
+4,price,3.14,qty,4
+4,qtyprice,3
+
+$ grep -P 'qty((?!\s|error).)*price' price.txt
+23,qty,price,42
+42 qty-6,apple-56,price-234,error
+4,qtyprice,3
+</code></pre>
+<p><strong>d)</strong> Correct the command to get output as shown below. Problem statement is to find sequence of duplicate word characters, with the second occurrence matching just before a newline character.</p>
+<pre><code class="language-bash">$ # no output
+$ printf '2\nice\nwater\nNice\n42' | grep -zoP '(\w+).*\1\n'
+
+$ # correct the command to get expected output as shown
+$ printf '2\nice\nwater\nNice\n42' | grep -zoP '(?s)(\w+).*\1\n'
+ice
+water
+Nice
+</code></pre>
+<p><strong>e)</strong> Extract all whole words except those that start with <code>p</code> or <code>e</code> or <code>n</code></p>
+<pre><code class="language-bash">$ echo 'a pip at tea top earn row nice' | grep -woP '\b[^pen]\w*'
+a
+at
+tea
+top
+row
+</code></pre>
+<br>
+<h1><a class="header" href="#ripgrep" id="ripgrep">ripgrep</a></h1>
+<p>Would be a good idea to first redo all the exercises using <code>rg</code> from all the previous chapters. Some exercises will require reading the manual, as those options aren't covered in the chapter.</p>
+<p><strong>a)</strong> Go through the manual and find an option that will change the line separator from <code>\n</code> to <code>\r\n</code>. See <a href="#frequently-used-options">Frequently used options</a> section for details about the input file used here.</p>
+<pre><code class="language-bash">$ # assumes 'exercises/freq_options' as CWD
+
+$ # no output
+$ rg -cx '' dracula.txt
+
+$ rg --crlf -cx '' dracula.txt
+2559
+</code></pre>
+<p><strong>b)</strong> Commands like <code>sed</code> and <code>perl</code> require special care if you need to search and replace a text literally. <code>rg</code> provides an easier alternative, which can be seen with these exercises.</p>
+<pre><code class="language-bash">$ # replace [4]* with 2
+$ printf '2.3/[4]*6\nfoo\n5.3-[4]*9\n' | rg --passthru -F '[4]*' -r '2'
+2.3/26
+foo
+5.3-29
+
+$ # replace '3$a with &amp;
+$ printf &quot;a'3\$a\nb'3\$a6\nc\n&quot; | rg --passthru -F \''3$a' -r '&amp;'
+a&amp;
+b&amp;6
+c
+</code></pre>
+<p><strong>c)</strong> Create <code>exercises/ripgrep</code> directory and then save <a href="https://github.com/learnbyexample/learn_gnugrep_ripgrep/raw/master/exercises/sample.md">this file from learn_gnugrep_ripgrep repo</a> as <code>sample.md</code>. For this input file, match all lines containing <code>ruby</code> irrespective of case, but not if it is part of code blocks that are bounded by triple backticks.</p>
+<pre><code class="language-bash">$ # assumes 'exercises' as CWD
+$ mkdir ripgrep &amp;&amp; cd $_
+
+$ rg -iPU '(?s)^```.*?^```(*SKIP)(*F)|ruby' sample.md
+3:REPL is a good way to learn RUBY for beginners.
+16:ruby comes loaded with awesome methods. Enjoy learning RuBy.
+</code></pre>
+<p><strong>d)</strong> Sum all integer numbers (floating-point numbers should be ignored) if the file also contains the string <code>is</code></p>
+<pre><code class="language-bash">$ # assumes 'exercises/ripgrep' as CWD
+$ # which already has one file named 'sample.md'
+
+$ # create two more files with these commands
+$ echo 'hi,31,3.14,bye' &gt; 'space in filename.txt'
+$ echo 'This is 2 good' &gt; $'weird \n symbols'
+
+$ # all three files should be considered as input
+$ # use awk '{s+=$1} END{print s}' if datamash is not available
+$ rg -0 -l 'is' | xargs -0 rg -oIP '\d++\.\d++(*SKIP)(*F)|\d++' | datamash sum 1
+61
+</code></pre>
+<p><strong>e)</strong> Default behavior changes depending upon output is intended for terminal or not. Use appropriate option(s) to get the output as shown below. Search for <code>good way</code> or <code>bye</code> in all the files in the given directory and save the output in <code>out.txt</code> file.</p>
+<pre><code class="language-bash">$ # assumes 'exercises/ripgrep' as CWD
+
+$ rg -n --heading 'good way|bye' &gt; out.txt
+$ cat out.txt
+space in filename.txt
+1:hi,31,3.14,bye
+
+sample.md
+3:REPL is a good way to learn RUBY for beginners.
+</code></pre>
+<p><strong>f)</strong> Which option will show both line number and 1-based byte offset of first matching portion for matching lines?</p>
+<pre><code class="language-bash">$ # assumes 'exercises/ripgrep' as CWD
+
+$ # normal output
+$ rg 'good' sample.md
+3:REPL is a good way to learn RUBY for beginners.
+
+$ # expected output
+$ rg -I --vimgrep 'good' sample.md
+3:11:REPL is a good way to learn RUBY for beginners.
+</code></pre>
+<p><strong>g)</strong> By default, <code>ripgrep</code> uses <code>\n</code> as the line separator. Use appropriate option to change the separator to <code>NUL</code> and display all lines containing <code>red</code> for the given input.</p>
+<pre><code class="language-bash">$ printf 'dark red\nteal\n\0brown\n\0spared' | rg --null-data 'red'
+dark red
+teal
+spared
+</code></pre>
+<p><strong>h)</strong> Use appropriate options to replace all <code>NUL</code> characters with <code>---</code> and a newline character as shown below.</p>
+<pre><code class="language-bash">$ printf 'dark red\nteal\n\0brown\n\0spared' | rg -a --passthru '\x00' -r $'---\n'
+dark red
+teal
+---
+brown
+---
+spared
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="further-reading.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="further-reading.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

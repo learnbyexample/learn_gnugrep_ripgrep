@@ -1,0 +1,424 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Context matching - GNU GREP and RIPGREP</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Example based guide to mastering GNU GREP and RIPGREP">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="custom.css">
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="cover.html">Cover</a></li><li class="chapter-item expanded affix "><a href="buy.html">Buy PDF/EPUB versions</a></li><li class="chapter-item expanded "><a href="preface.html"><strong aria-hidden="true">1.</strong> Preface</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">2.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="frequently-used-options.html"><strong aria-hidden="true">3.</strong> Frequently used options</a></li><li class="chapter-item expanded "><a href="breere-regular-expressions.html"><strong aria-hidden="true">4.</strong> BRE/ERE Regular Expressions</a></li><li class="chapter-item expanded "><a href="context-matching.html" class="active"><strong aria-hidden="true">5.</strong> Context matching</a></li><li class="chapter-item expanded "><a href="recursive-search.html"><strong aria-hidden="true">6.</strong> Recursive search</a></li><li class="chapter-item expanded "><a href="miscellaneous-options.html"><strong aria-hidden="true">7.</strong> Miscellaneous options</a></li><li class="chapter-item expanded "><a href="perl-compatible-regular-expressions.html"><strong aria-hidden="true">8.</strong> Perl Compatible Regular Expressions</a></li><li class="chapter-item expanded "><a href="gotchas-and-tricks.html"><strong aria-hidden="true">9.</strong> Gotchas and Tricks</a></li><li class="chapter-item expanded "><a href="ripgrep.html"><strong aria-hidden="true">10.</strong> ripgrep</a></li><li class="chapter-item expanded "><a href="further-reading.html"><strong aria-hidden="true">11.</strong> Further Reading</a></li><li class="chapter-item expanded "><a href="Exercise_solutions.html"><strong aria-hidden="true">12.</strong> Exercise Solutions</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">GNU GREP and RIPGREP</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="https://github.com/learnbyexample/learn_gnugrep_ripgrep" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#context-matching" id="context-matching">Context matching</a></h1>
+<p>Sometimes you want not just the matching lines, but the lines relative to the matches as well. For example, it could be to see the comments at start of a function block that was matched while searching a program file. Or, it could be to see extended information from a log file while searching for a particular error message. <code>GNU grep</code> has three options to display lines <strong>after</strong>, <strong>before</strong> or both <strong>combined</strong> relative to matching lines.</p>
+<blockquote>
+<p><img src="images/info.svg" alt="info" /> Files used in examples are available chapter wise from <a href="https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/example_files">learn_gnugrep_ripgrep repo</a>. The directory for this chapter is <code>context_matching</code>.</p>
+</blockquote>
+<p>The sample input file for this chapter is shown below:</p>
+<pre><code class="language-bash">$ cat context.txt
+wheat
+    roti
+    bread
+
+blue
+    toy
+    flower
+    sand stone
+light blue
+    flower
+    sky
+    water
+dark red
+    ruby
+    blood
+    evening sky
+    rose
+
+language
+    english
+    hindi
+    spanish
+    tamil
+
+programming language
+    python
+    kotlin
+    ruby
+</code></pre>
+<h2><a class="header" href="#-a" id="-a">-A</a></h2>
+<p>Additionally display lines <strong>after</strong> the matching lines. The number of lines required has to be specified after <code>-A</code></p>
+<blockquote>
+<p><img src="images/info.svg" alt="info" /> If there are multiple matches, by default <code>grep</code> adds a separator line <code>--</code> between the results.</p>
+</blockquote>
+<pre><code class="language-bash">$ # show lines containing 'blue' and two lines after such lines
+$ grep -A2 'blue' context.txt
+blue
+    toy
+    flower
+--
+light blue
+    flower
+    sky
+
+$ # use other options and regular expressions to refine the search
+$ grep -x -A2 'blue' context.txt
+blue
+    toy
+    flower
+</code></pre>
+<h2><a class="header" href="#-b" id="-b">-B</a></h2>
+<p>Additionally display lines <strong>before</strong> the matching lines.</p>
+<pre><code class="language-bash">$ grep -B2 'bread' context.txt
+wheat
+    roti
+    bread
+
+$ grep -B3 'ruby' context.txt
+    sky
+    water
+dark red
+    ruby
+--
+programming language
+    python
+    kotlin
+    ruby
+</code></pre>
+<h2><a class="header" href="#-c" id="-c">-C</a></h2>
+<p>This option can be used instead of specifying both <code>-A</code> and <code>-B</code> if the count of lines required is the same. You can also use <code>-N</code> instead of <code>-CN</code>.</p>
+<pre><code class="language-bash">$ # same as: grep -A1 -B1 'sky' context.txt
+$ # can also use: grep -1 'sky' context.txt
+$ grep -C1 'sky' context.txt
+    flower
+    sky
+    water
+--
+    blood
+    evening sky
+    rose
+
+$ grep -A1 -B2 'sky' context.txt
+light blue
+    flower
+    sky
+    water
+--
+    ruby
+    blood
+    evening sky
+    rose
+</code></pre>
+<blockquote>
+<p><img src="images/info.svg" alt="info" /> No error or warning if the count goes beyond lines available for any of these three options.</p>
+</blockquote>
+<pre><code class="language-bash">$ grep -C2 'kotlin' context.txt
+programming language
+    python
+    kotlin
+    ruby
+</code></pre>
+<h2><a class="header" href="#contiguous-matches" id="contiguous-matches">Contiguous matches</a></h2>
+<p>The separator <code>--</code> won't be added if two or more groups of matching lines have overlapping lines or are next to each other in input file.</p>
+<pre><code class="language-bash">$ # -n option used only for illustration purposes
+$ # prefix is : for matching lines and - for relative lines
+$ # group 6-8 and group 9-11 are next to each other here
+$ grep -n -C1 'flower' context.txt
+6-    toy
+7:    flower
+8-    sand stone
+9-light blue
+10:    flower
+11-    sky
+
+$ # example for overlapping case (line number 9)
+$ # last line of 1st group overlaps with matching line of 2nd group
+$ grep -n -A4 'blue' context.txt
+5:blue
+6-    toy
+7-    flower
+8-    sand stone
+9:light blue
+10-    flower
+11-    sky
+12-    water
+13-dark red
+</code></pre>
+<h2><a class="header" href="#customizing-separators" id="customizing-separators">Customizing separators</a></h2>
+<p>Use <code>--group-separator</code> to change the default separator <code>--</code> to something else.</p>
+<pre><code class="language-bash">$ seq 29 | grep --group-separator='*****' -A1 '3'
+3
+4
+*****
+13
+14
+*****
+23
+24
+
+$ # only matching line is shown if count 0 is used with -A/-B/-C
+$ grep -A0 --group-separator='*-----------*-----------*' 'in' context.txt
+    evening sky
+*-----------*-----------*
+    hindi
+*-----------*-----------*
+programming language
+*-----------*-----------*
+    kotlin
+</code></pre>
+<p>Use <code>--no-group-separator</code> option if the separator line is a hindrance, for example feeding the output of <code>grep</code> to another program.</p>
+<pre><code class="language-bash">$ seq 29 | grep --no-group-separator -A1 '3'
+3
+4
+13
+14
+23
+24
+
+$ # sum of values based on grep output
+$ seq 29 | grep --no-group-separator -A1 '3' | datamash sum 1
+81
+</code></pre>
+<h2><a class="header" href="#summary" id="summary">Summary</a></h2>
+<p>Context matching got its own chapter mainly due to corner cases and customization options (on Ubuntu, <code>man grep</code> doesn't even list them).</p>
+<h2><a class="header" href="#exercises" id="exercises">Exercises</a></h2>
+<p><strong>a)</strong> For this question, create <code>exercises/context_matching</code> directory and then save <a href="https://raw.githubusercontent.com/learnbyexample/learn_gnugrep_ripgrep/master/exercises/palindrome.py">this file from learn_gnugrep_ripgrep repo</a> as <code>palindrome.py</code>. For this input file, display all lines matching <code>raise</code> and one line before it.</p>
+<pre><code class="language-bash">$ # assumes 'exercises/context_matching' as CWD
+$ grep ##### add your solution here
+    if re.search(r'[^a-zA-Z]', ip_str):
+        raise ValueError(&quot;Characters other than alphabets and punctuations&quot;)
+    elif len(ip_str) &lt; 3:
+        raise ValueError(&quot;Less than 3 alphabets&quot;)
+</code></pre>
+<p><strong>b)</strong> Input has group of lines with single empty line in between. Change it to double empty lines between groups.</p>
+<pre><code class="language-bash">$ lines='rat\ndog\nbat\n\n42\n3.14\n\nhi there\nhave a nice day'
+$ printf '%b' &quot;$lines&quot; | grep ##### add your solution here
+rat
+dog
+bat
+
+
+42
+3.14
+
+
+hi there
+have a nice day
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="breere-regular-expressions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="recursive-search.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="breere-regular-expressions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="recursive-search.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

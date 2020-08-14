@@ -1,0 +1,414 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Gotchas and Tricks - GNU GREP and RIPGREP</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Example based guide to mastering GNU GREP and RIPGREP">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="custom.css">
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="cover.html">Cover</a></li><li class="chapter-item expanded affix "><a href="buy.html">Buy PDF/EPUB versions</a></li><li class="chapter-item expanded "><a href="preface.html"><strong aria-hidden="true">1.</strong> Preface</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">2.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="frequently-used-options.html"><strong aria-hidden="true">3.</strong> Frequently used options</a></li><li class="chapter-item expanded "><a href="breere-regular-expressions.html"><strong aria-hidden="true">4.</strong> BRE/ERE Regular Expressions</a></li><li class="chapter-item expanded "><a href="context-matching.html"><strong aria-hidden="true">5.</strong> Context matching</a></li><li class="chapter-item expanded "><a href="recursive-search.html"><strong aria-hidden="true">6.</strong> Recursive search</a></li><li class="chapter-item expanded "><a href="miscellaneous-options.html"><strong aria-hidden="true">7.</strong> Miscellaneous options</a></li><li class="chapter-item expanded "><a href="perl-compatible-regular-expressions.html"><strong aria-hidden="true">8.</strong> Perl Compatible Regular Expressions</a></li><li class="chapter-item expanded "><a href="gotchas-and-tricks.html" class="active"><strong aria-hidden="true">9.</strong> Gotchas and Tricks</a></li><li class="chapter-item expanded "><a href="ripgrep.html"><strong aria-hidden="true">10.</strong> ripgrep</a></li><li class="chapter-item expanded "><a href="further-reading.html"><strong aria-hidden="true">11.</strong> Further Reading</a></li><li class="chapter-item expanded "><a href="Exercise_solutions.html"><strong aria-hidden="true">12.</strong> Exercise Solutions</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">GNU GREP and RIPGREP</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="https://github.com/learnbyexample/learn_gnugrep_ripgrep" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#gotchas-and-tricks" id="gotchas-and-tricks">Gotchas and Tricks</a></h1>
+<h2><a class="header" href="#shell-quoting" id="shell-quoting">Shell quoting</a></h2>
+<p>Always use single quotes for search string/pattern, unless other forms of shell expansion is needed and you know what you are doing.</p>
+<pre><code class="language-bash">$ # spaces separate command arguments
+$ echo 'a cat and a dog' | grep and a
+grep: a: No such file or directory
+$ echo 'a cat and a dog' | grep 'and a'
+a cat and a dog
+
+$ # use of # indicates start of comment
+$ printf 'foo\na#2\nb#3\n' | grep #2
+Usage: grep [OPTION]... PATTERN [FILE]...
+Try 'grep --help' for more information.
+$ printf 'foo\na#2\nb#3\n' | grep '#2'
+a#2
+
+$ # assumes 'bre_ere' as CWD
+$ ls *.txt
+word_anchors.txt  words.txt
+$ # will get expanded to: grep -F word_anchors.txt words.txt
+$ echo '*.txt' | grep -F *.txt
+$ echo '*.txt' | grep -F '*.txt'
+*.txt
+</code></pre>
+<p>When double quotes are needed, try to use them only for the portion required. See <a href="https://mywiki.wooledge.org/Quotes">mywiki.wooledge Quotes</a> for detailed discussion of various quoting and expansions in <code>bash</code> shell.</p>
+<pre><code class="language-bash">$ expr='(a^b)'
+$ # in bash, strings placed next to each other will be concatenated
+$ echo '\S*\Q'&quot;$expr&quot;'\E\S*'
+\S*\Q(a^b)\E\S*
+
+$ echo 'f*(2-a/b) - 3*(a^b)-42' | grep -oP '\S*\Q'&quot;$expr&quot;'\E\S*'
+3*(a^b)-42
+</code></pre>
+<h2><a class="header" href="#patterns-starting-with-hyphen" id="patterns-starting-with-hyphen">Patterns starting with hyphen</a></h2>
+<p>Patterns cannot start with <code>-</code> as it will be treated as a command line option. Either escape it or use <code>--</code> as an option before the pattern to indicate that no more options will be used (handy if pattern is programmatically constructed). This problem and the solution is not unique to <code>grep</code> command.</p>
+<pre><code class="language-bash">$ # command assumes - is start of an option, hence the errors
+$ printf '-2+3=1\n'
+bash: printf: -2: invalid option
+printf: usage: printf [-v var] format [arguments]
+$ echo '5*3-2=13' | grep '-2'
+Usage: grep [OPTION]... PATTERN [FILE]...
+Try 'grep --help' for more information.
+
+$ # escape it (won't work if -F option is also needed)
+$ echo '5*3-2=13' | grep '\-2'
+5*3-2=13
+
+$ # or use --
+$ echo '5*3-2=13' | grep -- '-2'
+5*3-2=13
+$ printf -- '-2+3=1\n'
+-2+3=1
+</code></pre>
+<p>As a corollary, you can use options after filename arguments. Useful if you forgot some option(s) and want to edit the previous command from history.</p>
+<pre><code class="language-bash">$ printf 'boat\nsite\nfoot' | grep '[aeo]+t'
+$ printf 'boat\nsite\nfoot' | grep '[aeo]+t' -E
+boat
+foot
+</code></pre>
+<h2><a class="header" href="#word-boundary-differences" id="word-boundary-differences">Word boundary differences</a></h2>
+<p>The <code>-w</code> option is not exactly the same as using word boundaries in regular expressions. The <code>\b</code> anchor by definition requires word characters to be present, but this is not the case with <code>-w</code> as described in the manual:</p>
+<blockquote>
+<p><strong>-w, --word-regexp</strong>
+Select  only  those  lines  containing  matches  that  form whole words.  The test is that the matching substring must either be at the beginning of the line, or preceded by a non-word constituent character.  Similarly,  it  must  be either at the end of the line or followed by a non-word constituent character.  Word-constituent characters are letters, digits, and the underscore.  This option has no effect  if  -x is also specified.</p>
+</blockquote>
+<pre><code class="language-bash">$ # no output because there are no word characters
+$ echo '*$' | grep '\b\$\b'
+$ # matches because $ is preceded by non-word character
+$ # and followed by end of line
+$ echo '*$' | grep -w '\$'
+*$
+</code></pre>
+<p>Consider <code>I have 12, he has 2!</code> as sample text, shown below as image with vertical bars as word boundaries. The last character <code>!</code> doesn't have end of word boundary as it is not a word character. This should hopefully make it clear the differences between using <code>\b</code> and <code>-w</code> and <code>\&lt;\&gt;</code> features.</p>
+<p><img src="images/word_boundary.png" alt="word boundary" /></p>
+<pre><code class="language-bash">$ # \b matches both start and end of word boundaries
+$ # 1st and 3rd line have space as second character
+$ echo 'I have 12, he has 2!' | grep -o '\b..\b'
+I 
+12
+, 
+he
+ 2
+
+$ # \&lt; and \&gt; strictly match only start and end word boundaries respectively
+$ echo 'I have 12, he has 2!' | grep -o '\&lt;..\&gt;'
+12
+he
+
+$ # -w ensures there are no word characters around the matching text
+$ # same as: grep -oP '(?&lt;!\w)..(?!\w)'
+$ echo 'I have 12, he has 2!' | grep -ow '..'
+12
+he
+2!
+</code></pre>
+<h2><a class="header" href="#faster-execution-for-ascii-input" id="faster-execution-for-ascii-input">Faster execution for ASCII input</a></h2>
+<p>Changing locale to ASCII (assuming default is not ASCII locale) can give significant speed boost.</p>
+<pre><code class="language-bash">$ # assumes 'bre_ere' as CWD
+$ # time shown is best result from multiple runs
+$ # speed benefit will vary depending on computing resources, input, etc
+$ time grep -xE '([a-d][r-z]){3}' words.txt &gt; f1
+real    0m0.058s
+
+$ # LC_ALL=C will give ASCII locale, active only for this command
+$ time LC_ALL=C grep -xE '([a-d][r-z]){3}' words.txt &gt; f2
+real    0m0.006s
+
+$ # check that results are same for both versions of the command
+$ diff -s f1 f2
+Files f1 and f2 are identical
+</code></pre>
+<p>Here's another example.</p>
+<pre><code class="language-bash">$ time grep -xE '([a-z]..)\1' words.txt &gt; f1
+real    0m0.224s
+$ time LC_ALL=C grep -xE '([a-z]..)\1' words.txt &gt; f2
+real    0m0.132s
+
+$ # clean up temporary files
+$ rm f[12]
+</code></pre>
+<p>There's been plenty of speed improvements in recent versions, see <a href="https://savannah.gnu.org/news/?group_id=67">release notes</a> for details.</p>
+<pre><code class="language-bash">$ # assumes 'bre_ere' as CWD
+$ /bin/grep --version | head -n1
+/bin/grep (GNU grep) 2.25
+$ time /bin/grep -wE '([a-d][r-z]){3}' words.txt &gt; f1
+real    0m0.107s
+
+$ grep --version | head -n1
+grep (GNU grep) 3.4
+$ time grep -wE '([a-d][r-z]){3}' words.txt &gt; f2
+real    0m0.057s
+
+$ # clean up
+$ rm f[12]
+</code></pre>
+<h2><a class="header" href="#speed-benefits-with-pcre" id="speed-benefits-with-pcre">Speed benefits with PCRE</a></h2>
+<p>Using PCRE usually will be faster if search pattern has backreferences.</p>
+<p>As mentioned earlier, from <code>man grep</code> under <strong>Known Bugs</strong> section (applies to BRE/ERE)</p>
+<blockquote>
+<p>Large repetition counts in the {n,m} construct may cause grep to use lots of memory. In addition, certain other obscure regular expressions require exponential time and space, and may cause grep to run out of memory. Back-references are very slow, and may require exponential time.</p>
+</blockquote>
+<pre><code class="language-bash">$ time LC_ALL=C grep -xE '([a-z]..)\1' words.txt &gt; f1
+real    0m0.132s
+$ time LC_ALL=C grep -xP '([a-z]..)\1' words.txt &gt; f2
+real    0m0.011s
+
+$ # clean up
+$ rm f[12]
+</code></pre>
+<h2><a class="header" href="#parallel-execution" id="parallel-execution">Parallel execution</a></h2>
+<p>While searching huge code bases, you could consider using more than one processing resource (if available) to speed up results. This example dataset will be used again in <code>ripgrep</code> chapter.</p>
+<blockquote>
+<p><img src="images/warning.svg" alt="warning" /> <code>xargs -P</code> may return mangled output unlike <code>parallel</code>, see <a href="https://unix.stackexchange.com/questions/104778/gnu-parallel-vs-i-mean-background-vs-xargs-p">unix.stackexchange: xargs vs parallel</a> for details.</p>
+</blockquote>
+<pre><code class="language-bash">$ # assumes 'gotchas_tricks' as CWD
+$ # note that the download size is 154M
+$ wget https://github.com/torvalds/linux/archive/v4.19.tar.gz
+$ tar -zxf v4.19.tar.gz
+$ du -sh linux-4.19
+908M    linux-4.19
+
+$ cd linux-4.19
+$ # note that the time is significantly different from first run to next
+$ # due to caching, in this case 28.046s to 0.610s
+$ time grep -rl 'include' . &gt; ../f1
+real    0m0.610s
+$ # even default find+grep may be faster than grep -r
+$ # note the use of -print0 and -0 to handle filenames correctly
+$ time find -type f -print0 | xargs -0 grep -l 'include' &gt; ../f2
+real    0m0.568s
+$ # much better performance as 2 cores are used here instead of 1
+$ # assuming output order of results do not matter
+$ time find -type f -print0 | xargs -0 -P2 grep -l 'include' &gt; ../f3
+real    0m0.366s
+
+$ # however, output is not usable for the third case
+$ diff -sq &lt;(sort ../f1) &lt;(sort ../f2)
+Files /dev/fd/63 and /dev/fd/62 are identical
+$ diff -sq &lt;(sort ../f1) &lt;(sort ../f3)
+Files /dev/fd/63 and /dev/fd/62 differ
+
+$ # clean up
+$ rm ../f[1-3]
+</code></pre>
+<p>With this, chapters on <code>GNU grep</code> are done. Would highly suggest to maintain your own list of frequently used <code>grep</code> commands, tips and tricks, etc. Next chapter is on <code>ripgrep</code> which is rapidly gaining popularity, mainly due to its speed, recursive options and customization features. Also, do check out various resources linked in <a href="./further-reading.html#further-reading">Further Reading</a> chapter.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="perl-compatible-regular-expressions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="ripgrep.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="perl-compatible-regular-expressions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="ripgrep.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

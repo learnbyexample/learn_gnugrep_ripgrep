@@ -1,0 +1,513 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Recursive search - GNU GREP and RIPGREP</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Example based guide to mastering GNU GREP and RIPGREP">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="custom.css">
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="cover.html">Cover</a></li><li class="chapter-item expanded affix "><a href="buy.html">Buy PDF/EPUB versions</a></li><li class="chapter-item expanded "><a href="preface.html"><strong aria-hidden="true">1.</strong> Preface</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">2.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="frequently-used-options.html"><strong aria-hidden="true">3.</strong> Frequently used options</a></li><li class="chapter-item expanded "><a href="breere-regular-expressions.html"><strong aria-hidden="true">4.</strong> BRE/ERE Regular Expressions</a></li><li class="chapter-item expanded "><a href="context-matching.html"><strong aria-hidden="true">5.</strong> Context matching</a></li><li class="chapter-item expanded "><a href="recursive-search.html" class="active"><strong aria-hidden="true">6.</strong> Recursive search</a></li><li class="chapter-item expanded "><a href="miscellaneous-options.html"><strong aria-hidden="true">7.</strong> Miscellaneous options</a></li><li class="chapter-item expanded "><a href="perl-compatible-regular-expressions.html"><strong aria-hidden="true">8.</strong> Perl Compatible Regular Expressions</a></li><li class="chapter-item expanded "><a href="gotchas-and-tricks.html"><strong aria-hidden="true">9.</strong> Gotchas and Tricks</a></li><li class="chapter-item expanded "><a href="ripgrep.html"><strong aria-hidden="true">10.</strong> ripgrep</a></li><li class="chapter-item expanded "><a href="further-reading.html"><strong aria-hidden="true">11.</strong> Further Reading</a></li><li class="chapter-item expanded "><a href="Exercise_solutions.html"><strong aria-hidden="true">12.</strong> Exercise Solutions</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">GNU GREP and RIPGREP</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="https://github.com/learnbyexample/learn_gnugrep_ripgrep" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#recursive-search" id="recursive-search">Recursive search</a></h1>
+<p>This chapter will cover recursive search options and ways to filter the files to be searched. Shell globs and <code>find</code> command are also discussed to show alternate methods. Finally, there is a section to show how to pass file list output from <code>grep</code> to other commands.</p>
+<p>For sample files and directories used in this chapter, go to <code>example_files</code> directory and follow the steps given below:</p>
+<pre><code class="language-bash">$ # create directory for this chapter and cd into it
+$ mkdir recursive_matching &amp;&amp; cd $_
+
+$ # create a text file and a hidden file
+$ printf 'hide\nobscure\nconceal\ncover\nblot\nshield' &gt; patterns.txt
+$ grep -Ff patterns.txt ../bre_ere/words.txt &gt; .hidden
+$ # create another text file
+$ grep -E '([as]([b-g]|po)[r-t]){2}' ../bre_ere/words.txt &gt; nested_group.txt
+
+$ # create sub-directory, two scripts and another hidden file
+$ mkdir scripts
+$ echo 'yrneaolrknzcyr 86960' &gt; scripts/.key
+$ echo &quot;tr 'a-z0-9' 'n-za-m5-90-4' &lt; .key&quot; &gt; scripts/decode.sh
+$ printf &quot;import math\n\nprint(math.pi)\n&quot; &gt; scripts/pi.py
+
+$ # create link to a directory
+$ ln -s ../context_matching/
+
+$ # final directory structure including hidden files and links
+$ tree -al
+.
+├── context_matching -&gt; ../context_matching/
+│   └── context.txt
+├── .hidden
+├── nested_group.txt
+├── patterns.txt
+└── scripts
+    ├── decode.sh
+    ├── .key
+    └── pi.py
+
+2 directories, 7 files
+</code></pre>
+<h2><a class="header" href="#-r-and--r" id="-r-and--r">-r and -R</a></h2>
+<p>From <code>man grep</code></p>
+<pre><code class="language-bash">-r, --recursive
+      Read all files under each directory, recursively,  following
+      symbolic  links  only if they are on the command line.  Note
+      that if no file operand is given, grep searches the  working
+      directory.  This is equivalent to the -d recurse option.
+
+-R, --dereference-recursive
+      Read  all  files  under each directory, recursively.  Follow
+      all symbolic links, unlike -r.
+</code></pre>
+<blockquote>
+<p><img src="images/info.svg" alt="info" /> <code>-r</code> and <code>-R</code> will work as if <code>-H</code> option was specified as well, even if there is only one file found during recursive search. Hidden files are included by default.</p>
+</blockquote>
+<pre><code class="language-bash">$ # no need to specify path(s) if searching CWD
+$ # show all matching lines with digit characters
+$ grep -r '[0-9]'
+scripts/.key:yrneaolrknzcyr 86960
+scripts/decode.sh:tr 'a-z0-9' 'n-za-m5-90-4' &lt; .key
+
+$ # without filename prefix
+$ grep -rh '[0-9]'
+yrneaolrknzcyr 86960
+tr 'a-z0-9' 'n-za-m5-90-4' &lt; .key
+
+$ # list of files containing 'in'
+$ grep -rl 'in'
+.hidden
+nested_group.txt
+scripts/pi.py
+
+$ # list of files in 'scripts' directory NOT containing 'in'
+$ grep -rL 'in' scripts
+scripts/.key
+scripts/decode.sh
+</code></pre>
+<p>Difference between <code>-r</code> and <code>-R</code></p>
+<pre><code class="language-bash">$ # -r will not follow links
+$ # files containing empty lines
+$ grep -rlx ''
+scripts/pi.py
+
+$ # explicitly specify directories, files or links to be searched
+$ grep -rlx '' . context_matching
+./scripts/pi.py
+context_matching/context.txt
+
+$ # -R will automatically follow links
+$ grep -Rlx ''
+scripts/pi.py
+context_matching/context.txt
+</code></pre>
+<h2><a class="header" href="#customize-search-path" id="customize-search-path">Customize search path</a></h2>
+<p>By default, recursive search options <code>-r</code> and <code>-R</code> will include hidden files as well. There are situations, for example a directory under version control, where specific directories should be ignored or all the files mentioned in a specific file should be ignored. To aid in such custom searches, four options are available: </p>
+<table><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody>
+<tr><td>--include=FILE_PATTERN</td><td>search only files that match FILE_PATTERN</td></tr>
+<tr><td>--exclude=FILE_PATTERN</td><td>skip files and directories matching FILE_PATTERN</td></tr>
+<tr><td>--exclude-from=FILE</td><td>skip files matching any file pattern from FILE</td></tr>
+<tr><td>--exclude-dir=PATTERN</td><td>directories that match PATTERN will be skipped</td></tr>
+</tbody></table>
+<blockquote>
+<p><img src="images/info.svg" alt="info" /> <code>PATTERN</code> here refers to <code>glob</code> or <code>wildcard</code> patterns used by shell to expand filenames (not the same as regular expressions). The <code>PATTERN</code> applies only to basename of file or directory, not the pathname. Which implies that you cannot use <code>/</code> in the globs specified in conjunction with recursive options.</p>
+</blockquote>
+<p>Each of these options can be used multiple times to precisely specify the search paths. These can be used without recursive options too. If you mix <code>--include</code> and <code>--exclude</code> options, their order of declaration matters. To know more about <code>wildcards</code> see <a href="https://mywiki.wooledge.org/glob">wooledge: glob</a>.</p>
+<pre><code class="language-bash">$ # without customizing
+$ grep -Rl 'in'
+.hidden
+nested_group.txt
+scripts/pi.py
+context_matching/context.txt
+
+$ # excluding 'scripts' directory and all hidden files
+$ grep -Rl --exclude-dir='scripts' --exclude='.*' 'in'
+nested_group.txt
+context_matching/context.txt
+
+$ # allow only filenames ending with '.txt' (will match hidden files too)
+$ grep -Rl --include='*.txt' 'in'
+nested_group.txt
+context_matching/context.txt
+$ # allow only filenames ending with '.txt' or '.py'
+$ grep -Rl --include='*.txt' --include='*.py' 'in'
+nested_group.txt
+scripts/pi.py
+context_matching/context.txt
+
+$ # exclude all filenames ending with 'en' or '.txt'
+$ printf '*en\n*.txt' | grep -Rl --exclude-from=- 'in'
+scripts/pi.py
+</code></pre>
+<h2><a class="header" href="#extended-globs" id="extended-globs">Extended globs</a></h2>
+<p>Modern versions of shells like <code>bash</code> and <code>zsh</code> provide feature rich extensions to <code>glob</code>. These can be used instead of <code>-r</code> and <code>-R</code> options for some cases. See my <a href="https://github.com/learnbyexample/Linux_command_line/blob/master/Shell.md#wildcards">tutorial on glob</a> for details on extended globs.</p>
+<blockquote>
+<p><img src="images/info.svg" alt="info" /> Use <code>-d skip</code> to prevent <code>grep</code> from treating directories (matched as part of glob expansion) as input file to be searched.</p>
+</blockquote>
+<pre><code class="language-bash">$ # same as: grep -Rl --include='*.txt' --include='*.py' 'in'
+$ # to include hidden files, dotglob should be set as well 
+$ shopt -s extglob globstar 
+$ grep -l 'in' **/*.@(txt|py)
+context_matching/context.txt
+nested_group.txt
+scripts/pi.py
+
+$ # if directory name can match the glob, use '-d skip'
+$ printf '%s\n' **/*context*
+context_matching
+context_matching/context.txt
+$ grep -l 'in' **/*context*
+grep: context_matching: Is a directory
+context_matching/context.txt
+$ grep -d skip -l 'in' **/*context*
+context_matching/context.txt
+</code></pre>
+<h2><a class="header" href="#using-find-command" id="using-find-command">Using find command</a></h2>
+<p>The <code>find</code> command is more versatile than recursive options and extended globs. Apart from searching based on filename, it has provisions to match based on file characteristics like size and time. See my <a href="https://github.com/learnbyexample/Command-line-text-processing/blob/master/wheres_my_file.md">tutorial on find</a> for more details.</p>
+<pre><code class="language-bash">$ # files (including hidden ones) less than 50 bytes
+$ # '-type f' to match only files (not directories) and '-L' to follow links
+$ find -L -type f -size -50c
+./scripts/.key
+./scripts/decode.sh
+./scripts/pi.py
+./patterns.txt
+
+$ # apply 'grep' command to matched files
+$ find -L -type f -size -50c -exec grep 'e$' {} +
+./patterns.txt:hide
+./patterns.txt:obscure
+</code></pre>
+<h2><a class="header" href="#piping-filenames" id="piping-filenames">Piping filenames</a></h2>
+<p>File systems like <code>ext3</code> and <code>ext4</code> allows filenames with any bytes other than <code>/</code> and ASCII NUL. This can cause all sorts of problems if list of filenames from one command is passed to another as is. Space, newline, semicolon, etc are special to shell, so filenames containing these characters have to be properly quoted. Or, where applicable, separate the list of filenames with NUL character. For example, <code>grep -Z</code> will generate NUL separated list and <code>xargs -0</code> will interpret the list as NUL separated.</p>
+<pre><code class="language-bash">$ # note the \0 characters after filenames
+$ grep -rlZ '[0-9]' | od -c
+0000000   s   c   r   i   p   t   s   /   .   k   e   y  \0   s   c   r
+0000020   i   p   t   s   /   d   e   c   o   d   e   .   s   h  \0
+0000037
+
+$ # print last column from all lines of all input files
+$ grep -rlZ '[0-9]' | xargs -0 awk '{print $NF}'
+86960
+.key
+</code></pre>
+<p>Example to show filenames with problematic characters like space causing issue if <code>-Z</code> is not used.</p>
+<pre><code class="language-bash">$ echo 'how are you?' &gt; normal.txt
+$ echo 'how dare you!' &gt; 'filename with spaces.txt'
+$ grep -r 'are'
+filename with spaces.txt:how dare you!
+normal.txt:how are you?
+
+$ # problem when -Z is not used
+$ grep -rl 'are' | xargs wc
+wc: filename: No such file or directory
+wc: with: No such file or directory
+wc: spaces.txt: No such file or directory
+ 1  3 13 normal.txt
+ 1  3 13 total
+
+$ # -Z to the rescue
+$ grep -rlZ 'are' | xargs -0 wc
+ 1  3 14 filename with spaces.txt
+ 1  3 13 normal.txt
+ 2  6 27 total
+</code></pre>
+<p>Example for matching more than one search string anywhere in file:</p>
+<pre><code class="language-bash">$ # files containing 'in'
+$ grep -rl 'in'
+.hidden
+nested_group.txt
+scripts/pi.py
+
+$ # files containing 'in' and 'or'
+$ grep -rlZ 'in' | xargs -0 grep -l 'or'
+.hidden
+scripts/pi.py
+
+$ # files containing 'in' but NOT 'at'
+$ grep -rlZ 'in' | xargs -0 grep -L 'at'
+.hidden
+nested_group.txt
+
+$ # files containing 'in' and 'or' and 'at'
+$ # note the use of -Z for middle command
+$ grep -rlZ 'in' | xargs -0 grep -lZ 'or' | xargs -0 grep -l 'at'
+scripts/pi.py
+</code></pre>
+<h2><a class="header" href="#summary" id="summary">Summary</a></h2>
+<p>Having recursive options when there is already <code>find</code> command seems unnecessary, but in my opinion, these options are highly convenient. Some cases may require falling back to shell globs or <code>find</code> or even a combination of these methods. Tools like <code>ack</code>, <code>ag</code> and <code>ripgrep</code> provide a default recursive search behavior, with out of box features like ignoring hidden files, respecting <code>.gitignore</code> rules, etc.</p>
+<h2><a class="header" href="#exercises" id="exercises">Exercises</a></h2>
+<p>For sample directory, a particular version of one of my GitHub repo is used. All the exercises will assume recursive searching, unless otherwise specified. There are no symbolic links.</p>
+<pre><code class="language-bash">$ # assumes 'exercises' as CWD
+$ mkdir recursive_searching &amp;&amp; cd $_
+$ repo='https://github.com/learnbyexample/Command-line-text-processing.git'
+$ git clone -b apr19 &quot;$repo&quot;
+$ cd Command-line-text-processing
+</code></pre>
+<p><strong>a)</strong> List all files containing <code>xargs</code> or <code>python3</code></p>
+<pre><code class="language-bash">$ grep ##### add your solution here
+gnu_grep.md
+miscellaneous.md
+wheres_my_file.md
+exercises/GNU_grep/ex07_recursive_search/progs/hello.py
+README.md
+</code></pre>
+<p><strong>b)</strong> List all files containing <code>grep</code> but do not list if they are from <code>.git</code> or <code>exercises</code> directories.</p>
+<pre><code class="language-bash">$ grep ##### add your solution here
+gnu_grep.md
+sorting_stuff.md
+file_attributes.md
+whats_the_difference.md
+wheres_my_file.md
+gnu_sed.md
+gnu_awk.md
+tail_less_cat_head.md
+README.md
+ruby_one_liners.md
+perl_the_swiss_knife.md
+</code></pre>
+<p><strong>c)</strong> List all files containing <code>baz</code> if the filename ends with <code>.txt</code> but do not search hidden directories.</p>
+<pre><code class="language-bash">$ grep ##### add your solution here
+exercises/GNU_grep/ex12_regex_character_class_part1/sample_words.txt
+exercises/GNU_grep/ex16_misc_and_extras/sample.txt
+exercises/GNU_grep/ex08_search_pattern_from_file.txt
+</code></pre>
+<p><strong>d)</strong> Search files ending with <code>.md</code> only in current directory (i.e. no recursive searching) and count the total number of occurrences of whole words <code>grep</code> or <code>sed</code> or <code>awk</code>.</p>
+<pre><code class="language-bash">$ grep ##### add your solution here
+1532
+</code></pre>
+<p><strong>e)</strong> List all files containing <code>Hello</code> unless the filename ends with <code>.txt</code> or <code>.sh</code></p>
+<pre><code class="language-bash">$ grep ##### add your solution here
+gnu_grep.md
+miscellaneous.md
+file_attributes.md
+whats_the_difference.md
+gnu_sed.md
+gnu_awk.md
+tail_less_cat_head.md
+exercises/GNU_grep/ex07_recursive_search/progs/hello.py
+ruby_one_liners.md
+perl_the_swiss_knife.md
+</code></pre>
+<p><strong>f)</strong> List all files containing whole words <code>awk</code> and <code>perl</code> but not <code>basename</code>. Although not the case here, assume that filenames can contain shell special characters like space, semicolon, newline, etc.</p>
+<pre><code class="language-bash">$ grep ##### add your solution here
+sorting_stuff.md
+gnu_sed.md
+gnu_awk.md
+ruby_one_liners.md
+perl_the_swiss_knife.md
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="context-matching.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="miscellaneous-options.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="context-matching.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="miscellaneous-options.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

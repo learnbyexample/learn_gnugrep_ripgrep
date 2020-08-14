@@ -1,5 +1,0 @@
-sequoia
-subtle
-questionable
-exhibit
-equation
