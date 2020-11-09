@@ -28,7 +28,7 @@ For a preview of the book, see [sample chapters](https://github.com/learnbyexamp
 
 The book can also be [viewed as a single markdown file in this repo](./gnu_grep.md). See my blogpost on [generating pdf from markdown using pandoc](https://learnbyexample.github.io/tutorial/ebook-generation/customizing-pandoc/) if you are interested in the ebook creation process.
 
-For online `html` version of the book, visit https://learnbyexample.github.io/learn_gnugrep_ripgrep/
+For web version of the book, visit https://learnbyexample.github.io/learn_gnugrep_ripgrep/
 
 <br>
 
@@ -72,7 +72,9 @@ Twitter: https://twitter.com/learn_byexample
 * [softwareengineering.stackexchange](https://softwareengineering.stackexchange.com/questions/39/whats-your-favourite-quote-about-programming) and [skolakoda](https://skolakoda.org/programming-quotes) for programming quotes
 * [Warning](https://commons.wikimedia.org/wiki/File:Warning_icon.svg) and [Info](https://commons.wikimedia.org/wiki/File:Info_icon_002.svg) icons by [Amada44](https://commons.wikimedia.org/wiki/User:Amada44) under public domain
 * [Andrew Gallant](https://blog.burntsushi.net/about/) (author of `ripgrep`) and [mikeblas](https://www.reddit.com/user/mikeblas) for critical feedback
-* [mdBook](https://github.com/rust-lang/mdBook) — for `html` version of the book
+* [mdBook](https://github.com/rust-lang/mdBook) — for web version of the book
+    * [mdBook-pagetoc](https://github.com/JorelAli/mdBook-pagetoc) — for adding table of contents for each chapter
+    * [minify-html](https://github.com/wilsonzlin/minify-html) — for minifying html files
 
 Special thanks to all my friends and online acquaintances for their help, support and encouragement, especially during difficult times.
 

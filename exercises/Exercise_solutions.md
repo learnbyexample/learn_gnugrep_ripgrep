@@ -1,3 +1,7 @@
+# Exercise solutions
+
+<br>
+
 # Frequently used options
 
 Create `exercises` directory and within it, create another directory for this chapter, say `freq_options` or `chapter_2`. Input is a file downloaded from internet — https://www.gutenberg.org/files/345/345.txt saved as `dracula.txt`.
