@@ -1,60 +1,7 @@
-<!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
-    <head>
-        <!-- Book generated using mdBook -->
-        <meta charset="UTF-8">
-        <title>Miscellaneous options - GNU GREP and RIPGREP</title>
-        
-        
-
-
-        <!-- Custom HTML head -->
-        
-
-
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Example based guide to mastering GNU GREP and RIPGREP">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
-
-        
-        <link rel="icon" href="favicon.svg">
-        
-        
-        <link rel="shortcut icon" href="favicon.png">
-        
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
-
-        <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        
-        <link rel="stylesheet" href="fonts/fonts.css">
-        
-
-        <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
-
-        <!-- Custom theme stylesheets -->
-        
-        <link rel="stylesheet" href="custom.css">
-        
-
-        
-    </head>
-    <body>
-        <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+<!DOCTYPE HTML><html lang=en class="sidebar-visible no-js light"><head><meta charset=UTF-8><title>Miscellaneous options - GNU GREP and RIPGREP</title><meta content="text/html; charset=utf-8"http-equiv=Content-Type><meta name=description content="Example based guide to mastering GNU GREP and RIPGREP"><meta name=viewport content="width=device-width, initial-scale=1"><meta name=theme-color content=#ffffff><link rel=icon href=favicon.svg><link rel="shortcut icon"href=favicon.png><link rel=stylesheet href=css/variables.css><link rel=stylesheet href=css/general.css><link rel=stylesheet href=css/chrome.css><link rel=stylesheet href=FontAwesome/css/font-awesome.css><link rel=stylesheet href=fonts/fonts.css><link rel=stylesheet href=highlight.css><link rel=stylesheet href=tomorrow-night.css><link rel=stylesheet href=ayu-highlight.css><link rel=stylesheet href=style.css><body><script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
-
-        <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        </script><script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -67,10 +14,7 @@
                     localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
                 }
             } catch (e) { }
-        </script>
-
-        <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        </script><script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -79,10 +23,7 @@
             html.classList.remove('light')
             html.classList.add(theme);
             html.classList.add('js');
-        </script>
-
-        <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        </script><script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -91,85 +32,13 @@
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
-        </script>
-
-        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="cover.html">Cover</a></li><li class="chapter-item expanded affix "><a href="buy.html">Buy PDF/EPUB versions</a></li><li class="chapter-item expanded "><a href="preface.html"><strong aria-hidden="true">1.</strong> Preface</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">2.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="frequently-used-options.html"><strong aria-hidden="true">3.</strong> Frequently used options</a></li><li class="chapter-item expanded "><a href="breere-regular-expressions.html"><strong aria-hidden="true">4.</strong> BRE/ERE Regular Expressions</a></li><li class="chapter-item expanded "><a href="context-matching.html"><strong aria-hidden="true">5.</strong> Context matching</a></li><li class="chapter-item expanded "><a href="recursive-search.html"><strong aria-hidden="true">6.</strong> Recursive search</a></li><li class="chapter-item expanded "><a href="miscellaneous-options.html" class="active"><strong aria-hidden="true">7.</strong> Miscellaneous options</a></li><li class="chapter-item expanded "><a href="perl-compatible-regular-expressions.html"><strong aria-hidden="true">8.</strong> Perl Compatible Regular Expressions</a></li><li class="chapter-item expanded "><a href="gotchas-and-tricks.html"><strong aria-hidden="true">9.</strong> Gotchas and Tricks</a></li><li class="chapter-item expanded "><a href="ripgrep.html"><strong aria-hidden="true">10.</strong> ripgrep</a></li><li class="chapter-item expanded "><a href="further-reading.html"><strong aria-hidden="true">11.</strong> Further Reading</a></li><li class="chapter-item expanded "><a href="Exercise_solutions.html"><strong aria-hidden="true">12.</strong> Exercise Solutions</a></li></ol>
-            </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
-        </nav>
-
-        <div id="page-wrapper" class="page-wrapper">
-
-            <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
-                    <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                            <i class="fa fa-paint-brush"></i>
-                        </button>
-                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-                        </ul>
-                        
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
-                        </button>
-                        
-                    </div>
-
-                    <h1 class="menu-title">GNU GREP and RIPGREP</h1>
-
-                    <div class="right-buttons">
-                        
-                        <a href="https://github.com/learnbyexample/learn_gnugrep_ripgrep" title="Git repository" aria-label="Git repository">
-                            <i id="git-repository-button" class="fa fa-github"></i>
-                        </a>
-                        
-                    </div>
-                </div>
-
-                
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
-                    </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
-                        </ul>
-                    </div>
-                </div>
-                
-
-                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+        </script><nav id=sidebar class=sidebar aria-label="Table of contents"><div class=sidebar-scrollbox><ol class=chapter><li class="chapter-item expanded affix"><a href=cover.html>Cover</a><li class="chapter-item expanded affix"><a href=buy.html>Buy PDF/EPUB versions</a><li class="chapter-item expanded"><a href=preface.html><strong aria-hidden=true>1.</strong> Preface</a><li class="chapter-item expanded"><a href=introduction.html><strong aria-hidden=true>2.</strong> Introduction</a><li class="chapter-item expanded"><a href=frequently-used-options.html><strong aria-hidden=true>3.</strong> Frequently used options</a><li class="chapter-item expanded"><a href=breere-regular-expressions.html><strong aria-hidden=true>4.</strong> BRE/ERE Regular Expressions</a><li class="chapter-item expanded"><a href=context-matching.html><strong aria-hidden=true>5.</strong> Context matching</a><li class="chapter-item expanded"><a href=recursive-search.html><strong aria-hidden=true>6.</strong> Recursive search</a><li class="chapter-item expanded"><a href=miscellaneous-options.html class=active><strong aria-hidden=true>7.</strong> Miscellaneous options</a><li class="chapter-item expanded"><a href=perl-compatible-regular-expressions.html><strong aria-hidden=true>8.</strong> Perl Compatible Regular Expressions</a><li class="chapter-item expanded"><a href=gotchas-and-tricks.html><strong aria-hidden=true>9.</strong> Gotchas and Tricks</a><li class="chapter-item expanded"><a href=ripgrep.html><strong aria-hidden=true>10.</strong> ripgrep</a><li class="chapter-item expanded"><a href=further-reading.html><strong aria-hidden=true>11.</strong> Further Reading</a><li class="chapter-item expanded"><a href=Exercise_solutions.html><strong aria-hidden=true>12.</strong> Exercise Solutions</a></ol></div><div id=sidebar-resize-handle class=sidebar-resize-handle></div></nav><div id=page-wrapper class=page-wrapper><div class=page><div id=menu-bar-hover-placeholder></div><div id=menu-bar class="menu-bar sticky bordered"><div class=left-buttons><button id=sidebar-toggle class=icon-button type=button title="Toggle Table of Contents"aria-label="Toggle Table of Contents"aria-controls=sidebar><i class="fa fa-bars"></i></button><button id=theme-toggle class=icon-button type=button title="Change theme"aria-label="Change theme"aria-haspopup=true aria-expanded=false aria-controls=theme-list><i class="fa fa-paint-brush"></i></button><ul id=theme-list class=theme-popup aria-label=Themes role=menu><li role=none><button role=menuitem class=theme id=light>Light (default)</button><li role=none><button role=menuitem class=theme id=rust>Rust</button><li role=none><button role=menuitem class=theme id=coal>Coal</button><li role=none><button role=menuitem class=theme id=navy>Navy</button><li role=none><button role=menuitem class=theme id=ayu>Ayu</button></ul><button id=search-toggle class=icon-button type=button title="Search. (Shortkey: s)"aria-label="Toggle Searchbar"aria-expanded=false aria-keyshortcuts=S aria-controls=searchbar><i class="fa fa-search"></i></button></div><h1 class=menu-title>GNU GREP and RIPGREP</h1><div class=right-buttons><a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep title="Git repository"aria-label="Git repository"> <i id=git-repository-button class="fa fa-github"></i> </a></div></div><div id=search-wrapper class=hidden><form id=searchbar-outer class=searchbar-outer><input type=search name=search id=searchbar name=searchbar placeholder="Search this book ..."aria-controls=searchresults-outer aria-describedby=searchresults-header></form><div id=searchresults-outer class="searchresults-outer hidden"><div id=searchresults-header class=searchresults-header></div><ul id=searchresults></ul></div></div><script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
                     });
-                </script>
-
-                <div id="content" class="content">
-                    <main>
-                        <h1><a class="header" href="#miscellaneous-options" id="miscellaneous-options">Miscellaneous options</a></h1>
-<p>Options not yet covered will be discussed in this chapter.</p>
-<blockquote>
-<p><img src="images/info.svg" alt="info" /> Files used in examples are available chapter wise from <a href="https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/example_files">learn_gnugrep_ripgrep repo</a>. The directory for this chapter is <code>miscellaneous</code>.</p>
-</blockquote>
-<h2><a class="header" href="#scripting-options" id="scripting-options">Scripting options</a></h2>
-<p>While writing scripts, sometimes you just need to know if a file contains the pattern and act based on exit status of the command. Instead of usual workarounds like redirecting output to <code>/dev/null</code> you can use <code>-q</code> option. This will avoid printing anything on <code>stdout</code> and also provides speed benefit as <code>grep</code> would stop processing as soon as given condition is satisfied. Check out one of my <a href="https://github.com/learnbyexample/command_help/blob/master/ch">command line tool</a> for a practical case study of this option.</p>
-<pre><code class="language-bash">$ cat find.md
+                </script><div id=content class=content><main><div class=sidetoc><nav class=pagetoc></nav></div><h1><a class=header href=#miscellaneous-options id=miscellaneous-options>Miscellaneous options</a></h1><p>Options not yet covered will be discussed in this chapter.<blockquote><p><img src=images/info.svg alt=info> Files used in examples are available chapter wise from <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/example_files>learn_gnugrep_ripgrep repo</a>. The directory for this chapter is <code>miscellaneous</code>.</blockquote><h2><a class=header href=#scripting-options id=scripting-options>Scripting options</a></h2><p>While writing scripts, sometimes you just need to know if a file contains the pattern and act based on exit status of the command. Instead of usual workarounds like redirecting output to <code>/dev/null</code> you can use <code>-q</code> option. This will avoid printing anything on <code>stdout</code> and also provides speed benefit as <code>grep</code> would stop processing as soon as given condition is satisfied. Check out one of my <a href=https://github.com/learnbyexample/command_help/blob/master/ch>command line tool</a> for a practical case study of this option.<pre><code class=language-bash>$ cat find.md
 The find command is more versatile than recursive options and
 and extended globs. Apart from searching based on filename, it
 has provisions to match based on the the file characteristics
@@ -183,11 +52,9 @@ $ echo $?
 $ grep -q 'xyz' find.md
 $ echo $?
 1
-$ grep -qwE '(\w+) \1' find.md &amp;&amp; echo 'Repeated words found!'
+$ grep -qwE '(\w+) \1' find.md && echo 'Repeated words found!'
 Repeated words found!
-</code></pre>
-<p>The <code>-s</code> option will suppress error messages that are intended for <code>stderr</code>.</p>
-<pre><code class="language-bash">$ # when file doesn't exist
+</code></pre><p>The <code>-s</code> option will suppress error messages that are intended for <code>stderr</code>.<pre><code class=language-bash>$ # when file doesn't exist
 $ grep 'in' xyz.txt
 grep: xyz.txt: No such file or directory
 $ grep -s 'in' xyz.txt
@@ -202,18 +69,13 @@ grep: foo.txt: Permission denied
 $ grep -s 'rose' foo.txt
 $ echo $?
 2
-</code></pre>
-<p>Errors regarding regular expressions and invalid options will be on <code>stderr</code> even with <code>-s</code> option.</p>
-<pre><code class="language-bash">$ grep -sE 'a(' find.md
+</code></pre><p>Errors regarding regular expressions and invalid options will be on <code>stderr</code> even with <code>-s</code> option.<pre><code class=language-bash>$ grep -sE 'a(' find.md
 grep: Unmatched ( or \(
 
-$ grep -sE 'a(' find.md 2&gt; /dev/null
+$ grep -sE 'a(' find.md 2> /dev/null
 $ echo $?
 2
-</code></pre>
-<h2><a class="header" href="#multiline-matching" id="multiline-matching">Multiline matching</a></h2>
-<p>If input is small enough to meet memory requirements, the <code>-z</code> option comes in handy to match across multiple lines. This assumes that input doesn't contain the NUL character and thus entire file is read as single string. The <code>-z</code> option is similar to <code>-0</code> option for <code>xargs</code>, it will cause <code>grep</code> to separate input based on NUL character, instead of newline character.</p>
-<pre><code class="language-bash">$ # note that each match ends with \0
+</code></pre><h2><a class=header href=#multiline-matching id=multiline-matching>Multiline matching</a></h2><p>If input is small enough to meet memory requirements, the <code>-z</code> option comes in handy to match across multiple lines. This assumes that input doesn't contain the NUL character and thus entire file is read as single string. The <code>-z</code> option is similar to <code>-0</code> option for <code>xargs</code>, it will cause <code>grep</code> to separate input based on NUL character, instead of newline character.<pre><code class=language-bash>$ # note that each match ends with \0
 $ grep -zowE '(\w+)\s+\1' find.md | od -c
 0000000   a   n   d  \n   a   n   d  \0   t   h   e       t   h   e  \0
 0000020
@@ -225,9 +87,7 @@ and
 ---
 the the
 ---
-</code></pre>
-<p>If input contents includes the NUL character and <code>-z</code> is used, then whole file will not be read at once. Rather, <code>grep</code> will process chunks of data using NUL character as separator.</p>
-<pre><code class="language-bash">$ # with -z, \0 marks the different 'lines'
+</code></pre><p>If input contents includes the NUL character and <code>-z</code> is used, then whole file will not be read at once. Rather, <code>grep</code> will process chunks of data using NUL character as separator.<pre><code class=language-bash>$ # with -z, \0 marks the different 'lines'
 $ printf 'dark red\nteal\0a2\0spared' | grep -z 'red' | sed 's/\x0/\n---\n/g'
 dark red
 teal
@@ -241,10 +101,7 @@ $ printf 'dark red\nteal\0a2\0spared' | grep -z 'red' | od -c
 0000000   d   a   r   k       r   e   d  \n   t   e   a   l  \0   s   p
 0000020   a   r   e   d  \0
 0000025
-</code></pre>
-<h2><a class="header" href="#byte-offset" id="byte-offset">Byte offset</a></h2>
-<p>Sometimes you also want to know where the patterns you are searching for are located in the file. The <code>-b</code> option will give the byte location (starting with <code>0</code> for first byte) of matching lines or matching portions (if <code>-o</code> is also used).</p>
-<pre><code class="language-bash">$ # offset for starting line of each match
+</code></pre><h2><a class=header href=#byte-offset id=byte-offset>Byte offset</a></h2><p>Sometimes you also want to know where the patterns you are searching for are located in the file. The <code>-b</code> option will give the byte location (starting with <code>0</code> for first byte) of matching lines or matching portions (if <code>-o</code> is also used).<pre><code class=language-bash>$ # offset for starting line of each match
 $ grep -b 'is' find.md
 0:The find command is more versatile than recursive options and
 125:has provisions to match based on the the file characteristics
@@ -257,116 +114,29 @@ $ grep -ob 'art\b' find.md
 
 $ # to get offset line-wise instead of location in entire input file
 $ # line number and offset for start of matching portion
-$ awk '/is/{print NR, index($0, &quot;is&quot;)-1}' find.md
+$ awk '/is/{print NR, index($0, "is")-1}' find.md
 1 17
 3 8
-</code></pre>
-<h2><a class="header" href="#--label" id="--label">--label</a></h2>
-<p>Allows to customize the string to be used when indicating standard input as the data that was processed.</p>
-<pre><code class="language-bash">$ echo 'red and blue' | grep -c 'and' - find.md
+</code></pre><h2><a class=header href=#--label id=--label>--label</a></h2><p>Allows to customize the string to be used when indicating standard input as the data that was processed.<pre><code class=language-bash>$ echo 'red and blue' | grep -c 'and' - find.md
 (standard input):1
 find.md:3
 
 $ echo 'red and blue' | grep --label='stdin' -c 'and' - find.md
 stdin:1
 find.md:3
-</code></pre>
-<h2><a class="header" href="#options-not-covered" id="options-not-covered">Options not covered</a></h2>
-<table><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody>
-<tr><td>--binary-files, -a, -I</td><td>how to deal with binary input</td></tr>
-<tr><td>-d, -D</td><td>how to deal with directory, device, FIFO or socket as input</td></tr>
-<tr><td>-u, -U</td><td>how to deal with files on MS-DOS and MS-Windows platforms</td></tr>
-<tr><td>--line-buffered</td><td><a href="https://stackoverflow.com/questions/7161821/how-to-grep-a-continuous-stream">useful for processing continuous stream</a></td></tr>
-<tr><td>-T</td><td>align output with prefixes (ex: <code>-H</code>, <code>-b</code>) when input has Tab characters</td></tr>
-</tbody></table>
-<h2><a class="header" href="#summary" id="summary">Summary</a></h2>
-<p>A few more options were covered in this chapter. I wish I had known about the <code>-s</code> and <code>-q</code> options for script usage in my early years of job, instead of trying to mess with redirections (which was another topic I struggled with). Another topic not covered in this book is <a href="https://www.gnu.org/software/grep/manual/grep.html#Environment-Variables">environment variable settings</a> like <strong>locale</strong> and <strong>color</strong>.</p>
-<h2><a class="header" href="#exercises" id="exercises">Exercises</a></h2>
-<p><strong>a)</strong> Use the correct binary option to get output for second command shown below:</p>
-<pre><code class="language-bash">$ printf 'hi there\0good day\n' | grep 'good'
+</code></pre><h2><a class=header href=#options-not-covered id=options-not-covered>Options not covered</a></h2><table><thead><tr><th>Option<th>Description<tbody><tr><td>--binary-files, -a, -I<td>how to deal with binary input<tr><td>-d, -D<td>how to deal with directory, device, FIFO or socket as input<tr><td>-u, -U<td>how to deal with files on MS-DOS and MS-Windows platforms<tr><td>--line-buffered<td><a href=https://stackoverflow.com/questions/7161821/how-to-grep-a-continuous-stream>useful for processing continuous stream</a><tr><td>-T<td>align output with prefixes (ex: <code>-H</code>, <code>-b</code>) when input has Tab characters</table><h2><a class=header href=#summary id=summary>Summary</a></h2><p>A few more options were covered in this chapter. I wish I had known about the <code>-s</code> and <code>-q</code> options for script usage in my early years of job, instead of trying to mess with redirections (which was another topic I struggled with). Another topic not covered in this book is <a href=https://www.gnu.org/software/grep/manual/grep.html#Environment-Variables>environment variable settings</a> like <strong>locale</strong> and <strong>color</strong>.<h2><a class=header href=#exercises id=exercises>Exercises</a></h2><p><strong>a)</strong> Use the correct binary option to get output for second command shown below:<pre><code class=language-bash>$ printf 'hi there\0good day\n' | grep 'good'
 Binary file (standard input) matches
 
 $ printf 'hi there\0good day\n' | grep ##### add your solution here
 hi theregood day
-</code></pre>
-<p><strong>b)</strong> Read about <code>--line-buffered</code> from the manual (also <a href="https://stackoverflow.com/questions/7161821/how-to-grep-a-continuous-stream">this link</a>) and see it in action with code below:</p>
-<pre><code class="language-bash">$ for i in {1..5}; do seq 12; sleep 1; done | grep '[1-489]' | grep -v '0'
+</code></pre><p><strong>b)</strong> Read about <code>--line-buffered</code> from the manual (also <a href=https://stackoverflow.com/questions/7161821/how-to-grep-a-continuous-stream>this link</a>) and see it in action with code below:<pre><code class=language-bash>$ for i in {1..5}; do seq 12; sleep 1; done | grep '[1-489]' | grep -v '0'
 
 $ for i in {1..5}; do seq 12; sleep 1; done | \
-&gt; grep --line-buffered '[1-489]' | grep -v '0'
-</code></pre>
-<p><strong>c)</strong> Consider non-binary input having multiple lines of text. Display <code>Match</code> if input starts with a number and <code>Nope</code> if it doesn't.</p>
-<pre><code class="language-bash">$ printf 'oh\n42' | grep ##### add your solution here
+> grep --line-buffered '[1-489]' | grep -v '0'
+</code></pre><p><strong>c)</strong> Consider non-binary input having multiple lines of text. Display <code>Match</code> if input starts with a number and <code>Nope</code> if it doesn't.<pre><code class=language-bash>$ printf 'oh\n42' | grep ##### add your solution here
 Nope
 $ printf '2a\nhi' | grep ##### add your solution here
 Match
-</code></pre>
-
-                    </main>
-
-                    <nav class="nav-wrapper" aria-label="Page navigation">
-                        <!-- Mobile navigation buttons -->
-                        
-                            <a rel="prev" href="recursive-search.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                        
-
-                        
-                            <a rel="next" href="perl-compatible-regular-expressions.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        
-
-                        <div style="clear: both"></div>
-                    </nav>
-                </div>
-            </div>
-
-            <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
-                    <a rel="prev" href="recursive-search.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-                
-
-                
-                    <a rel="next" href="perl-compatible-regular-expressions.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                
-            </nav>
-
-        </div>
-
-        
-
-        
-
-        
-
-        
-        <script type="text/javascript">
+</code></pre></main><nav class=nav-wrapper aria-label="Page navigation"><a rel=prev href=recursive-search.html class="mobile-nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><a rel=next href=perl-compatible-regular-expressions.html class="mobile-nav-chapters next"title="Next chapter"aria-label="Next chapter"aria-keyshortcuts=Right> <i class="fa fa-angle-right"></i> </a><div style="clear: both"></div></nav></div></div><nav class=nav-wide-wrapper aria-label="Page navigation"><a rel=prev href=recursive-search.html class="nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><a rel=next href=perl-compatible-regular-expressions.html class="nav-chapters next"title="Next chapter"aria-label="Next chapter"aria-keyshortcuts=Right> <i class="fa fa-angle-right"></i> </a></nav></div><script>
             window.playground_copyable = true;
-        </script>
-        
-
-        
-
-        
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        
-
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
-
-        <!-- Custom JS scripts -->
-        
-
-        
-
-    </body>
-</html>
+        </script><script src=elasticlunr.min.js charset=utf-8></script><script src=mark.min.js charset=utf-8></script><script src=searcher.js charset=utf-8></script><script src=clipboard.min.js charset=utf-8></script><script src=highlight.js charset=utf-8></script><script src=book.js charset=utf-8></script><script src=sidebar.js></script>

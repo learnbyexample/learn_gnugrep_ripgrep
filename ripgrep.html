@@ -1,60 +1,7 @@
-<!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
-    <head>
-        <!-- Book generated using mdBook -->
-        <meta charset="UTF-8">
-        <title>ripgrep - GNU GREP and RIPGREP</title>
-        
-        
-
-
-        <!-- Custom HTML head -->
-        
-
-
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Example based guide to mastering GNU GREP and RIPGREP">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
-
-        
-        <link rel="icon" href="favicon.svg">
-        
-        
-        <link rel="shortcut icon" href="favicon.png">
-        
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
-
-        <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        
-        <link rel="stylesheet" href="fonts/fonts.css">
-        
-
-        <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
-
-        <!-- Custom theme stylesheets -->
-        
-        <link rel="stylesheet" href="custom.css">
-        
-
-        
-    </head>
-    <body>
-        <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+<!DOCTYPE HTML><html lang=en class="sidebar-visible no-js light"><head><meta charset=UTF-8><title>ripgrep - GNU GREP and RIPGREP</title><meta content="text/html; charset=utf-8"http-equiv=Content-Type><meta name=description content="Example based guide to mastering GNU GREP and RIPGREP"><meta name=viewport content="width=device-width, initial-scale=1"><meta name=theme-color content=#ffffff><link rel=icon href=favicon.svg><link rel="shortcut icon"href=favicon.png><link rel=stylesheet href=css/variables.css><link rel=stylesheet href=css/general.css><link rel=stylesheet href=css/chrome.css><link rel=stylesheet href=FontAwesome/css/font-awesome.css><link rel=stylesheet href=fonts/fonts.css><link rel=stylesheet href=highlight.css><link rel=stylesheet href=tomorrow-night.css><link rel=stylesheet href=ayu-highlight.css><link rel=stylesheet href=style.css><body><script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
-
-        <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        </script><script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -67,10 +14,7 @@
                     localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
                 }
             } catch (e) { }
-        </script>
-
-        <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        </script><script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -79,10 +23,7 @@
             html.classList.remove('light')
             html.classList.add(theme);
             html.classList.add('js');
-        </script>
-
-        <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        </script><script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -91,97 +32,17 @@
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
-        </script>
-
-        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="cover.html">Cover</a></li><li class="chapter-item expanded affix "><a href="buy.html">Buy PDF/EPUB versions</a></li><li class="chapter-item expanded "><a href="preface.html"><strong aria-hidden="true">1.</strong> Preface</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">2.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="frequently-used-options.html"><strong aria-hidden="true">3.</strong> Frequently used options</a></li><li class="chapter-item expanded "><a href="breere-regular-expressions.html"><strong aria-hidden="true">4.</strong> BRE/ERE Regular Expressions</a></li><li class="chapter-item expanded "><a href="context-matching.html"><strong aria-hidden="true">5.</strong> Context matching</a></li><li class="chapter-item expanded "><a href="recursive-search.html"><strong aria-hidden="true">6.</strong> Recursive search</a></li><li class="chapter-item expanded "><a href="miscellaneous-options.html"><strong aria-hidden="true">7.</strong> Miscellaneous options</a></li><li class="chapter-item expanded "><a href="perl-compatible-regular-expressions.html"><strong aria-hidden="true">8.</strong> Perl Compatible Regular Expressions</a></li><li class="chapter-item expanded "><a href="gotchas-and-tricks.html"><strong aria-hidden="true">9.</strong> Gotchas and Tricks</a></li><li class="chapter-item expanded "><a href="ripgrep.html" class="active"><strong aria-hidden="true">10.</strong> ripgrep</a></li><li class="chapter-item expanded "><a href="further-reading.html"><strong aria-hidden="true">11.</strong> Further Reading</a></li><li class="chapter-item expanded "><a href="Exercise_solutions.html"><strong aria-hidden="true">12.</strong> Exercise Solutions</a></li></ol>
-            </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
-        </nav>
-
-        <div id="page-wrapper" class="page-wrapper">
-
-            <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
-                    <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                            <i class="fa fa-paint-brush"></i>
-                        </button>
-                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-                        </ul>
-                        
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
-                        </button>
-                        
-                    </div>
-
-                    <h1 class="menu-title">GNU GREP and RIPGREP</h1>
-
-                    <div class="right-buttons">
-                        
-                        <a href="https://github.com/learnbyexample/learn_gnugrep_ripgrep" title="Git repository" aria-label="Git repository">
-                            <i id="git-repository-button" class="fa fa-github"></i>
-                        </a>
-                        
-                    </div>
-                </div>
-
-                
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
-                    </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
-                        </ul>
-                    </div>
-                </div>
-                
-
-                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+        </script><nav id=sidebar class=sidebar aria-label="Table of contents"><div class=sidebar-scrollbox><ol class=chapter><li class="chapter-item expanded affix"><a href=cover.html>Cover</a><li class="chapter-item expanded affix"><a href=buy.html>Buy PDF/EPUB versions</a><li class="chapter-item expanded"><a href=preface.html><strong aria-hidden=true>1.</strong> Preface</a><li class="chapter-item expanded"><a href=introduction.html><strong aria-hidden=true>2.</strong> Introduction</a><li class="chapter-item expanded"><a href=frequently-used-options.html><strong aria-hidden=true>3.</strong> Frequently used options</a><li class="chapter-item expanded"><a href=breere-regular-expressions.html><strong aria-hidden=true>4.</strong> BRE/ERE Regular Expressions</a><li class="chapter-item expanded"><a href=context-matching.html><strong aria-hidden=true>5.</strong> Context matching</a><li class="chapter-item expanded"><a href=recursive-search.html><strong aria-hidden=true>6.</strong> Recursive search</a><li class="chapter-item expanded"><a href=miscellaneous-options.html><strong aria-hidden=true>7.</strong> Miscellaneous options</a><li class="chapter-item expanded"><a href=perl-compatible-regular-expressions.html><strong aria-hidden=true>8.</strong> Perl Compatible Regular Expressions</a><li class="chapter-item expanded"><a href=gotchas-and-tricks.html><strong aria-hidden=true>9.</strong> Gotchas and Tricks</a><li class="chapter-item expanded"><a href=ripgrep.html class=active><strong aria-hidden=true>10.</strong> ripgrep</a><li class="chapter-item expanded"><a href=further-reading.html><strong aria-hidden=true>11.</strong> Further Reading</a><li class="chapter-item expanded"><a href=Exercise_solutions.html><strong aria-hidden=true>12.</strong> Exercise Solutions</a></ol></div><div id=sidebar-resize-handle class=sidebar-resize-handle></div></nav><div id=page-wrapper class=page-wrapper><div class=page><div id=menu-bar-hover-placeholder></div><div id=menu-bar class="menu-bar sticky bordered"><div class=left-buttons><button id=sidebar-toggle class=icon-button type=button title="Toggle Table of Contents"aria-label="Toggle Table of Contents"aria-controls=sidebar><i class="fa fa-bars"></i></button><button id=theme-toggle class=icon-button type=button title="Change theme"aria-label="Change theme"aria-haspopup=true aria-expanded=false aria-controls=theme-list><i class="fa fa-paint-brush"></i></button><ul id=theme-list class=theme-popup aria-label=Themes role=menu><li role=none><button role=menuitem class=theme id=light>Light (default)</button><li role=none><button role=menuitem class=theme id=rust>Rust</button><li role=none><button role=menuitem class=theme id=coal>Coal</button><li role=none><button role=menuitem class=theme id=navy>Navy</button><li role=none><button role=menuitem class=theme id=ayu>Ayu</button></ul><button id=search-toggle class=icon-button type=button title="Search. (Shortkey: s)"aria-label="Toggle Searchbar"aria-expanded=false aria-keyshortcuts=S aria-controls=searchbar><i class="fa fa-search"></i></button></div><h1 class=menu-title>GNU GREP and RIPGREP</h1><div class=right-buttons><a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep title="Git repository"aria-label="Git repository"> <i id=git-repository-button class="fa fa-github"></i> </a></div></div><div id=search-wrapper class=hidden><form id=searchbar-outer class=searchbar-outer><input type=search name=search id=searchbar name=searchbar placeholder="Search this book ..."aria-controls=searchresults-outer aria-describedby=searchresults-header></form><div id=searchresults-outer class="searchresults-outer hidden"><div id=searchresults-header class=searchresults-header></div><ul id=searchresults></ul></div></div><script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
                     });
-                </script>
-
-                <div id="content" class="content">
-                    <main>
-                        <h1><a class="header" href="#ripgrep" id="ripgrep">ripgrep</a></h1>
-<p><code>ripgrep</code> is definitely becoming a popular alternative (if not the most popular) to <code>grep</code> command. Editors like <a href="https://code.visualstudio.com/updates/v1_11">Visual Studio Code</a> and <a href="https://github.com/atom/fuzzy-finder/pull/369">Atom</a> are using <code>ripgrep</code> to power their search offerings. The major selling point is its default behavior for recursive search and speed. The project doesn't aim to be compatible with POSIX and behavior varies with respect to <code>GNU grep</code> in terms of features, option names, output style, regular expressions, etc. </p>
-<p><strong>Project links</strong></p>
-<ul>
-<li><a href="https://github.com/BurntSushi/ripgrep">github: ripgrep</a></li>
-<li><a href="https://github.com/BurntSushi/ripgrep/issues">issue manager</a></li>
-<li><a href="https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md">User guide</a></li>
-<li><a href="https://github.com/BurntSushi/ripgrep/blob/master/FAQ.md">FAQ</a></li>
-<li><a href="https://blog.burntsushi.net/ripgrep/">Benchmark with other grep implementations</a> — published in 2016</li>
-</ul>
-<blockquote>
-<p><img src="images/info.svg" alt="info" /> See <a href="https://beyondgrep.com/feature-comparison/">Feature comparison of ack, ag, git-grep, GNU grep and ripgrep</a> for quick overview between different <code>grep</code> implementations. See also <a href="https://github.com/beyondgrep/website/issues/">issues</a> as the chart might be pending updates.</p>
-</blockquote>
-<h2><a class="header" href="#installation" id="installation">Installation</a></h2>
-<p>See <a href="https://github.com/BurntSushi/ripgrep/blob/master/README.md#installation">ripgrep: installation</a> for details on various methods and platforms. Instructions shown below is for Debian-like distributions.</p>
-<pre><code class="language-bash">$ # link shown here on two lines as it is too long
+                </script><div id=content class=content><main><div class=sidetoc><nav class=pagetoc></nav></div><h1><a class=header href=#ripgrep id=ripgrep>ripgrep</a></h1><p><code>ripgrep</code> is definitely becoming a popular alternative (if not the most popular) to <code>grep</code> command. Editors like <a href=https://code.visualstudio.com/updates/v1_11>Visual Studio Code</a> and <a href=https://github.com/atom/fuzzy-finder/pull/369>Atom</a> are using <code>ripgrep</code> to power their search offerings. The major selling point is its default behavior for recursive search and speed. The project doesn't aim to be compatible with POSIX and behavior varies with respect to <code>GNU grep</code> in terms of features, option names, output style, regular expressions, etc.<p><strong>Project links</strong><ul><li><a href=https://github.com/BurntSushi/ripgrep>github: ripgrep</a><li><a href=https://github.com/BurntSushi/ripgrep/issues>issue manager</a><li><a href=https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md>User guide</a><li><a href=https://github.com/BurntSushi/ripgrep/blob/master/FAQ.md>FAQ</a><li><a href=https://blog.burntsushi.net/ripgrep/>Benchmark with other grep implementations</a> — published in 2016</ul><blockquote><p><img src=images/info.svg alt=info> See <a href=https://beyondgrep.com/feature-comparison/>Feature comparison of ack, ag, git-grep, GNU grep and ripgrep</a> for quick overview between different <code>grep</code> implementations. See also <a href=https://github.com/beyondgrep/website/issues/>issues</a> as the chart might be pending updates.</blockquote><h2><a class=header href=#installation id=installation>Installation</a></h2><p>See <a href=https://github.com/BurntSushi/ripgrep/blob/master/README.md#installation>ripgrep: installation</a> for details on various methods and platforms. Instructions shown below is for Debian-like distributions.<pre><code class=language-bash>$ # link shown here on two lines as it is too long
 $ # visit using the first part to get latest version
 $ link='https://github.com/BurntSushi/ripgrep/releases/'
-$ link=&quot;$link&quot;'download/12.1.0/ripgrep_12.1.0_amd64.deb'
-$ wget &quot;$link&quot;
+$ link="$link"'download/12.1.0/ripgrep_12.1.0_amd64.deb'
+$ wget "$link"
 $ sudo gdebi ripgrep_12.1.0_amd64.deb 
 
 $ # note that the installed command name is rg, not ripgrep
@@ -189,26 +50,7 @@ $ rg --version
 ripgrep 12.1.0 (rev 6162b000a3)
 -SIMD -AVX (compiled)
 +SIMD -AVX (runtime)
-</code></pre>
-<h2><a class="header" href="#default-behavior" id="default-behavior">Default behavior</a></h2>
-<p>Compared to <code>GNU grep</code>, the following is a list of default <code>rg</code> behavior (there could be more such differences):</p>
-<ul>
-<li>recursive search, if any input path is a directory (CWD if source is not specified) and
-<ul>
-<li>ignores files and directories that match rules specified by ignore files like <code>.gitignore</code></li>
-<li>ignores hidden files and directories</li>
-<li>ignores binary files (files containing ASCII NUL character) — but displays the match if found before encountering NUL character along with a warning</li>
-<li>blank line between matches from different files</li>
-<li>filename is added as a prefix line above matching lines instead of prefix for each matching line</li>
-</ul>
-</li>
-<li>line number prefix</li>
-<li>color option is enabled by default</li>
-</ul>
-<blockquote>
-<p><img src="images/info.svg" alt="info" /> Files used in examples are available chapter wise from <a href="https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/example_files">learn_gnugrep_ripgrep repo</a>. This chapter will reuse directories used for <code>GNU grep</code>. The <code>recursive_matching</code> directory was created in <a href="./recursive-search.html#recursive-search">Recursive search</a> chapter.</p>
-</blockquote>
-<pre><code class="language-bash">$ # assumes 'recursive_matching' as CWD
+</code></pre><h2><a class=header href=#default-behavior id=default-behavior>Default behavior</a></h2><p>Compared to <code>GNU grep</code>, the following is a list of default <code>rg</code> behavior (there could be more such differences):<ul><li>recursive search, if any input path is a directory (CWD if source is not specified) and <ul><li>ignores files and directories that match rules specified by ignore files like <code>.gitignore</code><li>ignores hidden files and directories<li>ignores binary files (files containing ASCII NUL character) — but displays the match if found before encountering NUL character along with a warning<li>blank line between matches from different files<li>filename is added as a prefix line above matching lines instead of prefix for each matching line</ul><li>line number prefix<li>color option is enabled by default</ul><blockquote><p><img src=images/info.svg alt=info> Files used in examples are available chapter wise from <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/example_files>learn_gnugrep_ripgrep repo</a>. This chapter will reuse directories used for <code>GNU grep</code>. The <code>recursive_matching</code> directory was created in <a href=./recursive-search.html#recursive-search>Recursive search</a> chapter.</blockquote><pre><code class=language-bash>$ # assumes 'recursive_matching' as CWD
 $ # by default line numbers are shown on terminal
 $ rg 'repo' nested_group.txt
 10:prepossesses
@@ -221,11 +63,8 @@ scripts/pi.py
 3:print(math.pi)
 
 scripts/decode.sh
-1:tr 'a-z0-9' 'n-za-m5-90-4' &lt; .key
-</code></pre>
-<h2><a class="header" href="#options-overview" id="options-overview">Options overview</a></h2>
-<p>It is always a good idea to know where to find the documentation. From command line, you can use <code>man rg</code> for manual and <code>rg -h</code> for list of all the options. See also <a href="https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md">ripgrep: User guide</a>.</p>
-<pre><code class="language-bash">$ man rg
+1:tr 'a-z0-9' 'n-za-m5-90-4' < .key
+</code></pre><h2><a class=header href=#options-overview id=options-overview>Options overview</a></h2><p>It is always a good idea to know where to find the documentation. From command line, you can use <code>man rg</code> for manual and <code>rg -h</code> for list of all the options. See also <a href=https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md>ripgrep: User guide</a>.<pre><code class=language-bash>$ man rg
 NAME
        rg - recursively search current directory for lines matching a pattern
 
@@ -262,27 +101,20 @@ DESCRIPTION
 
        Tip: to disable all smart filtering and make ripgrep behave a bit more
        like classical grep, use rg -uuu.
-</code></pre>
-<p>This section will cover some of the options provided by <code>ripgrep</code> with examples. These are adapted from examples presented for <code>GNU grep</code> and explanations will be kept to a minimum. Regular expressions will be covered in separate sections later on.</p>
-<h3><a class="header" href="#literal-search" id="literal-search">Literal search</a></h3>
-<pre><code class="language-bash">$ # assumes 'freq_options' as CWD
+</code></pre><p>This section will cover some of the options provided by <code>ripgrep</code> with examples. These are adapted from examples presented for <code>GNU grep</code> and explanations will be kept to a minimum. Regular expressions will be covered in separate sections later on.<h3><a class=header href=#literal-search id=literal-search>Literal search</a></h3><pre><code class=language-bash>$ # assumes 'freq_options' as CWD
 $ rg -F 'twice' programming_quotes.txt
 1:Debugging is twice as hard as writing the code in the first place.
 
 $ echo 'int a[5]' | rg -F 'a[5]'
 int a[5]
-</code></pre>
-<h3><a class="header" href="#case-insensitive-search" id="case-insensitive-search">Case insensitive search</a></h3>
-<pre><code class="language-bash">$ rg -i 'jam' programming_quotes.txt
+</code></pre><h3><a class=header href=#case-insensitive-search id=case-insensitive-search>Case insensitive search</a></h3><pre><code class=language-bash>$ rg -i 'jam' programming_quotes.txt
 6:use regular expressions. Now they have two problems by Jamie Zawinski
 
 $ printf 'Cat\ncOnCaT\nscatter\ncut' | rg -i 'cat'
 Cat
 cOnCaT
 scatter
-</code></pre>
-<h3><a class="header" href="#invert-matching-lines" id="invert-matching-lines">Invert matching lines</a></h3>
-<pre><code class="language-bash">$ seq 5 | rg -v '3'
+</code></pre><h3><a class=header href=#invert-matching-lines id=invert-matching-lines>Invert matching lines</a></h3><pre><code class=language-bash>$ seq 5 | rg -v '3'
 1
 2
 4
@@ -291,10 +123,7 @@ scatter
 $ printf 'goal\nrate\neat\npit' | rg -v 'at'
 goal
 pit
-</code></pre>
-<h3><a class="header" href="#line-number-and-count" id="line-number-and-count">Line number and count</a></h3>
-<p>Default settings like line number and color depend upon context. If output is terminal, these are on, but if output is redirected to file, another command, etc then they are turned off. Also, if <code>stdin</code> is the only source of input, line number option won't turn on.</p>
-<pre><code class="language-bash">$ # -n will ensure line numbers are available for further processing
+</code></pre><h3><a class=header href=#line-number-and-count id=line-number-and-count>Line number and count</a></h3><p>Default settings like line number and color depend upon context. If output is terminal, these are on, but if output is redirected to file, another command, etc then they are turned off. Also, if <code>stdin</code> is the only source of input, line number option won't turn on.<pre><code class=language-bash>$ # -n will ensure line numbers are available for further processing
 $ rg -n 'twice' programming_quotes.txt
 1:Debugging is twice as hard as writing the code in the first place.
 $ # -N to turn off default line number prefix on terminal
@@ -309,13 +138,11 @@ $ printf 'goal\nrate\neat\npit' | rg -vc 'g'
 
 $ # multiple file input
 $ seq 15 | rg -c '1' programming_quotes.txt -
-&lt;stdin&gt;:7
+&LTstdin>:7
 programming_quotes.txt:1
-$ cat &lt;(seq 15) programming_quotes.txt | rg -c '1'
+$ cat <(seq 15) programming_quotes.txt | rg -c '1'
 8
-</code></pre>
-<p>If any input file doesn't have a match, <code>-c</code> will not display that file in output. You can use <code>--include-zero</code> to display files without matches as well.</p>
-<pre><code class="language-bash">$ rg -c '1' *
+</code></pre><p>If any input file doesn't have a match, <code>-c</code> will not display that file in output. You can use <code>--include-zero</code> to display files without matches as well.<pre><code class=language-bash>$ rg -c '1' *
 search_strings.txt:1
 programming_quotes.txt:1
 
@@ -325,9 +152,7 @@ search_strings.txt:1
 programming_quotes.txt:1
 colors_1:0
 colors_2:0
-</code></pre>
-<h3><a class="header" href="#limiting-output-lines" id="limiting-output-lines">Limiting output lines</a></h3>
-<pre><code class="language-bash">$ # limit no. of matching lines displayed for each input file
+</code></pre><h3><a class=header href=#limiting-output-lines id=limiting-output-lines>Limiting output lines</a></h3><pre><code class=language-bash>$ # limit no. of matching lines displayed for each input file
 $ rg -m3 'in' programming_quotes.txt
 1:Debugging is twice as hard as writing the code in the first place.
 3:by definition, not smart enough to debug it by Brian W. Kernighan
@@ -338,15 +163,13 @@ $ seq 1000 | rg -m4 '2'
 12
 20
 21
-</code></pre>
-<h3><a class="header" href="#multiple-search-strings" id="multiple-search-strings">Multiple search strings</a></h3>
-<pre><code class="language-bash">$ # search for '1' or 'two', similar to conditional OR boolean logic
+</code></pre><h3><a class=header href=#multiple-search-strings id=multiple-search-strings>Multiple search strings</a></h3><pre><code class=language-bash>$ # search for '1' or 'two', similar to conditional OR boolean logic
 $ rg -e '1' -e 'two' programming_quotes.txt
 6:use regular expressions. Now they have two problems by Jamie Zawinski
 12:naming things, and off-by-1 errors by Leon Bambrick
 
 $ # specify a file as source of search strings
-$ printf 'two\n1\n' &gt; search_strings.txt
+$ printf 'two\n1\n' > search_strings.txt
 $ rg -f search_strings.txt programming_quotes.txt
 6:use regular expressions. Now they have two problems by Jamie Zawinski
 12:naming things, and off-by-1 errors by Leon Bambrick
@@ -363,9 +186,7 @@ $ rg 'in' programming_quotes.txt | rg 'not'
 by definition, not smart enough to debug it by Brian W. Kernighan
 A language that does not affect the way you think about programming,
 is not worth knowing by Alan Perlis
-</code></pre>
-<h3><a class="header" href="#filename-instead-of-matching-lines" id="filename-instead-of-matching-lines">Filename instead of matching lines</a></h3>
-<pre><code class="language-bash">$ # list filename if it contains 'are' anywhere in the file
+</code></pre><h3><a class=header href=#filename-instead-of-matching-lines id=filename-instead-of-matching-lines>Filename instead of matching lines</a></h3><pre><code class=language-bash>$ # list filename if it contains 'are' anywhere in the file
 $ rg -l 'are' programming_quotes.txt search_strings.txt
 programming_quotes.txt
 $ rg -l 'xyz' programming_quotes.txt search_strings.txt
@@ -379,9 +200,7 @@ search_strings.txt
 programming_quotes.txt
 $ rg --files-without-match 'are' programming_quotes.txt search_strings.txt
 search_strings.txt
-</code></pre>
-<h3><a class="header" href="#filename-prefix-for-matching-lines" id="filename-prefix-for-matching-lines">Filename prefix for matching lines</a></h3>
-<pre><code class="language-bash">$ # by default, filename isn't printed for single input
+</code></pre><h3><a class=header href=#filename-prefix-for-matching-lines id=filename-prefix-for-matching-lines>Filename prefix for matching lines</a></h3><pre><code class=language-bash>$ # by default, filename isn't printed for single input
 $ rg '1' programming_quotes.txt
 12:naming things, and off-by-1 errors by Leon Bambrick
 $ # use -I to suppress filename prefix for multiple input
@@ -397,7 +216,7 @@ $ seq 1000 | rg -m3 '1' - programming_quotes.txt
 programming_quotes.txt
 12:naming things, and off-by-1 errors by Leon Bambrick
 
-&lt;stdin&gt;
+&LTstdin>
 1:1
 10:10
 11:11
@@ -405,9 +224,7 @@ $ # use -H to always show filename prefix
 $ rg -H '1' programming_quotes.txt
 programming_quotes.txt
 12:naming things, and off-by-1 errors by Leon Bambrick
-</code></pre>
-<p>To get output format same as <code>GNU grep</code></p>
-<pre><code class="language-bash">$ # use --no-heading to get same style as GNU grep
+</code></pre><p>To get output format same as <code>GNU grep</code><pre><code class=language-bash>$ # use --no-heading to get same style as GNU grep
 $ rg --no-heading -H '1' programming_quotes.txt
 programming_quotes.txt:12:naming things, and off-by-1 errors by Leon Bambrick
 
@@ -415,28 +232,14 @@ $ # --no-heading is automatically assumed when output is redirected
 $ rg -Hn '1' *.txt | cat -
 search_strings.txt:2:1
 programming_quotes.txt:12:naming things, and off-by-1 errors by Leon Bambrick
-</code></pre>
-<p>The <code>vim</code> editor has an option <code>-q</code> that allows to easily edit the matching lines from <code>rg</code> output if it has both line number and filename prefixes. Use <code>--vimgrep</code> option instead of <code>-Hn</code> to allow <code>vim</code> to place cursor from start of match instead of start of line.</p>
-<pre><code class="language-bash">$ rg --vimgrep '1' *.txt
+</code></pre><p>The <code>vim</code> editor has an option <code>-q</code> that allows to easily edit the matching lines from <code>rg</code> output if it has both line number and filename prefixes. Use <code>--vimgrep</code> option instead of <code>-Hn</code> to allow <code>vim</code> to place cursor from start of match instead of start of line.<pre><code class=language-bash>$ rg --vimgrep '1' *.txt
 search_strings.txt:2:1:1
 programming_quotes.txt:12:27:naming things, and off-by-1 errors by Leon Bambrick
 
 $ # use :cn and :cp to navigate to next/previous occurrences
 $ # the status line at bottom will have additional info
-$ vim -q &lt;(rg --vimgrep '1' *.txt)
-</code></pre>
-<h3><a class="header" href="#colored-output" id="colored-output">Colored output</a></h3>
-<p>By default, <code>--color=auto</code> setting is used to distinguish matching portions, line numbers, filenames, etc. Use <code>never</code> to disable color and <code>always</code> to carry forward color information for further processing.</p>
-<p><img src="./images/rg_color_output.png" alt="rg color output" /></p>
-<p>Below image shows difference between <code>auto</code> and <code>always</code>. In the first case, <code>in</code> is highlighted even after piping, while in the second case, <code>in</code> is not highlighted. In practice, <code>always</code> is rarely used (for example: piping results to <code>less -R</code>) as it has extra information added to matching lines and could cause undesirable results when processing such lines. You can also use <code>-p</code> option, which is a shortcut to enable <code>--color=always --heading --line-number</code> options.</p>
-<p><img src="./images/rg_auto_vs_always.png" alt="rg auto vs always" /></p>
-<p>The <code>--colors</code> (note the plural form) option is useful to customize colors and style used for matching text, line numbers, etc. A common usage is to highlight multiple terms in different colors. See manual for complete details.</p>
-<p><img src="./images/rg_colors_customize.png" alt="rg colors customize" /></p>
-<h3><a class="header" href="#match-whole-word-or-line" id="match-whole-word-or-line">Match whole word or line</a></h3>
-<blockquote>
-<p><img src="images/warning.svg" alt="warning" /> The <code>-w</code> option behaves a bit differently than word boundaries in regular expressions. See <a href="./gotchas-and-tricks.html#word-boundary-differences">Word boundary differences</a> section for details.</p>
-</blockquote>
-<pre><code class="language-bash">$ # this matches 'par' anywhere in the line
+$ vim -q <(rg --vimgrep '1' *.txt)
+</code></pre><h3><a class=header href=#colored-output id=colored-output>Colored output</a></h3><p>By default, <code>--color=auto</code> setting is used to distinguish matching portions, line numbers, filenames, etc. Use <code>never</code> to disable color and <code>always</code> to carry forward color information for further processing.<p><img src=./images/rg_color_output.png alt="rg color output"><p>Below image shows difference between <code>auto</code> and <code>always</code>. In the first case, <code>in</code> is highlighted even after piping, while in the second case, <code>in</code> is not highlighted. In practice, <code>always</code> is rarely used (for example: piping results to <code>less -R</code>) as it has extra information added to matching lines and could cause undesirable results when processing such lines. You can also use <code>-p</code> option, which is a shortcut to enable <code>--color=always --heading --line-number</code> options.<p><img src=./images/rg_auto_vs_always.png alt="rg auto vs always"><p>The <code>--colors</code> (note the plural form) option is useful to customize colors and style used for matching text, line numbers, etc. A common usage is to highlight multiple terms in different colors. See manual for complete details.<p><img src=./images/rg_colors_customize.png alt="rg colors customize"><h3><a class=header href=#match-whole-word-or-line id=match-whole-word-or-line>Match whole word or line</a></h3><blockquote><p><img src=images/warning.svg alt=warning> The <code>-w</code> option behaves a bit differently than word boundaries in regular expressions. See <a href=./gotchas-and-tricks.html#word-boundary-differences>Word boundary differences</a> section for details.</blockquote><pre><code class=language-bash>$ # this matches 'par' anywhere in the line
 $ printf 'par value\nheir apparent\n' | rg 'par'
 par value
 heir apparent
@@ -445,9 +248,7 @@ $ # this matches 'par' only as a whole word
 $ # word character means any alphabet, digit or underscore characters
 $ printf 'par value\nheir apparent\n' | rg -w 'par'
 par value
-</code></pre>
-<p>Use <code>-x</code> to display a line only if entire line satisfies the given pattern.</p>
-<pre><code class="language-bash">$ # this matches 'my book' anywhere in the line
+</code></pre><p>Use <code>-x</code> to display a line only if entire line satisfies the given pattern.<pre><code class=language-bash>$ # this matches 'my book' anywhere in the line
 $ printf 'see my book list\nmy book\n' | rg 'my book'
 see my book list
 my book
@@ -458,9 +259,7 @@ my book
 $ # counting empty lines
 $ rg -cx '' programming_quotes.txt
 3
-</code></pre>
-<p>The <code>-f</code> and <code>-x</code> options can be combined to get common lines between two files or the difference when <code>-v</code> is used as well. Add <code>-F</code> as well depending on whether literal or regular expressions matching is needed.</p>
-<pre><code class="language-bash">$ # common lines between two files
+</code></pre><p>The <code>-f</code> and <code>-x</code> options can be combined to get common lines between two files or the difference when <code>-v</code> is used as well. Add <code>-F</code> as well depending on whether literal or regular expressions matching is needed.<pre><code class=language-bash>$ # common lines between two files
 $ rg -Fxf colors_1 colors_2
 4:yellow
 
@@ -475,9 +274,7 @@ $ rg -Fvxf colors_2 colors_1
 1:teal
 2:light blue
 3:brown
-</code></pre>
-<h3><a class="header" href="#extract-only-matching-portion" id="extract-only-matching-portion">Extract only matching portion</a></h3>
-<pre><code class="language-bash">$ rg -o -e 'twice' -e 'hard' programming_quotes.txt
+</code></pre><h3><a class=header href=#extract-only-matching-portion id=extract-only-matching-portion>Extract only matching portion</a></h3><pre><code class=language-bash>$ rg -o -e 'twice' -e 'hard' programming_quotes.txt
 1:twice
 1:hard
 11:hard
@@ -489,10 +286,7 @@ $ # add -o to get total count of matches (differs from GNU grep)
 $ # can also use --count-matches option instead of -co
 $ rg -co 'in' programming_quotes.txt
 13
-</code></pre>
-<h3><a class="header" href="#context-matching" id="context-matching">Context matching</a></h3>
-<p>Use <code>-A</code> and <code>-B</code> to display lines <strong>after</strong> and <strong>before</strong> matching lines.</p>
-<pre><code class="language-bash">$ # assumes 'context_matching' as CWD
+</code></pre><h3><a class=header href=#context-matching id=context-matching>Context matching</a></h3><p>Use <code>-A</code> and <code>-B</code> to display lines <strong>after</strong> and <strong>before</strong> matching lines.<pre><code class=language-bash>$ # assumes 'context_matching' as CWD
 $ # show lines containing 'blue' and two lines after such lines
 $ # for multiple matches, -- is added between the results
 $ # prefix is : for matching lines and - for relative lines
@@ -510,9 +304,7 @@ $ rg -B2 'bread' context.txt
 1-wheat
 2-    roti
 3:    bread
-</code></pre>
-<p>Use <code>-C</code> to display lines around the matching ones.</p>
-<pre><code class="language-bash">$ # same as: rg -A1 -B1 'sky' context.txt
+</code></pre><p>Use <code>-C</code> to display lines around the matching ones.<pre><code class=language-bash>$ # same as: rg -A1 -B1 'sky' context.txt
 $ rg -C1 'sky' context.txt
 10-    flower
 11:    sky
@@ -532,9 +324,7 @@ $ rg -A1 -B2 'sky' context.txt
 15-    blood
 16:    evening sky
 17-    rose
-</code></pre>
-<p>The separator <code>--</code> won't be added if two or more groups of matching lines have overlapping lines or are next to each other in input file.</p>
-<pre><code class="language-bash">$ # the two groups are next to each other here
+</code></pre><p>The separator <code>--</code> won't be added if two or more groups of matching lines have overlapping lines or are next to each other in input file.<pre><code class=language-bash>$ # the two groups are next to each other here
 $ rg -C1 'flower' context.txt
 6-    toy
 7:    flower
@@ -555,9 +345,7 @@ $ rg -A4 'blue' context.txt
 11-    sky
 12-    water
 13-dark red
-</code></pre>
-<p>Use <code>--context-separator</code> to change the default separator <code>--</code> to something else. You can also use escape sequences like <code>\t</code>, <code>\n</code>, etc as part of the separator.</p>
-<pre><code class="language-bash">$ seq 29 | rg --context-separator='*****' -A1 '3'
+</code></pre><p>Use <code>--context-separator</code> to change the default separator <code>--</code> to something else. You can also use escape sequences like <code>\t</code>, <code>\n</code>, etc as part of the separator.<pre><code class=language-bash>$ seq 29 | rg --context-separator='*****' -A1 '3'
 3
 4
 *****
@@ -566,19 +354,14 @@ $ rg -A4 'blue' context.txt
 *****
 23
 24
-</code></pre>
-<p>You cannot use <code>--context-separator=''</code> to display only the matches without any separator as a newline is always added in addition to the given string. Use <code>--no-context-separator</code> for such cases.</p>
-<pre><code class="language-bash">$ seq 29 | rg --no-context-separator -A1 '3'
+</code></pre><p>You cannot use <code>--context-separator=''</code> to display only the matches without any separator as a newline is always added in addition to the given string. Use <code>--no-context-separator</code> for such cases.<pre><code class=language-bash>$ seq 29 | rg --no-context-separator -A1 '3'
 3
 4
 13
 14
 23
 24
-</code></pre>
-<h3><a class="header" href="#scripting-options" id="scripting-options">Scripting options</a></h3>
-<p>While writing scripts, sometimes you just need to know if a file contains the pattern and act based on exit status of the command. Instead of usual workarounds like redirecting output to <code>/dev/null</code> you can use <code>-q</code> option. This will avoid printing anything on <code>stdout</code> and also provides speed benefit as <code>rg</code> would stop processing as soon as given condition is satisfied.</p>
-<pre><code class="language-bash">$ # assumes 'miscellaneous' as CWD
+</code></pre><h3><a class=header href=#scripting-options id=scripting-options>Scripting options</a></h3><p>While writing scripts, sometimes you just need to know if a file contains the pattern and act based on exit status of the command. Instead of usual workarounds like redirecting output to <code>/dev/null</code> you can use <code>-q</code> option. This will avoid printing anything on <code>stdout</code> and also provides speed benefit as <code>rg</code> would stop processing as soon as given condition is satisfied.<pre><code class=language-bash>$ # assumes 'miscellaneous' as CWD
 $ rg -q 'the the' find.md
 $ echo $?
 0
@@ -586,11 +369,9 @@ $ rg -q 'xyz' find.md
 $ echo $?
 1
 
-$ rg -q 'the the' find.md &amp;&amp; echo 'Repeated word found!'
+$ rg -q 'the the' find.md && echo 'Repeated word found!'
 Repeated word found!
-</code></pre>
-<p>The <code>--no-messages</code> option will suppress error messages that are intended for <code>stderr</code>.</p>
-<pre><code class="language-bash">$ # when file doesn't exist
+</code></pre><p>The <code>--no-messages</code> option will suppress error messages that are intended for <code>stderr</code>.<pre><code class=language-bash>$ # when file doesn't exist
 $ rg 'in' xyz.txt
 xyz.txt: No such file or directory (os error 2)
 $ rg --no-messages 'in' xyz.txt
@@ -603,20 +384,16 @@ foo.txt: Permission denied (os error 13)
 $ rg --no-messages 'rose' foo.txt
 $ echo $?
 2
-</code></pre>
-<p>Errors regarding regular expressions and invalid options will be on <code>stderr</code> even with <code>--no-messages</code> option.</p>
-<pre><code class="language-bash">$ rg --no-messages 'a(' find.md
+</code></pre><p>Errors regarding regular expressions and invalid options will be on <code>stderr</code> even with <code>--no-messages</code> option.<pre><code class=language-bash>$ rg --no-messages 'a(' find.md
 regex parse error:
     a(
      ^
 error: unclosed group
 
-$ rg --no-messages 'a(' find.md 2&gt; /dev/null
+$ rg --no-messages 'a(' find.md 2> /dev/null
 $ echo $?
 2
-</code></pre>
-<h3><a class="header" href="#byte-offset" id="byte-offset">Byte offset</a></h3>
-<pre><code class="language-bash">$ # zero-based offset for starting line of each match
+</code></pre><h3><a class=header href=#byte-offset id=byte-offset>Byte offset</a></h3><pre><code class=language-bash>$ # zero-based offset for starting line of each match
 $ # if line number prefix is also active, it will be before byte offset
 $ rg -Nb 'is' find.md
 0:The find command is more versatile than recursive options and
@@ -627,24 +404,7 @@ $ rg -Nob 'is' find.md
 17:is
 133:is
 180:is
-</code></pre>
-<h2><a class="header" href="#rust-regex" id="rust-regex">Rust Regex</a></h2>
-<p>This section will cover regular expressions syntax and features of <a href="https://docs.rs/regex/1.3.7/regex/index.html">Rust regex crate</a> — the engine that powers the default regex offered by <code>rg</code>. From the docs:</p>
-<blockquote>
-<p>Its syntax is similar to Perl-style regular expressions, but lacks a few features like look around and backreferences. In exchange, all searches execute in linear time with respect to the size of the regular expression and search text.</p>
-</blockquote>
-<p>By default, <code>rg</code> treats the search pattern as a regex</p>
-<ul>
-<li><code>-F</code> option will cause the search patterns to be treated literally</li>
-<li><code>-P</code> option will enable Perl Compatible Regular Expression 2 (PCRE2) instead of Rust regex</li>
-<li><code>--engine=auto</code> option will dynamically use PCRE2 if needed</li>
-</ul>
-<p>Content for this section is adapted from <a href="./breere-regular-expressions.html#breere-regular-expressions">BRE/ERE Regular Expressions</a> and <a href="./perl-compatible-regular-expressions.html#perl-compatible-regular-expressions">Perl Compatible Regular Expressions</a> chapters, with reduced description and examples.</p>
-<blockquote>
-<p><img src="images/info.svg" alt="info" /> <code>rg</code> allows to replace matching portions as well (<code>sed 's/search/replace/g'</code> will be similar to <code>rg -N --passthru 'search' -r 'replace'</code>) for both Rust regex and PCRE2 (substitution is the major feature-wise difference compared to PCRE).</p>
-</blockquote>
-<h3><a class="header" href="#line-anchors" id="line-anchors">Line Anchors</a></h3>
-<pre><code class="language-bash">$ # lines starting with 'pa'
+</code></pre><h2><a class=header href=#rust-regex id=rust-regex>Rust Regex</a></h2><p>This section will cover regular expressions syntax and features of <a href=https://docs.rs/regex/1.3.7/regex/index.html>Rust regex crate</a> — the engine that powers the default regex offered by <code>rg</code>. From the docs:<blockquote><p>Its syntax is similar to Perl-style regular expressions, but lacks a few features like look around and backreferences. In exchange, all searches execute in linear time with respect to the size of the regular expression and search text.</blockquote><p>By default, <code>rg</code> treats the search pattern as a regex<ul><li><code>-F</code> option will cause the search patterns to be treated literally<li><code>-P</code> option will enable Perl Compatible Regular Expression 2 (PCRE2) instead of Rust regex<li><code>--engine=auto</code> option will dynamically use PCRE2 if needed</ul><p>Content for this section is adapted from <a href=./breere-regular-expressions.html#breere-regular-expressions>BRE/ERE Regular Expressions</a> and <a href=./perl-compatible-regular-expressions.html#perl-compatible-regular-expressions>Perl Compatible Regular Expressions</a> chapters, with reduced description and examples.<blockquote><p><img src=images/info.svg alt=info> <code>rg</code> allows to replace matching portions as well (<code>sed 's/search/replace/g'</code> will be similar to <code>rg -N --passthru 'search' -r 'replace'</code>) for both Rust regex and PCRE2 (substitution is the major feature-wise difference compared to PCRE).</blockquote><h3><a class=header href=#line-anchors id=line-anchors>Line Anchors</a></h3><pre><code class=language-bash>$ # lines starting with 'pa'
 $ printf 'spared no one\npar\nspar\ndare' | rg '^pa'
 par
 
@@ -656,13 +416,7 @@ spar
 $ # lines containing only 'par', same as: rg -x 'par'
 $ printf 'spared no one\npar\nspar\ndare' | rg '^par$'
 par
-</code></pre>
-<h3><a class="header" href="#word-anchors" id="word-anchors">Word Anchors</a></h3>
-<p>A word character is any alphabet (irrespective of case), digit and the underscore character. The regex engine implementation is Unicode by default, but consider examples and descriptions as intended for ASCII characters unless otherwise specified.</p>
-<blockquote>
-<p><img src="images/warning.svg" alt="warning" /> Word boundaries behave a bit differently than <code>-w</code> option. See <a href="./gotchas-and-tricks.html#word-boundary-differences">Word boundary differences</a> section for details.</p>
-</blockquote>
-<pre><code class="language-bash">$ # assumes 'bre_ere' as CWD
+</code></pre><h3><a class=header href=#word-anchors id=word-anchors>Word Anchors</a></h3><p>A word character is any alphabet (irrespective of case), digit and the underscore character. The regex engine implementation is Unicode by default, but consider examples and descriptions as intended for ASCII characters unless otherwise specified.<blockquote><p><img src=images/warning.svg alt=warning> Word boundaries behave a bit differently than <code>-w</code> option. See <a href=./gotchas-and-tricks.html#word-boundary-differences>Word boundary differences</a> section for details.</blockquote><pre><code class=language-bash>$ # assumes 'bre_ere' as CWD
 $ # match words starting with 'par'
 $ rg '\bpar' word_anchors.txt
 1:sub par
@@ -676,9 +430,7 @@ $ rg 'par\b' word_anchors.txt
 $ # match only whole word 'par', same as: rg -w 'par'
 $ rg '\bpar\b' word_anchors.txt
 1:sub par
-</code></pre>
-<p>The word boundary has an opposite anchor too. <code>\B</code> matches wherever <code>\b</code> doesn't match. This duality will be seen with some other escape sequences too.</p>
-<pre><code class="language-bash">$ # replace 'par' with 'PAR' if it is surrounded by word characters
+</code></pre><p>The word boundary has an opposite anchor too. <code>\B</code> matches wherever <code>\b</code> doesn't match. This duality will be seen with some other escape sequences too.<pre><code class=language-bash>$ # replace 'par' with 'PAR' if it is surrounded by word characters
 $ rg '\Bpar\B' -r 'PAR' word_anchors.txt
 3:apPARent effort
 4:two sPARe computers
@@ -699,10 +451,7 @@ $ printf 'copper' | rg '\b' -r ':'
 :copper:
 $ printf 'copper' | rg '\B' -r ':'
 c:o:p:p:e:r
-</code></pre>
-<h3><a class="header" href="#string-anchors" id="string-anchors">String anchors</a></h3>
-<p><code>\A</code> restricts the match to start of string and <code>\z</code> restricts the match to end of string. This makes a difference if you are working with input data containing more than one line (based on newline character).</p>
-<pre><code class="language-bash">$ # -U enables multiline matching
+</code></pre><h3><a class=header href=#string-anchors id=string-anchors>String anchors</a></h3><p><code>\A</code> restricts the match to start of string and <code>\z</code> restricts the match to end of string. This makes a difference if you are working with input data containing more than one line (based on newline character).<pre><code class=language-bash>$ # -U enables multiline matching
 $ # regex multiline modifier m (covered later) is also enabled by default
 $ # note that output will contain only matching line(s), not entire input
 $ printf 'hi-hello;top\nfoo-spot\n' | rg -U '\Ahi'
@@ -718,10 +467,7 @@ $ printf 'hi-hello;top\nfoo-spot\n' | rg -U 'pot$'
 foo-spot
 $ printf 'hi-hello;top\nfoo-spot\n' | rg -U 'top$'
 hi-hello;top
-</code></pre>
-<h3><a class="header" href="#alternation" id="alternation">Alternation</a></h3>
-<p>Alternation is similar to using multiple <code>-e</code> option, but provides more flexibility when combined with grouping.</p>
-<pre><code class="language-bash">$ # match either 'cat' or 'dog', same as: rg -e 'cat' -e 'dog'
+</code></pre><h3><a class=header href=#alternation id=alternation>Alternation</a></h3><p>Alternation is similar to using multiple <code>-e</code> option, but provides more flexibility when combined with grouping.<pre><code class=language-bash>$ # match either 'cat' or 'dog', same as: rg -e 'cat' -e 'dog'
 $ printf 'I like cats\nI like parrots\nI like dogs' | rg 'cat|dog'
 I like cats
 I like dogs
@@ -738,11 +484,7 @@ $ # lines starting with 'a' or words ending with 'e'
 $ rg '^a|e\b' word_anchors.txt
 3:apparent effort
 4:two spare computers
-</code></pre>
-<p>A cool use case of alternation is combining line anchors to display entire input file but highlight only required search patterns. This effect can also be achieved using <code>--passthru</code> option instead of using standalone anchors as part of alternation.</p>
-<p><img src="./images/rg_highlight_patterns.png" alt="rg highlighting patterns in whole input" /></p>
-<p>There's some tricky situations when using alternation. If it is used to get matching line, there is no ambiguity. However, for matching portion extraction with <code>-o</code> option, it depends on a few factors. Say, you want to get either <code>are</code> or <code>spared</code> — which one should get precedence? The bigger word <code>spared</code> or the substring <code>are</code> inside it or based on something else?</p>
-<pre><code class="language-bash">$ # alternative which matches earliest in the input gets precedence
+</code></pre><p>A cool use case of alternation is combining line anchors to display entire input file but highlight only required search patterns. This effect can also be achieved using <code>--passthru</code> option instead of using standalone anchors as part of alternation.<p><img src=./images/rg_highlight_patterns.png alt="rg highlighting patterns in whole input"><p>There's some tricky situations when using alternation. If it is used to get matching line, there is no ambiguity. However, for matching portion extraction with <code>-o</code> option, it depends on a few factors. Say, you want to get either <code>are</code> or <code>spared</code> — which one should get precedence? The bigger word <code>spared</code> or the substring <code>are</code> inside it or based on something else?<pre><code class=language-bash>$ # alternative which matches earliest in the input gets precedence
 $ # left to right precedence if alternatives match on same index
 $ printf 'spared PARTY PaReNt' | rg -io 'par|pare|spare'
 spare
@@ -758,10 +500,7 @@ $ echo 'best years' | rg 'year|years' -r 'X'
 best Xs
 $ echo 'best years' | rg 'years|year' -r 'X'
 best X
-</code></pre>
-<h3><a class="header" href="#grouping" id="grouping">Grouping</a></h3>
-<p>Similar to <code>a(b+c)d = abd+acd</code> in maths, you get <code>a(b|c)d = abd|acd</code> in regular expressions.</p>
-<pre><code class="language-bash">$ # same as: rg 'reform|rest'
+</code></pre><h3><a class=header href=#grouping id=grouping>Grouping</a></h3><p>Similar to <code>a(b+c)d = abd+acd</code> in maths, you get <code>a(b|c)d = abd|acd</code> in regular expressions.<pre><code class=language-bash>$ # same as: rg 'reform|rest'
 $ printf 'red\nreform\nread\narrest' | rg 're(form|st)'
 reform
 arrest
@@ -771,20 +510,14 @@ $ # you'll later learn a better technique using quantifiers
 $ printf 'sub par\nspare\npart time' | rg '\b(par|part)\b'
 sub par
 part time
-</code></pre>
-<h3><a class="header" href="#escaping-metacharacters" id="escaping-metacharacters">Escaping metacharacters</a></h3>
-<p>You have seen a few metacharacters and escape sequences that help to compose a regular expression. To match the metacharacters literally, i.e. to remove their special meaning, prefix those characters with a <code>\</code> character. To indicate a literal <code>\</code> character, use <code>\\</code>. If there are many metacharacters to be escaped, try to work out if the command can be simplified by using <code>-F</code> (paired with options such as <code>-e</code>, <code>-f</code>, <code>-i</code>, <code>-w</code>, <code>-x</code>, etc).</p>
-<pre><code class="language-bash">$ # same as: rg -F 'b^2'
+</code></pre><h3><a class=header href=#escaping-metacharacters id=escaping-metacharacters>Escaping metacharacters</a></h3><p>You have seen a few metacharacters and escape sequences that help to compose a regular expression. To match the metacharacters literally, i.e. to remove their special meaning, prefix those characters with a <code>\</code> character. To indicate a literal <code>\</code> character, use <code>\\</code>. If there are many metacharacters to be escaped, try to work out if the command can be simplified by using <code>-F</code> (paired with options such as <code>-e</code>, <code>-f</code>, <code>-i</code>, <code>-w</code>, <code>-x</code>, etc).<pre><code class=language-bash>$ # same as: rg -F 'b^2'
 $ echo 'a^2 + b^2 - C*3' | rg 'b\^2'
 a^2 + b^2 - C*3
 
 $ # cannot use -F here as line anchor is needed
 $ printf '(a/b) + c\n3 + (a/b) - c' | rg '^\(a/b\)'
 (a/b) + c
-</code></pre>
-<h3><a class="header" href="#the-dot-meta-character" id="the-dot-meta-character">The dot meta character</a></h3>
-<p>The dot metacharacter serves as a placeholder to match any character except newline.</p>
-<pre><code class="language-bash"># extract 'c', followed by any character and then 't'
+</code></pre><h3><a class=header href=#the-dot-meta-character id=the-dot-meta-character>The dot meta character</a></h3><p>The dot metacharacter serves as a placeholder to match any character except newline.<pre><code class=language-bash># extract 'c', followed by any character and then 't'
 $ echo 'tac tin cot abc:tuv excite' | rg -o 'c.t'
 c t
 cot
@@ -800,10 +533,7 @@ $ rg -Nx 'c..(t|l)y' words.txt
 catty
 coyly
 curly
-</code></pre>
-<h3><a class="header" href="#greedy-quantifiers" id="greedy-quantifiers">Greedy Quantifiers</a></h3>
-<p>The <code>?</code> metacharacter quantifies a character or group to match <code>0</code> or <code>1</code> times.</p>
-<pre><code class="language-bash">$ # same as: rg '\b(par|part)\b' or rg -w 'par|part'
+</code></pre><h3><a class=header href=#greedy-quantifiers id=greedy-quantifiers>Greedy Quantifiers</a></h3><p>The <code>?</code> metacharacter quantifies a character or group to match <code>0</code> or <code>1</code> times.<pre><code class=language-bash>$ # same as: rg '\b(par|part)\b' or rg -w 'par|part'
 $ printf 'sub par\nspare\npart time' | rg -w 'part?'
 sub par
 part time
@@ -816,9 +546,7 @@ $ echo 'par part parrot parent' | rg -o 'par(en|ro)?t'
 part
 parrot
 parent
-</code></pre>
-<p>The <code>*</code> metacharacter quantifies a character or group to match <code>0</code> or more times.</p>
-<pre><code class="language-bash">$ # extract 'f' followed by zero or more of 'e' followed by 'd'
+</code></pre><p>The <code>*</code> metacharacter quantifies a character or group to match <code>0</code> or more times.<pre><code class=language-bash>$ # extract 'f' followed by zero or more of 'e' followed by 'd'
 $ echo 'fd fed fod fe:d feeeeder' | rg -o 'fe*d'
 fd
 fed
@@ -826,9 +554,7 @@ feeeed
 $ # replace zero or more of '1' followed by '2' with 'X'
 $ echo '3111111111125111142' | rg '1*2' -r 'X'
 3X511114X
-</code></pre>
-<p>The <code>+</code> metacharacter quantifies a character or group to match <code>1</code> or more times.</p>
-<pre><code class="language-bash">$ # extract 'f' followed by at least one of 'e' or 'o' or ':' followed by 'd'
+</code></pre><p>The <code>+</code> metacharacter quantifies a character or group to match <code>1</code> or more times.<pre><code class=language-bash>$ # extract 'f' followed by at least one of 'e' or 'o' or ':' followed by 'd'
 $ echo 'fd fed fod fe:d feeeeder' | rg -o 'f(e|o|:)+d'
 fed
 fod
@@ -841,14 +567,7 @@ $ echo '3111111111125111142' | rg -o '1+2'
 $ # replace one or more of '1' followed by optional '4' and then '2' with 'X'
 $ echo '3111111111125111142' | rg '1+4?2' -r 'X'
 3X5X
-</code></pre>
-<p>You can specify a range of integer numbers, both bounded and unbounded, using <code>{}</code> metacharacters. There are three ways to use this quantifier as listed below:</p>
-<table><thead><tr><th>Pattern</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>{m,n}</code></td><td>match <code>m</code> to <code>n</code> times</td></tr>
-<tr><td><code>{m,}</code></td><td>match at least <code>m</code> times</td></tr>
-<tr><td><code>{n}</code></td><td>match exactly <code>n</code> times</td></tr>
-</tbody></table>
-<pre><code class="language-bash">$ # note that whitespace is allowed within {} but not recommended
+</code></pre><p>You can specify a range of integer numbers, both bounded and unbounded, using <code>{}</code> metacharacters. There are three ways to use this quantifier as listed below:<table><thead><tr><th>Pattern<th>Description<tbody><tr><td><code>{m,n}</code><td>match <code>m</code> to <code>n</code> times<tr><td><code>{m,}</code><td>match at least <code>m</code> times<tr><td><code>{n}</code><td>match exactly <code>n</code> times</table><pre><code class=language-bash>$ # note that whitespace is allowed within {} but not recommended
 $ echo 'abc ac adc abbc xabbbcz bbb bc abbbbbc' | rg -o 'ab{1,4}c'
 abc
 abbc
@@ -865,12 +584,7 @@ $ echo 'abc ac adc abbc xabbbcz bbb bc abbbbbc' | rg -o 'ab{0,2}c'
 abc
 ac
 abbc
-</code></pre>
-<blockquote>
-<p><img src="images/info.svg" alt="info" /> The <code>{}</code> metacharacters have to be escaped to match them literally. However, unlike <code>()</code> metacharacters, escaping <code>{</code> alone is enough.</p>
-</blockquote>
-<p>Next up, how to construct AND conditional using dot metacharacter and quantifiers. To allow matching in any order, you'll have to bring in alternation as well. That is somewhat manageable for 2 or 3 patterns. With PCRE2, you can use lookarounds for a comparatively easier approach.</p>
-<pre><code class="language-bash">$ # match 'Error' followed by zero or more characters followed by 'valid'
+</code></pre><blockquote><p><img src=images/info.svg alt=info> The <code>{}</code> metacharacters have to be escaped to match them literally. However, unlike <code>()</code> metacharacters, escaping <code>{</code> alone is enough.</blockquote><p>Next up, how to construct AND conditional using dot metacharacter and quantifiers. To allow matching in any order, you'll have to bring in alternation as well. That is somewhat manageable for 2 or 3 patterns. With PCRE2, you can use lookarounds for a comparatively easier approach.<pre><code class=language-bash>$ # match 'Error' followed by zero or more characters followed by 'valid'
 $ echo 'Error: not a valid input' | rg -o 'Error.*valid'
 Error: not a valid
 
@@ -878,18 +592,14 @@ $ echo 'a cat and a dog' | rg 'cat.*dog|dog.*cat'
 a cat and a dog
 $ echo 'dog and cat' | rg 'cat.*dog|dog.*cat'
 dog and cat
-</code></pre>
-<p>Why are these called <strong>greedy</strong> quantifiers? If multiple quantities can satisfy the pattern, the longest match wins.</p>
-<pre><code class="language-bash">$ # longest match among 'foo' and 'fo' wins here
+</code></pre><p>Why are these called <strong>greedy</strong> quantifiers? If multiple quantities can satisfy the pattern, the longest match wins.<pre><code class=language-bash>$ # longest match among 'foo' and 'fo' wins here
 $ echo 'foot' | rg 'f.?o' -r 'X'
 Xt
 
 $ # everything will match here
 $ echo 'car bat cod map scat dot abacus' | rg -o '.*'
 car bat cod map scat dot abacus
-</code></pre>
-<p>But wait, how did <code>Error.*valid</code> example work? Shouldn't <code>.*</code> consume all the characters after <code>Error</code>? Good question. Depending on the implementation of regular expression engine, longest match will be selected from all valid matches generated with varying number of characters for <code>.*</code> or the engine would <strong>backtrack</strong> character by character from end of string until the pattern can be satisfied or fails.</p>
-<pre><code class="language-bash">$ # extract from start of line to last 'm' in the line
+</code></pre><p>But wait, how did <code>Error.*valid</code> example work? Shouldn't <code>.*</code> consume all the characters after <code>Error</code>? Good question. Depending on the implementation of regular expression engine, longest match will be selected from all valid matches generated with varying number of characters for <code>.*</code> or the engine would <strong>backtrack</strong> character by character from end of string until the pattern can be satisfied or fails.<pre><code class=language-bash>$ # extract from start of line to last 'm' in the line
 $ echo 'car bat cod map scat dot abacus' | rg -o '.*m'
 car bat cod m
 
@@ -900,9 +610,7 @@ car bat cod map scat dot
 $ # extract from first 'c' to last 'at' in the line
 $ echo 'car bat cod map scat dot abacus' | rg -o 'c.*at'
 car bat cod map scat
-</code></pre>
-<p>Precedence for quantifiers is left to right, even if it ends in matching less number of characters.</p>
-<pre><code class="language-bash">$ # (1|2|3)+ matches as much as possible here, which is '123312'
+</code></pre><p>Precedence for quantifiers is left to right, even if it ends in matching less number of characters.<pre><code class=language-bash>$ # (1|2|3)+ matches as much as possible here, which is '123312'
 $ # which results in (12baz)? matching 0 times
 $ echo 'foo123312baz' | rg -o 'o(1|2|3)+(12baz)?'
 o123312
@@ -910,10 +618,7 @@ o123312
 $ # (1|2|3)+ here matches '1233' to allow overall regex to pass
 $ echo 'foo123312baz' | rg -o 'o(1|2|3)+12baz'
 o123312baz
-</code></pre>
-<h3><a class="header" href="#non-greedy-quantifiers" id="non-greedy-quantifiers">Non-greedy quantifiers</a></h3>
-<p>As the name implies, these quantifiers will try to match as minimally as possible. Also known as <strong>lazy</strong> or <strong>reluctant</strong> quantifiers. Appending a <code>?</code> to greedy quantifiers makes them non-greedy.</p>
-<pre><code class="language-bash">$ # smallest match among 'foo' and 'fo' wins here
+</code></pre><h3><a class=header href=#non-greedy-quantifiers id=non-greedy-quantifiers>Non-greedy quantifiers</a></h3><p>As the name implies, these quantifiers will try to match as minimally as possible. Also known as <strong>lazy</strong> or <strong>reluctant</strong> quantifiers. Appending a <code>?</code> to greedy quantifiers makes them non-greedy.<pre><code class=language-bash>$ # smallest match among 'foo' and 'fo' wins here
 $ echo 'foot' | rg 'f.??o' -r 'X'
 Xot
 $ # overall regex has to be satisfied as minimally as possible
@@ -927,10 +632,7 @@ $ echo 'that is quite a fabricated tale' | rg -o 't.*?a'
 tha
 t is quite a
 ted ta
-</code></pre>
-<h3><a class="header" href="#character-classes" id="character-classes">Character classes</a></h3>
-<p>To create a custom placeholder for limited set of characters, enclose them inside <code>[]</code> metacharacters. It is similar to using single character alternations inside a grouping, but with added flexibility and features. Character classes have their own versions of metacharacters and provide special predefined sets for common use cases. Quantifiers are also applicable to character classes.</p>
-<pre><code class="language-bash">$ # same as: rg '(a|e|o)+t'
+</code></pre><h3><a class=header href=#character-classes id=character-classes>Character classes</a></h3><p>To create a custom placeholder for limited set of characters, enclose them inside <code>[]</code> metacharacters. It is similar to using single character alternations inside a grouping, but with added flexibility and features. Character classes have their own versions of metacharacters and provide special predefined sets for common use cases. Quantifiers are also applicable to character classes.<pre><code class=language-bash>$ # same as: rg '(a|e|o)+t'
 $ printf 'meeting\ncute\nboat\nsite\nfoot' | rg '[aeo]+t'
 meeting
 boat
@@ -945,9 +647,7 @@ no
 non
 noon
 on
-</code></pre>
-<p>Character classes have their own metacharacters to help define the sets succinctly. First up, the <code>-</code> metacharacter that helps to define a range of characters instead of having to specify them all individually.</p>
-<pre><code class="language-bash">$ # same as: rg -o '[0123456789]+'
+</code></pre><p>Character classes have their own metacharacters to help define the sets succinctly. First up, the <code>-</code> metacharacter that helps to define a range of characters instead of having to specify them all individually.<pre><code class=language-bash>$ # same as: rg -o '[0123456789]+'
 $ echo 'Sample123string42with777numbers' | rg -o '[0-9]+'
 123
 42
@@ -965,14 +665,12 @@ $ echo '23 154 12 26 34' | rg -ow '[12][0-9]'
 23
 12
 26
-$ # numbers &gt;= 100 with optional leading zeros
+$ # numbers >= 100 with optional leading zeros
 $ echo '0501 035 154 12 26 98234' | rg -ow '0*[1-9][0-9]{2,}'
 0501
 154
 98234
-</code></pre>
-<p>Next metacharacter is <code>^</code> which has to specified as the first character of the character class. It negates the set of characters, so all characters other than those specified will be matched.</p>
-<pre><code class="language-bash">$ # replace all non-digits
+</code></pre><p>Next metacharacter is <code>^</code> which has to specified as the first character of the character class. It negates the set of characters, so all characters other than those specified will be matched.<pre><code class=language-bash>$ # replace all non-digits
 $ echo 'Sample123string42with777numbers' | rg '[^0-9]+' -r 'X'
 X123X42X777X
 
@@ -981,26 +679,16 @@ $ echo 'foo:123:bar:baz' | rg -o '(:[^:]+){2}$'
 :bar:baz
 
 $ # get all sequence of characters surrounded by unique character
-$ echo 'I like &quot;mango&quot; and &quot;guava&quot;' | rg -o '&quot;[^&quot;]+&quot;'
-&quot;mango&quot;
-&quot;guava&quot;
+$ echo 'I like "mango" and "guava"' | rg -o '"[^"]+"'
+"mango"
+"guava"
 
 $ # use -v option if it is simpler than negated set: rg -x '[^aeiou]*'
 $ printf 'tryst\nfun\nglyph\npity\nwhy' | rg -v '[aeiou]'
 tryst
 glyph
 why
-</code></pre>
-<p>Some commonly used character sets have predefined escape sequences:</p>
-<ul>
-<li><code>\d</code> matches all <strong>digit</strong> characters <code>[0-9]</code></li>
-<li><code>\D</code> matches all non-digit characters</li>
-<li><code>\w</code> matches all <strong>word</strong> characters <code>[a-zA-Z0-9_]</code></li>
-<li><code>\W</code> matches all non-word characters</li>
-<li><code>\s</code> matches all <strong>whitespace</strong> characters: tab, newline, vertical tab, form feed, carriage return and space</li>
-<li><code>\S</code> matches all non-whitespace characters</li>
-</ul>
-<pre><code class="language-bash">$ echo 'Sample123string42with777numbers' | rg '\d+' -r ':'
+</code></pre><p>Some commonly used character sets have predefined escape sequences:<ul><li><code>\d</code> matches all <strong>digit</strong> characters <code>[0-9]</code><li><code>\D</code> matches all non-digit characters<li><code>\w</code> matches all <strong>word</strong> characters <code>[a-zA-Z0-9_]</code><li><code>\W</code> matches all non-word characters<li><code>\s</code> matches all <strong>whitespace</strong> characters: tab, newline, vertical tab, form feed, carriage return and space<li><code>\S</code> matches all non-whitespace characters</ul><pre><code class=language-bash>$ echo 'Sample123string42with777numbers' | rg '\d+' -r ':'
 Sample:string:with:numbers
 $ echo 'Sample123string42with777numbers' | rg '\D+' -r ':'
 :123:42:777:
@@ -1014,9 +702,7 @@ $ echo 'tea sea-pit sit-lean bean' | rg -o '[\w\s]+'
 tea sea
 pit sit
 lean bean
-</code></pre>
-<p>A <strong>named character set</strong> is defined by a name enclosed between <code>[:</code> and <code>:]</code> and has to be used within a character class <code>[]</code>, along with any other characters as needed. Using <code>[:^</code> instead of <code>[:</code> will negate the named character set. See <a href="./breere-regular-expressions.html#character-classes">BRE/ERE Character classes</a> section for full list.</p>
-<pre><code class="language-bash">$ # all alphabets and digits
+</code></pre><p>A <strong>named character set</strong> is defined by a name enclosed between <code>[:</code> and <code>:]</code> and has to be used within a character class <code>[]</code>, along with any other characters as needed. Using <code>[:^</code> instead of <code>[:</code> will negate the named character set. See <a href=./breere-regular-expressions.html#character-classes>BRE/ERE Character classes</a> section for full list.<pre><code class=language-bash>$ # all alphabets and digits
 $ printf 'errMsg\nant2\nm_2\n' | rg -x '[[:alnum:]]+'
 errMsg
 ant2
@@ -1027,11 +713,9 @@ pie tie
 ink
 eat
 42
-</code></pre>
-<p><strong>Set</strong> operations can be applied inside character class between sets. Mostly used to get intersection or difference between two sets, where one/both of them is a character range or predefined character set. To aid in such definitions, you can use <code>[]</code> in nested fashion.</p>
-<pre><code class="language-bash">$ # intersection of lowercase alphabets and other than vowel characters
+</code></pre><p><strong>Set</strong> operations can be applied inside character class between sets. Mostly used to get intersection or difference between two sets, where one/both of them is a character range or predefined character set. To aid in such definitions, you can use <code>[]</code> in nested fashion.<pre><code class=language-bash>$ # intersection of lowercase alphabets and other than vowel characters
 $ # can also use set difference: rg -ow '[a-z--aeiou]+'
-$ echo 'tryst glyph pity why' | rg -ow '[a-z&amp;&amp;[^aeiou]]+'
+$ echo 'tryst glyph pity why' | rg -ow '[a-z&&[^aeiou]]+'
 tryst
 glyph
 why
@@ -1042,12 +726,10 @@ eat
 top
 
 $ # remove all punctuation characters except . ! and ?
-$ para='&quot;Hi&quot;, there! How *are* you? All fine here.'
-$ echo &quot;$para&quot; | rg '[[:punct:]--[.!?]]+' -r ''
+$ para='"Hi", there! How *are* you? All fine here.'
+$ echo "$para" | rg '[[:punct:]--[.!?]]+' -r ''
 Hi there! How are you? All fine here.
-</code></pre>
-<p>Character class metacharacters can be matched literally by specific placement or using <code>\</code> to escape them.</p>
-<pre><code class="language-bash">$ # - should be first or last character within []
+</code></pre><p>Character class metacharacters can be matched literally by specific placement or using <code>\</code> to escape them.<pre><code class=language-bash>$ # - should be first or last character within []
 $ echo 'ab-cd gh-c 12-423' | rg -ow '[a-z-]{2,}'
 ab-cd
 gh-c
@@ -1064,10 +746,7 @@ $ # ^ should be other than first character within []
 $ echo 'f*(a^b) - 3*(a+b)/(a-b)' | rg -o 'a[+^]b'
 a^b
 a+b
-</code></pre>
-<h3><a class="header" href="#backreferences" id="backreferences">Backreferences</a></h3>
-<p>The grouping metacharacters <code>()</code> are also known as <strong>capture groups</strong>. Similar to variables in programming languages, the string captured by <code>()</code> can be referred later using backreference <code>$N</code> where <code>N</code> is the capture group you want. Leftmost <code>(</code> in the regular expression is <code>$1</code>, next one is <code>$2</code> and so on. By default, <code>$0</code> will give entire matched portion. Use <code>${N}</code> to avoid ambiguity between backreference and other characters.</p>
-<pre><code class="language-bash"># remove square brackets that surround digit characters
+</code></pre><h3><a class=header href=#backreferences id=backreferences>Backreferences</a></h3><p>The grouping metacharacters <code>()</code> are also known as <strong>capture groups</strong>. Similar to variables in programming languages, the string captured by <code>()</code> can be referred later using backreference <code>$N</code> where <code>N</code> is the capture group you want. Leftmost <code>(</code> in the regular expression is <code>$1</code>, next one is <code>$2</code> and so on. By default, <code>$0</code> will give entire matched portion. Use <code>${N}</code> to avoid ambiguity between backreference and other characters.<pre><code class=language-bash># remove square brackets that surround digit characters
 $ echo '[52] apples [and] [31] mangoes' | rg '\[(\d+)]' -r '$1'
 52 apples [and] 31 mangoes
 
@@ -1082,26 +761,20 @@ foo _123_ baz
 # swap words that are separated by a comma
 $ echo 'good,bad 42,24' | rg '(\w+),(\w+)' -r '$2,$1'
 bad,good 24,42
-</code></pre>
-<p>You can use a <strong>non-capturing group</strong> to avoid keeping a track of groups not needed for backreferencing. The syntax is <code>(?:pattern)</code> to define a non-capturing group.</p>
-<pre><code class="language-bash">$ # with normal grouping, need to keep track of all the groups
+</code></pre><p>You can use a <strong>non-capturing group</strong> to avoid keeping a track of groups not needed for backreferencing. The syntax is <code>(?:pattern)</code> to define a non-capturing group.<pre><code class=language-bash>$ # with normal grouping, need to keep track of all the groups
 $ echo '1,2,3,4,5,6,7' | rg '^(([^,]+,){3})([^,]+)' -r '$1($3)'
 1,2,3,(4),5,6,7
 
 $ # using non-capturing groups, only relevant groups have to be tracked
 $ echo '1,2,3,4,5,6,7' | rg '^((?:[^,]+,){3})([^,]+)' -r '$1($2)'
 1,2,3,(4),5,6,7
-</code></pre>
-<p>Regular expressions can get cryptic and difficult to maintain, even for seasoned programmers. There are a few constructs to help add clarity. One such is <strong>named capture groups</strong> and using that name for backreferencing instead of plain numbers.</p>
-<pre><code class="language-bash">$ echo 'a,b 42,24' | rg '(?P&lt;fw&gt;\w+),(?P&lt;sw&gt;\w+)' -r '$sw,$fw'
+</code></pre><p>Regular expressions can get cryptic and difficult to maintain, even for seasoned programmers. There are a few constructs to help add clarity. One such is <strong>named capture groups</strong> and using that name for backreferencing instead of plain numbers.<pre><code class=language-bash>$ echo 'a,b 42,24' | rg '(?P&LTfw>\w+),(?P&LTsw>\w+)' -r '$sw,$fw'
 b,a 24,42
 
 $ row='today,2008-24-03,food,2012-12-08,nice,5632'
-$ echo &quot;$row&quot; | rg '(?P&lt;dd&gt;-\d{2})(?P&lt;mm&gt;-\d{2})' -r '$mm$dd'
+$ echo "$row" | rg '(?P&LTdd>-\d{2})(?P&LTmm>-\d{2})' -r '$mm$dd'
 today,2008-03-24,food,2012-08-12,nice,5632
-</code></pre>
-<p>Using backreference along with <code>-o</code> and <code>-r</code> options will allow to extract matches that should also satisfy some surrounding conditions. This is a workaround for some of the cases where lookarounds are needed.</p>
-<pre><code class="language-bash">$ # extract digits that follow =
+</code></pre><p>Using backreference along with <code>-o</code> and <code>-r</code> options will allow to extract matches that should also satisfy some surrounding conditions. This is a workaround for some of the cases where lookarounds are needed.<pre><code class=language-bash>$ # extract digits that follow =
 $ echo 'foo=42, bar=314, baz:512' | rg -o '=(\d+)' -r '$1'
 42
 314
@@ -1113,28 +786,9 @@ $ echo '42 foo-5, baz3; x-83, y-20: f12' | rg -o '\-(\d+)[:;]' -r '$1'
 $ # extract 3rd occurrence of 'cat' followed by optional lowercase letters
 $ echo 'cat scatter cater scat' | rg -o '(?:cat.*?){2}(cat[a-z]*)' -r '$1'
 cater
-</code></pre>
-<p>As <code>$</code> is special in replacement section, you'll need <code>$$</code> to represent it literally.</p>
-<pre><code class="language-bash">$ echo 'a b a' | rg 'a' -r '$${a}'
+</code></pre><p>As <code>$</code> is special in replacement section, you'll need <code>$$</code> to represent it literally.<pre><code class=language-bash>$ echo 'a b a' | rg 'a' -r '$${a}'
 ${a} b ${a}
-</code></pre>
-<h3><a class="header" href="#modifiers" id="modifiers">Modifiers</a></h3>
-<p>Modifiers are like command line options to change the default behavior of the pattern. The <code>-i</code> option is an example for modifier. However, unlike <code>-i</code>, these modifiers can be applied selectively to portions of a pattern. In regular expression parlance, modifiers are also known as <strong>flags</strong>.</p>
-<table><thead><tr><th>Modifier</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>i</code></td><td>case sensitivity</td></tr>
-<tr><td><code>m</code></td><td>multiline for line anchors</td></tr>
-<tr><td><code>s</code></td><td>matching newline with <code>.</code> metacharacter</td></tr>
-<tr><td><code>x</code></td><td>readable pattern with whitespace and comments</td></tr>
-<tr><td><code>u</code></td><td>unicode</td></tr>
-</tbody></table>
-<p>To apply modifiers to selectively, specify them inside a special grouping syntax. This will override the modifiers applied to entire pattern, if any. The syntax variations are:</p>
-<ul>
-<li><code>(?modifiers:pattern)</code> will apply modifiers only for this portion</li>
-<li><code>(?-modifiers:pattern)</code> will negate modifiers only for this portion</li>
-<li><code>(?modifiers-modifiers:pattern)</code> will apply and negate particular modifiers only for this portion</li>
-<li><code>(?modifiers)</code> when pattern is not given, modifiers (including negation) will be applied from this point onwards</li>
-</ul>
-<pre><code class="language-bash">$ # same as: rg -i 'cat' -r 'X'
+</code></pre><h3><a class=header href=#modifiers id=modifiers>Modifiers</a></h3><p>Modifiers are like command line options to change the default behavior of the pattern. The <code>-i</code> option is an example for modifier. However, unlike <code>-i</code>, these modifiers can be applied selectively to portions of a pattern. In regular expression parlance, modifiers are also known as <strong>flags</strong>.<table><thead><tr><th>Modifier<th>Description<tbody><tr><td><code>i</code><td>case sensitivity<tr><td><code>m</code><td>multiline for line anchors<tr><td><code>s</code><td>matching newline with <code>.</code> metacharacter<tr><td><code>x</code><td>readable pattern with whitespace and comments<tr><td><code>u</code><td>unicode</table><p>To apply modifiers to selectively, specify them inside a special grouping syntax. This will override the modifiers applied to entire pattern, if any. The syntax variations are:<ul><li><code>(?modifiers:pattern)</code> will apply modifiers only for this portion<li><code>(?-modifiers:pattern)</code> will negate modifiers only for this portion<li><code>(?modifiers-modifiers:pattern)</code> will apply and negate particular modifiers only for this portion<li><code>(?modifiers)</code> when pattern is not given, modifiers (including negation) will be applied from this point onwards</ul><pre><code class=language-bash>$ # same as: rg -i 'cat' -r 'X'
 $ echo 'Cat cOnCaT scatter cut' | rg '(?i)cat' -r 'X'
 X cOnX sXter cut
 $ # override -i option
@@ -1160,9 +814,7 @@ $ rg -Ul '\A.*\bpython3\b(?s).*^import'
 script
 $ # no output if m is disabled
 $ rg -Ul '(?-m)\A.*\bpython3\b(?s).*^import'
-</code></pre>
-<p>The <code>x</code> modifier allows to use literal unescaped whitespaces for readability purposes and add comments after unescaped <code>#</code> character. This modifier has limited usage for cli applications as multiline pattern cannot be specified.</p>
-<pre><code class="language-bash">$ echo 'fox,cat,dog,parrot' | rg -o '(?x) ( ,[^,]+ ){2}$ #last 2 columns'
+</code></pre><p>The <code>x</code> modifier allows to use literal unescaped whitespaces for readability purposes and add comments after unescaped <code>#</code> character. This modifier has limited usage for cli applications as multiline pattern cannot be specified.<pre><code class=language-bash>$ echo 'fox,cat,dog,parrot' | rg -o '(?x) ( ,[^,]+ ){2}$ #last 2 columns'
 ,dog,parrot
 
 $ # need to escape whitespaces or use them inside [] to match literally
@@ -1173,10 +825,7 @@ $ echo 'foo a#b 123' | rg -o '(?x)a#.'
 a
 $ echo 'foo a#b 123' | rg -o '(?x)a\#.'
 a#b
-</code></pre>
-<h3><a class="header" href="#unicode" id="unicode">Unicode</a></h3>
-<p>Similar to named character classes and escape sequences, the <code>\p{}</code> construct offers various predefined sets to work with Unicode strings. See <a href="https://www.regular-expressions.info/unicode.html">regular-expressions: Unicode</a> for details. See also <code>-E</code> option regarding other encoding support.</p>
-<pre><code class="language-bash">$ # all consecutive letters
+</code></pre><h3><a class=header href=#unicode id=unicode>Unicode</a></h3><p>Similar to named character classes and escape sequences, the <code>\p{}</code> construct offers various predefined sets to work with Unicode strings. See <a href=https://www.regular-expressions.info/unicode.html>regular-expressions: Unicode</a> for details. See also <code>-E</code> option regarding other encoding support.<pre><code class=language-bash>$ # all consecutive letters
 $ # note that {} is not necessary here as L is single character
 $ echo 'fox:αλεπού,eagle:αετός' | rg '\p{L}+' -r '($0)'
 (fox):(αλεπού),(eagle):(αετός)
@@ -1197,9 +846,7 @@ $ # extract all characters other than letters, \PL can also be used
 $ echo 'φοο12,βτ_4,foo' | rg -o '\P{L}+'
 12,
 _4,
-</code></pre>
-<p>Characters can be specified using hexadecimal <code>\x{}</code> codepoints as well.</p>
-<pre><code class="language-bash">$ # {} are optional if only two hex characters are needed
+</code></pre><p>Characters can be specified using hexadecimal <code>\x{}</code> codepoints as well.<pre><code class=language-bash>$ # {} are optional if only two hex characters are needed
 $ echo 'a cat and a dog' | rg 't\x20a'
 a cat and a dog
 
@@ -1210,10 +857,7 @@ eagle
 $ echo 'fox:αλεπού,eagle:αετός' | rg -o '[\x{3b1}-\x{3bb}]+'
 αλε
 αε
-</code></pre>
-<h2><a class="header" href="#pcre2" id="pcre2">PCRE2</a></h2>
-<p>Use <code>-P</code> option to enable Perl Compatible Regular Expressions 2 (PCRE2) instead of default Rust regex. PCRE2 is mostly similar, but not exactly same as regular expressions present in Perl programming language. The main feature difference between PCRE and PCRE2 is substitution. Most of the features covered in <a href="./perl-compatible-regular-expressions.html#perl-compatible-regular-expressions">Perl Compatible Regular Expressions</a> chapter will work exactly the same with <code>rg -P</code> as well. There could be differences with regards to how certain things are handled between <code>GNU grep</code> and <code>ripgrep</code> — for example, <code>-f</code> and <code>-e</code> options, empty matches, etc.</p>
-<pre><code class="language-bash">$ # empty match handling
+</code></pre><h2><a class=header href=#pcre2 id=pcre2>PCRE2</a></h2><p>Use <code>-P</code> option to enable Perl Compatible Regular Expressions 2 (PCRE2) instead of default Rust regex. PCRE2 is mostly similar, but not exactly same as regular expressions present in Perl programming language. The main feature difference between PCRE and PCRE2 is substitution. Most of the features covered in <a href=./perl-compatible-regular-expressions.html#perl-compatible-regular-expressions>Perl Compatible Regular Expressions</a> chapter will work exactly the same with <code>rg -P</code> as well. There could be differences with regards to how certain things are handled between <code>GNU grep</code> and <code>ripgrep</code> — for example, <code>-f</code> and <code>-e</code> options, empty matches, etc.<pre><code class=language-bash>$ # empty match handling
 $ echo '1a42z' | grep -oP '[a-z]*'
 a
 z
@@ -1229,9 +873,7 @@ grep: the -P option only supports a single pattern
 $ printf 'sub\nbit' | rg -P -f- five_words.txt
 2:subtle
 4:exhibit
-</code></pre>
-<p>This section will only show a few examples. For complete documentation and other information, see <a href="https://www.pcre.org/current/doc/html/index.html">pcre: current doc</a>.</p>
-<pre><code class="language-bash">$ # lookarounds is major feature not present in Rust regex
+</code></pre><p>This section will only show a few examples. For complete documentation and other information, see <a href=https://www.pcre.org/current/doc/html/index.html>pcre: current doc</a>.<pre><code class=language-bash>$ # lookarounds is major feature not present in Rust regex
 $ rg -P '(?=.*a)(?=.*e)(?=.*i)(?=.*o).*u' five_words.txt
 1:sequoia
 3:questionable
@@ -1242,7 +884,7 @@ $ # same as: rg -o '(?:cat.*?){2}(cat[a-z]*)' -r '$1'
 $ echo 'cat scatter cater scat' | rg -oP '(cat.*?){2}\Kcat[a-z]*'
 cater
 $ # match if 'go' is not there between 'at' and 'par'
-$ echo 'fox,cat,dog,parrot' | rg -qP 'at((?!go).)*par' &amp;&amp; echo 'Match'
+$ echo 'fox,cat,dog,parrot' | rg -qP 'at((?!go).)*par' && echo 'Match'
 Match
 
 $ # backreference within regex definition
@@ -1252,11 +894,9 @@ aa a 42 f_1 f_13.14
 
 $ # mixing regex and literal matching
 $ expr='(a^b)'
-$ echo 'f*(2-a/b) - 3*(a^b)-42' | rg -oP '\S*\Q'&quot;$expr&quot;'\E\S*'
+$ echo 'f*(2-a/b) - 3*(a^b)-42' | rg -oP '\S*\Q'"$expr"'\E\S*'
 3*(a^b)-42
-</code></pre>
-<p>If you wish to use Rust regex normally and switch to PCRE2 when needed, use the <code>--engine=auto</code> option.</p>
-<pre><code class="language-bash">$ # using a feature not present normally
+</code></pre><p>If you wish to use Rust regex normally and switch to PCRE2 when needed, use the <code>--engine=auto</code> option.<pre><code class=language-bash>$ # using a feature not present normally
 $ echo 'car bat cod map' | rg -o '(bat|map)(*SKIP)(*F)|\w+'
 regex parse error:
     (bat|map)(*SKIP)(*F)|\w+
@@ -1267,32 +907,29 @@ $ # automatically switch to PCRE2
 $ echo 'car bat cod map' | rg -o --engine=auto '(bat|map)(*SKIP)(*F)|\w+'
 car
 cod
-</code></pre>
-<h2><a class="header" href="#recursive-options" id="recursive-options">Recursive options</a></h2>
-<p>This section reuses <code>recursive_matching</code> directory that was created in an earlier chapter. To avoid any issues, you can delete the existing directory and recreate it again using the following commands.</p>
-<pre><code class="language-bash">$ # assumes 'example_files' as CWD
+</code></pre><h2><a class=header href=#recursive-options id=recursive-options>Recursive options</a></h2><p>This section reuses <code>recursive_matching</code> directory that was created in an earlier chapter. To avoid any issues, you can delete the existing directory and recreate it again using the following commands.<pre><code class=language-bash>$ # assumes 'example_files' as CWD
 $ # create directory for this section and cd into it
-$ mkdir recursive_matching &amp;&amp; cd $_
+$ mkdir recursive_matching && cd $_
 
 $ # create some files
-$ printf 'hide\nobscure\nconceal\ncover\nblot\nshield' &gt; patterns.txt
-$ grep -Ff patterns.txt ../bre_ere/words.txt &gt; .hidden
-$ grep -E '([as]([b-g]|po)[r-t]){2}' ../bre_ere/words.txt &gt; nested_group.txt
-$ echo 'how are you?' &gt; normal.txt
-$ echo 'how dare you!' &gt; 'filename with spaces.txt'
+$ printf 'hide\nobscure\nconceal\ncover\nblot\nshield' > patterns.txt
+$ grep -Ff patterns.txt ../bre_ere/words.txt > .hidden
+$ grep -E '([as]([b-g]|po)[r-t]){2}' ../bre_ere/words.txt > nested_group.txt
+$ echo 'how are you?' > normal.txt
+$ echo 'how dare you!' > 'filename with spaces.txt'
 
 $ # create sub-directory, two scripts and another hidden file
 $ mkdir scripts
-$ echo 'yrneaolrknzcyr 86960' &gt; scripts/.key
-$ echo &quot;tr 'a-z0-9' 'n-za-m5-90-4' &lt; .key&quot; &gt; scripts/decode.sh
-$ printf &quot;import math\n\nprint(math.pi)\n&quot; &gt; scripts/pi.py
+$ echo 'yrneaolrknzcyr 86960' > scripts/.key
+$ echo "tr 'a-z0-9' 'n-za-m5-90-4' < .key" > scripts/decode.sh
+$ printf "import math\n\nprint(math.pi)\n" > scripts/pi.py
 
 $ # create link to a directory
 $ ln -s ../context_matching/
 
 $ tree -al
 .
-├── context_matching -&gt; ../context_matching/
+├── context_matching -> ../context_matching/
 │   └── context.txt
 ├── filename with spaces.txt
 ├── .hidden
@@ -1305,9 +942,7 @@ $ tree -al
     └── pi.py
 
 2 directories, 9 files
-</code></pre>
-<p>This section will cover the feature most attractive for users — the default recursive behavior and options to customize it. For beginners to recursive search using <code>rg</code>, the <code>--files</code> option to get list of files being searched can be useful. The <code>--debug</code> and <code>--trace</code> options could be used for further analysis, especially to know why a file is ignored. The <code>--files</code> option is also handy if you want to use features of <code>rg</code> in pruning filenames for further processing instead of glob match, <code>find</code> command, etc.</p>
-<pre><code class="language-bash">$ # assumes 'recursive_matching' as CWD
+</code></pre><p>This section will cover the feature most attractive for users — the default recursive behavior and options to customize it. For beginners to recursive search using <code>rg</code>, the <code>--files</code> option to get list of files being searched can be useful. The <code>--debug</code> and <code>--trace</code> options could be used for further analysis, especially to know why a file is ignored. The <code>--files</code> option is also handy if you want to use features of <code>rg</code> in pruning filenames for further processing instead of glob match, <code>find</code> command, etc.<pre><code class=language-bash>$ # assumes 'recursive_matching' as CWD
 $ rg --files
 patterns.txt
 scripts/pi.py
@@ -1315,20 +950,8 @@ scripts/decode.sh
 nested_group.txt
 normal.txt
 filename with spaces.txt
-</code></pre>
-<p>As seen from the example above, some of the files seem missing. That is because <code>rg</code> performs recursive search with certain pre-set conditions:</p>
-<ul>
-<li>ignore files and directories that match rules specified by ignore files like <code>.gitignore</code></li>
-<li>ignore hidden files and directories</li>
-<li>ignore binary files (files containing ASCII NUL character) — but displays the match if found before encountering NUL character along with a warning</li>
-<li>ignore symbolic links (same as <code>grep -r</code>)</li>
-</ul>
-<p>Here's an example to show <code>.gitignore</code> in action. The presence of <code>.git</code> directory (either in current directory or in parent directories) would mark <code>.gitignore</code> to be used for ignoring. Recently, <code>--no-require-git</code> flag was added to avoid the need for empty <code>.git</code> directory. For illustration purposes, empty <code>.git</code> would be created here instead of using an actual <code>git</code> project. In addition to <code>.gitignore</code>, the <code>rg</code> command also uses filenames like <code>.ignore</code> and <code>.rgignore</code> for determining files to ignore. For complete details and various ignore options, refer to manual as well as <a href="https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md">ripgrep: user guide</a>.</p>
-<blockquote>
-<p><img src="images/info.svg" alt="info" /> See <a href="https://stackoverflow.com/questions/8527597/how-do-i-ignore-files-in-a-directory-in-git">stackoverflow: .gitignore pattern format</a> to learn about the various rules.</p>
-</blockquote>
-<pre><code class="language-bash">$ mkdir .git
-$ echo 'patterns.txt' &gt; .gitignore
+</code></pre><p>As seen from the example above, some of the files seem missing. That is because <code>rg</code> performs recursive search with certain pre-set conditions:<ul><li>ignore files and directories that match rules specified by ignore files like <code>.gitignore</code><li>ignore hidden files and directories<li>ignore binary files (files containing ASCII NUL character) — but displays the match if found before encountering NUL character along with a warning<li>ignore symbolic links (same as <code>grep -r</code>)</ul><p>Here's an example to show <code>.gitignore</code> in action. The presence of <code>.git</code> directory (either in current directory or in parent directories) would mark <code>.gitignore</code> to be used for ignoring. Recently, <code>--no-require-git</code> flag was added to avoid the need for empty <code>.git</code> directory. For illustration purposes, empty <code>.git</code> would be created here instead of using an actual <code>git</code> project. In addition to <code>.gitignore</code>, the <code>rg</code> command also uses filenames like <code>.ignore</code> and <code>.rgignore</code> for determining files to ignore. For complete details and various ignore options, refer to manual as well as <a href=https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md>ripgrep: user guide</a>.<blockquote><p><img src=images/info.svg alt=info> See <a href=https://stackoverflow.com/questions/8527597/how-do-i-ignore-files-in-a-directory-in-git>stackoverflow: .gitignore pattern format</a> to learn about the various rules.</blockquote><pre><code class=language-bash>$ mkdir .git
+$ echo 'patterns.txt' > .gitignore
 $ rg -wl 'obscure|are'
 normal.txt
 
@@ -1336,9 +959,7 @@ $ # --no-ignore option will disable pruning based on ignore files
 $ rg --no-ignore -wl 'obscure|are'
 patterns.txt
 normal.txt
-</code></pre>
-<p>Use the <code>--hidden</code> option to search hidden files and directories as well.</p>
-<pre><code class="language-bash">$ # create normal file in a hidden directory
+</code></pre><p>Use the <code>--hidden</code> option to search hidden files and directories as well.<pre><code class=language-bash>$ # create normal file in a hidden directory
 $ cp patterns.txt .git/pat.txt
 $ # no output, and patterns.txt isn't matched because of .gitignore
 $ rg -l 'obscure|ne'
@@ -1347,20 +968,10 @@ $ rg --hidden -l 'obscure|ne'
 scripts/.key
 .git/pat.txt
 .hidden
-</code></pre>
-<p>As a shortcut, you can use</p>
-<ul>
-<li><code>-u</code> to indicate <code>--no-ignore</code></li>
-<li><code>-uu</code> to indicate <code>--no-ignore --hidden</code></li>
-<li><code>-uuu</code> to indicate <code>--no-ignore --hidden --binary</code></li>
-</ul>
-<p>Use <code>-L</code> option to follow symbolic links.</p>
-<pre><code class="language-bash">$ rg 'red'
+</code></pre><p>As a shortcut, you can use<ul><li><code>-u</code> to indicate <code>--no-ignore</code><li><code>-uu</code> to indicate <code>--no-ignore --hidden</code><li><code>-uuu</code> to indicate <code>--no-ignore --hidden --binary</code></ul><p>Use <code>-L</code> option to follow symbolic links.<pre><code class=language-bash>$ rg 'red'
 $ rg -Ll 'red'
 context_matching/context.txt
-</code></pre>
-<p>The <code>-t</code> option provides a handy way to search files based on their extension. Use <code>rg --type-list</code> to see all available types and their glob patterns. Use <code>-T</code> to invert the selection.</p>
-<pre><code class="language-bash">$ rg -t=py -t=sh --files
+</code></pre><p>The <code>-t</code> option provides a handy way to search files based on their extension. Use <code>rg --type-list</code> to see all available types and their glob patterns. Use <code>-T</code> to invert the selection.<pre><code class=language-bash>$ rg -t=py -t=sh --files
 scripts/pi.py
 scripts/decode.sh
 
@@ -1373,9 +984,7 @@ filename with spaces.txt
 $ rg -T=txt --files
 scripts/pi.py
 scripts/decode.sh
-</code></pre>
-<p>Use <code>-g</code> option to search only files matching the given glob pattern. Prefix <code>!</code> to exclude the matches. If <code>/</code> is not used, the glob will be matched against basename of all the files found recursively.</p>
-<pre><code class="language-bash">$ rg -g='*.{sh,py}' --files
+</code></pre><p>Use <code>-g</code> option to search only files matching the given glob pattern. Prefix <code>!</code> to exclude the matches. If <code>/</code> is not used, the glob will be matched against basename of all the files found recursively.<pre><code class=language-bash>$ rg -g='*.{sh,py}' --files
 scripts/pi.py
 scripts/decode.sh
 
@@ -1393,88 +1002,55 @@ $ rg -g='!scripts' --files
 nested_group.txt
 normal.txt
 filename with spaces.txt
-</code></pre>
-<blockquote>
-<p><img src="images/info.svg" alt="info" /> There are many more options to customize the search experience (for ex: defining your own type using <code>--type-add</code> option, <code>--max-depth</code> to control depth of traversal, etc). See <a href="https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file">ripgrep user guide: configuration</a> for examples and details on how to maintain them in a file.</p>
-</blockquote>
-<h2><a class="header" href="#speed-comparison" id="speed-comparison">Speed comparison</a></h2>
-<p>See <a href="./gotchas-and-tricks.html#parallel-execution">Parallel execution</a> section for sample directory used for comparison shown below.</p>
-<pre><code class="language-bash">$ # assumes 'linux-4.19' as CWD
+</code></pre><blockquote><p><img src=images/info.svg alt=info> There are many more options to customize the search experience (for ex: defining your own type using <code>--type-add</code> option, <code>--max-depth</code> to control depth of traversal, etc). See <a href=https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file>ripgrep user guide: configuration</a> for examples and details on how to maintain them in a file.</blockquote><h2><a class=header href=#speed-comparison id=speed-comparison>Speed comparison</a></h2><p>See <a href=./gotchas-and-tricks.html#parallel-execution>Parallel execution</a> section for sample directory used for comparison shown below.<pre><code class=language-bash>$ # assumes 'linux-4.19' as CWD
 $ # note that my machine has two cores
 $ # rg automatically makes the best use of both cores, awesome and convenient
 $ # GNU grep would need external tools like parallel to do so
 
-$ time grep -rw 'user' &gt; ../f1
+$ time grep -rw 'user' > ../f1
 real    0m1.353s
 
-$ time rg -uuu -w 'user' &gt; ../f2
+$ time rg -uuu -w 'user' > ../f2
 real    0m0.626s
 
-$ diff -sq &lt;(sort ../f1) &lt;(sort ../f2)
+$ diff -sq <(sort ../f1) <(sort ../f2)
 Files /dev/fd/63 and /dev/fd/62 are identical
-</code></pre>
-<p>Lot of factors like file size, file encoding, line size, sparse or dense matches, hardware features, etc will affect performance. <code>rg</code> has options like <code>-j</code>, <code>--dfa-size-limit</code> and <code>--mmap</code> to tweak performance for some cases.</p>
-<blockquote>
-<p><img src="images/info.svg" alt="info" /> See <a href="https://blog.burntsushi.net/ripgrep/">Benchmark with other grep implementations</a> by the author of <code>ripgrep</code> command for a methodological detailed analysis and insights.</p>
-</blockquote>
-<blockquote>
-<p><img src="images/info.svg" alt="info" /> See <a href="https://github.com/learnbyexample/learn_gnugrep_ripgrep/blob/032f0a2d00bd125902caec0666309a5532c981cb/gnu_grep.md#speed-comparison">Speed comparison</a> section from an earlier version of this book for some more examples. It also compares features like PCRE, <code>rg -r</code> vs <code>GNU sed</code>, etc.</p>
-</blockquote>
-<h2><a class="header" href="#ripgrep-all" id="ripgrep-all">ripgrep-all</a></h2>
-<p>From <a href="https://github.com/phiresky/ripgrep-all">GitHub repo</a>:</p>
-<blockquote>
-<p><strong>rga</strong> is a line-oriented search tool that allows you to look for a regex in a multitude of file types. <code>rga</code> wraps the awesome <code>ripgrep</code> and enables it to search in pdf, docx, sqlite, jpg, movie subtitles (mkv, mp4), etc.</p>
-</blockquote>
-<p>The main usp is pairing file types and relevant tools to enable text searching. <code>rga</code> also has a handy caching feature that speeds up the search for subsequent usages on the same input.</p>
-<h2><a class="header" href="#summary" id="summary">Summary</a></h2>
-<p><code>ripgrep</code> is an excellent alternative to <code>GNU grep</code>. If you are working with large code bases, I'd definitely recommend <code>ripgrep</code> for its performance and customization options. Recently, the author added <a href="https://github.com/BurntSushi/ripgrep/discussions">github: discussions</a> to the repository, which is very handy too. There are interesting features in the pipeline, for example <a href="https://github.com/BurntSushi/ripgrep/issues/1497">ngram indexing support</a>.</p>
-<h2><a class="header" href="#exercises" id="exercises">Exercises</a></h2>
-<p>Would be a good idea to first redo all the exercises using <code>rg</code> from all the previous chapters. Some exercises will require reading the manual, as those options aren't covered in the chapter.</p>
-<p><strong>a)</strong> Go through the manual and find an option that will change the line separator from <code>\n</code> to <code>\r\n</code>. See <a href="./frequently-used-options.html#exercises">Frequently used options: Exercises</a> section for details about the input file used here.</p>
-<pre><code class="language-bash">$ # assumes 'exercises/freq_options' as CWD
+</code></pre><p>Lot of factors like file size, file encoding, line size, sparse or dense matches, hardware features, etc will affect performance. <code>rg</code> has options like <code>-j</code>, <code>--dfa-size-limit</code> and <code>--mmap</code> to tweak performance for some cases.<blockquote><p><img src=images/info.svg alt=info> See <a href=https://blog.burntsushi.net/ripgrep/>Benchmark with other grep implementations</a> by the author of <code>ripgrep</code> command for a methodological detailed analysis and insights.</blockquote><blockquote><p><img src=images/info.svg alt=info> See <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/blob/032f0a2d00bd125902caec0666309a5532c981cb/gnu_grep.md#speed-comparison>Speed comparison</a> section from an earlier version of this book for some more examples. It also compares features like PCRE, <code>rg -r</code> vs <code>GNU sed</code>, etc.</blockquote><h2><a class=header href=#ripgrep-all id=ripgrep-all>ripgrep-all</a></h2><p>From <a href=https://github.com/phiresky/ripgrep-all>GitHub repo</a>:<blockquote><p><strong>rga</strong> is a line-oriented search tool that allows you to look for a regex in a multitude of file types. <code>rga</code> wraps the awesome <code>ripgrep</code> and enables it to search in pdf, docx, sqlite, jpg, movie subtitles (mkv, mp4), etc.</blockquote><p>The main usp is pairing file types and relevant tools to enable text searching. <code>rga</code> also has a handy caching feature that speeds up the search for subsequent usages on the same input.<h2><a class=header href=#summary id=summary>Summary</a></h2><p><code>ripgrep</code> is an excellent alternative to <code>GNU grep</code>. If you are working with large code bases, I'd definitely recommend <code>ripgrep</code> for its performance and customization options. Recently, the author added <a href=https://github.com/BurntSushi/ripgrep/discussions>github: discussions</a> to the repository, which is very handy too. There are interesting features in the pipeline, for example <a href=https://github.com/BurntSushi/ripgrep/issues/1497>ngram indexing support</a>.<h2><a class=header href=#exercises id=exercises>Exercises</a></h2><p>Would be a good idea to first redo all the exercises using <code>rg</code> from all the previous chapters. Some exercises will require reading the manual, as those options aren't covered in the chapter.<p><strong>a)</strong> Go through the manual and find an option that will change the line separator from <code>\n</code> to <code>\r\n</code>. See <a href=./frequently-used-options.html#exercises>Frequently used options: Exercises</a> section for details about the input file used here.<pre><code class=language-bash>$ # assumes 'exercises/freq_options' as CWD
 
 $ # no output
 $ rg -cx '' dracula.txt
 
 $ rg ##### add your solution here
 2559
-</code></pre>
-<p><strong>b)</strong> Commands like <code>sed</code> and <code>perl</code> require special care if you need to search and replace a text literally. <code>rg</code> provides an easier alternative, which can be seen with these exercises.</p>
-<pre><code class="language-bash">$ # replace [4]* with 2
+</code></pre><p><strong>b)</strong> Commands like <code>sed</code> and <code>perl</code> require special care if you need to search and replace a text literally. <code>rg</code> provides an easier alternative, which can be seen with these exercises.<pre><code class=language-bash>$ # replace [4]* with 2
 $ printf '2.3/[4]*6\nfoo\n5.3-[4]*9\n' | rg ##### add your solution here
 2.3/26
 foo
 5.3-29
 
-$ # replace '3$a with &amp;
-$ printf &quot;a'3\$a\nb'3\$a6\nc\n&quot; | rg ##### add your solution here
-a&amp;
-b&amp;6
+$ # replace '3$a with &
+$ printf "a'3\$a\nb'3\$a6\nc\n" | rg ##### add your solution here
+a&
+b&6
 c
-</code></pre>
-<p><strong>c)</strong> Create <code>exercises/ripgrep</code> directory and then save <a href="https://github.com/learnbyexample/learn_gnugrep_ripgrep/raw/master/exercises/sample.md">this file from learn_gnugrep_ripgrep repo</a> as <code>sample.md</code>. For this input file, match all lines containing <code>ruby</code> irrespective of case, but not if it is part of code blocks that are bounded by triple backticks.</p>
-<pre><code class="language-bash">$ # assumes 'exercises' as CWD
-$ mkdir ripgrep &amp;&amp; cd $_
+</code></pre><p><strong>c)</strong> Create <code>exercises/ripgrep</code> directory and then save <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/raw/master/exercises/sample.md>this file from learn_gnugrep_ripgrep repo</a> as <code>sample.md</code>. For this input file, match all lines containing <code>ruby</code> irrespective of case, but not if it is part of code blocks that are bounded by triple backticks.<pre><code class=language-bash>$ # assumes 'exercises' as CWD
+$ mkdir ripgrep && cd $_
 
 $ rg ##### add your solution here
 3:REPL is a good way to learn RUBY for beginners.
 16:ruby comes loaded with awesome methods. Enjoy learning RuBy.
-</code></pre>
-<p><strong>d)</strong> Sum all integer numbers (floating-point numbers should be ignored) if the file also contains the string <code>is</code></p>
-<pre><code class="language-bash">$ # assumes 'exercises/ripgrep' as CWD
+</code></pre><p><strong>d)</strong> Sum all integer numbers (floating-point numbers should be ignored) if the file also contains the string <code>is</code><pre><code class=language-bash>$ # assumes 'exercises/ripgrep' as CWD
 $ # which already has one file named 'sample.md'
 
 $ # create two more files with these commands
-$ echo 'hi,31,3.14,bye' &gt; 'space in filename.txt'
-$ echo 'This is 2 good' &gt; $'weird \n symbols'
+$ echo 'hi,31,3.14,bye' > 'space in filename.txt'
+$ echo 'This is 2 good' > $'weird \n symbols'
 
 $ # all three files should be considered as input
 $ # use awk '{s+=$1} END{print s}' if datamash is not available
 $ rg ##### add your solution here | datamash sum 1
 61
-</code></pre>
-<p><strong>e)</strong> Default behavior changes depending upon output is intended for terminal or not. Use appropriate option(s) to get the output as shown below. Search for <code>good way</code> or <code>bye</code> in all the files in the given directory and save the output in <code>out.txt</code> file.</p>
-<pre><code class="language-bash">$ # assumes 'exercises/ripgrep' as CWD
+</code></pre><p><strong>e)</strong> Default behavior changes depending upon output is intended for terminal or not. Use appropriate option(s) to get the output as shown below. Search for <code>good way</code> or <code>bye</code> in all the files in the given directory and save the output in <code>out.txt</code> file.<pre><code class=language-bash>$ # assumes 'exercises/ripgrep' as CWD
 
 $ rg ##### add your solution here
 $ cat out.txt
@@ -1483,9 +1059,7 @@ space in filename.txt
 
 sample.md
 3:REPL is a good way to learn RUBY for beginners.
-</code></pre>
-<p><strong>f)</strong> Which option will show both line number and 1-based byte offset of first matching portion for matching lines?</p>
-<pre><code class="language-bash">$ # assumes 'exercises/ripgrep' as CWD
+</code></pre><p><strong>f)</strong> Which option will show both line number and 1-based byte offset of first matching portion for matching lines?<pre><code class=language-bash>$ # assumes 'exercises/ripgrep' as CWD
 
 $ # normal output
 $ rg 'good' sample.md
@@ -1494,88 +1068,17 @@ $ rg 'good' sample.md
 $ # expected output
 $ rg ##### add your solution here
 3:11:REPL is a good way to learn RUBY for beginners.
-</code></pre>
-<p><strong>g)</strong> By default, <code>ripgrep</code> uses <code>\n</code> as the line separator. Use appropriate option to change the separator to <code>NUL</code> and display all lines containing <code>red</code> for the given input.</p>
-<pre><code class="language-bash">$ printf 'dark red\nteal\n\0brown\n\0spared' | rg ##### add your solution here
+</code></pre><p><strong>g)</strong> By default, <code>ripgrep</code> uses <code>\n</code> as the line separator. Use appropriate option to change the separator to <code>NUL</code> and display all lines containing <code>red</code> for the given input.<pre><code class=language-bash>$ printf 'dark red\nteal\n\0brown\n\0spared' | rg ##### add your solution here
 dark red
 teal
 spared
-</code></pre>
-<p><strong>h)</strong> Use appropriate options to replace all <code>NUL</code> characters with <code>---</code> and a newline character as shown below.</p>
-<pre><code class="language-bash">$ printf 'dark red\nteal\n\0brown\n\0spared' | rg ##### add your solution here
+</code></pre><p><strong>h)</strong> Use appropriate options to replace all <code>NUL</code> characters with <code>---</code> and a newline character as shown below.<pre><code class=language-bash>$ printf 'dark red\nteal\n\0brown\n\0spared' | rg ##### add your solution here
 dark red
 teal
 ---
 brown
 ---
 spared
-</code></pre>
-
-                    </main>
-
-                    <nav class="nav-wrapper" aria-label="Page navigation">
-                        <!-- Mobile navigation buttons -->
-                        
-                            <a rel="prev" href="gotchas-and-tricks.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                        
-
-                        
-                            <a rel="next" href="further-reading.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        
-
-                        <div style="clear: both"></div>
-                    </nav>
-                </div>
-            </div>
-
-            <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
-                    <a rel="prev" href="gotchas-and-tricks.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-                
-
-                
-                    <a rel="next" href="further-reading.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                
-            </nav>
-
-        </div>
-
-        
-
-        
-
-        
-
-        
-        <script type="text/javascript">
+</code></pre></main><nav class=nav-wrapper aria-label="Page navigation"><a rel=prev href=gotchas-and-tricks.html class="mobile-nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><a rel=next href=further-reading.html class="mobile-nav-chapters next"title="Next chapter"aria-label="Next chapter"aria-keyshortcuts=Right> <i class="fa fa-angle-right"></i> </a><div style="clear: both"></div></nav></div></div><nav class=nav-wide-wrapper aria-label="Page navigation"><a rel=prev href=gotchas-and-tricks.html class="nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><a rel=next href=further-reading.html class="nav-chapters next"title="Next chapter"aria-label="Next chapter"aria-keyshortcuts=Right> <i class="fa fa-angle-right"></i> </a></nav></div><script>
             window.playground_copyable = true;
-        </script>
-        
-
-        
-
-        
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        
-
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
-
-        <!-- Custom JS scripts -->
-        
-
-        
-
-    </body>
-</html>
+        </script><script src=elasticlunr.min.js charset=utf-8></script><script src=mark.min.js charset=utf-8></script><script src=searcher.js charset=utf-8></script><script src=clipboard.min.js charset=utf-8></script><script src=highlight.js charset=utf-8></script><script src=book.js charset=utf-8></script><script src=sidebar.js></script>

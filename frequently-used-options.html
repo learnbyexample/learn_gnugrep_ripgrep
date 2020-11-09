@@ -1,60 +1,7 @@
-<!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
-    <head>
-        <!-- Book generated using mdBook -->
-        <meta charset="UTF-8">
-        <title>Frequently used options - GNU GREP and RIPGREP</title>
-        
-        
-
-
-        <!-- Custom HTML head -->
-        
-
-
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Example based guide to mastering GNU GREP and RIPGREP">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
-
-        
-        <link rel="icon" href="favicon.svg">
-        
-        
-        <link rel="shortcut icon" href="favicon.png">
-        
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
-
-        <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        
-        <link rel="stylesheet" href="fonts/fonts.css">
-        
-
-        <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
-
-        <!-- Custom theme stylesheets -->
-        
-        <link rel="stylesheet" href="custom.css">
-        
-
-        
-    </head>
-    <body>
-        <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+<!DOCTYPE HTML><html lang=en class="sidebar-visible no-js light"><head><meta charset=UTF-8><title>Frequently used options - GNU GREP and RIPGREP</title><meta content="text/html; charset=utf-8"http-equiv=Content-Type><meta name=description content="Example based guide to mastering GNU GREP and RIPGREP"><meta name=viewport content="width=device-width, initial-scale=1"><meta name=theme-color content=#ffffff><link rel=icon href=favicon.svg><link rel="shortcut icon"href=favicon.png><link rel=stylesheet href=css/variables.css><link rel=stylesheet href=css/general.css><link rel=stylesheet href=css/chrome.css><link rel=stylesheet href=FontAwesome/css/font-awesome.css><link rel=stylesheet href=fonts/fonts.css><link rel=stylesheet href=highlight.css><link rel=stylesheet href=tomorrow-night.css><link rel=stylesheet href=ayu-highlight.css><link rel=stylesheet href=style.css><body><script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
-
-        <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        </script><script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -67,10 +14,7 @@
                     localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
                 }
             } catch (e) { }
-        </script>
-
-        <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        </script><script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -79,10 +23,7 @@
             html.classList.remove('light')
             html.classList.add(theme);
             html.classList.add('js');
-        </script>
-
-        <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        </script><script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -91,85 +32,13 @@
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
-        </script>
-
-        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="cover.html">Cover</a></li><li class="chapter-item expanded affix "><a href="buy.html">Buy PDF/EPUB versions</a></li><li class="chapter-item expanded "><a href="preface.html"><strong aria-hidden="true">1.</strong> Preface</a></li><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">2.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="frequently-used-options.html" class="active"><strong aria-hidden="true">3.</strong> Frequently used options</a></li><li class="chapter-item expanded "><a href="breere-regular-expressions.html"><strong aria-hidden="true">4.</strong> BRE/ERE Regular Expressions</a></li><li class="chapter-item expanded "><a href="context-matching.html"><strong aria-hidden="true">5.</strong> Context matching</a></li><li class="chapter-item expanded "><a href="recursive-search.html"><strong aria-hidden="true">6.</strong> Recursive search</a></li><li class="chapter-item expanded "><a href="miscellaneous-options.html"><strong aria-hidden="true">7.</strong> Miscellaneous options</a></li><li class="chapter-item expanded "><a href="perl-compatible-regular-expressions.html"><strong aria-hidden="true">8.</strong> Perl Compatible Regular Expressions</a></li><li class="chapter-item expanded "><a href="gotchas-and-tricks.html"><strong aria-hidden="true">9.</strong> Gotchas and Tricks</a></li><li class="chapter-item expanded "><a href="ripgrep.html"><strong aria-hidden="true">10.</strong> ripgrep</a></li><li class="chapter-item expanded "><a href="further-reading.html"><strong aria-hidden="true">11.</strong> Further Reading</a></li><li class="chapter-item expanded "><a href="Exercise_solutions.html"><strong aria-hidden="true">12.</strong> Exercise Solutions</a></li></ol>
-            </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
-        </nav>
-
-        <div id="page-wrapper" class="page-wrapper">
-
-            <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
-                    <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                            <i class="fa fa-paint-brush"></i>
-                        </button>
-                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-                        </ul>
-                        
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
-                        </button>
-                        
-                    </div>
-
-                    <h1 class="menu-title">GNU GREP and RIPGREP</h1>
-
-                    <div class="right-buttons">
-                        
-                        <a href="https://github.com/learnbyexample/learn_gnugrep_ripgrep" title="Git repository" aria-label="Git repository">
-                            <i id="git-repository-button" class="fa fa-github"></i>
-                        </a>
-                        
-                    </div>
-                </div>
-
-                
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
-                    </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
-                        </ul>
-                    </div>
-                </div>
-                
-
-                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+        </script><nav id=sidebar class=sidebar aria-label="Table of contents"><div class=sidebar-scrollbox><ol class=chapter><li class="chapter-item expanded affix"><a href=cover.html>Cover</a><li class="chapter-item expanded affix"><a href=buy.html>Buy PDF/EPUB versions</a><li class="chapter-item expanded"><a href=preface.html><strong aria-hidden=true>1.</strong> Preface</a><li class="chapter-item expanded"><a href=introduction.html><strong aria-hidden=true>2.</strong> Introduction</a><li class="chapter-item expanded"><a href=frequently-used-options.html class=active><strong aria-hidden=true>3.</strong> Frequently used options</a><li class="chapter-item expanded"><a href=breere-regular-expressions.html><strong aria-hidden=true>4.</strong> BRE/ERE Regular Expressions</a><li class="chapter-item expanded"><a href=context-matching.html><strong aria-hidden=true>5.</strong> Context matching</a><li class="chapter-item expanded"><a href=recursive-search.html><strong aria-hidden=true>6.</strong> Recursive search</a><li class="chapter-item expanded"><a href=miscellaneous-options.html><strong aria-hidden=true>7.</strong> Miscellaneous options</a><li class="chapter-item expanded"><a href=perl-compatible-regular-expressions.html><strong aria-hidden=true>8.</strong> Perl Compatible Regular Expressions</a><li class="chapter-item expanded"><a href=gotchas-and-tricks.html><strong aria-hidden=true>9.</strong> Gotchas and Tricks</a><li class="chapter-item expanded"><a href=ripgrep.html><strong aria-hidden=true>10.</strong> ripgrep</a><li class="chapter-item expanded"><a href=further-reading.html><strong aria-hidden=true>11.</strong> Further Reading</a><li class="chapter-item expanded"><a href=Exercise_solutions.html><strong aria-hidden=true>12.</strong> Exercise Solutions</a></ol></div><div id=sidebar-resize-handle class=sidebar-resize-handle></div></nav><div id=page-wrapper class=page-wrapper><div class=page><div id=menu-bar-hover-placeholder></div><div id=menu-bar class="menu-bar sticky bordered"><div class=left-buttons><button id=sidebar-toggle class=icon-button type=button title="Toggle Table of Contents"aria-label="Toggle Table of Contents"aria-controls=sidebar><i class="fa fa-bars"></i></button><button id=theme-toggle class=icon-button type=button title="Change theme"aria-label="Change theme"aria-haspopup=true aria-expanded=false aria-controls=theme-list><i class="fa fa-paint-brush"></i></button><ul id=theme-list class=theme-popup aria-label=Themes role=menu><li role=none><button role=menuitem class=theme id=light>Light (default)</button><li role=none><button role=menuitem class=theme id=rust>Rust</button><li role=none><button role=menuitem class=theme id=coal>Coal</button><li role=none><button role=menuitem class=theme id=navy>Navy</button><li role=none><button role=menuitem class=theme id=ayu>Ayu</button></ul><button id=search-toggle class=icon-button type=button title="Search. (Shortkey: s)"aria-label="Toggle Searchbar"aria-expanded=false aria-keyshortcuts=S aria-controls=searchbar><i class="fa fa-search"></i></button></div><h1 class=menu-title>GNU GREP and RIPGREP</h1><div class=right-buttons><a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep title="Git repository"aria-label="Git repository"> <i id=git-repository-button class="fa fa-github"></i> </a></div></div><div id=search-wrapper class=hidden><form id=searchbar-outer class=searchbar-outer><input type=search name=search id=searchbar name=searchbar placeholder="Search this book ..."aria-controls=searchresults-outer aria-describedby=searchresults-header></form><div id=searchresults-outer class="searchresults-outer hidden"><div id=searchresults-header class=searchresults-header></div><ul id=searchresults></ul></div></div><script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
                     });
-                </script>
-
-                <div id="content" class="content">
-                    <main>
-                        <h1><a class="header" href="#frequently-used-options" id="frequently-used-options">Frequently used options</a></h1>
-<p>This chapter will cover many of the options provided by <code>GNU grep</code>. Regular expressions will be covered from next chapter, so the examples in this chapter will use only literal strings for input patterns. Literal or fixed string matching means exact string comparison is intended, no special meaning for any character.</p>
-<blockquote>
-<p><img src="images/info.svg" alt="info" /> Files used in examples are available chapter wise from <a href="https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/example_files">learn_gnugrep_ripgrep repo</a>. The directory for this chapter is <code>freq_options</code>.</p>
-</blockquote>
-<h2><a class="header" href="#simple-string-search" id="simple-string-search">Simple string search</a></h2>
-<p>By default, <code>grep</code> would print all input <em>lines</em> which matches the given search patterns. The newline character <code>\n</code> is considered as the line separator. This section will show you how to filter lines matching a given search string using <code>grep</code>.</p>
-<pre><code class="language-bash">$ # sample input file for this section
+                </script><div id=content class=content><main><div class=sidetoc><nav class=pagetoc></nav></div><h1><a class=header href=#frequently-used-options id=frequently-used-options>Frequently used options</a></h1><p>This chapter will cover many of the options provided by <code>GNU grep</code>. Regular expressions will be covered from next chapter, so the examples in this chapter will use only literal strings for input patterns. Literal or fixed string matching means exact string comparison is intended, no special meaning for any character.<blockquote><p><img src=images/info.svg alt=info> Files used in examples are available chapter wise from <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/example_files>learn_gnugrep_ripgrep repo</a>. The directory for this chapter is <code>freq_options</code>.</blockquote><h2><a class=header href=#simple-string-search id=simple-string-search>Simple string search</a></h2><p>By default, <code>grep</code> would print all input <em>lines</em> which matches the given search patterns. The newline character <code>\n</code> is considered as the line separator. This section will show you how to filter lines matching a given search string using <code>grep</code>.<pre><code class=language-bash>$ # sample input file for this section
 $ cat programming_quotes.txt
 Debugging is twice as hard as writing the code in the first place.
 Therefore, if you write the code as cleverly as possible, you are,
@@ -183,32 +52,21 @@ is not worth knowing by Alan Perlis
 
 There are 2 hard problems in computer science: cache invalidation,
 naming things, and off-by-1 errors by Leon Bambrick
-</code></pre>
-<p>To filter the required lines, invoke <code>grep</code> command, pass the search string and then specify one or more filenames to be searched. As a good practice, always use single quotes around the search string. Examples requiring shell interpretation will be discussed later.</p>
-<pre><code class="language-bash">$ grep 'twice' programming_quotes.txt
+</code></pre><p>To filter the required lines, invoke <code>grep</code> command, pass the search string and then specify one or more filenames to be searched. As a good practice, always use single quotes around the search string. Examples requiring shell interpretation will be discussed later.<pre><code class=language-bash>$ grep 'twice' programming_quotes.txt
 Debugging is twice as hard as writing the code in the first place.
 
 $ grep 'e th' programming_quotes.txt
 Therefore, if you write the code as cleverly as possible, you are,
 A language that does not affect the way you think about programming,
-</code></pre>
-<p>If the filename is <code>-</code> or left out, <code>grep</code> will perform the search on <code>stdin</code> data.</p>
-<pre><code class="language-bash">$ printf 'avocado\nmango\nguava' | grep 'v'
+</code></pre><p>If the filename is <code>-</code> or left out, <code>grep</code> will perform the search on <code>stdin</code> data.<pre><code class=language-bash>$ printf 'avocado\nmango\nguava' | grep 'v'
 avocado
 guava
-</code></pre>
-<blockquote>
-<p><img src="images/warning.svg" alt="warning" /> If your input file has some other format like <code>\r\n</code> (carriage return and newline characters) as line ending, convert the input file to Unix style before processing. See <a href="https://stackoverflow.com/questions/45772525/why-does-my-tool-output-overwrite-itself-and-how-do-i-fix-it">stackoverflow: Why does my tool output overwrite itself and how do I fix it?</a> for a detailed discussion and mitigation methods. Make sure to remember this point, it'll come up in exercises.</p>
-</blockquote>
-<pre><code class="language-bash">$ # Unix and DOS style line endings
+</code></pre><blockquote><p><img src=images/warning.svg alt=warning> If your input file has some other format like <code>\r\n</code> (carriage return and newline characters) as line ending, convert the input file to Unix style before processing. See <a href=https://stackoverflow.com/questions/45772525/why-does-my-tool-output-overwrite-itself-and-how-do-i-fix-it>stackoverflow: Why does my tool output overwrite itself and how do I fix it?</a> for a detailed discussion and mitigation methods. Make sure to remember this point, it'll come up in exercises.</blockquote><pre><code class=language-bash>$ # Unix and DOS style line endings
 $ printf '42\n' | file -
 /dev/stdin: ASCII text
 $ printf '42\r\n' | file -
 /dev/stdin: ASCII text, with CRLF line terminators
-</code></pre>
-<h2><a class="header" href="#fixed-string-search" id="fixed-string-search">Fixed string search</a></h2>
-<p>The search string (pattern) is treated as a Basic Regular Expression (BRE) by default. But regular expressions is a topic for next chapter. For now, use the <code>-F</code> option to indicate that the patterns should be matched literally. As a performance optimization, <code>GNU grep</code> automatically tries to perform literal search even if <code>-F</code> option is not used depending upon the kind of search string specified.</p>
-<pre><code class="language-bash">$ # oops, why did it not match?
+</code></pre><h2><a class=header href=#fixed-string-search id=fixed-string-search>Fixed string search</a></h2><p>The search string (pattern) is treated as a Basic Regular Expression (BRE) by default. But regular expressions is a topic for next chapter. For now, use the <code>-F</code> option to indicate that the patterns should be matched literally. As a performance optimization, <code>GNU grep</code> automatically tries to perform literal search even if <code>-F</code> option is not used depending upon the kind of search string specified.<pre><code class=language-bash>$ # oops, why did it not match?
 $ echo 'int a[5]' | grep 'a[5]'
 $ # where did that error come from??
 $ echo 'int a[5]' | grep 'a['
@@ -222,20 +80,14 @@ $ echo 'int a[5]' | grep -F 'a[5]'
 int a[5]
 $ echo 'int a[5]' | fgrep 'a[5]'
 int a[5]
-</code></pre>
-<h2><a class="header" href="#case-insensitive-search" id="case-insensitive-search">Case insensitive search</a></h2>
-<p>Sometimes, you don't know if the log file has <code>error</code> or <code>Error</code> or <code>ERROR</code> and so on. In such cases, you can use <code>-i</code> option to ignore case.</p>
-<pre><code class="language-bash">$ grep -i 'jam' programming_quotes.txt
+</code></pre><h2><a class=header href=#case-insensitive-search id=case-insensitive-search>Case insensitive search</a></h2><p>Sometimes, you don't know if the log file has <code>error</code> or <code>Error</code> or <code>ERROR</code> and so on. In such cases, you can use <code>-i</code> option to ignore case.<pre><code class=language-bash>$ grep -i 'jam' programming_quotes.txt
 use regular expressions. Now they have two problems by Jamie Zawinski
 
 $ printf 'Cat\ncOnCaT\nscatter\ncut' | grep -i 'cat'
 Cat
 cOnCaT
 scatter
-</code></pre>
-<h2><a class="header" href="#invert-matching-lines" id="invert-matching-lines">Invert matching lines</a></h2>
-<p>Use <code>-v</code> option to get lines other than those matching the given search string.</p>
-<pre><code class="language-bash">$ seq 5 | grep -v '3'
+</code></pre><h2><a class=header href=#invert-matching-lines id=invert-matching-lines>Invert matching lines</a></h2><p>Use <code>-v</code> option to get lines other than those matching the given search string.<pre><code class=language-bash>$ seq 5 | grep -v '3'
 1
 2
 4
@@ -244,13 +96,7 @@ scatter
 $ printf 'goal\nrate\neat\npit' | grep -v 'at'
 goal
 pit
-</code></pre>
-<blockquote>
-<p><img src="images/info.svg" alt="info" /> Text processing often involves negating a logic to arrive at a solution or to make it simpler. Look out for opposite pairs like <code>-l -L</code>, <code>-h -H</code>, negative logic in regular expression, etc in coming sections.</p>
-</blockquote>
-<h2><a class="header" href="#line-number-and-count" id="line-number-and-count">Line number and count</a></h2>
-<p>The <code>-n</code> option will prefix line number and a colon character while displaying the output results. This is useful to quickly locate the matching lines for further editing.</p>
-<pre><code class="language-bash">$ grep -n 'not' programming_quotes.txt
+</code></pre><blockquote><p><img src=images/info.svg alt=info> Text processing often involves negating a logic to arrive at a solution or to make it simpler. Look out for opposite pairs like <code>-l -L</code>, <code>-h -H</code>, negative logic in regular expression, etc in coming sections.</blockquote><h2><a class=header href=#line-number-and-count id=line-number-and-count>Line number and count</a></h2><p>The <code>-n</code> option will prefix line number and a colon character while displaying the output results. This is useful to quickly locate the matching lines for further editing.<pre><code class=language-bash>$ grep -n 'not' programming_quotes.txt
 3:by definition, not smart enough to debug it by Brian W. Kernighan
 8:A language that does not affect the way you think about programming,
 9:is not worth knowing by Alan Perlis
@@ -258,32 +104,22 @@ pit
 $ printf 'great\nnumber\numpteen' | grep -n 'r'
 1:great
 2:number
-</code></pre>
-<p>Having to count total number of matching lines comes up often. Somehow piping <code>grep</code> output to <code>wc</code> command is prevalent instead of simply using the <code>-c</code> option.</p>
-<pre><code class="language-bash">$ # count of lines matching the pattern
+</code></pre><p>Having to count total number of matching lines comes up often. Somehow piping <code>grep</code> output to <code>wc</code> command is prevalent instead of simply using the <code>-c</code> option.<pre><code class=language-bash>$ # count of lines matching the pattern
 $ grep -c 'in' programming_quotes.txt
 8
 
 $ # to get count of lines NOT matching the pattern
 $ printf 'goal\nrate\neat\npit' | grep -vc 'g'
 3
-</code></pre>
-<p>With multiple file input, count is displayed for each file separately. Use <code>cat</code> if you need a combined count.</p>
-<pre><code class="language-bash">$ # here - is placeholder for stdin data
+</code></pre><p>With multiple file input, count is displayed for each file separately. Use <code>cat</code> if you need a combined count.<pre><code class=language-bash>$ # here - is placeholder for stdin data
 $ seq 15 | grep -c '1' programming_quotes.txt -
 programming_quotes.txt:1
 (standard input):7
 
 $ # useful application of cat command
-$ cat &lt;(seq 15) programming_quotes.txt | grep -c '1'
+$ cat <(seq 15) programming_quotes.txt | grep -c '1'
 8
-</code></pre>
-<blockquote>
-<p><img src="images/warning.svg" alt="warning" /> The output given by <code>-c</code> is total number of <strong>lines</strong> matching the given patterns, not total number of matches. Use <code>-o</code> option and pipe the output to <code>wc -l</code> to get total matches (example shown later).</p>
-</blockquote>
-<h2><a class="header" href="#limiting-output-lines" id="limiting-output-lines">Limiting output lines</a></h2>
-<p>Sometimes there are too many results in which case you could pipe the output to a <strong>pager</strong> tool like <code>less</code>. Or use the <code>-m</code> option to limit how many matching lines should be displayed for each input file. <code>grep</code> would stop processing an input file as soon as condition specified by <code>-m</code> is satisfied. Just like <code>-c</code> option, <em>note</em> that <code>-m</code> works by line count, not by number of matches.</p>
-<pre><code class="language-bash">$ grep -m3 'in' programming_quotes.txt
+</code></pre><blockquote><p><img src=images/warning.svg alt=warning> The output given by <code>-c</code> is total number of <strong>lines</strong> matching the given patterns, not total number of matches. Use <code>-o</code> option and pipe the output to <code>wc -l</code> to get total matches (example shown later).</blockquote><h2><a class=header href=#limiting-output-lines id=limiting-output-lines>Limiting output lines</a></h2><p>Sometimes there are too many results in which case you could pipe the output to a <strong>pager</strong> tool like <code>less</code>. Or use the <code>-m</code> option to limit how many matching lines should be displayed for each input file. <code>grep</code> would stop processing an input file as soon as condition specified by <code>-m</code> is satisfied. Just like <code>-c</code> option, <em>note</em> that <code>-m</code> works by line count, not by number of matches.<pre><code class=language-bash>$ grep -m3 'in' programming_quotes.txt
 Debugging is twice as hard as writing the code in the first place.
 by definition, not smart enough to debug it by Brian W. Kernighan
 Some people, when confronted with a problem, think - I know, I will
@@ -293,16 +129,11 @@ $ seq 1000 | grep -m4 '2'
 12
 20
 21
-</code></pre>
-<h2><a class="header" href="#multiple-search-strings" id="multiple-search-strings">Multiple search strings</a></h2>
-<p>The <code>-e</code> option can be used to specify multiple search strings from the command line. This is similar to <strong>conditional OR</strong> boolean logic.</p>
-<pre><code class="language-bash">$ # search for '1' or 'two'
+</code></pre><h2><a class=header href=#multiple-search-strings id=multiple-search-strings>Multiple search strings</a></h2><p>The <code>-e</code> option can be used to specify multiple search strings from the command line. This is similar to <strong>conditional OR</strong> boolean logic.<pre><code class=language-bash>$ # search for '1' or 'two'
 $ grep -e '1' -e 'two' programming_quotes.txt
 use regular expressions. Now they have two problems by Jamie Zawinski
 naming things, and off-by-1 errors by Leon Bambrick
-</code></pre>
-<p>If there are lot of search strings, save them in a file (one search string per line and make sure there are no empty lines). Use <code>-f</code> option to specify a file as source of search strings. You can use this option multiple times and also add more patterns from command line using the <code>-e</code> option.</p>
-<pre><code class="language-bash">$ printf 'two\n1\n' &gt; search_strings.txt
+</code></pre><p>If there are lot of search strings, save them in a file (one search string per line and make sure there are no empty lines). Use <code>-f</code> option to specify a file as source of search strings. You can use this option multiple times and also add more patterns from command line using the <code>-e</code> option.<pre><code class=language-bash>$ printf 'two\n1\n' > search_strings.txt
 $ cat search_strings.txt
 two
 1
@@ -315,22 +146,13 @@ $ grep -f search_strings.txt -e 'twice' programming_quotes.txt
 Debugging is twice as hard as writing the code in the first place.
 use regular expressions. Now they have two problems by Jamie Zawinski
 naming things, and off-by-1 errors by Leon Bambrick
-</code></pre>
-<p>To find lines matching all of the search strings, you'd need to resort to regular expressions (covered later) or workaround by using shell pipes. This is similar to <strong>conditional AND</strong> boolean logic.</p>
-<pre><code class="language-bash">$ # match lines containing both 'in' and 'not' in any order
+</code></pre><p>To find lines matching all of the search strings, you'd need to resort to regular expressions (covered later) or workaround by using shell pipes. This is similar to <strong>conditional AND</strong> boolean logic.<pre><code class=language-bash>$ # match lines containing both 'in' and 'not' in any order
 $ # same as: grep 'not' programming_quotes.txt | grep 'in'
 $ grep 'in' programming_quotes.txt | grep 'not'
 by definition, not smart enough to debug it by Brian W. Kernighan
 A language that does not affect the way you think about programming,
 is not worth knowing by Alan Perlis
-</code></pre>
-<h2><a class="header" href="#filename-instead-of-matching-lines" id="filename-instead-of-matching-lines">Filename instead of matching lines</a></h2>
-<p>Often, you just want a list of filenames that match the search patterns. The output might get saved for future reference, passed to another command like <code>sed/awk/perl/sort/etc</code> for further processing and so on. Some of these commands can handle search by themselves, but <code>grep</code> is fast and specialized tool for searching and using shell pipes can improve performance if parallel processing is available. Similar to <code>-m</code> option, <code>grep</code> will stop processing the input file as soon as the given condition is satisfied.</p>
-<ul>
-<li><code>-l</code> will list files matching the pattern</li>
-<li><code>-L</code> will list files NOT matching the pattern</li>
-</ul>
-<pre><code class="language-bash">$ # list filename if it contains 'are' anywhere in the file
+</code></pre><h2><a class=header href=#filename-instead-of-matching-lines id=filename-instead-of-matching-lines>Filename instead of matching lines</a></h2><p>Often, you just want a list of filenames that match the search patterns. The output might get saved for future reference, passed to another command like <code>sed/awk/perl/sort/etc</code> for further processing and so on. Some of these commands can handle search by themselves, but <code>grep</code> is fast and specialized tool for searching and using shell pipes can improve performance if parallel processing is available. Similar to <code>-m</code> option, <code>grep</code> will stop processing the input file as soon as the given condition is satisfied.<ul><li><code>-l</code> will list files matching the pattern<li><code>-L</code> will list files NOT matching the pattern</ul><pre><code class=language-bash>$ # list filename if it contains 'are' anywhere in the file
 $ grep -l 'are' programming_quotes.txt search_strings.txt
 programming_quotes.txt
 $ # no output because no match was found
@@ -346,14 +168,7 @@ programming_quotes.txt
 search_strings.txt
 $ grep -L 'are' programming_quotes.txt search_strings.txt
 search_strings.txt
-</code></pre>
-<h2><a class="header" href="#filename-prefix-for-matching-lines" id="filename-prefix-for-matching-lines">Filename prefix for matching lines</a></h2>
-<p>If there are multiple file inputs, <code>grep</code> would automatically prefix filename while displaying matching lines. You can also control whether or not to add the prefix using options.</p>
-<ul>
-<li><code>-h</code> option will prevent filename prefix in the output (this is the default for single file input)</li>
-<li><code>-H</code> option will always show filename prefix (this is the default for multiple file input)</li>
-</ul>
-<pre><code class="language-bash">$ # -h is on by default for single file input
+</code></pre><h2><a class=header href=#filename-prefix-for-matching-lines id=filename-prefix-for-matching-lines>Filename prefix for matching lines</a></h2><p>If there are multiple file inputs, <code>grep</code> would automatically prefix filename while displaying matching lines. You can also control whether or not to add the prefix using options.<ul><li><code>-h</code> option will prevent filename prefix in the output (this is the default for single file input)<li><code>-H</code> option will always show filename prefix (this is the default for multiple file input)</ul><pre><code class=language-bash>$ # -h is on by default for single file input
 $ grep '1' programming_quotes.txt
 naming things, and off-by-1 errors by Leon Bambrick
 $ # using -h to suppress filename prefix
@@ -372,50 +187,27 @@ programming_quotes.txt:naming things, and off-by-1 errors by Leon Bambrick
 $ # using -H to always show filename prefix
 $ grep -H '1' programming_quotes.txt
 programming_quotes.txt:naming things, and off-by-1 errors by Leon Bambrick
-</code></pre>
-<p>The <code>vim</code> editor has an option <code>-q</code> that allows to easily edit the matching lines from <code>grep</code> output if it has both line number and filename prefixes. Let me know if your favorite editor has equivalent feature, I'll update it here.</p>
-<pre><code class="language-bash">$ grep -Hn '1' *
+</code></pre><p>The <code>vim</code> editor has an option <code>-q</code> that allows to easily edit the matching lines from <code>grep</code> output if it has both line number and filename prefixes. Let me know if your favorite editor has equivalent feature, I'll update it here.<pre><code class=language-bash>$ grep -Hn '1' *
 programming_quotes.txt:12:naming things, and off-by-1 errors by Leon Bambrick
 search_strings.txt:2:1
 
 $ # use :cn and :cp to navigate to next/previous occurrences
 $ # the status line at bottom will have additional info
 $ # use -H option to ensure filename is always present in output
-$ vim -q &lt;(grep -Hn '1' *)
-</code></pre>
-<h2><a class="header" href="#colored-output" id="colored-output">Colored output</a></h2>
-<p>When working from terminal, having <code>--color</code> option enabled makes it easier to spot the matching portions in output. Especially when experimenting to get the correct regular expression. Modern terminal will usually have color support, see <a href="https://unix.stackexchange.com/questions/9957/how-to-check-if-bash-can-print-colors">unix.stackexchange: How to check if bash can print colors?</a> for details.</p>
-<p>The <code>--color</code> option will highlight matching patterns, line numbers, filename, etc. It has three different settings:</p>
-<ul>
-<li><code>auto</code> will result in color highlighting when results are displayed on terminal, but not when output is redirected to another command, file, etc. This is the default setting</li>
-<li><code>always</code> will result in color highlighting when results are displayed on terminal as well as when output is redirected to another command, file, etc</li>
-<li><code>never</code> explicitly disable color highlighting</li>
-</ul>
-<p><img src="./images/color_output.png" alt="grep color output" /></p>
-<p>Below image shows difference between <code>auto</code> and <code>always</code>. In the first case, <code>in</code> is highlighted even after piping, while in the second case, <code>in</code> is not highlighted. In practice, <code>always</code> is rarely used as it has extra information added to matching lines and could cause undesirable results when processing such lines.</p>
-<p><img src="./images/auto_vs_always.png" alt="grep auto vs always" /></p>
-<p>Usually, both <code>ls</code> and <code>grep</code> commands are aliased to include <code>--color=auto</code>.</p>
-<pre><code class="language-bash">$ # this is usually saved in ~/.bashrc or ~/.bash_aliases
+$ vim -q <(grep -Hn '1' *)
+</code></pre><h2><a class=header href=#colored-output id=colored-output>Colored output</a></h2><p>When working from terminal, having <code>--color</code> option enabled makes it easier to spot the matching portions in output. Especially when experimenting to get the correct regular expression. Modern terminal will usually have color support, see <a href=https://unix.stackexchange.com/questions/9957/how-to-check-if-bash-can-print-colors>unix.stackexchange: How to check if bash can print colors?</a> for details.<p>The <code>--color</code> option will highlight matching patterns, line numbers, filename, etc. It has three different settings:<ul><li><code>auto</code> will result in color highlighting when results are displayed on terminal, but not when output is redirected to another command, file, etc. This is the default setting<li><code>always</code> will result in color highlighting when results are displayed on terminal as well as when output is redirected to another command, file, etc<li><code>never</code> explicitly disable color highlighting</ul><p><img src=./images/color_output.png alt="grep color output"><p>Below image shows difference between <code>auto</code> and <code>always</code>. In the first case, <code>in</code> is highlighted even after piping, while in the second case, <code>in</code> is not highlighted. In practice, <code>always</code> is rarely used as it has extra information added to matching lines and could cause undesirable results when processing such lines.<p><img src=./images/auto_vs_always.png alt="grep auto vs always"><p>Usually, both <code>ls</code> and <code>grep</code> commands are aliased to include <code>--color=auto</code>.<pre><code class=language-bash>$ # this is usually saved in ~/.bashrc or ~/.bash_aliases
 $ alias grep='grep --color=auto'
 
 $ # another use case for 'always' is piping the results to 'less' command
 $ grep --color=always 'not' programming_quotes.txt | less -R
-</code></pre>
-<h2><a class="header" href="#match-whole-word-or-line" id="match-whole-word-or-line">Match whole word or line</a></h2>
-<p>A word character is any alphabet (irrespective of case), digit and the underscore character. You might wonder why there are digits and underscores as well, why not only alphabets? This comes from variable and function naming conventions — typically alphabets, digits and underscores are allowed. So, the definition is more programming oriented than natural language. The <code>-w</code> option will ensure that given patterns are not surrounded by other word characters. For example, this helps to distinguish <code>par</code> from <code>spar</code>, <code>park</code>, <code>apart</code>, <code>par2</code>, <code>_par</code>, etc</p>
-<blockquote>
-<p><img src="images/warning.svg" alt="warning" /> The <code>-w</code> option behaves a bit differently than word boundaries in regular expressions. See <a href="./gotchas-and-tricks.html#word-boundary-differences">Word boundary differences</a> section for details.</p>
-</blockquote>
-<pre><code class="language-bash">$ # this matches 'par' anywhere in the line
+</code></pre><h2><a class=header href=#match-whole-word-or-line id=match-whole-word-or-line>Match whole word or line</a></h2><p>A word character is any alphabet (irrespective of case), digit and the underscore character. You might wonder why there are digits and underscores as well, why not only alphabets? This comes from variable and function naming conventions — typically alphabets, digits and underscores are allowed. So, the definition is more programming oriented than natural language. The <code>-w</code> option will ensure that given patterns are not surrounded by other word characters. For example, this helps to distinguish <code>par</code> from <code>spar</code>, <code>park</code>, <code>apart</code>, <code>par2</code>, <code>_par</code>, etc<blockquote><p><img src=images/warning.svg alt=warning> The <code>-w</code> option behaves a bit differently than word boundaries in regular expressions. See <a href=./gotchas-and-tricks.html#word-boundary-differences>Word boundary differences</a> section for details.</blockquote><pre><code class=language-bash>$ # this matches 'par' anywhere in the line
 $ printf 'par value\nheir apparent\n' | grep 'par'
 par value
 heir apparent
 $ # this matches 'par' only as a whole word
 $ printf 'par value\nheir apparent\n' | grep -w 'par'
 par value
-</code></pre>
-<p>Another useful option is <code>-x</code> which will display a line only if the entire line satisfies the given pattern.</p>
-<pre><code class="language-bash">$ # this matches 'my book' anywhere in the line
+</code></pre><p>Another useful option is <code>-x</code> which will display a line only if the entire line satisfies the given pattern.<pre><code class=language-bash>$ # this matches 'my book' anywhere in the line
 $ printf 'see my book list\nmy book\n' | grep 'my book'
 see my book list
 my book
@@ -432,11 +224,8 @@ search_strings.txt:1
 $ # counting empty lines, won't work for files with DOS style line endings
 $ grep -cx '' programming_quotes.txt
 3
-</code></pre>
-<h2><a class="header" href="#comparing-lines-between-files" id="comparing-lines-between-files">Comparing lines between files</a></h2>
-<p>The <code>-f</code> and <code>-x</code> options can be combined to get common lines between two files or the difference when <code>-v</code> is used as well. In these cases, it is advised to use <code>-F</code> because you might not know if there are regular expression metacharacters present in the input files or not.</p>
-<pre><code class="language-bash">$ printf 'teal\nlight blue\nbrown\nyellow\n' &gt; colors_1
-$ printf 'blue\nblack\ndark green\nyellow\n' &gt; colors_2
+</code></pre><h2><a class=header href=#comparing-lines-between-files id=comparing-lines-between-files>Comparing lines between files</a></h2><p>The <code>-f</code> and <code>-x</code> options can be combined to get common lines between two files or the difference when <code>-v</code> is used as well. In these cases, it is advised to use <code>-F</code> because you might not know if there are regular expression metacharacters present in the input files or not.<pre><code class=language-bash>$ printf 'teal\nlight blue\nbrown\nyellow\n' > colors_1
+$ printf 'blue\nblack\ndark green\nyellow\n' > colors_2
 
 $ # common lines between two files
 $ grep -Fxf colors_1 colors_2
@@ -453,11 +242,7 @@ $ grep -Fvxf colors_2 colors_1
 teal
 light blue
 brown
-</code></pre>
-<p>See also <a href="https://stackoverflow.com/questions/42239179/fastest-way-to-find-lines-of-a-text-file-from-another-larger-text-file-in-bash">stackoverflow: Fastest way to find lines of a text file from another larger text file</a> — go through all the answers.</p>
-<h2><a class="header" href="#extract-only-matching-portion" id="extract-only-matching-portion">Extract only matching portion</a></h2>
-<p>If total number of matches is required, use the <code>-o</code> option to display only the matching portions (one per line) and then use <code>wc</code> to count. This option is more commonly used with regular expressions.</p>
-<pre><code class="language-bash">$ grep -o -e 'twice' -e 'hard' programming_quotes.txt
+</code></pre><p>See also <a href=https://stackoverflow.com/questions/42239179/fastest-way-to-find-lines-of-a-text-file-from-another-larger-text-file-in-bash>stackoverflow: Fastest way to find lines of a text file from another larger text file</a> — go through all the answers.<h2><a class=header href=#extract-only-matching-portion id=extract-only-matching-portion>Extract only matching portion</a></h2><p>If total number of matches is required, use the <code>-o</code> option to display only the matching portions (one per line) and then use <code>wc</code> to count. This option is more commonly used with regular expressions.<pre><code class=language-bash>$ grep -o -e 'twice' -e 'hard' programming_quotes.txt
 twice
 hard
 hard
@@ -468,128 +253,37 @@ $ grep -c 'in' programming_quotes.txt
 $ # use -o to get each match on a separate line
 $ grep -o 'in' programming_quotes.txt | wc -l
 13
-</code></pre>
-<h2><a class="header" href="#summary" id="summary">Summary</a></h2>
-<p>In my initial years of cli usage as a VLSI engineer, I knew may be about five of the options listed in this chapter. Didn't even know about the <code>color</code> option. I've seen comments about not knowing <code>-c</code> option. These are some of the reasons why I'd advice to go through list of all the options if you are using a command frequently. Bonus points for maintaining a list of example usage for future reference, passing on to your colleagues, etc.</p>
-<h2><a class="header" href="#exercises" id="exercises">Exercises</a></h2>
-<p>Create <code>exercises</code> directory and within it, create another directory for this chapter, say <code>freq_options</code> or <code>chapter_2</code>. Input is a file downloaded from internet — <a href="https://www.gutenberg.org/files/345/345.txt">https://www.gutenberg.org/files/345/345.txt</a> saved as <code>dracula.txt</code>. To solve the exercises, modify the partial command shown just before the expected output.</p>
-<p><strong>a)</strong> Display all lines containing <code>ablaze</code></p>
-<pre><code class="language-bash">$ mkdir -p exercises/freq_options &amp;&amp; cd $_
+</code></pre><h2><a class=header href=#summary id=summary>Summary</a></h2><p>In my initial years of cli usage as a VLSI engineer, I knew may be about five of the options listed in this chapter. Didn't even know about the <code>color</code> option. I've seen comments about not knowing <code>-c</code> option. These are some of the reasons why I'd advice to go through list of all the options if you are using a command frequently. Bonus points for maintaining a list of example usage for future reference, passing on to your colleagues, etc.<h2><a class=header href=#exercises id=exercises>Exercises</a></h2><p>Create <code>exercises</code> directory and within it, create another directory for this chapter, say <code>freq_options</code> or <code>chapter_2</code>. Input is a file downloaded from internet — <a href=https://www.gutenberg.org/files/345/345.txt>https://www.gutenberg.org/files/345/345.txt</a> saved as <code>dracula.txt</code>. To solve the exercises, modify the partial command shown just before the expected output.<p><strong>a)</strong> Display all lines containing <code>ablaze</code><pre><code class=language-bash>$ mkdir -p exercises/freq_options && cd $_
 $ wget https://www.gutenberg.org/files/345/345.txt -O dracula.txt
 
 $ grep ##### add your solution here
 the room, his face all ablaze with excitement. He rushed up to me and
-</code></pre>
-<p><strong>b)</strong> Display all lines containing <code>abandon</code> as a whole word.</p>
-<pre><code class="language-bash">$ grep ##### add your solution here
+</code></pre><p><strong>b)</strong> Display all lines containing <code>abandon</code> as a whole word.<pre><code class=language-bash>$ grep ##### add your solution here
 inheritors, being remote, would not be likely to abandon their just
-</code></pre>
-<p><strong>c)</strong> Display all lines that satisfies both of these conditions:</p>
-<ul>
-<li><code>professor</code> matched irrespective of case</li>
-<li>either <code>quip</code> or <code>sleep</code> matched case sensitively</li>
-</ul>
-<pre><code class="language-bash">$ grep ##### add your solution here
+</code></pre><p><strong>c)</strong> Display all lines that satisfies both of these conditions:<ul><li><code>professor</code> matched irrespective of case<li>either <code>quip</code> or <code>sleep</code> matched case sensitively</ul><pre><code class=language-bash>$ grep ##### add your solution here
 equipment of a professor of the healing craft. When we were shown in,
 its potency; and she fell into a deep sleep. When the Professor was
 sleeping, and the Professor seemingly had not moved from his seat at her
 to sleep, and something weaker when she woke from it. The Professor and
-</code></pre>
-<p><strong>d)</strong> Display first three lines containing <code>Count</code></p>
-<pre><code class="language-bash">$ grep ##### add your solution here
+</code></pre><p><strong>d)</strong> Display first three lines containing <code>Count</code><pre><code class=language-bash>$ grep ##### add your solution here
 town named by Count Dracula, is a fairly well-known place. I shall enter
 must ask the Count all about them.)
 Count Dracula had directed me to go to the Golden Krone Hotel, which I
-</code></pre>
-<p><strong>e)</strong> Display first six lines containing <code>Harker</code> but not either of <code>Journal</code> or <code>Letter</code></p>
-<pre><code class="language-bash">$ grep ##### add your solution here
-said, &quot;The Herr Englishman?&quot; &quot;Yes,&quot; I said, &quot;Jonathan Harker.&quot; She
-&quot;I am Dracula; and I bid you welcome, Mr. Harker, to my house. Come in;
+</code></pre><p><strong>e)</strong> Display first six lines containing <code>Harker</code> but not either of <code>Journal</code> or <code>Letter</code><pre><code class=language-bash>$ grep ##### add your solution here
+said, "The Herr Englishman?" "Yes," I said, "Jonathan Harker." She
+"I am Dracula; and I bid you welcome, Mr. Harker, to my house. Come in;
 I shall be all alone, and my friend Harker Jonathan--nay, pardon me, I
 Jonathan Harker will not be by my side to correct and aid me. He will be
-&quot;I write by desire of Mr. Jonathan Harker, who is himself not strong
-junior partner of the important firm Hawkins &amp; Harker; and so, as you
-</code></pre>
-<p><strong>f)</strong> Display lines containing <code>Zooelogical Gardens</code> along with line number prefix.</p>
-<pre><code class="language-bash">$ grep ##### add your solution here
+"I write by desire of Mr. Jonathan Harker, who is himself not strong
+junior partner of the important firm Hawkins & Harker; and so, as you
+</code></pre><p><strong>f)</strong> Display lines containing <code>Zooelogical Gardens</code> along with line number prefix.<pre><code class=language-bash>$ grep ##### add your solution here
 5597:         _Interview with the Keeper in the Zooelogical Gardens._
 5601:the keeper of the section of the Zooelogical Gardens in which the wolf
 8042:the Zooelogical Gardens a young one may have got loose, or one be bred
-</code></pre>
-<p><strong>g)</strong> Find total count of whole word <code>the</code> (irrespective of case).</p>
-<pre><code class="language-bash">$ grep ##### add your solution here
+</code></pre><p><strong>g)</strong> Find total count of whole word <code>the</code> (irrespective of case).<pre><code class=language-bash>$ grep ##### add your solution here
 8090
-</code></pre>
-<p><strong>h)</strong> The below code snippet tries to get number of empty lines, but apparently shows wrong result, why?</p>
-<pre><code class="language-bash">$ grep -cx '' dracula.txt
+</code></pre><p><strong>h)</strong> The below code snippet tries to get number of empty lines, but apparently shows wrong result, why?<pre><code class=language-bash>$ grep -cx '' dracula.txt
 0
-</code></pre>
-
-                    </main>
-
-                    <nav class="nav-wrapper" aria-label="Page navigation">
-                        <!-- Mobile navigation buttons -->
-                        
-                            <a rel="prev" href="introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                        
-
-                        
-                            <a rel="next" href="breere-regular-expressions.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        
-
-                        <div style="clear: both"></div>
-                    </nav>
-                </div>
-            </div>
-
-            <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
-                    <a rel="prev" href="introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-                
-
-                
-                    <a rel="next" href="breere-regular-expressions.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                
-            </nav>
-
-        </div>
-
-        
-
-        
-
-        
-
-        
-        <script type="text/javascript">
+</code></pre></main><nav class=nav-wrapper aria-label="Page navigation"><a rel=prev href=introduction.html class="mobile-nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><a rel=next href=breere-regular-expressions.html class="mobile-nav-chapters next"title="Next chapter"aria-label="Next chapter"aria-keyshortcuts=Right> <i class="fa fa-angle-right"></i> </a><div style="clear: both"></div></nav></div></div><nav class=nav-wide-wrapper aria-label="Page navigation"><a rel=prev href=introduction.html class="nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><a rel=next href=breere-regular-expressions.html class="nav-chapters next"title="Next chapter"aria-label="Next chapter"aria-keyshortcuts=Right> <i class="fa fa-angle-right"></i> </a></nav></div><script>
             window.playground_copyable = true;
-        </script>
-        
-
-        
-
-        
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        
-
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
-
-        <!-- Custom JS scripts -->
-        
-
-        
-
-    </body>
-</html>
+        </script><script src=elasticlunr.min.js charset=utf-8></script><script src=mark.min.js charset=utf-8></script><script src=searcher.js charset=utf-8></script><script src=clipboard.min.js charset=utf-8></script><script src=highlight.js charset=utf-8></script><script src=book.js charset=utf-8></script><script src=sidebar.js></script>
