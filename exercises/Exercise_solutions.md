@@ -4,13 +4,13 @@
 
 # Frequently used options
 
-Create `exercises` directory and within it, create another directory for this chapter, say `freq_options` or `chapter_2`. Input is a file downloaded from internet — https://www.gutenberg.org/files/345/345.txt saved as `dracula.txt`.
+First create `exercises` directory and then within it, create another directory for this chapter, say `freq_options` or `chapter_2`. Input is a file downloaded from internet — https://www.gutenberg.org/files/345/old/345.txt saved as `dracula.txt`.
 
 **a)** Display all lines containing `ablaze`
 
 ```bash
 $ mkdir -p exercises/freq_options && cd $_
-$ wget https://www.gutenberg.org/files/345/345.txt -O dracula.txt
+$ wget https://www.gutenberg.org/files/345/old/345.txt -O dracula.txt
 
 $ grep 'ablaze' dracula.txt
 the room, his face all ablaze with excitement. He rushed up to me and
@@ -333,7 +333,7 @@ $ printf 'hi there\0good day\n' | grep -a 'good'
 hi theregood day
 ```
 
-**b)** Read about `--line-buffered` from the manual (also [this link](https://stackoverflow.com/questions/7161821/how-to-grep-a-continuous-stream)) and see it in action with code below:
+**b)** Read about `--line-buffered` from the manual (also [this link](https://stackoverflow.com/q/7161821/4082052)) and see it in action with code below:
 
 ```bash
 $ for i in {1..5}; do seq 12; sleep 1; done | grep '[1-489]' | grep -v '0'

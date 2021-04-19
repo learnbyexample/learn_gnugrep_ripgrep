@@ -2,11 +2,11 @@
 
 link='https://github.com/BurntSushi/ripgrep/releases/'
 
-link="$link"'download/12.1.0/ripgrep_12.1.0_amd64.deb'
+link="$link"'download/12.1.1/ripgrep_12.1.1_amd64.deb'
 
 wget "$link"
 
-sudo gdebi ripgrep_12.1.0_amd64.deb 
+sudo gdebi ripgrep_12.1.1_amd64.deb 
 
 rg --version
 
@@ -74,7 +74,7 @@ rg -f search_strings.txt -e 'twice' programming_quotes.txt
 
 rg 'in' programming_quotes.txt | rg 'not'
 
-## Filename instead of matching lines
+## Get filename instead of matching lines
 
 rg -l 'are' programming_quotes.txt search_strings.txt
 
@@ -414,7 +414,9 @@ echo 'foo=42, bar=314, baz:512' | rg -o '=(\d+)' -r '$1'
 
 echo '42 foo-5, baz3; x-83, y-20: f12' | rg -o '\-(\d+)[:;]' -r '$1'
 
-echo 'cat scatter cater scat' | rg -o '(?:cat.*?){2}(cat[a-z]*)' -r '$1'
+s='scatter cat cater scat concatenate abdicate'
+
+echo "$s" | rg -o '^(?:.*?cat.*?){2}(cat[a-z]*)' -r '$1'
 
 echo 'a b a' | rg 'a' -r '$${a}'
 
@@ -476,7 +478,9 @@ rg -P '(?=.*a)(?=.*e)(?=.*i)(?=.*o).*u' five_words.txt
 
 echo 'hey food! foo42 foot5 foofoo' | rg -P 'foo(?!\d)' -r 'X'
 
-echo 'cat scatter cater scat' | rg -oP '(cat.*?){2}\Kcat[a-z]*'
+s='scatter cat cater scat concatenate abdicate'
+
+echo "$s" | rg -oP '^(.*?cat.*?){2}\Kcat[a-z]*'
 
 echo 'fox,cat,dog,parrot' | rg -qP 'at((?!go).)*par' && echo 'Match'
 
@@ -486,9 +490,9 @@ expr='(a^b)'
 
 echo 'f*(2-a/b) - 3*(a^b)-42' | rg -oP '\S*\Q'"$expr"'\E\S*'
 
-echo 'car bat cod map' | rg -o '(bat|map)(*SKIP)(*F)|\w+'
+echo 'car bat cod map' | rg -o '\b(bat|map)\b(*SKIP)(*F)|\w+'
 
-echo 'car bat cod map' | rg -o --engine=auto '(bat|map)(*SKIP)(*F)|\w+'
+echo 'car bat cod map' | rg -o --engine=auto '\b(bat|map)\b(*SKIP)(*F)|\w+'
 
 ## Recursive options
 
@@ -536,6 +540,8 @@ rg 'red'
 
 rg -Ll 'red'
 
+rg --type-list | rg 'markdown'
+
 rg -t=py -t=sh --files
 
 rg -t=txt --files
@@ -549,6 +555,20 @@ rg -g='*gr*' --files
 rg -g='!*.py' --files
 
 rg -g='!scripts' --files
+
+mkdir double_star && cd $_
+
+mkdir -p one/two/{x,y,z}/four
+
+touch one/1.txt one/two/y/why.txt one/two/x/ex.txt one/two/y/four/4.txt
+
+rg --files
+
+rg -g='one/two/**' --files
+
+rg -g='**/y/**' --files
+
+cd .. && rm -r double_star
 
 ## Speed comparison
 

@@ -46,6 +46,16 @@ grep -Rl --include='*.txt' --include='*.py' 'in'
 
 printf '*en\n*.txt' | grep -Rl --exclude-from=- 'in'
 
+grep -Rl --include='*on*' --exclude='*.txt' 'in'
+
+grep -Rl --exclude='*.txt' --include='*on*' 'in'
+
+grep -l 'a' scripts/*
+
+grep -l --exclude='*.sh' 'a' scripts/*
+
+grep -l --include='*.sh' 'a' scripts/*
+
 ## Extended globs
 
 shopt -s extglob globstar 

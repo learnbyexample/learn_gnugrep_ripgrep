@@ -1,5 +1,16 @@
 <br>
 
+### 1.7
+
+* Command versions updated to **GNU grep 3.6** and **ripgrep 12.1.1**
+* Added examples for using `--include` and `--exclude` when recursive option is not active
+* Added examples which require `**` in the `glob` pattern with `rg -g`
+* Updated documentation snippets as per new `man` and `info` pages
+* Updated timing data for speed comparison examples
+* Corrected various typos, improved descriptions/comments/examples/exercises/etc
+
+<br>
+
 ### 1.6
 
 * Clarified BRE vs ERE difference for line anchor escaping

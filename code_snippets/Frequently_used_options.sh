@@ -70,7 +70,7 @@ grep -f search_strings.txt -e 'twice' programming_quotes.txt
 
 grep 'in' programming_quotes.txt | grep 'not'
 
-## Filename instead of matching lines
+## Get filename instead of matching lines
 
 grep -l 'are' programming_quotes.txt search_strings.txt
 

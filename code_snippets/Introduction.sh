@@ -1,10 +1,10 @@
 ## Installation
 
-wget https://ftp.gnu.org/gnu/grep/grep-3.4.tar.xz
+wget https://ftp.gnu.org/gnu/grep/grep-3.6.tar.xz
 
-tar -Jxf grep-3.4.tar.xz
+tar -Jxf grep-3.6.tar.xz
 
-cd grep-3.4/
+cd grep-3.6/
 
 ./configure 
 

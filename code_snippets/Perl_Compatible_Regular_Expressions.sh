@@ -16,9 +16,9 @@ echo '5ba\babc2' | grep -oP '[a\b]*'
 
 echo '5ba\babc2' | grep -oP '[a\\b]*'
 
-echo 'w=y\x+9*3' | grep -oE '[\w=]+'
+echo 'w=y\x+9' | grep -oE '[\w=]+'
 
-echo 'w=y\x+9*3' | grep -oP '[\w=]+'
+echo 'w=y\x+9' | grep -oP '[\w=]+'
 
 echo '123456789abc42az' | grep -E '(.)(.)(.)(.)(.)(.)(.)(.)(.)(.).*\10'
 
@@ -40,11 +40,11 @@ cat five_words.txt
 
 printf 'sub\nbit' | grep -f- five_words.txt
 
-grep -e 'sub' -e 'bit' five_words.txt 
+grep -e 'sub' -e 'bit' five_words.txt
 
 printf 'sub\nbit' | grep -P -f- five_words.txt
 
-grep -P -e 'sub' -e 'bit' five_words.txt 
+grep -P -e 'sub' -e 'bit' five_words.txt
 
 ## String anchors
 
@@ -146,9 +146,9 @@ echo 'cat scatter cater scat' | grep -oP '(?<=(cat.*?){2})cat[a-z]*'
 
 echo 'foo=42, bar=314' | grep -oP '=\K\d+'
 
-echo 'cat scatter cater scat' | grep -oP '(cat.*?){2}\Kcat[a-z]*'
+echo 'cat scatter cater scat' | grep -oP '^(.*?cat.*?){2}\Kcat[a-z]*'
 
-echo 'or42 car3 pare7 care5' | grep -oP '\b[a-z]{1,3}\K\d+'
+echo 'or42 pare7 or3 cared5' | grep -oP '\b[a-z]{1,3}\K\d+'
 
 echo 'fox,cat,dog,parrot' | grep -qP '^((?!cat).)*dog' || echo 'No match'
 
@@ -208,7 +208,7 @@ printf '@A-.\tcar' | grep -oP '\G\S'
 
 ## Skipping matches
 
-echo 'car bat cod map' | grep -oP '(bat|map)(*SKIP)(*F)|\w+'
+echo 'car bat cod map' | grep -oP '\b(bat|map)\b(*SKIP)(*F)|\w+'
 
 echo 'I like2 "mango" and "guava"' | grep -oP '"[^"]+"(*SKIP)(*F)|\w+'
 

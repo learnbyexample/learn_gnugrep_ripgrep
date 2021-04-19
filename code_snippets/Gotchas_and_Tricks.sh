@@ -62,21 +62,11 @@ time LC_ALL=C grep -xE '([a-z]..)\1' words.txt > f2
 
 rm f[12]
 
-/bin/grep --version | head -n1
-
-time /bin/grep -wE '([a-d][r-z]){3}' words.txt > f1
-
-grep --version | head -n1
-
-time grep -wE '([a-d][r-z]){3}' words.txt > f2
-
-rm f[12]
-
 ## Speed benefits with PCRE
 
 time LC_ALL=C grep -xE '([a-z]..)\1' words.txt > f1
 
-time LC_ALL=C grep -xP '([a-z]..)\1' words.txt > f2
+time grep -xP '([a-z]..)\1' words.txt > f2
 
 rm f[12]
 
@@ -94,7 +84,7 @@ time grep -rl 'include' . > ../f1
 
 time find -type f -print0 | xargs -0 grep -l 'include' > ../f2
 
-time find -type f -print0 | xargs -0 -P2 grep -l 'include' > ../f3
+time find -type f -print0 | xargs -0 -P0 grep -l 'include' > ../f3
 
 diff -sq <(sort ../f1) <(sort ../f2)
 
