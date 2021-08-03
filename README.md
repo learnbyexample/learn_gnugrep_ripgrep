@@ -18,10 +18,10 @@ See [Version_changes.md](./Version_changes.md) to keep track of changes made to 
 
 You can purchase the book using these links:
 
-* https://gumroad.com/l/gnugrep_ripgrep
+* https://learnbyexample.gumroad.com/l/gnugrep_ripgrep
 * https://leanpub.com/gnugrep_ripgrep
-* You can also get the book as part of **Magical one-liners** bundle from https://gumroad.com/l/oneliners or https://leanpub.com/b/oneliners
-* You can also get the book as part of **Awesome Regex** bundle from https://gumroad.com/l/regex or https://leanpub.com/b/regex
+* You can also get the book as part of **Magical one-liners** bundle from https://learnbyexample.gumroad.com/l/oneliners or https://leanpub.com/b/oneliners
+* You can also get the book as part of **Awesome Regex** bundle from https://learnbyexample.gumroad.com/l/regex or https://leanpub.com/b/regex
 * See https://learnbyexample.github.io/books/ for list of other books
 
 For a preview of the book, see [sample chapters](https://github.com/learnbyexample/learn_gnugrep_ripgrep/blob/master/sample_chapters/gnu_grep_sample.pdf)
@@ -86,4 +86,3 @@ Special thanks to all my friends and online acquaintances for their help, suppor
 The book is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 The code snippets are licensed under MIT, see [LICENSE](./LICENSE) file
-
