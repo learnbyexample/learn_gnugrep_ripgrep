@@ -16,13 +16,19 @@ See [Version_changes.md](./Version_changes.md) to keep track of changes made to 
 
 # E-book
 
-You can purchase the book using these links:
+You can purchase the pdf/epub versions of the book using these links:
 
 * https://learnbyexample.gumroad.com/l/gnugrep_ripgrep
 * https://leanpub.com/gnugrep_ripgrep
-* You can also get the book as part of **Magical one-liners** bundle from https://learnbyexample.gumroad.com/l/oneliners or https://leanpub.com/b/oneliners
-* You can also get the book as part of **Awesome Regex** bundle from https://learnbyexample.gumroad.com/l/regex or https://leanpub.com/b/regex
-* See https://learnbyexample.github.io/books/ for list of other books
+
+You can also get the book as part of these bundles:
+
+* **Magical one-liners** bundle from https://learnbyexample.gumroad.com/l/oneliners or https://leanpub.com/b/oneliners
+* **Awesome Regex** bundle from https://learnbyexample.gumroad.com/l/regex or https://leanpub.com/b/regex
+* **All books bundle** bundle from https://learnbyexample.gumroad.com/l/all-books
+    * Includes all my programming books
+
+See https://learnbyexample.github.io/books/ for list of other books
 
 For a preview of the book, see [sample chapters](https://github.com/learnbyexample/learn_gnugrep_ripgrep/blob/master/sample_chapters/gnu_grep_sample.pdf)
 
