@@ -6,9 +6,11 @@ Example based guide to mastering GNU grep and ripgrep.
     <img src="./images/grep.png" width="320px" height="400px" />
 </p>
 
-The book also includes exercises to test your understanding, which is presented together as a single file in this repo - [Exercises.md](./exercises/Exercises.md)
+The book also includes exercises to test your understanding, which are presented together as a single file in this repo - [Exercises.md](./exercises/Exercises.md)
 
 For solutions to the exercises, see [Exercise_solutions.md](./exercises/Exercise_solutions.md).
+
+You can also use [this interactive TUI app](https://github.com/learnbyexample/TUI-apps/blob/main/GrepExercises) to practice some of the exercises from the book.
 
 See [Version_changes.md](./Version_changes.md) to keep track of changes made to the book.
 
@@ -28,13 +30,13 @@ You can also get the book as part of these bundles:
 * **All books bundle** bundle from https://learnbyexample.gumroad.com/l/all-books
     * Includes all my programming books
 
-See https://learnbyexample.github.io/books/ for list of other books
+See https://learnbyexample.github.io/books/ for a list of other books
 
 For a preview of the book, see [sample chapters](https://github.com/learnbyexample/learn_gnugrep_ripgrep/blob/master/sample_chapters/gnu_grep_sample.pdf)
 
-The book can also be [viewed as a single markdown file in this repo](./gnu_grep.md). See my blogpost on [generating pdf from markdown using pandoc](https://learnbyexample.github.io/tutorial/ebook-generation/customizing-pandoc/) if you are interested in the ebook creation process.
+The book can also be [viewed as a single markdown file in this repo](./gnu_grep.md). See my blogpost on [generating pdfs from markdown using pandoc](https://learnbyexample.github.io/tutorial/ebook-generation/customizing-pandoc/) if you are interested in the ebook creation process.
 
-For web version of the book, visit https://learnbyexample.github.io/learn_gnugrep_ripgrep/
+For the web version of the book, visit https://learnbyexample.github.io/learn_gnugrep_ripgrep/
 
 <br>
 
