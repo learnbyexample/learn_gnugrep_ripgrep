@@ -1,100 +1,76 @@
-mkdir recursive_matching && cd $_
+## Sample directory
 
-printf 'hide\nobscure\nconceal\ncover\nblot\nshield' > patterns.txt
+source grep.sh
 
-grep -Ff patterns.txt ../bre_ere/words.txt > .hidden
+tree -a
 
-grep -E '([as]([b-g]|po)[r-t]){2}' ../bre_ere/words.txt > nested_group.txt
+## Recursive options
 
-mkdir scripts
+grep -r 'clear'
 
-echo 'yrneaolrknzcyr 86960' > scripts/.key
+grep -rh 'clear'
 
-echo "tr 'a-z0-9' 'n-za-m5-90-4' < .key" > scripts/decode.sh
+grep -rl 'blue'
 
-printf "import math\n\nprint(math.pi)\n" > scripts/pi.py
+grep -rL 'blue'
 
-ln -s ../context_matching/
+grep -rl 'pwd'
 
-tree -al
+grep -rl 'pwd' backups projects/dot_files
 
-## -r and -R
-
-grep -r '[0-9]'
-
-grep -rh '[0-9]'
-
-grep -rl 'in'
-
-grep -rL 'in' scripts
-
-grep -rlx ''
-
-grep -rlx '' . context_matching
-
-grep -Rlx ''
+grep -Rl 'pwd'
 
 ## Customize search path
 
-grep -Rl 'in'
+grep -rl 'blue'
 
-grep -Rl --exclude-dir='scripts' --exclude='.*' 'in'
+grep -rl --include='*.txt' 'blue'
 
-grep -Rl --include='*.txt' 'in'
+printf '*.txt\n.hi*' | grep -rl --exclude-from=- 'blue'
 
-grep -Rl --include='*.txt' --include='*.py' 'in'
+grep -rl --exclude-dir='backups' --exclude='.*' 'blue'
 
-printf '*en\n*.txt' | grep -Rl --exclude-from=- 'in'
+grep -rl --include='*.txt' --include='.hi*' 'blue'
 
-grep -Rl --include='*on*' --exclude='*.txt' 'in'
+grep -rl --exclude='*.sh' --include='*ll*' 'He'
 
-grep -Rl --exclude='*.txt' --include='*on*' 'in'
+grep -rl --include='*ll*' --exclude='*.sh' 'He'
 
-grep -l 'a' scripts/*
+grep -l --exclude='*.sh' 'He' projects/*/*
 
-grep -l --exclude='*.sh' 'a' scripts/*
+grep -l --include='*.sh' 'He' projects/*/*
 
-grep -l --include='*.sh' 'a' scripts/*
+## extglob and globstar
 
-## Extended globs
+shopt -s extglob globstar
 
-shopt -s extglob globstar 
+grep -l 'r' **/*.@(txt|py|sh)
 
-grep -l 'in' **/*.@(txt|py)
+printf '%s\n' **/*py*
 
-printf '%s\n' **/*context*
+grep -l 'on' **/*py*
 
-grep -l 'in' **/*context*
+grep -d skip -l 'on' **/*py*
 
-grep -d skip -l 'in' **/*context*
+## find command
 
-## Using find command
+find -L -type f -size -25c
 
-find -L -type f -size -50c
-
-find -L -type f -size -50c -exec grep 'e$' {} +
+find -L -type f -size -25c -exec grep 'e$' {} +
 
 ## Piping filenames
 
-grep -rlZ '[0-9]' | od -c
+grep -rl 'clear'
 
-grep -rlZ '[0-9]' | xargs -0 awk '{print $NF}'
+grep -rl 'clear' | xargs head -n1
 
-echo 'how are you?' > normal.txt
+grep -rl 'blue'
 
-echo 'how dare you!' > 'filename with spaces.txt'
+grep -rl 'blue' | xargs grep -l 'teal'
 
-grep -r 'are'
+grep -rlZ 'blue' | xargs -0 grep -l 'teal'
 
-grep -rl 'are' | xargs wc
+grep -rlZ 'violet' | xargs -0 grep -L 'brown'
 
-grep -rlZ 'are' | xargs -0 wc
-
-grep -rl 'in'
-
-grep -rlZ 'in' | xargs -0 grep -l 'or'
-
-grep -rlZ 'in' | xargs -0 grep -L 'at'
-
-grep -rlZ 'in' | xargs -0 grep -lZ 'or' | xargs -0 grep -l 'at'
+grep -rlZ 'violet' | xargs -r0 grep -L 'brown'
 

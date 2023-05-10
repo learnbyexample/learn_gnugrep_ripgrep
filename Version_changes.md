@@ -1,5 +1,21 @@
 <br>
 
+### 2.0
+
+* Command versions updated to **GNU grep 3.10** and **ripgrep 13.0.0**
+* Many more exercises added, and you can practice some of them using this [interactive TUI app](https://github.com/learnbyexample/TUI-apps/blob/main/GrepExercises)
+* PCRE chapter — added section for conditional grouping, corrected description and examples for `\K`, atomic grouping, etc
+* ripgrep chapter — options and regex section modified to present only differences compared to `GNU grep`, added details for more options such as `--field-match-separator`, improved recursive search section, etc
+* Long sections split into smaller ones
+* In general, many of the examples, exercises, solutions, descriptions and external links were updated/corrected
+* Updated Acknowledgements section
+* Code snippets related to info/warning sections will now appear as a single block
+* Book title changed to **CLI text processing with GNU grep and ripgrep**
+* New cover image
+* Images centered for EPUB format
+
+<br>
+
 ### 1.7
 
 * Command versions updated to **GNU grep 3.6** and **ripgrep 12.1.1**

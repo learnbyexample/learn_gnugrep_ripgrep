@@ -1,4 +1,4 @@
-## Scripting options
+## Suppress stdout
 
 cat find.md
 
@@ -14,21 +14,25 @@ echo $?
 
 grep -qwE '(\w+) \1' find.md && echo 'Repeated words found!'
 
+## Suppress stderr
+
 grep 'in' xyz.txt
 
 grep -s 'in' xyz.txt
 
 echo $?
 
-touch foo.txt
+touch new.txt
 
-chmod -r foo.txt
+chmod -r new.txt
 
-grep 'rose' foo.txt
+grep 'rose' new.txt
 
-grep -s 'rose' foo.txt
+grep -s 'rose' new.txt
 
 echo $?
+
+rm -f new.txt
 
 grep -sE 'a(' find.md
 
@@ -40,11 +44,11 @@ echo $?
 
 grep -zowE '(\w+)\s+\1' find.md | od -c
 
+grep -zowE '(\w+)\s+\1' find.md | tr '\0' '\n'
+
 grep -zowE '(\w+)\s+\1' find.md | sed 's/\x0/\n---\n/g'
 
 printf 'dark red\nteal\0a2\0spared' | grep -z 'red' | sed 's/\x0/\n---\n/g'
-
-printf 'dark red\nteal\0a2\0spared' | grep -z 'red' | od -c
 
 ## Byte offset
 
@@ -54,9 +58,11 @@ grep -b 'it' find.md
 
 grep -ob 'art\b' find.md
 
-awk '/is/{print NR, index($0, "is")-1}' find.md
+awk 'match($0, /is/){print NR, RSTART, $0}' OFS=: find.md
 
-## --label
+rg --column 'is' find.md
+
+## Naming stdin
 
 echo 'red and blue' | grep -c 'and' - find.md
 

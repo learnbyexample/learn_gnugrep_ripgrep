@@ -36,6 +36,16 @@ printf 'spared PARTY PaReNt' | grep -ioP 'par|pare|spare'
 
 printf 'spared PARTY PaReNt' | grep -ioP 'spare|pare|par'
 
+echo 'fig123312apple' | grep -oE 'g[123]+(12apple)?'
+
+echo 'fig123312apple' | grep -oP 'g[123]+(12apple)?'
+
+echo 'abc ac adc abbc xabbbcz bbb bc abbbbbc' | grep -oE 'ab{,2}c'
+
+echo 'abc ac adc abbc xabbbcz bbb bc abbbbbc' | grep -oP 'ab{,2}c'
+
+echo 'abc ac adc abbc xabbbcz bbb bc abbbbbc' | grep -oP 'ab{0,2}c'
+
 cat five_words.txt
 
 printf 'sub\nbit' | grep -f- five_words.txt
@@ -72,41 +82,51 @@ echo 'foot' | grep -oP 'f.?o'
 
 echo 'foot' | grep -oP 'f.??o'
 
-echo 'frost' | grep -oP 'f.??o'
+echo 'apple 314' | grep -oP '\d{2,5}'
 
-echo 'foo 314' | grep -oP '\d{2,5}'
+echo 'apple 314' | grep -oP '\d{2,5}?'
 
-echo 'foo 314' | grep -oP '\d{2,5}?'
+echo 'green:3.14:teal::brown:oh!:blue' | grep -oP ':.*:'
 
-echo 'that is quite a fabricated tale' | grep -oP 't.*a'
-
-echo 'that is quite a fabricated tale' | grep -oP 't.*?a'
-
-echo 'that is quite a fabricated tale' | grep -oP 't.*?a.*?f'
+echo 'green:3.14:teal::brown:oh!:blue' | grep -oP ':.*?:'
 
 ## Possessive quantifiers
 
-printf 'abc\nac\nadc\nxabbbcz\nbbb' | grep -oP 'ab*c'
+echo 'fig:mango:pineapple:guava' | grep -oP ':.*apple'
 
-printf 'abc\nac\nadc\nxabbbcz\nbbb' | grep -oP 'ab*+c'
+echo 'fig:mango:pineapple:guava' | grep -oP ':.*+apple'
 
 echo '0501 035 154 12 26 98234' | grep -woP '0*+\d{3,}'
 
+## Atomic grouping
+
 echo '0501 035 154 12 26 98234' | grep -woP '(?>0*)\d{3,}'
 
-## Grouping variants
+s='fig::mango::pineapple::guava::apples::orange'
 
-echo '1,2,3,3,5' | grep -P '^([^,]+,){2}([^,]+),\2,'
+echo "$s" | grep -oP '::.*?::apple'
 
-echo '1,2,3,3,5' | grep -P '^(?:[^,]+,){2}([^,]+),\1,'
+echo "$s" | grep -oP '(?>::.*?::)apple'
+
+## Non-capturing group
+
+printf 'a,b,c,d,e\n1,2,3,3,5' | grep -P '^([^,]+,){2}([^,]+),\2,'
+
+printf 'a,b,c,d,e\n1,2,3,3,5' | grep -P '^(?:[^,]+,){2}([^,]+),\1,'
+
+## Named capture groups
 
 echo '1,2,3,3,5' | grep -P '^(?:[^,]+,){2}(?<col3>[^,]+),\k<col3>,'
 
 echo '1,2,3,3,5' | grep -P '^(?:[^,]+,){2}(?P<col3>[^,]+),(?P=col3),'
 
+## Negative backreferences
+
 echo '1,2,3,3,5' | grep -P '^([^,]+,){2}([^,]+),\g{-1},'
 
 echo '1,2,3,3,5' | grep -P '^([^,]+,){2}([^,]+),\g-1,'
+
+## Subexpression calls
 
 row='today,2008-03-24,food,2012-08-12,nice,5632'
 
@@ -116,51 +136,83 @@ echo "$row" | grep -oP '(?<date>\d{4}-\d{2}-\d{2}).*(?&date)'
 
 ## Lookarounds
 
-echo ':cart<apple-rest;tea' | grep -oP '(?<![:-])\b\w+\b'
+echo 'fig:cart<apple-rest;tea' | grep -oP '(?<![:-])\b\w+'
 
-echo 'boz42 bezt5 bazbiz' | grep -ioP 'b.z(?!\d)'
+printf 'hey cats!\ncat42\ncat_5\ncatcat' | grep -P 'cat(?!\d)'
 
-echo '42 foo-5, baz3; x-83, y-20: f12' | grep -oP '\d+(?=,)'
+echo 'fig:cart<apple-rest;tea' | grep -woP '(?<![:-])\w+(?!-|$)'
 
-echo '42 foo-5, baz3; x-83, y-20: f12' | grep -oP '(?<=-)\d++(?!,)'
+echo '42 apple-5, fig3; x-83, y-20: f12' | grep -oP '\d+(?=,)'
+
+echo '42 apple-5, fig3; x-83, y-20: f12' | grep -oP '(?<=[a-z])\d+'
+
+echo 'par spare part party' | grep -oP '\b\w*par\w*\b(?=.*\bpart\b)'
+
+echo '42 apple-5, fig3; x-83, y-20: f12' | grep -oP '(?<=-)\d++(?!,)'
+
+echo 'par spare part party' | grep -oP '\b\w++(?<![rt])'
+
+## Conditional AND with lookarounds
 
 grep -P '(?=.*b)(?=.*e).*t' five_words.txt
 
 grep -P '(?=.*a)(?=.*e)(?=.*i)(?=.*o).*u' five_words.txt
 
-grep -P '^(?!e)(?=.*a)(?=.*e)(?=.*i)(?=.*o).*u' five_words.txt
+grep -P '(?!.*n$)(?=.*a[bt]).*q' five_words.txt
 
 ## Variable length lookbehind
 
-echo 'pore42 car3 pare7 care5' | grep -oP '(?<=(?:po|ca)re)\d+'
+s='pore42 tar3 dare7 care5'
 
-echo 'pore42 car3 pare7 care5' | grep -oP '(?<=\b[a-z]{4})\d+'
+echo "$s" | grep -oP '(?<=(?:po|da)re)\d+'
 
-echo 'pore42 car3 pare7 care5' | grep -oP '(?<!car|pare)\d+'
+echo "$s" | grep -oP '(?<=\b[a-z]{4})\d+'
 
-echo 'pore42 car3 pare7 care5' | grep -oP '(?<=\b[a-z]+)\d+'
+echo "$s" | grep -oP '(?<=tar|dare)\d+'
 
-echo 'pore42 car3 pare7 care5' | grep -oP '(?<=\b[a-z]{1,3})\d+'
+echo "$s" | grep -oP '(?<=\b[a-z]+)\d+'
+
+echo "$s" | grep -oP '(?<=\b[a-z]{1,3})\d+'
 
 echo 'cat scatter cater scat' | grep -oP '(?<=(cat.*?){2})cat[a-z]*'
 
-echo 'foo=42, bar=314' | grep -oP '=\K\d+'
+## Set start of matching portion with \K
 
-echo 'cat scatter cater scat' | grep -oP '^(.*?cat.*?){2}\Kcat[a-z]*'
+echo 'apple=42, fig=314' | grep -oP '=\K\d+'
 
-echo 'or42 pare7 or3 cared5' | grep -oP '\b[a-z]{1,3}\K\d+'
+s='cat scatter cater scat concatenate catastrophic catapult duplicate'
 
-echo 'fox,cat,dog,parrot' | grep -qP '^((?!cat).)*dog' || echo 'No match'
+echo "$s" | grep -oP '^(.*?cat.*?){2}\Kcat[a-z]*'
 
-echo 'fox,cat,dog,parrot' | grep -qP '^((?!parrot).)*dog' && echo 'Match'
+echo "$s" | grep -oP '(.*?cat.*?){2}\Kcat[a-z]*'
 
-echo 'fox,cat,dog,parrot' | grep -qP 'at((?!go).)*par' && echo 'Match'
+echo 'or42 pare7 cat3 cared5' | grep -oP '\b[a-z]{1,3}\K\d+'
 
-echo 'fox,cat,dog,parrot' | grep -oP '^((?!cat).)*'
+## Negated groups
 
-echo 'fox,cat,dog,parrot' | grep -oP '^((?!parrot).)*'
+s='fox,cat,dog,parrot'
 
-echo 'fox,cat,dog,parrot' | grep -oP '^((?!(.)\2).)*'
+echo "$s" | grep -qP '^((?!cat).)*dog' || echo 'no match'
+
+echo "$s" | grep -qP '^((?!parrot).)*dog' && echo 'match found'
+
+echo "$s" | grep -qP 'at((?!go).)*par' && echo 'match found'
+
+s='fox,cat,dog,parrot'
+
+echo "$s" | grep -oP '^((?!cat).)*'
+
+echo "$s" | grep -oP '^((?!parrot).)*'
+
+echo "$s" | grep -oP '^((?!(.)\2).)*'
+
+echo "$s" | grep -oP '^((?!lion).)*'
+
+## Conditional groups
+
+cat conditional.txt
+
+grep -xP '(\[)?\w+(?(1)]|-\w+)' conditional.txt
 
 ## Modifiers
 
@@ -172,7 +224,7 @@ echo 'Cat SCatTeR CATER cAts' | grep -oP 'Cat(?i:[a-z]*)\b'
 
 printf 'Hi there\nHave a Nice Day' | grep -zoP '(?s)the.*ice'
 
-grep -zlP '(?ms)\A\N*\bpython3\b.*^import' *
+grep -zlP '(?ms)\A\N*\bpython3\b.*^import' five_words.txt script
 
 echo 'fox,cat,dog,parrot' | grep -oP '(?x) ^( (?! (.)\2 ) . )*'
 
@@ -184,13 +236,17 @@ echo 'a cat and a dog' | grep -P '(?x)t a'
 
 echo 'a cat and a dog' | grep -P '(?x)t\ a'
 
-echo 'foo a#b 123' | grep -oP '(?x)a#.'
+echo 'a cat and a dog' | grep -P '(?x)t[ ]a'
 
-echo 'foo a#b 123' | grep -oP '(?x)a\#.'
+echo 'food a#b 123' | grep -oP '(?x)a#.'
+
+echo 'food a#b 123' | grep -oP '(?x)a\#.'
 
 ## \Q and \E
 
 echo 'int a[5]' | grep -P '\Qa[5]'
+
+echo '5b-a\b-abc2' | grep -oP '[\Q\-\Eab]*'
 
 expr='(a^b)'
 
@@ -198,17 +254,31 @@ echo '\S*\Q'"$expr"'\E\S*'
 
 echo 'f*(2-a/b) - 3*(a^b)-42' | grep -oP '\S*\Q'"$expr"'\E\S*'
 
-echo '5b-a\b-abc2' | grep -oP '[\Q\-\Eab]*'
-
 ## \G anchor
 
-echo '123-87-593 42 foo' | grep -oP '\G\d+-?'
+echo '123-87-593 42 apple-12-345' | grep -oP '\G\d+-?'
 
-printf '@A-.\tcar' | grep -oP '\G\S'
+echo 'at_2 bat_100 kite_42' | grep -oP '\G\w(?=\w)'
+
+marks='Joe 75 88 Mina 89 85 84 John 90'
+
+echo "$marks" | grep -oP '(?:Mina|\G) \K\d+'
+
+echo "$marks" | grep -oP '(?:John|\G) \K\d+'
+
+p='Jo:x2 Mina:56 Rohit:abcdef'
+
+echo "$p" | grep -oP '(?:Mina:\K|\G)\S'
+
+echo "$p" | grep -oP '(?:Mina:\K|\G(?!\A))\S'
+
+echo "$p" | grep -oP '(?:Jo:\K|\G(?!\A))\S'
 
 ## Skipping matches
 
-echo 'car bat cod map' | grep -oP '\b(bat|map)\b(*SKIP)(*F)|\w+'
+words='tiger imp eagle ant important imp2 Cat'
+
+echo "$words" | grep -oP '\b(?:imp|ant)\b(*SKIP)(*F)|\w+'
 
 echo 'I like2 "mango" and "guava"' | grep -oP '"[^"]+"(*SKIP)(*F)|\w+'
 
@@ -244,13 +314,13 @@ echo 'fox:αλεπού,eagle:αετός' | grep -oP '\p{L}+'
 
 echo 'fox:αλεπού,eagle:αετός' | grep -oP '\p{Greek}+'
 
-echo 'φοο12,βτ_4,foo' | grep -oP '\p{Xwd}+'
+echo 'φοο12,βτ_4,bat' | grep -oP '\p{Xwd}+'
 
-echo 'φοο12,βτ_4,foo' | grep -oP '\P{L}+'
+echo 'φοο12,βτ_4,bat' | grep -oP '\P{L}+'
 
 echo 'a cat and a dog' | grep -P 't\x20a'
 
-echo 'fox:αλεπού,eagle:αετός' | grep -oP '[\x{61}-\x{7a}]+'
+echo 'fox:αλεπού,eagle:αετός' | grep -oP '[\x61-\x7a]+'
 
 echo 'fox:αλεπού,eagle:αετός' | grep -oP '[\x{3b1}-\x{3bb}]+'
 

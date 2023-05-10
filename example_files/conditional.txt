@@ -1,0 +1,10 @@
+[hi]
+good-bye
+bad
+[42]
+-oh
+i-j
+[-]
+[oh-no]
+[apple banana]
+1-2-3

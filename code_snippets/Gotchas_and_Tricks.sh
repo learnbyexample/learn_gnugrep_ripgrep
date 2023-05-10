@@ -4,21 +4,19 @@ echo 'a cat and a dog' | grep and a
 
 echo 'a cat and a dog' | grep 'and a'
 
-printf 'foo\na#2\nb#3\n' | grep #2
+printf 'apple\na#2\nb#3\n' | grep #2
 
-printf 'foo\na#2\nb#3\n' | grep '#2'
+printf 'apple\na#2\nb#3\n' | grep '#2'
 
-ls *.txt
+echo 'files *.txt' | grep -F *.txt
 
-echo '*.txt' | grep -F *.txt
+echo 'files *.txt' | grep -F '*.txt'
 
-echo '*.txt' | grep -F '*.txt'
+f='apple'
 
-expr='(a^b)'
+printf '!fruit=apple\n!fruit=pear' | grep "!fruit=$f"
 
-echo '\S*\Q'"$expr"'\E\S*'
-
-echo 'f*(2-a/b) - 3*(a^b)-42' | grep -oP '\S*\Q'"$expr"'\E\S*'
+printf '!fruit=apple\n!fruit=pear' | grep '!fruit='"$f"
 
 ## Patterns starting with hyphen
 
@@ -82,9 +80,9 @@ cd linux-4.19
 
 time grep -rl 'include' . > ../f1
 
-time find -type f -print0 | xargs -0 grep -l 'include' > ../f2
+time find -type f -print0 | xargs -r0 grep -l 'include' > ../f2
 
-time find -type f -print0 | xargs -0 -P0 grep -l 'include' > ../f3
+time find -type f -print0 | xargs -r0 -P0 grep -l --line-buffered 'include' > ../f3
 
 diff -sq <(sort ../f1) <(sort ../f2)
 

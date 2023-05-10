@@ -1,8 +1,10 @@
 ## Line Anchors
 
-printf 'spared no one\npar\nspar\ndare' | grep '^pa'
+cat anchors.txt
 
-printf 'spared no one\npar\nspar\ndare' | grep 'ar$'
+grep '^s' anchors.txt
+
+grep 'rt$' anchors.txt
 
 printf 'spared no one\npar\nspar\ndare' | grep '^par$'
 
@@ -10,37 +12,41 @@ printf 'spared no one\npar\nspar\ndare' | grep -x 'par'
 
 ## Word Anchors
 
-cat word_anchors.txt
+cat anchors.txt
 
-grep '\bpar' word_anchors.txt
+grep '\bpar' anchors.txt
 
-grep 'par\b' word_anchors.txt
+grep 'par\b' anchors.txt
 
-grep '\bpar\b' word_anchors.txt
+grep '\bpar\b' anchors.txt
 
-grep -w 'par' word_anchors.txt
+grep -w 'par' anchors.txt
 
-grep '\Bpar\B' word_anchors.txt
+## Opposite Word Anchor
 
-grep '\Bpar' word_anchors.txt
+grep '\Bpar\B' anchors.txt
 
-grep 'par\B' word_anchors.txt
+grep '\Bpar' anchors.txt
+
+grep 'par\B' anchors.txt
 
 ## Alternation
 
-printf 'I like cats\nI like parrots\nI like dogs' | grep 'cat\|dog'
+cat pets.txt
 
-printf 'I like cats\nI like parrots\nI like dogs' | grep -E 'cat|dog'
+grep 'cat\|dog' pets.txt
 
-printf 'I like cats\nI like parrots\nI like dogs' | grep -e 'cat' -e 'dog'
+grep -E 'cat|dog' pets.txt
+
+grep -e 'cat' -e 'dog' pets.txt
 
 printf 'CATs dog bee parrot FoX' | grep -ioE 'cat|dog|fox'
 
-grep -E '^a|e\b' word_anchors.txt
+grep -E '^t|ar\b' anchors.txt
 
-grep --color=auto -E '^|pare' word_anchors.txt
+grep --color -E 'sub|for|tar|' anchors.txt
 
-grep --color=auto -E 'sub|put|tar|$' word_anchors.txt
+## Alternation precedence
 
 echo 'car spared spar' | grep -oE 'are|spared'
 
@@ -54,15 +60,15 @@ echo 'pool party 2' | grep -oP 'par|party'
 
 ## Grouping
 
-printf 'red\nreform\nread\narrest' | grep -E 'reform|rest'
+printf 'red\nreform\nread\ncrest' | grep -E 'reform|rest'
 
-printf 'red\nreform\nread\narrest' | grep -E 're(form|st)'
+printf 'red\nreform\nread\ncrest' | grep -E 're(form|st)'
 
-printf 'sub par\nspare\npart time' | grep -E '\bpar\b|\bpart\b'
+grep -E '\bpar\b|\bpart\b' anchors.txt
 
-printf 'sub par\nspare\npart time' | grep -E '\b(par|part)\b'
+grep -E '\b(par|part)\b' anchors.txt
 
-printf 'sub par\nspare\npart time' | grep -E '\bpar(|t)\b'
+grep -E '\bpar(|t)\b' anchors.txt
 
 ## Escaping metacharacters
 
@@ -80,13 +86,13 @@ printf '(a/b) + c\n3 + (a/b) - c' | grep -E '^\(a/b)'
 
 ## Matching characters like tabs
 
-echo 'attempt' | grep -o 'a\tt'
-
 printf 'go\tto\ngo to' | grep $'go\tto'
 
 printf 'go\tto\ngo to' | grep $'go\x20to'
 
-## The dot meta character
+echo 'sea eat car rat eel tea' | grep 's\ea'
+
+## The dot metacharacter
 
 echo 'tac tin cot abc:tuv excite' | grep -o 'c.t'
 
@@ -94,7 +100,9 @@ printf '42\t33\n'
 
 printf '42\t33\n' | grep -o '2.3'
 
-grep -xE 'c..(t|l)y' words.txt
+wc -l words.txt
+
+grep -xE 'du.(ky|ts)' words.txt
 
 ## Quantifiers
 
@@ -126,11 +134,17 @@ echo 'abc ac adc abbc xabbbcz bbb bc abbbbbc' | grep -oE 'ab{,2}c'
 
 echo 'abc ac adc abbc xabbbcz bbb bc abbbbbc' | grep -oE 'ab{3}c'
 
+echo 'a{5} = 10' | grep -E 'a\{5}'
+
+echo 'report_{a,b}.txt' | grep -E '_{a,b}'
+
+## Conditional AND
+
 echo 'Error: not a valid input' | grep -o 'Error.*valid'
 
-echo 'a cat and a dog' | grep -E 'cat.*dog|dog.*cat'
+echo 'cat and dog and parrot' | grep -oE 'cat.*dog|dog.*cat'
 
-echo 'dog and cat' | grep -E 'cat.*dog|dog.*cat'
+echo 'dog and cat and parrot' | grep -oE 'cat.*dog|dog.*cat'
 
 ## Longest match wins
 
@@ -138,9 +152,9 @@ echo 'foot' | grep -oE 'f.?o'
 
 echo 'car bat cod map scat dot abacus' | grep -o '.*'
 
-echo 'foo123312baz' | grep -oE 'o(1|2|3)+(12baz)?'
+echo 'fig123312apple' | grep -oE 'g(1|2|3)+(12apple)?'
 
-echo 'foo123312baz' | grep -oP 'o(1|2|3)+(12baz)?'
+echo 'fig123312apple' | grep -oP 'g(1|2|3)+(12apple)?'
 
 echo 'car bat cod map scat dot abacus' | grep -o '.*m'
 
@@ -160,6 +174,8 @@ echo 'do so in to no on' | grep -ow '[sot][on]'
 
 grep -xE '[on]{2,}' words.txt
 
+## Character class metacharacters
+
 echo 'Sample123string42with777numbers' | grep -oE '[0-9]+'
 
 echo 'coat Bin food tar12 best' | grep -owE '[a-z]+'
@@ -176,9 +192,9 @@ echo '0501 035 154 12 26 98234' | grep -owE '0*[1-9][0-9]{2,}'
 
 echo 'Sample123string42with777numbers' | grep -oE '[^0-9]+'
 
-echo 'foo=42; baz=123' | grep -o '^[^=]*'
+echo 'apple:123:banana:cherry' | grep -o '^[^:]*'
 
-echo 'foo:123:bar:baz' | grep -oE '(:[^:]+){2}$'
+echo 'apple:123:banana:cherry' | grep -oE '(:[^:]+){2}$'
 
 echo 'I like "mango" and "guava"' | grep -oE '"[^"]+"'
 
@@ -186,9 +202,15 @@ printf 'tryst\nfun\nglyph\npity\nwhy' | grep -xE '[^aeiou]*'
 
 printf 'tryst\nfun\nglyph\npity\nwhy' | grep -v '[aeiou]'
 
+## Escape sequence sets
+
 printf 'load;err_msg--\nant,r2..not\n' | grep -o '\w*'
 
-printf '   1..3  \v\f  foo_baz 42\tzzz   \r\n1-2-3\n\n' | grep -o '\S*'
+echo 'sea eat car rat eel tea' | grep -o '\b\w' | paste -sd ''
+
+printf '   1..3  \v\f  fig_tea 42\tzzz   \r\n1-2-3\n\n' | grep -o '\S*'
+
+## Named character sets
 
 printf 'err_msg\nxerox\nant\nm_2\nP2\nload1\neel' | grep -x '[[:lower:]]*'
 
@@ -198,11 +220,13 @@ printf 'err_msg\nxerox\nant\nm_2\nP2\nload1\neel' | grep -x '[[:alnum:]]*'
 
 echo 'pie tie#ink-eat_42;' | grep -o '[^[:punct:]]*'
 
+## Matching character class metacharacters literally
+
 echo 'ab-cd gh-c 12-423' | grep -owE '[a-z-]{2,}'
 
-printf 'int a[5]\nfoo\n1+1=2\n' | grep '[=]]'
+printf 'int a[5]\nfig\n1+1=2\n' | grep '[=]]'
 
-printf 'int a[5]\nfoo\n1+1=2\n' | grep '[]=]'
+printf 'int a[5]\nfig\n1+1=2\n' | grep '[]=]'
 
 echo 'int a[5]' | grep '[x[.y]'
 

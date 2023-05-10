@@ -1,12 +1,20 @@
-## Simple string search
+## Basic string search
 
-cat programming_quotes.txt
+cat ip.txt
 
-grep 'twice' programming_quotes.txt
+grep 'play' ip.txt
 
-grep 'e th' programming_quotes.txt
+grep 'y t' ip.txt
 
-printf 'avocado\nmango\nguava' | grep 'v'
+printf 'apple\nbanana\nmango\nfig\n' | grep 'an'
+
+printf 'apple\nbanana\nmango\nfig\n' | grep 'an' -
+
+grep 'is' > op.txt
+
+cat op.txt
+
+rm op.txt
 
 printf '42\n' | file -
 
@@ -22,109 +30,111 @@ echo 'int a[5]' | grep 'a[5'
 
 echo 'int a[5]' | grep -F 'a[5]'
 
-echo 'int a[5]' | fgrep 'a[5]'
-
 ## Case insensitive search
 
-grep -i 'jam' programming_quotes.txt
+grep -i 'the' ip.txt
 
-printf 'Cat\ncOnCaT\nscatter\ncut' | grep -i 'cat'
+printf 'Cat\ncOnCaT\ncut\n' | grep -i 'cat'
 
 ## Invert matching lines
 
-seq 5 | grep -v '3'
+seq 4 | grep -v '3'
 
 printf 'goal\nrate\neat\npit' | grep -v 'at'
 
 ## Line number and count
 
-grep -n 'not' programming_quotes.txt
+grep -n 'to' ip.txt
 
-printf 'great\nnumber\numpteen' | grep -n 'r'
+printf 'great\nneat\nuser' | grep -n 'eat'
 
-grep -c 'in' programming_quotes.txt
+grep -c 'is' ip.txt
 
 printf 'goal\nrate\neat\npit' | grep -vc 'g'
 
-seq 15 | grep -c '1' programming_quotes.txt -
+printf 'this\nis\ncool\n' | grep -c 'is' ip.txt -
 
-cat <(seq 15) programming_quotes.txt | grep -c '1'
+cat <(printf 'this\nis\ncool\n') ip.txt | grep -c 'is'
 
 ## Limiting output lines
 
-grep -m3 'in' programming_quotes.txt
+grep -m2 'is' ip.txt
 
 seq 1000 | grep -m4 '2'
 
 ## Multiple search strings
 
-grep -e '1' -e 'two' programming_quotes.txt
+grep -e 'what' -e 'But' ip.txt
 
-printf 'two\n1\n' > search_strings.txt
+cat search.txt
 
-cat search_strings.txt
+grep -Ff search.txt ip.txt
 
-grep -f search_strings.txt programming_quotes.txt
+grep -Ff search.txt -e 'it' -e 'are' ip.txt
 
-grep -f search_strings.txt -e 'twice' programming_quotes.txt
-
-grep 'in' programming_quotes.txt | grep 'not'
+grep 'is' ip.txt | grep 'to'
 
 ## Get filename instead of matching lines
 
-grep -l 'are' programming_quotes.txt search_strings.txt
+grep -l 'are' ip.txt search.txt
 
-grep -l 'xyz' programming_quotes.txt search_strings.txt
+grep -l 'xyz' ip.txt search.txt
 
-grep -l '1' programming_quotes.txt search_strings.txt
+grep -l 'say' ip.txt search.txt
 
-grep -L 'xyz' programming_quotes.txt search_strings.txt
+grep -L 'xyz' ip.txt search.txt
 
-grep -L 'are' programming_quotes.txt search_strings.txt
+grep -L 'are' ip.txt search.txt
 
 ## Filename prefix for matching lines
 
-grep '1' programming_quotes.txt
+grep 'say' ip.txt
 
-seq 1000 | grep -h -m3 '1' - programming_quotes.txt
+printf 'say\nyou\n' | grep -h 'say' - ip.txt
 
-seq 1000 | grep -m3 '1' - programming_quotes.txt
+printf 'say\nyou\n' | grep 'say' - ip.txt
 
-grep -H '1' programming_quotes.txt
+grep -H 'say' ip.txt
 
-grep -Hn '1' *
+## Quickfix
 
-vim -q <(grep -Hn '1' *)
+grep -Hn 'say' ip.txt search.txt
+
+vim -q <(grep -Hn 'say' ip.txt search.txt)
 
 ## Colored output
 
-grep --color=auto -m3 'in' programming_quotes.txt
+grep --color 'the' ip.txt
 
-grep --color=auto -n -e '1' -e 'worth' *.txt
+grep --color -e 'play' -e 'say' ip.txt search.txt
 
-grep --color=always 'in' programming_quotes.txt | grep --color 'not'
-
-grep --color=auto 'in' programming_quotes.txt | grep --color 'not'
+alias ls='ls --color=auto'
 
 alias grep='grep --color=auto'
 
-grep --color=always 'not' programming_quotes.txt | less -R
+grep --color=always -i 'the' ip.txt | less -R
 
-## Match whole word or line
+grep --color=always 'is' ip.txt | grep --color 'to'
+
+grep --color=auto 'is' ip.txt | grep --color 'to'
+
+## Match whole word
 
 printf 'par value\nheir apparent\n' | grep 'par'
 
 printf 'par value\nheir apparent\n' | grep -w 'par'
 
+## Match whole line
+
 printf 'see my book list\nmy book\n' | grep 'my book'
 
 printf 'see my book list\nmy book\n' | grep -x 'my book'
 
-grep '1' *.txt
+grep 'say' ip.txt search.txt
 
-grep -x '1' *.txt
+grep -x 'say' ip.txt search.txt
 
-grep -cx '' programming_quotes.txt
+grep -cx '' ip.txt
 
 ## Comparing lines between files
 
@@ -140,9 +150,9 @@ grep -Fvxf colors_2 colors_1
 
 ## Extract only matching portion
 
-grep -o -e 'twice' -e 'hard' programming_quotes.txt
+grep -oi 'the' ip.txt
 
-grep -c 'in' programming_quotes.txt
+grep -c 'an' ip.txt
 
-grep -o 'in' programming_quotes.txt | wc -l
+grep -o 'an' ip.txt | wc -l
 

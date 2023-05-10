@@ -2,9 +2,9 @@ cat context.txt
 
 ## -A
 
-grep -A2 'blue' context.txt
-
 grep -x -A2 'blue' context.txt
+
+grep -A2 'blue' context.txt
 
 ## -B
 
@@ -12,11 +12,11 @@ grep -B2 'bread' context.txt
 
 grep -B3 'ruby' context.txt
 
+grep -A1 -B2 'sky' context.txt
+
 ## -C
 
 grep -C1 'sky' context.txt
-
-grep -A1 -B2 'sky' context.txt
 
 grep -C2 'kotlin' context.txt
 
