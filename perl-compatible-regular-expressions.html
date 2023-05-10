@@ -1,8 +1,5 @@
-<!DOCTYPE HTML><html lang=en class="sidebar-visible no-js light"><head><meta charset=UTF-8><title>Perl Compatible Regular Expressions - GNU GREP and RIPGREP</title><meta content="text/html; charset=utf-8"http-equiv=Content-Type><meta name=description content="Example based guide to mastering GNU GREP and RIPGREP"><meta name=viewport content="width=device-width, initial-scale=1"><meta name=theme-color content=#ffffff><link rel=icon href=favicon.svg><link rel="shortcut icon"href=favicon.png><link rel=stylesheet href=css/variables.css><link rel=stylesheet href=css/general.css><link rel=stylesheet href=css/chrome.css><link rel=stylesheet href=FontAwesome/css/font-awesome.css><link rel=stylesheet href=fonts/fonts.css><link rel=stylesheet href=highlight.css><link rel=stylesheet href=tomorrow-night.css><link rel=stylesheet href=ayu-highlight.css><link rel=stylesheet href=style.css><body><script>
-            var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script><script>
-            try {
+<!doctypehtml><html class="sidebar-visible no-js light"lang=en><head><meta charset=UTF-8><title>Perl Compatible Regular Expressions - CLI text processing with GNU grep and ripgrep</title><meta content="text/html; charset=utf-8"http-equiv=Content-Type><meta content="Example based guide to mastering GNU grep and ripgrep"name=description><meta content=width=device-width,initial-scale=1 name=viewport><meta content=#ffffff name=theme-color><meta content="CLI text processing with GNU grep and ripgrep"property=og:title><meta content=website property=og:type><meta content="Example based guide to mastering GNU grep and ripgrep"property=og:description><meta content=https://learnbyexample.github.io/learn_gnugrep_ripgrep/ property=og:url><meta content=https://raw.githubusercontent.com/learnbyexample/learn_gnugrep_ripgrep/master/images/grep_ls.png property=og:image><meta content=1280 property=og:image:width><meta content=720 property=og:image:height><meta content=summary_large_image property=twitter:card><meta content=@learn_byexample property=twitter:site><link href=favicon.svg rel=icon><link rel="shortcut icon"href=favicon.png><link href=css/variables.css rel=stylesheet><link href=css/general.css rel=stylesheet><link href=css/chrome.css rel=stylesheet><link href=FontAwesome/css/font-awesome.css rel=stylesheet><link href=fonts/fonts.css rel=stylesheet><link href=highlight.css rel=stylesheet><link href=tomorrow-night.css rel=stylesheet><link href=ayu-highlight.css rel=stylesheet><link href=style.css rel=stylesheet><body><script>var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";</script><script>try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
 
@@ -13,99 +10,110 @@
                 if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
                     localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
                 }
-            } catch (e) { }
-        </script><script>
-            var theme;
+            } catch (e) { }</script><script>var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
             html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
-        </script><script>
-            var html = document.querySelector('html');
+            html.classList.add('js');</script><script>var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             }
             html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
-        </script><nav id=sidebar class=sidebar aria-label="Table of contents"><div class=sidebar-scrollbox><ol class=chapter><li class="chapter-item expanded affix"><a href=cover.html>Cover</a><li class="chapter-item expanded affix"><a href=buy.html>Buy PDF/EPUB versions</a><li class="chapter-item expanded"><a href=preface.html><strong aria-hidden=true>1.</strong> Preface</a><li class="chapter-item expanded"><a href=introduction.html><strong aria-hidden=true>2.</strong> Introduction</a><li class="chapter-item expanded"><a href=frequently-used-options.html><strong aria-hidden=true>3.</strong> Frequently used options</a><li class="chapter-item expanded"><a href=breere-regular-expressions.html><strong aria-hidden=true>4.</strong> BRE/ERE Regular Expressions</a><li class="chapter-item expanded"><a href=context-matching.html><strong aria-hidden=true>5.</strong> Context matching</a><li class="chapter-item expanded"><a href=recursive-search.html><strong aria-hidden=true>6.</strong> Recursive search</a><li class="chapter-item expanded"><a href=miscellaneous-options.html><strong aria-hidden=true>7.</strong> Miscellaneous options</a><li class="chapter-item expanded"><a href=perl-compatible-regular-expressions.html class=active><strong aria-hidden=true>8.</strong> Perl Compatible Regular Expressions</a><li class="chapter-item expanded"><a href=gotchas-and-tricks.html><strong aria-hidden=true>9.</strong> Gotchas and Tricks</a><li class="chapter-item expanded"><a href=ripgrep.html><strong aria-hidden=true>10.</strong> ripgrep</a><li class="chapter-item expanded"><a href=further-reading.html><strong aria-hidden=true>11.</strong> Further Reading</a><li class="chapter-item expanded"><a href=Exercise_solutions.html><strong aria-hidden=true>12.</strong> Exercise Solutions</a></li><br><hr><li class="chapter-item expanded"><i id=git-repository-button class="fa fa-github"></i><a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep>   Source code</a><li class="chapter-item expanded"><i id=home-button class="fa fa-home"></i><a href=https://learnbyexample.github.io/>   My Blog</a><li class="chapter-item expanded"><i id=book-button class="fa fa-book"></i><a href=https://learnbyexample.github.io/books/>   My Books</a><li class="chapter-item expanded"><i id=mail-button class="fa fa-envelope"></i><a href=https://learnbyexample.gumroad.com/l/learnbyexample-weekly>   learnbyexample weekly</a></ol></div><div id=sidebar-resize-handle class=sidebar-resize-handle></div></nav><div id=page-wrapper class=page-wrapper><div class=page><div id=menu-bar-hover-placeholder></div><div id=menu-bar class="menu-bar sticky bordered"><div class=left-buttons><button id=sidebar-toggle class=icon-button type=button title="Toggle Table of Contents"aria-label="Toggle Table of Contents"aria-controls=sidebar><i class="fa fa-bars"></i></button><button id=theme-toggle class=icon-button type=button title="Change theme"aria-label="Change theme"aria-haspopup=true aria-expanded=false aria-controls=theme-list><i class="fa fa-paint-brush"></i></button><ul id=theme-list class=theme-popup aria-label=Themes role=menu><li role=none><button role=menuitem class=theme id=light>Light (default)</button><li role=none><button role=menuitem class=theme id=rust>Rust</button><li role=none><button role=menuitem class=theme id=coal>Coal</button><li role=none><button role=menuitem class=theme id=navy>Navy</button><li role=none><button role=menuitem class=theme id=ayu>Ayu</button></ul><button id=search-toggle class=icon-button type=button title="Search. (Shortkey: s)"aria-label="Toggle Searchbar"aria-expanded=false aria-keyshortcuts=S aria-controls=searchbar><i class="fa fa-search"></i></button></div><h1 class=menu-title>GNU GREP and RIPGREP</h1><div class=right-buttons><a href=https://learnbyexample.github.io title=Blog aria-label=Blog> <i id=home-button class="fa fa-home"></i> </a><a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep title="Git repository"aria-label="Git repository"> <i id=git-repository-button class="fa fa-github"></i> </a></div></div><div id=search-wrapper class=hidden><form id=searchbar-outer class=searchbar-outer><input type=search id=searchbar name=searchbar placeholder="Search this book ..."aria-controls=searchresults-outer aria-describedby=searchresults-header></form><div id=searchresults-outer class="searchresults-outer hidden"><div id=searchresults-header class=searchresults-header></div><ul id=searchresults></ul></div></div><script>
-                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+            html.classList.add("sidebar-" + sidebar);</script><nav aria-label="Table of contents"class=sidebar id=sidebar><div class=sidebar-scrollbox><ol class=chapter><li class="chapter-item expanded affix"><a href=cover.html>Cover</a><li class="chapter-item expanded affix"><a href=buy.html>Buy PDF/EPUB versions</a><li class="chapter-item expanded"><a href=preface.html><strong aria-hidden=true>1.</strong> Preface</a><li class="chapter-item expanded"><a href=introduction.html><strong aria-hidden=true>2.</strong> Introduction</a><li class="chapter-item expanded"><a href=frequently-used-options.html><strong aria-hidden=true>3.</strong> Frequently used options</a><li class="chapter-item expanded"><a href=breere-regular-expressions.html><strong aria-hidden=true>4.</strong> BRE/ERE Regular Expressions</a><li class="chapter-item expanded"><a href=context-matching.html><strong aria-hidden=true>5.</strong> Context matching</a><li class="chapter-item expanded"><a href=recursive-search.html><strong aria-hidden=true>6.</strong> Recursive search</a><li class="chapter-item expanded"><a href=miscellaneous-options.html><strong aria-hidden=true>7.</strong> Miscellaneous options</a><li class="chapter-item expanded"><a class=active href=perl-compatible-regular-expressions.html><strong aria-hidden=true>8.</strong> Perl Compatible Regular Expressions</a><li class="chapter-item expanded"><a href=gotchas-and-tricks.html><strong aria-hidden=true>9.</strong> Gotchas and Tricks</a><li class="chapter-item expanded"><a href=ripgrep.html><strong aria-hidden=true>10.</strong> ripgrep</a><li class="chapter-item expanded"><a href=further-reading.html><strong aria-hidden=true>11.</strong> Further Reading</a><li class="chapter-item expanded"><a href=Exercise_solutions.html><strong aria-hidden=true>12.</strong> Exercise Solutions</a></li><br><hr><li class="chapter-item expanded"><i class="fa fa-github"id=git-repository-button></i><a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep>   Source code</a><li class="chapter-item expanded"><i class="fa fa-home"id=home-button></i><a href=https://learnbyexample.github.io/>   My Blog</a><li class="chapter-item expanded"><i class="fa fa-book"id=book-button></i><a href=https://learnbyexample.github.io/books/>   My Books</a><li class="chapter-item expanded"><i class="fa fa-envelope"id=mail-button></i><a href=https://learnbyexample.gumroad.com/l/learnbyexample-weekly>   learnbyexample weekly</a><li class="chapter-item expanded"><i class="fa fa-twitter"id=twitter-button></i><a href=https://twitter.com/learn_byexample>   Twitter</a></ol></div><div class=sidebar-resize-handle id=sidebar-resize-handle></div></nav><div class=page-wrapper id=page-wrapper><div class=page><div id=menu-bar-hover-placeholder></div><div class="menu-bar sticky bordered"id=menu-bar><div class=left-buttons><button aria-label="Toggle Table of Contents"title="Toggle Table of Contents"aria-controls=sidebar class=icon-button id=sidebar-toggle type=button><i class="fa fa-bars"></i></button><button aria-label="Change theme"title="Change theme"aria-controls=theme-list aria-expanded=false aria-haspopup=true class=icon-button id=theme-toggle type=button><i class="fa fa-paint-brush"></i></button><ul aria-label=Themes class=theme-popup id=theme-list role=menu><li role=none><button class=theme id=light role=menuitem>Light (default)</button><li role=none><button class=theme id=rust role=menuitem>Rust</button><li role=none><button class=theme id=coal role=menuitem>Coal</button><li role=none><button class=theme id=navy role=menuitem>Navy</button><li role=none><button class=theme id=ayu role=menuitem>Ayu</button></ul><button aria-label="Toggle Searchbar"title="Search. (Shortkey: s)"aria-controls=searchbar aria-expanded=false aria-keyshortcuts=S class=icon-button id=search-toggle type=button><i class="fa fa-search"></i></button></div><h1 class=menu-title>CLI text processing with GNU grep and ripgrep</h1><div class=right-buttons><a aria-label=Blog href=https://learnbyexample.github.io title=Blog> <i class="fa fa-home"id=home-button></i> </a><a aria-label=Twitter href=https://twitter.com/learn_byexample title=Twitter> <i class="fa fa-twitter"id=twitter-button></i> </a><a aria-label="Git repository"title="Git repository"href=https://github.com/learnbyexample/learn_gnugrep_ripgrep> <i class="fa fa-github"id=git-repository-button></i> </a></div></div><div class=hidden id=search-wrapper><form class=searchbar-outer id=searchbar-outer><input placeholder="Search this book ..."aria-controls=searchresults-outer aria-describedby=searchresults-header id=searchbar name=searchbar type=search></form><div class="searchresults-outer hidden"id=searchresults-outer><div class=searchresults-header id=searchresults-header></div><ul id=searchresults></ul></div></div><script>document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
-                    });
-                </script><div id=content class=content><main><div class=sidetoc><nav class=pagetoc></nav></div><h1 id=perl-compatible-regular-expressions><a class=header href=#perl-compatible-regular-expressions>Perl Compatible Regular Expressions</a></h1><p>Using <code>-P</code> option will enable use of Perl Compatible Regular Expressions (PCRE) instead of BRE/ERE. PCRE is mostly similar, but not exactly same as regular expressions present in Perl programming language. As per <code>man</code> page<blockquote><p>This option is experimental when combined with the -z (--null-data) option, and grep -P may warn of unimplemented features.</blockquote><p>In my experience, <code>-P</code> works very well (except perhaps when combined with <code>-z</code> in older versions of <code>GNU grep</code>) and should be considered as a powerful option when non-trivial backreferences are needed or when BRE/ERE features fall short of requirements like lookarounds, non-greedy quantifiers, etc.<blockquote><p><img src=images/warning.svg alt=warning> Only some of the commonly used features are presented here. See <code>man pcrepattern</code> or <a href=https://www.pcre.org/original/doc/html/pcrepattern.html>online manual</a> for complete details.</blockquote><blockquote><p><img src=images/info.svg alt=info> Files used in examples are available chapter wise from <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/example_files>learn_gnugrep_ripgrep repo</a>. The directory for this chapter is <code>pcre</code>.</blockquote><h2 id=breere-vs-pcre-subtle-differences><a class=header href=#breere-vs-pcre-subtle-differences>BRE/ERE vs PCRE subtle differences</a></h2><ol><li>Escaping metacharacters</ol><pre><code class=language-bash>$ # examples in this section will show both BRE/ERE and PCRE versions
-$ echo 'a^2 + b^2 - C*3' | grep 'b^2'
+                    });</script><div class=content id=content><main><div class=sidetoc><nav class=pagetoc></nav></div><h1 id=perl-compatible-regular-expressions><a class=header href=#perl-compatible-regular-expressions>Perl Compatible Regular Expressions</a></h1><p>The <code>-P</code> option will help you use Perl Compatible Regular Expressions (PCRE) instead of BRE/ERE. PCRE is mostly similar, but not exactly the same as regular expressions present in the Perl programming language.<p>PCRE is handy when you need advanced features like lookarounds, non-greedy quantifiers, possessive quantifiers, unicode character sets, subexpression calls and so on.<p>Only some of the commonly used features are presented in this chapter. See <code>man pcrepattern</code> or <a href=https://www.pcre.org/original/doc/html/pcrepattern.html>online manual</a> for complete details.<blockquote><p><img alt=info src=images/info.svg> The <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/example_files>example_files</a> directory has all the files used in the examples.</blockquote><h2 id=breere-vs-pcre-subtle-differences><a class=header href=#breere-vs-pcre-subtle-differences>BRE/ERE vs PCRE subtle differences</a></h2><p>There are several subtle differences between PCRE and BRE/ERE for the same feature. This section lists some of the them, along with examples.<ol><li>Escaping metacharacters</ol><pre><code class=language-bash>$ echo 'a^2 + b^2 - C*3' | grep 'b^2'
 a^2 + b^2 - C*3
 
-$ # line anchors have to be always escaped to match literally
+# line anchors have to be always escaped to match literally
 $ echo 'a^2 + b^2 - C*3' | grep -P 'b^2'
 $ echo 'a^2 + b^2 - C*3' | grep -P 'b\^2'
 a^2 + b^2 - C*3
 </code></pre><ol start=2><li>Character class metacharacters</ol><pre><code class=language-bash>$ echo 'int a[5]' | grep '[x[.y]'
 grep: Unmatched [, [^, [:, [., or [=
-$ # [. and [= aren't special
+# [. and [= aren't special
 $ echo 'int a[5]' | grep -P '[x[.y]'
 int a[5]
 
 $ echo '5ba\babc2' | grep -o '[a\b]*'
 ba\bab
-$ # \ is special inside character class
+# \ is special inside character class
 $ echo '5ba\babc2' | grep -oP '[a\b]*'
 a
 a
 $ echo '5ba\babc2' | grep -oP '[a\\b]*'
 ba\bab
-</code></pre><ol start=3><li>Backslash sequences inside character class</ol><pre><code class=language-bash>$ # \w here matches \ and w
+</code></pre><ol start=3><li>Backslash sequences inside character class</ol><pre><code class=language-bash># \w here matches \ and w
 $ echo 'w=y\x+9' | grep -oE '[\w=]+'
 w=
 \
 
-$ # \w here matches word characters
+# \w here matches word characters
 $ echo 'w=y\x+9' | grep -oP '[\w=]+'
 w=y
 x
 9
-</code></pre><ol start=4><li>Backreferences greater than <code>\9</code></ol><pre><code class=language-bash>$ # no match as '\10' will be treated as '\1' and '0'
+</code></pre><ol start=4><li>Backreferences greater than <code>\9</code></ol><pre><code class=language-bash># no match as '\10' will be treated as '\1' and '0'
 $ echo '123456789abc42az' | grep -E '(.)(.)(.)(.)(.)(.)(.)(.)(.)(.).*\10'
 
-$ # no such limitation for PCRE, use '\g{1}0' to represent '\1' and '0'
+# no such limitation for PCRE
+# use '\g{1}0' if you need to represent '\1' and '0'
 $ echo '123456789abc42az' | grep -P '(.)(.)(.)(.)(.)(.)(.)(.)(.)(.).*\10'
 123456789abc42az
-</code></pre><ol start=5><li>Dot metacharacter</ol><pre><code class=language-bash>$ # dot metacharacter will match any character
+</code></pre><ol start=5><li>Dot metacharacter</ol><pre><code class=language-bash># dot metacharacter will match any character
 $ printf 'blue green\nteal brown' | grep -oz 'g.*n'
 green
 teal brown
 
-$ # by default dot metacharacter won't match newline characters
+# by default dot metacharacter won't match newline characters
 $ printf 'blue green\nteal brown' | grep -ozP 'g.*n'
 green
-$ # can be changed using (?s) modifier (covered later)
+# can be changed using (?s) modifier (covered later)
 $ printf 'blue green\nteal brown' | grep -ozP '(?s)g.*n'
 green
-teal brown 
-</code></pre><ol start=6><li>Alternation precedence</ol><pre><code class=language-bash>$ # order doesn't matter, longest match wins
+teal brown
+</code></pre><ol start=6><li>Alternation precedence</ol><pre><code class=language-bash># order doesn't matter, longest match wins
 $ printf 'spared PARTY PaReNt' | grep -ioE 'par|pare|spare'
 spare
 PAR
 PaRe
 
-$ # left to right precedence if alternatives match on same index
+# left to right precedence if alternatives match from the same index
 $ printf 'spared PARTY PaReNt' | grep -ioP 'par|pare|spare'
 spare
 PAR
 PaR
 
-$ # workaround is to sort alternations based on length, longest first
+# workaround is to sort alternations based on length, longest first
 $ printf 'spared PARTY PaReNt' | grep -ioP 'spare|pare|par'
 spare
 PAR
 PaRe
-</code></pre><ol start=7><li><code>-f</code> and <code>-e</code> options</ol><pre><code class=language-bash>$ cat five_words.txt
+</code></pre><ol start=7><li>Quantifier precedence</ol><pre><code class=language-bash># longest match wins
+$ echo 'fig123312apple' | grep -oE 'g[123]+(12apple)?'
+g123312apple
+
+# precedence is left-to-right
+$ echo 'fig123312apple' | grep -oP 'g[123]+(12apple)?'
+g123312
+</code></pre><ol start=8><li><code>{,n}</code> quantifier</ol><pre><code class=language-bash>$ echo 'abc ac adc abbc xabbbcz bbb bc abbbbbc' | grep -oE 'ab{,2}c'
+abc
+ac
+abbc
+
+# '0' has to be explicitly mentioned as the lower limit
+$ echo 'abc ac adc abbc xabbbcz bbb bc abbbbbc' | grep -oP 'ab{,2}c'
+$ echo 'abc ac adc abbc xabbbcz bbb bc abbbbbc' | grep -oP 'ab{0,2}c'
+abc
+ac
+abbc
+</code></pre><ol start=9><li><code>-f</code> and <code>-e</code> options</ol><pre><code class=language-bash>$ cat five_words.txt
 sequoia
 subtle
 questionable
@@ -123,288 +131,385 @@ $ printf 'sub\nbit' | grep -P -f- five_words.txt
 grep: the -P option only supports a single pattern
 $ grep -P -e 'sub' -e 'bit' five_words.txt
 grep: the -P option only supports a single pattern
-</code></pre><h2 id=string-anchors><a class=header href=#string-anchors>String anchors</a></h2><p>This restriction is about qualifying a pattern to match only at start or end of an input string. A string can contain zero or more newline characters. This is helpful if you want to distinguish between start/end of string and start/end of line (see <a href=./perl-compatible-regular-expressions.html#modifiers>Modifiers</a> section for examples).<p><code>\A</code> restricts the match to start of string and <code>\z</code> restricts the match to end of string. There is another end of string anchor <code>\Z</code> which is similar to <code>\z</code> but if newline is last character, then <code>\Z</code> allows matching just before the newline character.<pre><code class=language-bash>$ # start of string
+</code></pre><h2 id=string-anchors><a class=header href=#string-anchors>String anchors</a></h2><p>This restriction is about qualifying a pattern to match only at the start or end of an input string. A string can contain zero or more newline characters. This is helpful if you want to distinguish between start/end of string and start/end of line (see <a href=./perl-compatible-regular-expressions.html#modifiers>Modifiers</a> section for examples).<p><code>\A</code> restricts the match to the start of string and <code>\z</code> restricts the match to the end of string. There is another end of string anchor <code>\Z</code> which is similar to <code>\z</code> but if newline is the last character, then <code>\Z</code> allows matching just before this newline character.<pre><code class=language-bash># start of string
 $ echo 'hi-hello;top-spot' | grep -oP '\A\w+'
 hi
-$ # end of string
-$ # note that grep strips newline from each input line
-$ # and adds it back for matching lines
+# end of string
+# note that grep strips newline from each input line
+# and adds it back for matching lines
 $ echo 'hi-hello;top-spot' | grep -oP '\w+\z'
 spot
 
-$ # here, newline is not stripped as -z is used
-$ # \z matches exact end of string
-$ # \Z matches just before newline (if present) at end of string
+# here, newline is not stripped as -z is used
+# \z matches the exact end of string
+# \Z matches just before newline (if present) at the end of string
 $ echo 'hi-hello;top-spot' | grep -zoP '\w+\z'
 $ echo 'hi-hello;top-spot' | grep -zoP '\w+\Z'
 spot
-</code></pre><h2 id=escape-sequences><a class=header href=#escape-sequences>Escape sequences</a></h2><p>Apart from <code>\w</code>, <code>\s</code> and their opposites, PCRE provides more such handy sequences.<ul><li><code>\d</code> for digits <code>[0-9]</code><li><code>\h</code> for horizontal blank characters <code>[ \t]</code><li><code>\n</code> for newline character<li><code>\D</code>, <code>\H</code>, <code>\N</code> respectively for their opposites</ul><pre><code class=language-bash>$ # same as: grep -oE '[0-9]+'
+</code></pre><h2 id=escape-sequences><a class=header href=#escape-sequences>Escape sequences</a></h2><p>Apart from <code>\w</code>, <code>\s</code> and their opposites, PCRE provides more such handy sequences.<ul><li><code>\d</code> for digits <code>[0-9]</code><li><code>\h</code> for horizontal blank characters <code>[ \t]</code><li><code>\n</code> for newline character<li><code>\D</code>, <code>\H</code> and <code>\N</code> respectively for their opposites</ul><pre><code class=language-bash># same as: grep -oE '[0-9]+'
 $ echo 'Sample123string42with777numbers' | grep -oP '\d+'
 123
 42
 777
-$ # same as: grep -oE '[^0-9]+'
+
+# same as: grep -oE '[^0-9]+'
 $ echo 'Sample123string42with777numbers' | grep -oP '\D+'
 Sample
 string
 with
 numbers
-</code></pre><p>PCRE also supports escape sequences like <code>\t</code>, <code>\n</code>, etc and formats like <code>\xNN</code> are allowed. See <a href=https://www.pcre.org/original/doc/html/pcrepattern.html#SEC5>pcre: escape sequences</a> for full list and other details.<pre><code class=language-bash>$ printf 'blue green\nteal\n' | grep -z $'n\nt'
+</code></pre><p>PCRE supports escape sequences like <code>\t</code> to represent the tab character. You can also represent a character using the format <code>\xNN</code> where <code>NN</code> are exactly two hexadecimal characters. See <a href=https://www.pcre.org/original/doc/html/pcrepattern.html#SEC5>pcre: escape sequences</a> for full list and other details.<pre><code class=language-bash>$ printf 'blue green\nteal\n' | grep -z $'n\nt'
 blue green
 teal
+
 $ printf 'blue green\nteal\n' | grep -zP 'n\nt'
 blue green
 teal
-</code></pre><h2 id=non-greedy-quantifiers><a class=header href=#non-greedy-quantifiers>Non-greedy quantifiers</a></h2><p>As the name implies, these quantifiers will try to match as minimally as possible. Also known as <strong>lazy</strong> or <strong>reluctant</strong> quantifiers. Appending a <code>?</code> to greedy quantifiers makes them non-greedy.<pre><code class=language-bash>$ # greedy
+</code></pre><h2 id=non-greedy-quantifiers><a class=header href=#non-greedy-quantifiers>Non-greedy quantifiers</a></h2><p>As the name implies, these quantifiers will try to match as minimally as possible. Also known as <strong>lazy</strong> or <strong>reluctant</strong> quantifiers. Appending a <code>?</code> to greedy quantifiers makes them non-greedy.<pre><code class=language-bash># greedy
 $ echo 'foot' | grep -oP 'f.?o'
 foo
-$ # non-greedy
+
+# non-greedy
 $ echo 'foot' | grep -oP 'f.??o'
 fo
-$ # overall regex has to be satisfied as minimally as possible
-$ echo 'frost' | grep -oP 'f.??o'
-fro
-
-$ echo 'foo 314' | grep -oP '\d{2,5}'
+</code></pre><p>Here's an example using the <code>{m,n}</code> format:<pre><code class=language-bash>$ echo 'apple 314' | grep -oP '\d{2,5}'
 314
-$ echo 'foo 314' | grep -oP '\d{2,5}?'
-31
 
-$ echo 'that is quite a fabricated tale' | grep -oP 't.*a'
-that is quite a fabricated ta
-$ echo 'that is quite a fabricated tale' | grep -oP 't.*?a'
-tha
-t is quite a
-ted ta
-$ echo 'that is quite a fabricated tale' | grep -oP 't.*?a.*?f'
-that is quite a f
-</code></pre><h2 id=possessive-quantifiers><a class=header href=#possessive-quantifiers>Possessive quantifiers</a></h2><p>Appending a <code>+</code> to greedy quantifiers makes them possessive. These are like greedy quantifiers, but without the backtracking. So, something like <code>Error.*+valid</code> will never match because <code>.*+</code> will consume all the remaining characters. If both greedy and possessive quantifier versions are functionally equivalent, then possessive is preferred because it will fail faster for non-matching cases.<pre><code class=language-bash>$ # functionally equivalent greedy and possessive versions
-$ printf 'abc\nac\nadc\nxabbbcz\nbbb' | grep -oP 'ab*c'
-abc
-ac
-abbbc
-$ printf 'abc\nac\nadc\nxabbbcz\nbbb' | grep -oP 'ab*+c'
-abc
-ac
-abbbc
-$ # practical example, get numbers >= 100
+$ echo 'apple 314' | grep -oP '\d{2,5}?'
+31
+</code></pre><p>Like greedy quantifiers, lazy quantifiers will try to satisfy the overall pattern. For example, <code>.*?</code> will first start with an empty match and then move forward one character at a time until a match is found.<pre><code class=language-bash># ':.*:' will match from the first ':' to the last ':'
+$ echo 'green:3.14:teal::brown:oh!:blue' | grep -oP ':.*:'
+:3.14:teal::brown:oh!:
+
+# ':.*?:' will match from ':' to the very next ':'
+$ echo 'green:3.14:teal::brown:oh!:blue' | grep -oP ':.*?:'
+:3.14:
+::
+:oh!:
+</code></pre><h2 id=possessive-quantifiers><a class=header href=#possessive-quantifiers>Possessive quantifiers</a></h2><p>The difference between greedy and possessive quantifiers is that possessive will not backtrack to find a match. In other words, possessive quantifiers will always consume every character that matches the pattern on which it is applied. Syntax wise, you need to append <code>+</code> to greedy quantifiers to make it possessive, similar to adding <code>?</code> for the non-greedy case.<p>Unlike greedy and non-greedy quantifiers, a pattern like <code>:.*+apple</code> will never result in a match because <code>.*+</code> will consume rest of the line, leaving no way to match <code>apple</code>.<pre><code class=language-bash># greedy quantifiers will backtrack to allow overall pattern to succeed
+$ echo 'fig:mango:pineapple:guava' | grep -oP ':.*apple'
+:mango:pineapple
+
+# possessive quantifiers will never backtrack
+$ echo 'fig:mango:pineapple:guava' | grep -oP ':.*+apple'
+</code></pre><p>Here's a more practical example. Suppose you want to match integer numbers greater than or equal to <code>100</code> where these numbers can optionally have leading zeros.<pre><code class=language-bash># same as: grep -woP '0*[1-9]\d{2,}'
 $ echo '0501 035 154 12 26 98234' | grep -woP '0*+\d{3,}'
 0501
 154
 98234
-</code></pre><p>The effect of possessive quantifier can also be expressed using <strong>atomic grouping</strong>. The syntax is <code>(?>pattern)</code> where pattern uses normal greedy quantifiers.<pre><code class=language-bash>$ # same as: grep -woP '0*+\d{3,}'
+</code></pre><h2 id=atomic-grouping><a class=header href=#atomic-grouping>Atomic grouping</a></h2><p><code>(?>pattern)</code> is an atomic group which safeguards the pattern from further backtracking. You can think of it as a special group that is isolated from the rest of the regular expression.<p>Here's an example with greedy quantifier:<pre><code class=language-bash># 0* is greedy and the (?>) grouping prevents backtracking
 $ echo '0501 035 154 12 26 98234' | grep -woP '(?>0*)\d{3,}'
 0501
 154
 98234
-</code></pre><h2 id=grouping-variants><a class=header href=#grouping-variants>Grouping variants</a></h2><p>You can use a <strong>non-capturing group</strong> to avoid keeping a track of groups not needed for backreferencing. The syntax is <code>(?:pattern)</code> to define a non-capturing group.<pre><code class=language-bash>$ # lines containing same contents for 3rd and 4th fields
-$ # the first group is needed to apply quantifier, not backreferencing
-$ echo '1,2,3,3,5' | grep -P '^([^,]+,){2}([^,]+),\2,'
+</code></pre><p>Here's an example with non-greedy quantifier:<pre><code class=language-bash>$ s='fig::mango::pineapple::guava::apples::orange'
+
+# this matches from the first '::' to the first occurrence of '::apple'
+$ echo "$s" | grep -oP '::.*?::apple'
+::mango::pineapple::guava::apple
+
+# '(?>::.*?::)' will match only from '::' to the very next '::'
+# '::mango::' fails because 'apple' isn't found afterwards
+# similarly '::pineapple::' fails
+# '::guava::' succeeds because it is followed by 'apple'
+$ echo "$s" | grep -oP '(?>::.*?::)apple'
+::guava::apple
+</code></pre><h2 id=non-capturing-group><a class=header href=#non-capturing-group>Non-capturing group</a></h2><p>You can use non-capturing groups <code>(?:pattern)</code> to avoid keeping a track of groups not needed for backreferencing.<pre><code class=language-bash># lines containing same content in the 3rd and 4th fields
+# the first group is needed to apply quantifier, not backreferencing
+$ printf 'a,b,c,d,e\n1,2,3,3,5' | grep -P '^([^,]+,){2}([^,]+),\2,'
 1,2,3,3,5
 
-$ # you can use non-capturing group in such cases
-$ echo '1,2,3,3,5' | grep -P '^(?:[^,]+,){2}([^,]+),\1,'
+# you can use non-capturing groups in such cases
+$ printf 'a,b,c,d,e\n1,2,3,3,5' | grep -P '^(?:[^,]+,){2}([^,]+),\1,'
 1,2,3,3,5
-</code></pre><p>Regular expressions can get cryptic and difficult to maintain, even for seasoned programmers. There are a few constructs to help add clarity. One such is <strong>named capture groups</strong> and using that name for backreferencing instead of plain numbers. The naming can be specified in multiple ways:<ul><li><code>(?&LTname>pattern)</code><li><code>(?P&LTname>pattern)</code> — Python style<li><code>(?'name'pattern)</code> — not suited for cli usage, as single quotes are usually used around the entire pattern</ul><p>and any of these can be used for backreferencing:<ul><li><code>\k&LTname></code><li><code>\k{name}</code><li><code>\g{name}</code><li><code>(?P=name)</code><li><code>\N</code> or <code>\g{N}</code> numbering can also be used</ul><pre><code class=language-bash>$ # one of the combinations to use named capture groups
+</code></pre><h2 id=named-capture-groups><a class=header href=#named-capture-groups>Named capture groups</a></h2><p>Regular expressions can get cryptic and difficult to maintain, even for seasoned programmers. There are a few constructs to help add clarity. Named capture groups enables descriptive names for backreferencing instead of plain numbers. The naming can be specified in multiple ways:<ul><li><code>(?&LTname>pattern)</code> — Perl style<li><code>(?P&LTname>pattern)</code> — Python style<li><code>(?'name'pattern)</code> — not suited for CLI usage, as single quotes are usually used around the entire regular expression</ul><p>Any of these can be used for backreferencing:<ul><li><code>\k&LTname></code><li><code>\k{name}</code><li><code>\g{name}</code><li><code>(?P=name)</code><li><code>\N</code> or <code>\g{N}</code> numbering can also be used</ul><pre><code class=language-bash># one of the combinations to use named capture groups
 $ echo '1,2,3,3,5' | grep -P '^(?:[^,]+,){2}(?&LTcol3>[^,]+),\k&LTcol3>,'
 1,2,3,3,5
 
-$ # here's another
+# here's another combination
 $ echo '1,2,3,3,5' | grep -P '^(?:[^,]+,){2}(?P&LTcol3>[^,]+),(?P=col3),'
 1,2,3,3,5
-</code></pre><p>Another useful approach when there are numerous capture groups is to use <strong>negative backreference</strong>. The negative numbering starts with <code>-1</code> to refer to capture group closest to the backreference that was defined before the backreference. Based on opening <code>(</code> not closing parentheses. In other words, the highest numbered capture group prior to backreference will be <code>-1</code>, the second highest will be <code>-2</code> and so on.<pre><code class=language-bash>$ # \g{-1} here is same as using \2
+</code></pre><h2 id=negative-backreferences><a class=header href=#negative-backreferences>Negative backreferences</a></h2><p>Another useful approach when there are numerous capture groups is to use negative backreferences. The negative numbering starts with <code>-1</code> to refer to the capture group closest to the backreference that was defined before the backreference. In other words, the highest numbered capture group prior to the backreference will be <code>-1</code>, the second highest will be <code>-2</code> and so on.<pre><code class=language-bash># \g{-1} here is same as using \2
 $ echo '1,2,3,3,5' | grep -P '^([^,]+,){2}([^,]+),\g{-1},'
 1,2,3,3,5
 
-$ # {} are optional if there is no ambiguity
+# {} is optional if there is no ambiguity
 $ echo '1,2,3,3,5' | grep -P '^([^,]+,){2}([^,]+),\g-1,'
 1,2,3,3,5
-</code></pre><p><strong>Subexpression calls</strong> can be used instead of backreferencing to reuse the pattern itself (similar to function calls in programming). The syntax is <code>(?N)</code> to refer to that particular capture group by number (relative numbering is allowed as well). Named capture groups can be called in various ways as <code>(?&name)</code> or <code>(?P>name)</code> or <code>\g&LTname></code> or <code>\g'name'</code>.<pre><code class=language-bash>$ row='today,2008-03-24,food,2012-08-12,nice,5632'
+</code></pre><h2 id=subexpression-calls><a class=header href=#subexpression-calls>Subexpression calls</a></h2><p>If backreferences are like variables, then subexpression calls are like functions. Backreferences allow you to reuse the portion matched by the capture group. Subexpression calls allow you to reuse the pattern that was used inside the capture group. You can call subexpressions recursively too, see the <a href=./perl-compatible-regular-expressions.html#recursive-matching>Recursive matching</a> section for examples.<p>The syntax is <code>(?N)</code> to refer to that particular capture group by number (relative numbering is allowed as well). Named capture groups can be called in various ways as <code>(?&name)</code> or <code>(?P>name)</code> or <code>\g&LTname></code> or <code>\g'name'</code>.<pre><code class=language-bash>$ row='today,2008-03-24,food,2012-08-12,nice,5632'
+
+# numbered backreference
 $ echo "$row" | grep -oP '(\d{4}-\d{2}-\d{2}).*(?1)'
 2008-03-24,food,2012-08-12
 
+# named capture group
 $ echo "$row" | grep -oP '(?&LTdate>\d{4}-\d{2}-\d{2}).*(?&date)'
 2008-03-24,food,2012-08-12
-</code></pre><h2 id=lookarounds><a class=header href=#lookarounds>Lookarounds</a></h2><p>Lookarounds helps to create custom anchors and add conditions to a pattern. These assertions are also known as <strong>zero-width patterns</strong> because they add restrictions similar to anchors and are not part of matched portions (especially helpful with <code>-o</code> option). These can also be used to negate a grouping similar to negated character sets. Lookaround assertions can be added to a pattern in two ways — <strong>lookbehind</strong> and <strong>lookahead</strong>. Syntax wise, these two ways are differentiated by adding a <code><</code> for the lookbehind version. The assertion can be <strong>negative</strong> (syntax <code>!</code>) or <strong>positive</strong> (syntax <code>=</code>).<table><thead><tr><th>Syntax<th>Lookaround type<tbody><tr><td><code>(?!pattern)</code><td>Negative lookahead<tr><td><code>(?&LT!pattern)</code><td>Negative lookbehind<tr><td><code>(?=pattern)</code><td>Positive lookahead<tr><td><code>(?<=pattern)</code><td>Positive lookbehind</table><pre><code class=language-bash>$ # extract whole words only if NOT preceded by : or -
-$ # can also use '(?&LT![:-])\b\w++'
-$ echo ':cart&LTapple-rest;tea' | grep -oP '(?&LT![:-])\b\w+\b'
+</code></pre><h2 id=lookarounds><a class=header href=#lookarounds>Lookarounds</a></h2><p>Lookarounds help to create custom anchors and add conditions to a pattern. These assertions are also known as <strong>zero-width patterns</strong> because they add restrictions similar to anchors and are not part of matched portions (especially helpful with the <code>-o</code> option). These can also be used to negate a grouping similar to negated character sets.<p>Lookaround assertions can be added to a pattern in two ways — <strong>lookbehind</strong> and <strong>lookahead</strong>. Syntax wise, these two ways are differentiated by adding a <code><</code> for the lookbehind version. The assertion can be <strong>negative</strong> (<code>!</code>) or <strong>positive</strong> (<code>=</code>).<div class=table-wrapper><table><thead><tr><th>Syntax<th>Lookaround type<tbody><tr><td><code>(?!pattern)</code><td>Negative lookahead<tr><td><code>(?&LT!pattern)</code><td>Negative lookbehind<tr><td><code>(?=pattern)</code><td>Positive lookahead<tr><td><code>(?<=pattern)</code><td>Positive lookbehind</table></div><p>Here are some examples for negative lookarounds:<pre><code class=language-bash># extract whole words only if not preceded by : or -
+# note that the start of the string satisfies the given assertion
+$ echo 'fig:cart&LTapple-rest;tea' | grep -oP '(?&LT![:-])\b\w+'
+fig
 apple
 tea
 
-$ # note that end of string satisfies the given assertion
-$ # 'bazbiz' has two matches as the assertion doesn't consume characters
-$ echo 'boz42 bezt5 bazbiz' | grep -ioP 'b.z(?!\d)'
-bez
-baz
-biz
+# match 'cat' only if it is not followed by a digit character
+$ printf 'hey cats!\ncat42\ncat_5\ncatcat' | grep -P 'cat(?!\d)'
+hey cats!
+cat_5
+catcat
 
-$ # extract digits only if it is followed by ,
-$ # note that end of string doesn't qualify as this is positive assertion
-$ echo '42 foo-5, baz3; x-83, y-20: f12' | grep -oP '\d+(?=,)'
+# extract whole words only if NOT preceded by : or -
+# and not followed by - or end of line
+$ echo 'fig:cart&LTapple-rest;tea' | grep -woP '(?&LT![:-])\w+(?!-|$)'
+fig
+</code></pre><p>And here are some examples for positive lookarounds:<pre><code class=language-bash># extract digits only if it is followed by ,
+# note that the end of string doesn't qualify
+$ echo '42 apple-5, fig3; x-83, y-20: f12' | grep -oP '\d+(?=,)'
 5
 83
-$ # extract digits only if it is preceded by - and not followed by ,
-$ # note that this would give different results for greedy quantifier
-$ echo '42 foo-5, baz3; x-83, y-20: f12' | grep -oP '(?<=-)\d++(?!,)'
+
+# extract digits only if it is preceded by a lowercase alphabet
+$ echo '42 apple-5, fig3; x-83, y-20: f12' | grep -oP '(?<=[a-z])\d+'
+3
+12
+
+# extract words containing 'par'
+# as long as 'part' occurs as a whole word later in the line
+$ echo 'par spare part party' | grep -oP '\b\w*par\w*\b(?=.*\bpart\b)'
+par
+spare
+
+# extract digits only if it is preceded by - and not followed by ,
+# possessive quantifier here prevents digits from being part of the assertion
+$ echo '42 apple-5, fig3; x-83, y-20: f12' | grep -oP '(?<=-)\d++(?!,)'
 20
-</code></pre><p>As promised earlier, here's how lookarounds can be used to construct simpler AND conditional.<pre><code class=language-bash>$ # words containing 'b' and 'e' and 't' in any order
-$ # same as: 'b.*e.*t|b.*t.*e|e.*b.*t|e.*t.*b|t.*b.*e|t.*e.*b'
-$ # or: grep 'b' five_words.txt | grep 'e' | grep 't'
+</code></pre><p>In all the examples so far, lookahead grouping was placed as a suffix and lookbehind as a prefix. This is how they are used most of the time, but not the only way to use them. Lookarounds can be placed anywhere and multiple lookarounds can be combined in any order. They do not consume characters nor do they play a role in matched portions. They just let you know whether the condition you want to test is satisfied from the current location in the input string.<pre><code class=language-bash># extract whole words that don't end with 'r' or 't'
+$ echo 'par spare part party' | grep -oP '\b\w++(?&LT![rt])'
+spare
+party
+</code></pre><h2 id=conditional-and-with-lookarounds><a class=header href=#conditional-and-with-lookarounds>Conditional AND with lookarounds</a></h2><p>As promised earlier, here are some examples that show how lookarounds make it simpler to construct AND conditionals.<pre><code class=language-bash># words containing 'b' and 'e' and 't' in any order
+# same as: 'b.*e.*t|b.*t.*e|e.*b.*t|e.*t.*b|t.*b.*e|t.*e.*b'
+# or: grep 'b' five_words.txt | grep 'e' | grep 't'
 $ grep -P '(?=.*b)(?=.*e).*t' five_words.txt
 subtle
 questionable
 exhibit
 
-$ # words containing all lowercase vowels in any order
+# words containing all lowercase vowels in any order
 $ grep -P '(?=.*a)(?=.*e)(?=.*i)(?=.*o).*u' five_words.txt
 sequoia
 questionable
 equation
 
-$ # in addition to previous example, line cannot start with 'e'
-$ grep -P '^(?!e)(?=.*a)(?=.*e)(?=.*i)(?=.*o).*u' five_words.txt
-sequoia
+# words containing ('ab' or 'at') and 'q' but not 'n' at the end
+$ grep -P '(?!.*n$)(?=.*a[bt]).*q' five_words.txt
 questionable
-</code></pre><h2 id=variable-length-lookbehind><a class=header href=#variable-length-lookbehind>Variable length lookbehind</a></h2><p>When using lookbehind assertion (both positive and negative), the assertion pattern cannot <em>imply</em> matching variable length of text. Using fixed length quantifier or alternations of different lengths (but each alternative being fixed length) is allowed. Here's some examples to clarify these points:<pre><code class=language-bash>$ # allowed
-$ echo 'pore42 car3 pare7 care5' | grep -oP '(?<=(?:po|ca)re)\d+'
+</code></pre><h2 id=variable-length-lookbehind><a class=header href=#variable-length-lookbehind>Variable length lookbehind</a></h2><p>With lookbehind (both positive and negative), the pattern used for the assertion cannot <em>imply</em> matching variable length of text. Using fixed length quantifier or alternations of different lengths (but each alternative being fixed length) is allowed. Here are some examples to clarify these points:<pre><code class=language-bash>$ s='pore42 tar3 dare7 care5'
+
+# allowed
+$ echo "$s" | grep -oP '(?<=(?:po|da)re)\d+'
 42
-5
-$ echo 'pore42 car3 pare7 care5' | grep -oP '(?<=\b[a-z]{4})\d+'
+7
+$ echo "$s" | grep -oP '(?<=\b[a-z]{4})\d+'
 42
 7
 5
-$ echo 'pore42 car3 pare7 care5' | grep -oP '(?&LT!car|pare)\d+'
-42
-5
-$ # not allowed
-$ echo 'pore42 car3 pare7 care5' | grep -oP '(?<=\b[a-z]+)\d+'
+$ echo "$s" | grep -oP '(?<=tar|dare)\d+'
+3
+7
+
+# not allowed
+$ echo "$s" | grep -oP '(?<=\b[a-z]+)\d+'
 grep: lookbehind assertion is not fixed length
-$ echo 'pore42 car3 pare7 care5' | grep -oP '(?<=\b[a-z]{1,3})\d+'
+$ echo "$s" | grep -oP '(?<=\b[a-z]{1,3})\d+'
 grep: lookbehind assertion is not fixed length
 $ echo 'cat scatter cater scat' | grep -oP '(?<=(cat.*?){2})cat[a-z]*'
 grep: lookbehind assertion is not fixed length
-</code></pre><p>Some of the variable length <strong>positive</strong> lookbehind cases can be simulated by using <code>\K</code> as a suffix to the pattern that is needed as lookbehind assertion. Similar to lookarounds, any matching text up to <code>\K</code> will not be part of output. Most, but not all of the time, you can use <code>\K</code> and avoid using positive lookbehind altogether.<pre><code class=language-bash>$ # extract digits that follow =
-$ # same as: (?<==)\d+
-$ echo 'foo=42, bar=314' | grep -oP '=\K\d+'
+</code></pre><h2 id=set-start-of-matching-portion-with-k><a class=header href=#set-start-of-matching-portion-with-k>Set start of matching portion with \K</a></h2><p>Some of the positive lookbehind cases can be solved by adding <code>\K</code> as a suffix to the pattern to be asserted. The text consumed until <code>\K</code> won't be part of the matching portion. In other words, <code>\K</code> determines the starting point. The pattern before <code>\K</code> can be variable length too.<pre><code class=language-bash># extract digits that follow =
+# same as: grep -oP '(?<==)\d+'
+$ echo 'apple=42, fig=314' | grep -oP '=\K\d+'
 42
 314
 
-$ # simulating variable length positive lookbehind
-$ # extract 3rd occurrence of 'cat' followed by optional lowercase letters
-$ echo 'cat scatter cater scat' | grep -oP '^(.*?cat.*?){2}\Kcat[a-z]*'
+$ s='cat scatter cater scat concatenate catastrophic catapult duplicate'
+# extract 3rd occurrence of 'cat' followed by optional lowercase letters
+$ echo "$s" | grep -oP '^(.*?cat.*?){2}\Kcat[a-z]*'
 cater
-$ # extract digits only if preceded by 1-3 lowercase letters at word boundary
-$ echo 'or42 pare7 or3 cared5' | grep -oP '\b[a-z]{1,3}\K\d+'
+# extract occurrences at multiples of 3
+$ echo "$s" | grep -oP '(.*?cat.*?){2}\Kcat[a-z]*'
+cater
+catastrophic
+
+# extract digits only if preceded by 1 to 3 lowercase letters at word boundary
+$ echo 'or42 pare7 cat3 cared5' | grep -oP '\b[a-z]{1,3}\K\d+'
 42
 3
-</code></pre><p>Variable length <strong>negative</strong> lookbehind can be simulated using negative lookahead inside a grouping and applying quantifier to match characters one by one. This also showcases how grouping can be negated in certain cases.<pre><code class=language-bash>$ # match 'dog' only if it is not preceded by 'cat' anywhere in the line
-$ # note the use of anchor to force matching all characters up to 'dog'
-$ echo 'fox,cat,dog,parrot' | grep -qP '^((?!cat).)*dog' || echo 'No match'
-No match
-$ # match 'dog' only if it is not preceded by 'parrot' anywhere in the line
-$ echo 'fox,cat,dog,parrot' | grep -qP '^((?!parrot).)*dog' && echo 'Match'
-Match
-$ # match if 'go' is not there between 'at' and 'par'
-$ echo 'fox,cat,dog,parrot' | grep -qP 'at((?!go).)*par' && echo 'Match'
-Match
+</code></pre><h2 id=negated-groups><a class=header href=#negated-groups>Negated groups</a></h2><p>Some of the variable length negative lookbehind cases can be simulated by using a negative lookahead (which doesn't have restriction on variable length). The trick is to assert negative lookahead one character at a time and applying quantifiers on such a grouping to satisfy the variable requirement. This will only work if you have well defined conditions before the negated group.<pre><code class=language-bash>$ s='fox,cat,dog,parrot'
 
-$ # extract matched portion to understand negated grouping better
-$ echo 'fox,cat,dog,parrot' | grep -oP '^((?!cat).)*'
+# match 'dog' only if it is not preceded by 'cat' anywhere before
+# note the use of anchor to force matching all characters up to 'dog'
+$ echo "$s" | grep -qP '^((?!cat).)*dog' || echo 'no match'
+no match
+
+# match 'dog' only if it is not preceded by 'parrot' anywhere before
+$ echo "$s" | grep -qP '^((?!parrot).)*dog' && echo 'match found'
+match found
+
+# match if 'go' is not there between 'at' and 'par'
+$ echo "$s" | grep -qP 'at((?!go).)*par' && echo 'match found'
+match found
+</code></pre><p>You can extract the matched portion to understand negated grouping better:<pre><code class=language-bash>$ s='fox,cat,dog,parrot'
+
+$ echo "$s" | grep -oP '^((?!cat).)*'
 fox,
-$ echo 'fox,cat,dog,parrot' | grep -oP '^((?!parrot).)*'
+$ echo "$s" | grep -oP '^((?!parrot).)*'
 fox,cat,dog,
-$ echo 'fox,cat,dog,parrot' | grep -oP '^((?!(.)\2).)*'
+$ echo "$s" | grep -oP '^((?!(.)\2).)*'
 fox,cat,dog,pa
-</code></pre><h2 id=modifiers><a class=header href=#modifiers>Modifiers</a></h2><p>Modifiers are like cli options to change the default behavior of a pattern. The <code>-i</code> option is an example for modifier. However, unlike <code>-i</code>, these modifiers can be applied selectively to portions of a pattern. In regular expression parlance, modifiers are also known as <strong>flags</strong>.<table><thead><tr><th>Modifier<th>Description<tbody><tr><td><code>i</code><td>case sensitivity<tr><td><code>m</code><td>multiline for line anchors<tr><td><code>s</code><td>matching newline with <code>.</code> metacharacter<tr><td><code>x</code><td>readable pattern with whitespace and comments</table><p>To apply modifiers selectively, specify them inside a special grouping syntax. This will override the modifiers applied to entire pattern, if any. The syntax variations are:<ul><li><code>(?modifiers:pattern)</code> will apply modifiers only for this portion<li><code>(?-modifiers:pattern)</code> will negate modifiers only for this portion<li><code>(?modifiers-modifiers:pattern)</code> will apply and negate particular modifiers only for this portion<li><code>(?modifiers)</code> when pattern is not given, modifiers (including negation) will be applied from this point onwards</ul><p>In these ways, modifiers can be specified precisely only where it is needed. Especially useful for constructing patterns programmatically.<pre><code class=language-bash>$ # same as: grep -i 'cat'
+$ echo "$s" | grep -oP '^((?!lion).)*'
+fox,cat,dog,parrot
+</code></pre><h2 id=conditional-groups><a class=header href=#conditional-groups>Conditional groups</a></h2><p>This special grouping allows you to add a condition that depends on whether a capture group succeeded in matching. You can also add an optional else condition. The main advantage of conditional groups is that it prevents pattern duplication. The syntax as per the docs is shown below.<blockquote><p><code>(?(condition)yes-pattern)</code><p><code>(?(condition)yes-pattern|no-pattern)</code></blockquote><p>Here's an example. The task is to match whole lines containing word characters surrounded by <code>[]</code> or containing word characters separated by a hyphen.<pre><code class=language-bash>$ cat conditional.txt
+[hi]
+good-bye
+bad
+[42]
+-oh
+i-j
+[-]
+[oh-no]
+[apple banana]
+1-2-3
+
+# ?(1) condition refers to the first capture group succeeding
+# in this example, ?(1) checks if '[' was matched
+$ grep -xP '(\[)?\w+(?(1)]|-\w+)' conditional.txt
+[hi]
+good-bye
+[42]
+i-j
+</code></pre><p>The above command is equivalent to <code>grep -xP '\[\w+]|\w+-\w+'</code>. Which seems simpler than the conditional group syntax. But if the first <code>\w+</code> was a complicated pattern, conditional group would be better suited.<h2 id=modifiers><a class=header href=#modifiers>Modifiers</a></h2><p>Modifiers are like CLI options to change the default behavior of a pattern. The <code>-i</code> option is an example for a modifier. However, unlike <code>-i</code>, these modifiers can be applied selectively to a portion of the pattern. In regular expression parlance, modifiers are also known as <strong>flags</strong>.<div class=table-wrapper><table><thead><tr><th>Modifier<th>Description<tbody><tr><td><code>i</code><td>case sensitivity<tr><td><code>m</code><td>multiline for line anchors<tr><td><code>s</code><td>matching newline with <code>.</code> metacharacter<tr><td><code>x</code><td>readable pattern with whitespace and comments</table></div><p>To apply modifiers selectively, specify them inside a special grouping syntax. This will override the modifiers applied to entire pattern, if any. The syntax variations are:<ul><li><code>(?modifiers:pattern)</code> will apply modifiers only for this portion<li><code>(?-modifiers:pattern)</code> will negate modifiers only for this portion<li><code>(?modifiers-modifiers:pattern)</code> will apply and negate particular modifiers only for this portion<li><code>(?modifiers)</code> when pattern is not given, modifiers (including negation) will be applied from this point onwards</ul><p>In these ways, modifiers can be specified precisely only where it is needed. Especially useful for constructing patterns programmatically. Here are some examples:<pre><code class=language-bash># same as: grep -i 'cat'
 $ printf 'Cat\ncOnCaT\nscatter\ncut' | grep -P '(?i)cat'
 Cat
 cOnCaT
 scatter
-$ # override -i option
+
+# override -i option
 $ printf 'Cat\ncOnCaT\nscatter\ncut' | grep -iP '(?-i)cat'
 scatter
-$ # same as: grep -ioP '(?-i:Cat)[a-z]*\b' or grep -oP 'Cat(?i)[a-z]*\b'
+
+# same as: grep -ioP '(?-i:Cat)[a-z]*\b' or grep -oP 'Cat(?i)[a-z]*\b'
 $ echo 'Cat SCatTeR CATER cAts' | grep -oP 'Cat(?i:[a-z]*)\b'
 Cat
 CatTeR
 
-$ # allow . metacharacter to match newline character as well
+# allow . metacharacter to match newline character as well
 $ printf 'Hi there\nHave a Nice Day' | grep -zoP '(?s)the.*ice'
 there
 Have a Nice
-
-$ # multiple options can be used together
-$ # whole word 'python3' in 1st line and a line starting with 'import'
-$ # note the use of string anchor and \N to match non-newline characters
-$ grep -zlP '(?ms)\A\N*\bpython3\b.*^import' *
+</code></pre><p>Here's an example with multiple modifiers used together:<pre><code class=language-bash># whole word 'python3' in 1st line and a line starting with 'import'
+# note the use of string anchor \A to match only the start of file
+# \N is used instead of . to match non-newline characters as 's' flag is active
+$ grep -zlP '(?ms)\A\N*\bpython3\b.*^import' five_words.txt script
 script
-</code></pre><p>The <code>x</code> modifier allows to use literal unescaped whitespaces for readability purposes and add comments after unescaped <code>#</code> character. This modifier has limited usage for cli applications as multiline pattern cannot be specified.<pre><code class=language-bash>$ # same as: grep -oP '^((?!(.)\2).)*'
+</code></pre><p>The <code>x</code> modifier allows you to use literal unescaped whitespaces for readability purposes and add comments after an unescaped <code>#</code> character. This modifier has limited usage for CLI applications as multiline pattern cannot be specified.<pre><code class=language-bash># same as: grep -oP '^((?!(.)\2).)*'
 $ echo 'fox,cat,dog,parrot' | grep -oP '(?x) ^( (?! (.)\2 ) . )*'
 fox,cat,dog,pa
 
 $ echo 'fox,cat,dog,parrot' | grep -oP '(?x) (,[^,]+){2}$ #last 2 columns'
 ,dog,parrot
-$ # Comments can also be added using (?#comment) special group
-$ echo 'fox,cat,dog,parrot' | grep -oP '(,[^,]+){2}$(?#last 2 columns)'
+</code></pre><p>Comments can also be added using the <code>(?#comment)</code> special group:<pre><code class=language-bash>$ echo 'fox,cat,dog,parrot' | grep -oP '(,[^,]+){2}$(?#last 2 columns)'
 ,dog,parrot
-
-$ # need to escape whitespace or use them inside [] to match literally
-$ echo 'a cat and a dog' | grep -P '(?x)t a'
+</code></pre><p>You'll have to escape whitespace or use them inside character classes to match them literally when <code>(?x)</code> is active:<pre><code class=language-bash>$ echo 'a cat and a dog' | grep -P '(?x)t a'
 $ echo 'a cat and a dog' | grep -P '(?x)t\ a'
 a cat and a dog
-$ echo 'foo a#b 123' | grep -oP '(?x)a#.'
+$ echo 'a cat and a dog' | grep -P '(?x)t[ ]a'
+a cat and a dog
+
+$ echo 'food a#b 123' | grep -oP '(?x)a#.'
 a
-$ echo 'foo a#b 123' | grep -oP '(?x)a\#.'
+$ echo 'food a#b 123' | grep -oP '(?x)a\#.'
 a#b
-</code></pre><h2 id=q-and-e><a class=header href=#q-and-e>\Q and \E</a></h2><p>A pattern surrounded by <code>\Q</code> and <code>\E</code> will be matched literally, just like how <code>-F</code> option behaves. This can be used inside character class too. If <code>\E</code> is not specified, the effect will be applicable until the end of pattern (syntax error if <code>\Q</code> alone is used inside character class).<pre><code class=language-bash>$ # same as: grep -F 'a[5]'
+</code></pre><h2 id=q-and-e><a class=header href=#q-and-e>\Q and \E</a></h2><p>A pattern surrounded by <code>\Q</code> and <code>\E</code> will be matched literally, just like how the <code>-F</code> option behaves. If <code>\E</code> is not specified, the effect will be applicable until the end of the pattern. These escapes can be used inside character class too, but you'll get syntax error if <code>\Q</code> alone is used.<pre><code class=language-bash># same as: grep -F 'a[5]'
 $ echo 'int a[5]' | grep -P '\Qa[5]'
 int a[5]
 
-$ expr='(a^b)'
-$ # as good practice, use double quotes only where needed
-$ echo '\S*\Q'"$expr"'\E\S*'
-\S*\Q(a^b)\E\S*
-$ echo 'f*(2-a/b) - 3*(a^b)-42' | grep -oP '\S*\Q'"$expr"'\E\S*'
-3*(a^b)-42
-
-$ # same as: grep -oP '[a\\\-b]*'
+# same as: grep -oP '[a\\\-b]*'
 $ echo '5b-a\b-abc2' | grep -oP '[\Q\-\Eab]*'
 b-a\b-ab
-</code></pre><h2 id=g-anchor><a class=header href=#g-anchor>\G anchor</a></h2><p>The <code>\G</code> anchor restricts matching from start of string like the <code>\A</code> anchor. In addition, after a match is done, ending of that match is considered as the new anchor location. This process is repeated again and continues until the given pattern fails to match.<pre><code class=language-bash>$ # all digits and optional hyphen combo from start of string
-$ echo '123-87-593 42 foo' | grep -oP '\G\d+-?'
+</code></pre><p>Here's an example with shell variables:<pre><code class=language-bash>$ expr='(a^b)'
+
+$ echo '\S*\Q'"$expr"'\E\S*'
+\S*\Q(a^b)\E\S*
+
+$ echo 'f*(2-a/b) - 3*(a^b)-42' | grep -oP '\S*\Q'"$expr"'\E\S*'
+3*(a^b)-42
+</code></pre><blockquote><p><img alt=warning src=images/warning.svg> When you are working with external data (such as shell arguments), the data itself might have <code>\Q</code> and <code>\E</code> and might thus lead to conflicting behavior.</blockquote><h2 id=g-anchor><a class=header href=#g-anchor>\G anchor</a></h2><p>The <code>\G</code> anchor matches the start of the input string, just like the <code>\A</code> anchor. In addition, it will also match at the end of the previous match. This helps you to mark a particular location in the input string and continue from there instead of having the pattern to always check for the specific location. This is best understood with examples.<pre><code class=language-bash># all digits and optional hyphen combo from the start of string
+$ echo '123-87-593 42 apple-12-345' | grep -oP '\G\d+-?'
 123-
 87-
 593
+</code></pre><p>In the above example, <code>\G</code> will first match the start of the string. So, the first four characters <code>123-</code> will be matched since they satisfy the <code>\d+-?</code> pattern. The ending of this matched portion (fourth character) will now be considered as the new anchor for <code>\G</code>. The next three characters <code>87-</code> will then match and <code>\G</code> assertion is satisfied due to the previous match. Same for <code>593</code>. When the next character is considered, <code>\G</code> assertion is still satisfied but <code>\d+-?</code> fails due to the space character. Because the matching failed, <code>\G</code> will <em>not</em> be satisfied when the next digit sequence <code>42</code> is considered. So, no more characters can match since this particular example doesn't provide an alternate way for <code>\G</code> to be reactivated.<p>Here's another example of using <code>\G</code> without alternations:<pre><code class=language-bash># all word characters from the start of string
+# only if it is followed by a word character
+$ echo 'at_2 bat_100 kite_42' | grep -oP '\G\w(?=\w)'
+a
+t
+_
+</code></pre><p>Next, using <code>\G</code> as part of alternations so that it can be activated anywhere in the input string. Suppose you need to extract one or more numbers that follow a particular name. Here's one way to solve it:<pre><code class=language-bash>$ marks='Joe 75 88 Mina 89 85 84 John 90'
 
-$ # all non-whitespace characters from start of string
-$ printf '@A-.\tcar' | grep -oP '\G\S'
-@
-A
--
-.
-</code></pre><h2 id=skipping-matches><a class=header href=#skipping-matches>Skipping matches</a></h2><p>Sometimes, you want to extract all matches except particular matches. Usually, there are common characteristics between the two types of matches that makes it hard or impossible to define pattern only for the required matches. For example: field values unless it is a particular name, or perhaps don't touch double quoted values and so on. To use the skipping feature, define the matches to be ignored suffixed by <code>(*SKIP)(*FAIL)</code> and then define the matches required as part of alternation. <code>(*F)</code> can also be used instead of <code>(*FAIL)</code>.<pre><code class=language-bash>$ # all whole words except bat and map
-$ echo 'car bat cod map' | grep -oP '\b(bat|map)\b(*SKIP)(*F)|\w+'
-car
-cod
+$ echo "$marks" | grep -oP '(?:Mina|\G) \K\d+'
+89
+85
+84
 
-$ # all words except those surrounded by double quotes
-$ # do you think grep -oP '(?&LT!")\w++(?!")' will work the same for all cases?
+$ echo "$marks" | grep -oP '(?:John|\G) \K\d+'
+90
+</code></pre><p><code>\G</code> matches the start of the string but the input string doesn't start with a space character. So the regular expression can be satisfied only after the other alternative is matched. Consider the first pattern where <code>Mina</code> is the other alternative. Once that string is found, a space and digit characters will satisfy the rest of the pattern. Ending of the match, i.e. <code>Mina 89</code> in this case, will now be the <code>\G</code> anchoring position. This will allow <code>85</code> and <code>84</code> to be matched subsequently. After that, <code>J</code> fails the <code>\d</code> pattern and no more matches are possible (as <code>Mina</code> isn't found another time).<p>In some cases, <code>\G</code> anchoring at the start of the string will cause issues. One workaround is to add a negative lookaround assertion. Here's an example. Goal is to extract non-whitespace characters after <code>:</code> only for the given name.<pre><code class=language-bash>$ p='Jo:x2 Mina:56 Rohit:abcdef'
+
+# issue due to \G matching at the start of the string
+# the first space separated field is also getting extracted
+$ echo "$p" | grep -oP '(?:Mina:\K|\G)\S'
+J
+o
+:
+x
+2
+5
+6
+
+# adding a negative assertion helps
+$ echo "$p" | grep -oP '(?:Mina:\K|\G(?!\A))\S'
+5
+6
+$ echo "$p" | grep -oP '(?:Jo:\K|\G(?!\A))\S'
+x
+2
+</code></pre><h2 id=skipping-matches><a class=header href=#skipping-matches>Skipping matches</a></h2><p>Sometimes, you want to work with all matches except particular portions. Usually, there are common characteristics between the two types of matches that makes it hard to define a pattern only for the required matches. For example, extracting field values unless it is a particular name, or perhaps don't touch double quoted values and so on. To use the skipping feature, define the matches to be ignored suffixed by <code>(*SKIP)(*FAIL)</code> and then put the required matches as part of an alternation list. <code>(*F)</code> can also be used instead of <code>(*FAIL)</code>.<pre><code class=language-bash># all whole words except 'imp' or 'ant'
+$ words='tiger imp eagle ant important imp2 Cat'
+$ echo "$words" | grep -oP '\b(?:imp|ant)\b(*SKIP)(*F)|\w+'
+tiger
+eagle
+important
+imp2
+Cat
+
+# all words except those surrounded by double quotes
+# do you think grep -oP '(?&LT!")\w++(?!")' will work the same for all cases?
 $ echo 'I like2 "mango" and "guava"' | grep -oP '"[^"]+"(*SKIP)(*F)|\w+'
 I
 like2
 and
-</code></pre><blockquote><p><img src=images/info.svg alt=info> See also <a href=https://www.rexegg.com/regex-best-trick.html>rexegg: The Greatest Regex Trick Ever</a> and <a href=https://www.rexegg.com/backtracking-control-verbs.html>rexegg: Backtracking Control Verbs</a></blockquote><h2 id=recursive-matching><a class=header href=#recursive-matching>Recursive matching</a></h2><p>Subexpression call can be considered as analogous to function call. And in typical function fashion, it does support recursion. Useful to match nested patterns, which is usually not recommended to be done with regular expressions. Indeed, if you are looking to parse file formats like html, xml, json, csv, etc — use a proper parser library. But for some cases, a parser might not be available and using regular expressions might be simpler than writing a parser from scratch.<p>First up, a pattern to match a set of parentheses that is not nested (termed as <strong>level-one</strong> for reference).<pre><code class=language-bash>$ eqn0='a + (b * c) - (d / e)'
+</code></pre><blockquote><p><img alt=info src=images/info.svg> See also <a href=https://www.rexegg.com/regex-best-trick.html>rexegg: The Greatest Regex Trick Ever</a> and <a href=https://www.rexegg.com/backtracking-control-verbs.html>rexegg: Backtracking Control Verbs</a></blockquote><h2 id=recursive-matching><a class=header href=#recursive-matching>Recursive matching</a></h2><p>The subexpression call special group was introduced as analogous to function calls. And similar to functions, it does support recursion. Useful to match nested patterns, which is usually <em>not</em> recommended to be done with regular expressions. Indeed, you should use a proper parser tool or library for file formats like html, xml, json, csv, etc. But for some cases, a parser might not be available and using regular expressions might be simpler than writing one from scratch.<p>First up, a pattern to match a set of parentheses that is not nested (termed as <strong>level-one</strong> for reference).<pre><code class=language-bash>$ eqn0='a + (b * c) - (d / e)'
 $ eqn1='((f+x)^y-42)*((3-g)^z+2)'
 
-$ # literal ( followed by non () characters followed by literal )
-$ # use *+ instead of ++ if you want to match empty pairs as well
+# literal ( followed by non () characters followed by literal )
+# use *+ instead of ++ if you want to match empty pairs as well
 $ echo "$eqn0" | grep -oP '\([^()]++\)'
 (b * c)
 (d / e)
 $ echo "$eqn1" | grep -oP '\([^()]++\)'
 (f+x)
 (3-g)
-</code></pre><p>Next, matching a set of parentheses which may optionally contain any number of non-nested sets of parentheses (termed as <strong>level-two</strong> for reference). Breaking down the pattern, you can see <code>(</code> and <code>)</code> have to be matched literally. Inside that, valid string is made up of either non-parentheses characters or a non-nested parentheses sequence — i.e. <strong>level-one</strong>.<pre><code class=language-bash>$ # x modifier used for readability
+</code></pre><p>Next, matching a set of parentheses which may optionally contain any number of non-nested sets of parentheses (termed as <strong>level-two</strong> for reference). Breaking down the pattern, you can see <code>(</code> and <code>)</code> have to be matched literally. Inside that, valid string is made up of either non-parentheses characters or a non-nested parentheses sequence — i.e. <strong>level-one</strong>.<pre><code class=language-bash># x modifier used for readability
 $ echo "$eqn1" | grep -oP '(?x) \( (?: [^()]++ | \([^()]++\) )++ \)'
 ((f+x)^y-42)
 ((3-g)^z+2)
@@ -414,7 +519,7 @@ $ echo "$eqn2" | grep -oP '(?x) \( (?: [^()]++ | \([^()]++\) )++ \)'
 (b)
 ((c))
 ((d))
-</code></pre><p>To recursively match any number of nested sets of parentheses, use a subexpression call within its capture group itself. Since entire pattern needs to be called here, you can use the default zeroth capture group. Comparing with <strong>level-two</strong>, the only change is that subexpression call <code>(?0)</code> is used instead of the <strong>level-one</strong> in the second alternation.<pre><code class=language-bash>$ # (?R) can also be used instead of (?0)
+</code></pre><p>To recursively match any number of nested sets of parentheses, use a capture group and call it within the capture group itself. Since entire pattern needs to be called here, you can use the default zeroth capture group. Comparing with <strong>level-two</strong>, the only change is that subexpression call <code>(?0)</code> is used instead of the <strong>level-one</strong> in the second alternation.<pre><code class=language-bash># (?R) can also be used instead of (?0)
 $ echo "$eqn0" | grep -oP '(?x) \( (?: [^()]++ | (?0) )++ \)'
 (b * c)
 (d / e)
@@ -431,77 +536,124 @@ $ echo "$eqn3" | grep -oP '(?x) \( (?: [^()]++ | (?0) )++ \)'
 (3+a)
 ((r-2)*(t+2)/6)
 (a(b(c(d(e)))))
-</code></pre><h2 id=unicode><a class=header href=#unicode>Unicode</a></h2><p>Similar to named character classes and escape sequences, the <code>\p{}</code> construct offers various predefined sets to work with Unicode strings.<blockquote><p><img src=images/info.svg alt=info> See <a href=https://www.pcre.org/original/doc/html/pcrepattern.html#SEC5>pcre manual</a> under topic <strong>Unicode character properties</strong> for details.</blockquote><pre><code class=language-bash>$ # assumes current locale supports unicode
-$ # extract all consecutive letters
+</code></pre><h2 id=unicode><a class=header href=#unicode>Unicode</a></h2><p>Similar to named character classes and escape sequences, the <code>\p{}</code> construct offers various predefined sets to work with Unicode strings.<pre><code class=language-bash># assumes that the current locale supports unicode
+# extract all consecutive letters
 $ echo 'fox:αλεπού,eagle:αετός' | grep -oP '\p{L}+'
 fox
 αλεπού
 eagle
 αετός
 
-$ # extract all consecutive Greek letters
+# extract all consecutive Greek letters
 $ echo 'fox:αλεπού,eagle:αετός' | grep -oP '\p{Greek}+'
 αλεπού
 αετός
 
-$ # extract all words
-$ echo 'φοο12,βτ_4,foo' | grep -oP '\p{Xwd}+'
+# extract all words
+$ echo 'φοο12,βτ_4,bat' | grep -oP '\p{Xwd}+'
 φοο12
 βτ_4
-foo
+bat
 
-$ # extract all characters other than letters
-$ # \p{^L} can also be used instead of \P{L}
-$ echo 'φοο12,βτ_4,foo' | grep -oP '\P{L}+'
+# extract all characters other than letters
+# \p{^L} can also be used instead of \P{L}
+$ echo 'φοο12,βτ_4,bat' | grep -oP '\P{L}+'
 12,
 _4,
-</code></pre><p>Characters can be specified using octal <code>\o</code> or hexadecimal <code>\x</code> codepoints as well.<pre><code class=language-bash>$ # \x{20} and \o{40} can be used instead of literal space character
+</code></pre><p>Characters can be specified using octal <code>\o</code> and hexadecimal <code>\x</code> formats as well.<pre><code class=language-bash># \x{20} and \o{40} can be used instead of literal space character
 $ echo 'a cat and a dog' | grep -P 't\x20a'
 a cat and a dog
 
-$ # {} are optional if only two hex characters are needed
-$ echo 'fox:αλεπού,eagle:αετός' | grep -oP '[\x{61}-\x{7a}]+'
+# {} are optional if only two hehexadecimal characters are needed
+$ echo 'fox:αλεπού,eagle:αετός' | grep -oP '[\x61-\x7a]+'
 fox
 eagle
 
 $ echo 'fox:αλεπού,eagle:αετός' | grep -oP '[\x{3b1}-\x{3bb}]+'
 αλε
 αε
-</code></pre><h2 id=summary><a class=header href=#summary>Summary</a></h2><p>PCRE is one of the most feature rich regular expression library. Apart from use in command line tools like <code>GNU grep</code>, <a href=https://www.pcre.org/original/doc/html/pcregrep.html>pcregrep</a> and <code>ripgrep</code>, it is also used in programming languages — for example <code>Nim</code>. There are many more complex constructs that have not been presented here. However, I feel I've covered most of the features that might come up for command line usage with <code>grep</code>.<h2 id=exercises><a class=header href=#exercises>Exercises</a></h2><p><strong>a)</strong> Filter all lines that satisfy all of these rules:<ul><li>should have at least two alphabets<li>should have at least 3 digits<li>should have at least one special character among <code>%</code> or <code>*</code> or <code>#</code> or <code>$</code><li>should not end with a whitespace character</ul><pre><code class=language-bash>$ pswds='hunter2\nF2H3u#9\n*X3Yz3.14\t\nr2_d2_42\nA $ C1234'
-$ printf "$pswds" | grep ##### add your solution here
+</code></pre><blockquote><p><img alt=info src=images/info.svg> See <a href=https://www.pcre.org/original/doc/html/pcrepattern.html#SEC5>pcre manual</a> under topic <strong>Unicode character properties</strong> and <a href=https://www.regular-expressions.info/unicode.html>regular-expressions: Unicode</a> for more details.</blockquote><h2 id=summary><a class=header href=#summary>Summary</a></h2><p>PCRE is one of the most feature rich regular expression library. Apart from use in command line tools like <code>GNU grep</code>, <a href=https://www.pcre.org/original/doc/html/pcregrep.html>pcregrep</a> and <code>ripgrep</code>, it is also used in programming languages — for example <code>Nim</code>. There are many more complex constructs that have not been presented here. However, I feel I've covered most of the features that might come up for command line usage with <code>grep</code>.<h2 id=exercises><a class=header href=#exercises>Exercises</a></h2><blockquote><p><img alt=info src=images/info.svg> The <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/exercises>exercises</a> directory has all the files used in this section.</blockquote><p><strong>1)</strong> From the <code>sample.txt</code> input file, extract from the start of a line to the first occurrence of <code>he</code>.<pre><code class=language-bash>##### add your solution here
+Hi the
+He he
+</code></pre><p><strong>2)</strong> For the input file <code>terms.txt</code>, display line that do <em>not</em> contain a digit character.<pre><code class=language-bash>##### add your solution here
+are
+not
+go
+</code></pre><p><strong>3)</strong> From the <code>pcre.txt</code> input file, extract consecutive repeated occurrences of <code>abc</code> followed by <code>a</code> provided that the final <code>a</code> isn't part of <code>abc</code>. For example, <code>abcabcadef</code> should give <code>abcabca</code> as the output and <code>abcabcabcd</code> shouldn't match.<pre><code class=language-bash>##### add your solution here
+abcabcabca
+</code></pre><p><strong>4)</strong> What's the syntax for non-capturing group and name a use case for such a grouping.<p><strong>5)</strong> What is negative backreferencing?<p><strong>6)</strong> What's the difference between backreference and subexpression calls?<p><strong>7)</strong> From the <code>pcre.txt</code> input file, extract from <code>S:</code> followed by a digit character to the very next occurrence of <code>E:</code> followed by two or more digits. For example, <code>S:12 E:5 fig S:4 and E:123</code> should give <code>S:4 and E:123</code> as the output and <code>S:1 - E:2</code> shouldn't match.<pre><code class=language-bash>##### add your solution here
+S:4 and E:123
+S:42 E:43
+S:100 & E:10
+</code></pre><p><strong>8)</strong> From the <code>sample.txt</code> input file, extract all sequences made up of lowercase letters except those that start with <code>a</code> or <code>h</code> or <code>i</code> or <code>t</code>. Such sequences should not be surrounded by other word characters.<pre><code class=language-bash>##### add your solution here
+you
+do
+banana
+papaya
+mango
+nothing
+</code></pre><p><strong>9)</strong> From the <code>sample.txt</code> input file, extract all sequences made up of lowercase letters except those that end with letters from <code>g</code> to <code>z</code>. Such sequences should not be surrounded by other word characters.<pre><code class=language-bash>##### add your solution here
+there
+are
+banana
+papaya
+he
+he
+</code></pre><p><strong>10)</strong> From the <code>pcre.txt</code> input file, extract integer portion of floating-point numbers. Integers and numbers ending with <code>.</code> and no further digits should not be considered. For example, output for <code>ab32.4</code> should be <code>32</code> and numbers like <code>2.</code> and <code>456</code> should not be matched.<pre><code class=language-bash>$ grep -oP '\d+\.\d+' pcre.txt
+32.4
+46.42
+
+##### add your solution here
+32
+46
+</code></pre><p><strong>11)</strong> For the input file <code>pcre.txt</code>, filter lines that satisfy all of these rules:<ul><li>at least 2 alphabets<li>at least 3 digits<li>at least 1 special character among <code>%</code> or <code>*</code> or <code>#</code> or <code>$</code><li>should <em>not</em> contain <code>Yz</code> or <code>if</code></ul><pre><code class=language-bash>##### add your solution here
 F2H3u#9
 A $ C1234
-</code></pre><p><strong>b)</strong> Extract all fields from second to second last from the given rows having <code>,</code> as delimiter. There shouldn't be empty lines in output.<pre><code class=language-bash>$ printf 'foo,abc\ncat,x,dog' | grep ##### add your solution here
-x
-$ echo 'foo,42,baz,3.14,abc' | grep ##### add your solution here
-42,baz,3.14
-</code></pre><p><strong>c)</strong> Create <code>exercises/pcre</code> directory and then save <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/raw/master/exercises/price.txt>this file from learn_gnugrep_ripgrep repo</a> as <code>price.txt</code>. For this input file, match lines if it contains <code>qty</code> followed by <code>price</code> but not if there is <strong>whitespace</strong> or the string <strong>error</strong> between them.<pre><code class=language-bash>$ # assumes 'exercises/pcre' as CWD
-$ cat price.txt
+</code></pre><p><strong>12)</strong> From the <code>pcre.txt</code> input file, extract from the second field to the second last field from rows having at least two columns considering <code>;</code> as the delimiter. For example, <code>b;c</code> should be extracted from <code>a;b;c;d</code> and a line containing less than two <code>;</code> characters shouldn't produce any output.<pre><code class=language-bash>##### add your solution here
+in;awe;b2b;3list
+be;he;0;a;b
+</code></pre><p><strong>13)</strong> For the input file <code>pcre.txt</code>, match lines if it contains <code>qty</code> followed by <code>price</code> but not if there is any <strong>whitespace</strong> character or the string <code>error</code> between them.<pre><code class=language-bash>##### add your solution here
 23,qty,price,42
-qty price,oh
-3.14,qty,6,errors,9,price,3
-42 qty-6,apple-56,price-234,error
-4,price,3.14,qty,4
-4,qtyprice,3
+(qtyprice) (hi-there)
+42\nqty-6,apple-56,price-234,error
+</code></pre><p><strong>14)</strong> From the <code>pcre.txt</code> input file, extract <code>if</code> followed by content within any number of nested parentheses.<pre><code class=language-bash>##### add your solution here
+if(3-(k*3+4)/12-(r+2/3))
+if(a(b)c(d(e(f)1)2)3)
+</code></pre><p><strong>15)</strong> What does the <code>\G</code> anchor do?<p><strong>16)</strong> From the <code>patterns.txt</code> input file, extract from <code>car</code> at the start of a line to the very next occurrence of <code>book</code> or <code>lie</code> in the file. Perform additional transformation to convert ASCII NUL characters, if any, to the newline character.<pre><code class=language-bash>##### add your solution here
+care
+4*5]
+a huge discarded pile of book
+car
+eden
+rested replie
+</code></pre><p><strong>17)</strong> For the input file <code>patterns.txt</code>, match lines having the content present in the <code>p</code> shell variable literally at the end of lines. For example, if <code>p='*[5]'</code>, then <code>(9-2)*[5]</code> would be a valid match, but not <code>[4]*[5]+[6]</code>.<pre><code class=language-bash>$ p='*[5]'
+##### add your solution here
+(9-2)*[5]
 
-$ grep ##### add your solution here
-23,qty,price,42
-42 qty-6,apple-56,price-234,error
-4,qtyprice,3
-</code></pre><p><strong>d)</strong> Correct the command to get output as shown below. Problem statement is to find sequence of duplicate word characters, with the second occurrence matching just before a newline character.<pre><code class=language-bash>$ # no output
-$ printf '2\nice\nwater\nNice\n42' | grep -zoP '(\w+).*\1\n'
+$ p='*4)'
+##### add your solution here
+12- (e+(j/k-3)*4)
 
-$ # correct the command to get expected output as shown
-$ printf '2\nice\nwater\nNice\n42' | grep ##### add your solution here
-ice
-water
-Nice
-</code></pre><p><strong>e)</strong> Extract all whole words except those that start with <code>p</code> or <code>e</code> or <code>n</code><pre><code class=language-bash>$ echo 'a pip at tea top earn row nice' | grep ##### add your solution here
-a
-at
-tea
-top
-row
-</code></pre></main><nav class=nav-wrapper aria-label="Page navigation"><a rel=prev href=miscellaneous-options.html class="mobile-nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><a rel=next href=gotchas-and-tricks.html class="mobile-nav-chapters next"title="Next chapter"aria-label="Next chapter"aria-keyshortcuts=Right> <i class="fa fa-angle-right"></i> </a><div style="clear: both"></div></nav></div></div><nav class=nav-wide-wrapper aria-label="Page navigation"><a rel=prev href=miscellaneous-options.html class="nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><a rel=next href=gotchas-and-tricks.html class="nav-chapters next"title="Next chapter"aria-label="Next chapter"aria-keyshortcuts=Right> <i class="fa fa-angle-right"></i> </a></nav></div><script>
-            window.playground_copyable = true;
-        </script><script src=elasticlunr.min.js charset=utf-8></script><script src=mark.min.js charset=utf-8></script><script src=searcher.js charset=utf-8></script><script src=clipboard.min.js charset=utf-8></script><script src=highlight.js charset=utf-8></script><script src=book.js charset=utf-8></script><script src=sidebar.js></script>
+$ p='42'
+##### add your solution here
+Hi42Bye nice1423 bad42
+</code></pre><p><strong>18)</strong> From the <code>patterns.txt</code> input file, extract all whole words if a line also contains <code>car</code>. But, any word occupying the first five characters in the line shouldn't be part of the output. For example, <code>no scar</code> shouldn't produce any output since both words have all/some characters within the first five characters in the line. <code>part cart mart</code> should produce <code>cart</code> and <code>mart</code> as output. <code>two sets tests</code> would fail the <code>car</code> condition, and thus shouldn't produce any output.<pre><code class=language-bash>$ grep 'car' patterns.txt
+scar
+par car tar far Cart
+care
+a huge discarded pile of books
+scare
+car
+part cart mart
+
+##### add your solution here
+tar
+far
+Cart
+discarded
+pile
+of
+books
+cart
+mart
+</code></pre><p><strong>19)</strong> What do the following unicode character sets match?<ul><li><code>\p{L}</code><li><code>\P{L}</code><li><code>\p{Greek}</code><li><code>\p{Xwd}</code><li><code>\p{P}</code></ul><p><strong>20)</strong> What do the following escape sequences do?<ul><li><code>\A</code><li><code>\z</code><li><code>\Z</code></ul></main><nav aria-label="Page navigation"class=nav-wrapper><a aria-label="Previous chapter"class="mobile-nav-chapters previous"title="Previous chapter"aria-keyshortcuts=Left href=miscellaneous-options.html rel=prev> <i class="fa fa-angle-left"></i> </a><a aria-label="Next chapter"class="mobile-nav-chapters next"title="Next chapter"aria-keyshortcuts=Right href=gotchas-and-tricks.html rel=next> <i class="fa fa-angle-right"></i> </a><div style="clear: both"></div></nav></div></div><nav aria-label="Page navigation"class=nav-wide-wrapper><a aria-label="Previous chapter"class="nav-chapters previous"title="Previous chapter"aria-keyshortcuts=Left href=miscellaneous-options.html rel=prev> <i class="fa fa-angle-left"></i> </a><a aria-label="Next chapter"class="nav-chapters next"title="Next chapter"aria-keyshortcuts=Right href=gotchas-and-tricks.html rel=next> <i class="fa fa-angle-right"></i> </a></nav></div><script>window.playground_copyable = true;</script><script charset=utf-8 src=elasticlunr.min.js></script><script charset=utf-8 src=mark.min.js></script><script charset=utf-8 src=searcher.js></script><script charset=utf-8 src=clipboard.min.js></script><script charset=utf-8 src=highlight.js></script><script charset=utf-8 src=book.js></script><script src=sidebar.js></script>

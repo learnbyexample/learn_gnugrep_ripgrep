@@ -1,8 +1,5 @@
-<!DOCTYPE HTML><html lang=en class="sidebar-visible no-js light"><head><meta charset=UTF-8><title>Context matching - GNU GREP and RIPGREP</title><meta content="text/html; charset=utf-8"http-equiv=Content-Type><meta name=description content="Example based guide to mastering GNU GREP and RIPGREP"><meta name=viewport content="width=device-width, initial-scale=1"><meta name=theme-color content=#ffffff><link rel=icon href=favicon.svg><link rel="shortcut icon"href=favicon.png><link rel=stylesheet href=css/variables.css><link rel=stylesheet href=css/general.css><link rel=stylesheet href=css/chrome.css><link rel=stylesheet href=FontAwesome/css/font-awesome.css><link rel=stylesheet href=fonts/fonts.css><link rel=stylesheet href=highlight.css><link rel=stylesheet href=tomorrow-night.css><link rel=stylesheet href=ayu-highlight.css><link rel=stylesheet href=style.css><body><script>
-            var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script><script>
-            try {
+<!doctypehtml><html class="sidebar-visible no-js light"lang=en><head><meta charset=UTF-8><title>Context matching - CLI text processing with GNU grep and ripgrep</title><meta content="text/html; charset=utf-8"http-equiv=Content-Type><meta content="Example based guide to mastering GNU grep and ripgrep"name=description><meta content=width=device-width,initial-scale=1 name=viewport><meta content=#ffffff name=theme-color><meta content="CLI text processing with GNU grep and ripgrep"property=og:title><meta content=website property=og:type><meta content="Example based guide to mastering GNU grep and ripgrep"property=og:description><meta content=https://learnbyexample.github.io/learn_gnugrep_ripgrep/ property=og:url><meta content=https://raw.githubusercontent.com/learnbyexample/learn_gnugrep_ripgrep/master/images/grep_ls.png property=og:image><meta content=1280 property=og:image:width><meta content=720 property=og:image:height><meta content=summary_large_image property=twitter:card><meta content=@learn_byexample property=twitter:site><link href=favicon.svg rel=icon><link rel="shortcut icon"href=favicon.png><link href=css/variables.css rel=stylesheet><link href=css/general.css rel=stylesheet><link href=css/chrome.css rel=stylesheet><link href=FontAwesome/css/font-awesome.css rel=stylesheet><link href=fonts/fonts.css rel=stylesheet><link href=highlight.css rel=stylesheet><link href=tomorrow-night.css rel=stylesheet><link href=ayu-highlight.css rel=stylesheet><link href=style.css rel=stylesheet><body><script>var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";</script><script>try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
 
@@ -13,32 +10,25 @@
                 if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
                     localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
                 }
-            } catch (e) { }
-        </script><script>
-            var theme;
+            } catch (e) { }</script><script>var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
             html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
-        </script><script>
-            var html = document.querySelector('html');
+            html.classList.add('js');</script><script>var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             }
             html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
-        </script><nav id=sidebar class=sidebar aria-label="Table of contents"><div class=sidebar-scrollbox><ol class=chapter><li class="chapter-item expanded affix"><a href=cover.html>Cover</a><li class="chapter-item expanded affix"><a href=buy.html>Buy PDF/EPUB versions</a><li class="chapter-item expanded"><a href=preface.html><strong aria-hidden=true>1.</strong> Preface</a><li class="chapter-item expanded"><a href=introduction.html><strong aria-hidden=true>2.</strong> Introduction</a><li class="chapter-item expanded"><a href=frequently-used-options.html><strong aria-hidden=true>3.</strong> Frequently used options</a><li class="chapter-item expanded"><a href=breere-regular-expressions.html><strong aria-hidden=true>4.</strong> BRE/ERE Regular Expressions</a><li class="chapter-item expanded"><a href=context-matching.html class=active><strong aria-hidden=true>5.</strong> Context matching</a><li class="chapter-item expanded"><a href=recursive-search.html><strong aria-hidden=true>6.</strong> Recursive search</a><li class="chapter-item expanded"><a href=miscellaneous-options.html><strong aria-hidden=true>7.</strong> Miscellaneous options</a><li class="chapter-item expanded"><a href=perl-compatible-regular-expressions.html><strong aria-hidden=true>8.</strong> Perl Compatible Regular Expressions</a><li class="chapter-item expanded"><a href=gotchas-and-tricks.html><strong aria-hidden=true>9.</strong> Gotchas and Tricks</a><li class="chapter-item expanded"><a href=ripgrep.html><strong aria-hidden=true>10.</strong> ripgrep</a><li class="chapter-item expanded"><a href=further-reading.html><strong aria-hidden=true>11.</strong> Further Reading</a><li class="chapter-item expanded"><a href=Exercise_solutions.html><strong aria-hidden=true>12.</strong> Exercise Solutions</a></li><br><hr><li class="chapter-item expanded"><i id=git-repository-button class="fa fa-github"></i><a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep>   Source code</a><li class="chapter-item expanded"><i id=home-button class="fa fa-home"></i><a href=https://learnbyexample.github.io/>   My Blog</a><li class="chapter-item expanded"><i id=book-button class="fa fa-book"></i><a href=https://learnbyexample.github.io/books/>   My Books</a><li class="chapter-item expanded"><i id=mail-button class="fa fa-envelope"></i><a href=https://learnbyexample.gumroad.com/l/learnbyexample-weekly>   learnbyexample weekly</a></ol></div><div id=sidebar-resize-handle class=sidebar-resize-handle></div></nav><div id=page-wrapper class=page-wrapper><div class=page><div id=menu-bar-hover-placeholder></div><div id=menu-bar class="menu-bar sticky bordered"><div class=left-buttons><button id=sidebar-toggle class=icon-button type=button title="Toggle Table of Contents"aria-label="Toggle Table of Contents"aria-controls=sidebar><i class="fa fa-bars"></i></button><button id=theme-toggle class=icon-button type=button title="Change theme"aria-label="Change theme"aria-haspopup=true aria-expanded=false aria-controls=theme-list><i class="fa fa-paint-brush"></i></button><ul id=theme-list class=theme-popup aria-label=Themes role=menu><li role=none><button role=menuitem class=theme id=light>Light (default)</button><li role=none><button role=menuitem class=theme id=rust>Rust</button><li role=none><button role=menuitem class=theme id=coal>Coal</button><li role=none><button role=menuitem class=theme id=navy>Navy</button><li role=none><button role=menuitem class=theme id=ayu>Ayu</button></ul><button id=search-toggle class=icon-button type=button title="Search. (Shortkey: s)"aria-label="Toggle Searchbar"aria-expanded=false aria-keyshortcuts=S aria-controls=searchbar><i class="fa fa-search"></i></button></div><h1 class=menu-title>GNU GREP and RIPGREP</h1><div class=right-buttons><a href=https://learnbyexample.github.io title=Blog aria-label=Blog> <i id=home-button class="fa fa-home"></i> </a><a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep title="Git repository"aria-label="Git repository"> <i id=git-repository-button class="fa fa-github"></i> </a></div></div><div id=search-wrapper class=hidden><form id=searchbar-outer class=searchbar-outer><input type=search id=searchbar name=searchbar placeholder="Search this book ..."aria-controls=searchresults-outer aria-describedby=searchresults-header></form><div id=searchresults-outer class="searchresults-outer hidden"><div id=searchresults-header class=searchresults-header></div><ul id=searchresults></ul></div></div><script>
-                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+            html.classList.add("sidebar-" + sidebar);</script><nav aria-label="Table of contents"class=sidebar id=sidebar><div class=sidebar-scrollbox><ol class=chapter><li class="chapter-item expanded affix"><a href=cover.html>Cover</a><li class="chapter-item expanded affix"><a href=buy.html>Buy PDF/EPUB versions</a><li class="chapter-item expanded"><a href=preface.html><strong aria-hidden=true>1.</strong> Preface</a><li class="chapter-item expanded"><a href=introduction.html><strong aria-hidden=true>2.</strong> Introduction</a><li class="chapter-item expanded"><a href=frequently-used-options.html><strong aria-hidden=true>3.</strong> Frequently used options</a><li class="chapter-item expanded"><a href=breere-regular-expressions.html><strong aria-hidden=true>4.</strong> BRE/ERE Regular Expressions</a><li class="chapter-item expanded"><a class=active href=context-matching.html><strong aria-hidden=true>5.</strong> Context matching</a><li class="chapter-item expanded"><a href=recursive-search.html><strong aria-hidden=true>6.</strong> Recursive search</a><li class="chapter-item expanded"><a href=miscellaneous-options.html><strong aria-hidden=true>7.</strong> Miscellaneous options</a><li class="chapter-item expanded"><a href=perl-compatible-regular-expressions.html><strong aria-hidden=true>8.</strong> Perl Compatible Regular Expressions</a><li class="chapter-item expanded"><a href=gotchas-and-tricks.html><strong aria-hidden=true>9.</strong> Gotchas and Tricks</a><li class="chapter-item expanded"><a href=ripgrep.html><strong aria-hidden=true>10.</strong> ripgrep</a><li class="chapter-item expanded"><a href=further-reading.html><strong aria-hidden=true>11.</strong> Further Reading</a><li class="chapter-item expanded"><a href=Exercise_solutions.html><strong aria-hidden=true>12.</strong> Exercise Solutions</a></li><br><hr><li class="chapter-item expanded"><i class="fa fa-github"id=git-repository-button></i><a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep>   Source code</a><li class="chapter-item expanded"><i class="fa fa-home"id=home-button></i><a href=https://learnbyexample.github.io/>   My Blog</a><li class="chapter-item expanded"><i class="fa fa-book"id=book-button></i><a href=https://learnbyexample.github.io/books/>   My Books</a><li class="chapter-item expanded"><i class="fa fa-envelope"id=mail-button></i><a href=https://learnbyexample.gumroad.com/l/learnbyexample-weekly>   learnbyexample weekly</a><li class="chapter-item expanded"><i class="fa fa-twitter"id=twitter-button></i><a href=https://twitter.com/learn_byexample>   Twitter</a></ol></div><div class=sidebar-resize-handle id=sidebar-resize-handle></div></nav><div class=page-wrapper id=page-wrapper><div class=page><div id=menu-bar-hover-placeholder></div><div class="menu-bar sticky bordered"id=menu-bar><div class=left-buttons><button aria-label="Toggle Table of Contents"title="Toggle Table of Contents"aria-controls=sidebar class=icon-button id=sidebar-toggle type=button><i class="fa fa-bars"></i></button><button aria-label="Change theme"title="Change theme"aria-controls=theme-list aria-expanded=false aria-haspopup=true class=icon-button id=theme-toggle type=button><i class="fa fa-paint-brush"></i></button><ul aria-label=Themes class=theme-popup id=theme-list role=menu><li role=none><button class=theme id=light role=menuitem>Light (default)</button><li role=none><button class=theme id=rust role=menuitem>Rust</button><li role=none><button class=theme id=coal role=menuitem>Coal</button><li role=none><button class=theme id=navy role=menuitem>Navy</button><li role=none><button class=theme id=ayu role=menuitem>Ayu</button></ul><button aria-label="Toggle Searchbar"title="Search. (Shortkey: s)"aria-controls=searchbar aria-expanded=false aria-keyshortcuts=S class=icon-button id=search-toggle type=button><i class="fa fa-search"></i></button></div><h1 class=menu-title>CLI text processing with GNU grep and ripgrep</h1><div class=right-buttons><a aria-label=Blog href=https://learnbyexample.github.io title=Blog> <i class="fa fa-home"id=home-button></i> </a><a aria-label=Twitter href=https://twitter.com/learn_byexample title=Twitter> <i class="fa fa-twitter"id=twitter-button></i> </a><a aria-label="Git repository"title="Git repository"href=https://github.com/learnbyexample/learn_gnugrep_ripgrep> <i class="fa fa-github"id=git-repository-button></i> </a></div></div><div class=hidden id=search-wrapper><form class=searchbar-outer id=searchbar-outer><input placeholder="Search this book ..."aria-controls=searchresults-outer aria-describedby=searchresults-header id=searchbar name=searchbar type=search></form><div class="searchresults-outer hidden"id=searchresults-outer><div class=searchresults-header id=searchresults-header></div><ul id=searchresults></ul></div></div><script>document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
-                    });
-                </script><div id=content class=content><main><div class=sidetoc><nav class=pagetoc></nav></div><h1 id=context-matching><a class=header href=#context-matching>Context matching</a></h1><p>Sometimes you want not just the matching lines, but the lines relative to the matches as well. For example, it could be to see the comments at start of a function block that was matched while searching a program file. Or, it could be to see extended information from a log file while searching for a particular error message. <code>GNU grep</code> has three options to display lines <strong>after</strong>, <strong>before</strong> or both <strong>combined</strong> relative to matching lines.<blockquote><p><img src=images/info.svg alt=info> Files used in examples are available chapter wise from <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/example_files>learn_gnugrep_ripgrep repo</a>. The directory for this chapter is <code>context_matching</code>.</blockquote><p>The sample input file for this chapter is shown below:<pre><code class=language-bash>$ cat context.txt
+                    });</script><div class=content id=content><main><div class=sidetoc><nav class=pagetoc></nav></div><h1 id=context-matching><a class=header href=#context-matching>Context matching</a></h1><p>Sometimes you want not just the matching lines, but the lines relative to the matches as well. For example, it could be to see the comments at the start of a function block that was matched while searching a program file. Or, it could be to see extended information from a log file while searching for a particular error message.<p><code>GNU grep</code> has three options to display lines <strong>after</strong>, <strong>before</strong> or both <strong>combined</strong> relative to the matching lines. And there are a couple of options to customize the separator between matching groups.<blockquote><p><img alt=info src=images/info.svg> The <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/example_files>example_files</a> directory has all the files used in the examples.</blockquote><p>The sample input file used in this chapter is shown below:<pre><code class=language-bash>$ cat context.txt
 wheat
     roti
     bread
@@ -67,7 +57,12 @@ programming language
     python
     kotlin
     ruby
-</code></pre><h2 id=-a><a class=header href=#-a>-A</a></h2><p>Additionally display lines <strong>after</strong> the matching lines. The number of lines required has to be specified after <code>-A</code><blockquote><p><img src=images/info.svg alt=info> If there are multiple matches, by default <code>grep</code> adds a separator line <code>--</code> between the results.</blockquote><pre><code class=language-bash>$ # show lines containing 'blue' and two lines after such lines
+</code></pre><h2 id=-a><a class=header href=#-a>-A</a></h2><p>Helps to get lines <strong>after</strong> the matching lines. The number of lines required has to be specified after the <code>-A</code> option.<pre><code class=language-bash># match whole line 'blue' and also display two lines after such lines
+$ grep -x -A2 'blue' context.txt
+blue
+    toy
+    flower
+</code></pre><p>If there are multiple matches, <code>grep</code> adds a separator line <code>--</code> between the groups.<pre><code class=language-bash># show lines containing 'blue' and two lines after such lines
 $ grep -A2 'blue' context.txt
 blue
     toy
@@ -76,13 +71,7 @@ blue
 light blue
     flower
     sky
-
-$ # use other options and regular expressions to refine the search
-$ grep -x -A2 'blue' context.txt
-blue
-    toy
-    flower
-</code></pre><h2 id=-b><a class=header href=#-b>-B</a></h2><p>Additionally display lines <strong>before</strong> the matching lines.<pre><code class=language-bash>$ grep -B2 'bread' context.txt
+</code></pre><h2 id=-b><a class=header href=#-b>-B</a></h2><p>Helps to get lines <strong>before</strong> the matching lines.<pre><code class=language-bash>$ grep -B2 'bread' context.txt
 wheat
     roti
     bread
@@ -97,18 +86,7 @@ programming language
     python
     kotlin
     ruby
-</code></pre><h2 id=-c><a class=header href=#-c>-C</a></h2><p>This option can be used instead of specifying both <code>-A</code> and <code>-B</code> if the count of lines required is the same. You can also use <code>-N</code> instead of <code>-CN</code>.<pre><code class=language-bash>$ # same as: grep -A1 -B1 'sky' context.txt
-$ # can also use: grep -1 'sky' context.txt
-$ grep -C1 'sky' context.txt
-    flower
-    sky
-    water
---
-    blood
-    evening sky
-    rose
-
-$ grep -A1 -B2 'sky' context.txt
+</code></pre><p>Here's an example with both <code>-A</code> and <code>-B</code> options:<pre><code class=language-bash>$ grep -A1 -B2 'sky' context.txt
 light blue
     flower
     sky
@@ -118,14 +96,24 @@ light blue
     blood
     evening sky
     rose
-</code></pre><blockquote><p><img src=images/info.svg alt=info> No error or warning if the count goes beyond lines available for any of these three options.</blockquote><pre><code class=language-bash>$ grep -C2 'kotlin' context.txt
+</code></pre><h2 id=-c><a class=header href=#-c>-C</a></h2><p>This option can be used instead of specifying both <code>-A</code> and <code>-B</code> if the number of lines required is the same. You can also use <code>-N</code> instead of <code>-CN</code>.<pre><code class=language-bash># same as: grep -A1 -B1 'sky' context.txt
+# can also use: grep -1 'sky' context.txt
+$ grep -C1 'sky' context.txt
+    flower
+    sky
+    water
+--
+    blood
+    evening sky
+    rose
+</code></pre><blockquote><p><img alt=info src=images/info.svg> You'll not get any error or warning if the count goes beyond the number of lines available for any of these options.<pre><code class=language-bash>$ grep -C2 'kotlin' context.txt
 programming language
     python
     kotlin
     ruby
-</code></pre><h2 id=contiguous-matches><a class=header href=#contiguous-matches>Contiguous matches</a></h2><p>The separator <code>--</code> won't be added if two or more groups of matching lines have overlapping lines or are next to each other in input file.<pre><code class=language-bash>$ # -n option used only for illustration purposes
-$ # prefix is : for matching lines and - for relative lines
-$ # group 6-8 and group 9-11 are next to each other here
+</code></pre></blockquote><h2 id=contiguous-matches><a class=header href=#contiguous-matches>Contiguous matches</a></h2><p>The separator <code>--</code> won't be added if two or more groups of matching lines have overlapping lines or are next to each other in the input file.<p>Here's an example when the groups are next to each other:<pre><code class=language-bash># -n option is used here for illustration purposes
+# separator is : for matching lines and - for relative lines
+# group 6-8 and group 9-11 are next to each other here
 $ grep -n -C1 'flower' context.txt
 6-    toy
 7:    flower
@@ -133,9 +121,7 @@ $ grep -n -C1 'flower' context.txt
 9-light blue
 10:    flower
 11-    sky
-
-$ # example for overlapping case (line number 9)
-$ # last line of 1st group overlaps with matching line of 2nd group
+</code></pre><p>And here's an example for groups with common lines between them:<pre><code class=language-bash># relative line of 1st group (line 9) overlaps with matching line of 2nd group
 $ grep -n -A4 'blue' context.txt
 5:blue
 6-    toy
@@ -156,7 +142,7 @@ $ grep -n -A4 'blue' context.txt
 23
 24
 
-$ # only matching line is shown if count 0 is used with -A/-B/-C
+# there are no relative lines if the context count is 0
 $ grep -A0 --group-separator='*-----------*-----------*' 'in' context.txt
     evening sky
 *-----------*-----------*
@@ -165,7 +151,7 @@ $ grep -A0 --group-separator='*-----------*-----------*' 'in' context.txt
 programming language
 *-----------*-----------*
     kotlin
-</code></pre><p>Use <code>--no-group-separator</code> option if the separator line is a hindrance, for example feeding the output of <code>grep</code> to another program.<pre><code class=language-bash>$ seq 29 | grep --no-group-separator -A1 '3'
+</code></pre><p>Use the <code>--no-group-separator</code> option if the separator line is a hindrance. For example, feeding the output of <code>grep</code> to another program.<pre><code class=language-bash>$ seq 29 | grep --no-group-separator -A1 '3'
 3
 4
 13
@@ -173,28 +159,63 @@ programming language
 23
 24
 
-$ # sum of values based on grep output
+# passing the grep output to another program
 $ seq 29 | grep --no-group-separator -A1 '3' | datamash sum 1
 81
-</code></pre><h2 id=summary><a class=header href=#summary>Summary</a></h2><p>Context matching got its own chapter mainly due to corner cases and customization options (on Ubuntu, <code>man grep</code> doesn't even list them).<h2 id=exercises><a class=header href=#exercises>Exercises</a></h2><p><strong>a)</strong> For this question, create <code>exercises/context_matching</code> directory and then save <a href=https://raw.githubusercontent.com/learnbyexample/learn_gnugrep_ripgrep/master/exercises/palindrome.py>this file from learn_gnugrep_ripgrep repo</a> as <code>palindrome.py</code>. For this input file, display all lines matching <code>raise</code> and one line before it.<pre><code class=language-bash>$ # assumes 'exercises/context_matching' as CWD
-$ grep ##### add your solution here
-    if re.search(r'[^a-zA-Z]', ip_str):
-        raise ValueError("Characters other than alphabets and punctuations")
-    elif len(ip_str) < 3:
-        raise ValueError("Less than 3 alphabets")
-</code></pre><p><strong>b)</strong> Input has group of lines with single empty line in between. Change it to double empty lines between groups.<pre><code class=language-bash>$ lines='rat\ndog\nbat\n\n42\n3.14\n\nhi there\nhave a nice day'
-$ printf '%b' "$lines" | grep ##### add your solution here
-rat
-dog
-bat
+</code></pre><h2 id=summary><a class=header href=#summary>Summary</a></h2><p>This chapter showed how you can display lines relative to the matching ones. You also learned how to customize group separators.<h2 id=exercises><a class=header href=#exercises>Exercises</a></h2><blockquote><p><img alt=info src=images/info.svg> The <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/exercises>exercises</a> directory has all the files used in this section.</blockquote><p><strong>1)</strong> For the input file <code>sample.txt</code>, filter lines containing <code>do</code> and also display the line that comes after such a matching line.<pre><code class=language-bash>##### add your solution here
+Just do-it
+Believe it
+--
+Much ado about nothing
+He he he
+</code></pre><p><strong>2)</strong> For the input file <code>sample.txt</code>, filter lines containing <code>o</code> followed by zero or more characters and then <code>m</code> or <code>r</code>. Also, display the line that comes before such a matching line.<pre><code class=language-bash>##### add your solution here
+Hello World
+--
+Hi there
+How are you
+--
+He he he
+Adios amigo
+</code></pre><p><strong>3)</strong> Will you get an error if there are no lines to satisfy the context specified? For example, <code>Hello</code> matches only the first line of the <code>sample.txt</code> file. If you try <code>grep -B5 'Hello' sample.txt</code> will you get the first line in the output or an error?<p><strong>4)</strong> For the input file <code>sample.txt</code>, filter lines containing <code>pay</code> and also display the line that comes before and after such a matching line.<pre><code class=language-bash>##### add your solution here
+banana
+papaya
+mango
+</code></pre><p><strong>5)</strong> For the input file <code>sample.txt</code>, filter lines containing <code>lie</code> and also display the line that comes before and two lines after such a matching line.<pre><code class=language-bash>##### add your solution here
+Just do-it
+Believe it
+
+banana
+</code></pre><p><strong>6)</strong> Will the <code>-v</code> option work as expected when combined with the context based options?<p><strong>7)</strong> Under what conditions will the separator <code>--</code> be absent even when there are multiple context matches?<p><strong>8)</strong> For the input file <code>sample.txt</code>, filter lines containing <code>are</code> or <code>he</code> as whole words as well as the line that comes before such a matching line. There should be no separator between the groups of matching lines in the output.<pre><code class=language-bash>##### add your solution here
+Hi there
+How are you
+Much ado about nothing
+He he he
+</code></pre><p><strong>9)</strong> For the input file <code>sample.txt</code>, filter lines containing <code>pay</code> or <code>the</code> as well as the line that comes after/before such a matching line. Show <code>=====</code> as the separator between the groups of matching lines in the output.<pre><code class=language-bash>##### add your solution here
+
+Hi there
+How are you
+=====
+banana
+papaya
+mango
+</code></pre><p><strong>10)</strong> The input file <code>sample.txt</code> has an empty line between group of lines. Change it to double empty lines between the groups.<pre><code class=language-bash>##### add your solution here
+Hello World
 
 
-42
-3.14
+Hi there
+How are you
 
 
-hi there
-have a nice day
-</code></pre></main><nav class=nav-wrapper aria-label="Page navigation"><a rel=prev href=breere-regular-expressions.html class="mobile-nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><a rel=next href=recursive-search.html class="mobile-nav-chapters next"title="Next chapter"aria-label="Next chapter"aria-keyshortcuts=Right> <i class="fa fa-angle-right"></i> </a><div style="clear: both"></div></nav></div></div><nav class=nav-wide-wrapper aria-label="Page navigation"><a rel=prev href=breere-regular-expressions.html class="nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><a rel=next href=recursive-search.html class="nav-chapters next"title="Next chapter"aria-label="Next chapter"aria-keyshortcuts=Right> <i class="fa fa-angle-right"></i> </a></nav></div><script>
-            window.playground_copyable = true;
-        </script><script src=elasticlunr.min.js charset=utf-8></script><script src=mark.min.js charset=utf-8></script><script src=searcher.js charset=utf-8></script><script src=clipboard.min.js charset=utf-8></script><script src=highlight.js charset=utf-8></script><script src=book.js charset=utf-8></script><script src=sidebar.js></script>
+Just do-it
+Believe it
+
+
+banana
+papaya
+mango
+
+
+Much ado about nothing
+He he he
+Adios amigo
+</code></pre></main><nav aria-label="Page navigation"class=nav-wrapper><a aria-label="Previous chapter"class="mobile-nav-chapters previous"title="Previous chapter"aria-keyshortcuts=Left href=breere-regular-expressions.html rel=prev> <i class="fa fa-angle-left"></i> </a><a aria-label="Next chapter"class="mobile-nav-chapters next"title="Next chapter"aria-keyshortcuts=Right href=recursive-search.html rel=next> <i class="fa fa-angle-right"></i> </a><div style="clear: both"></div></nav></div></div><nav aria-label="Page navigation"class=nav-wide-wrapper><a aria-label="Previous chapter"class="nav-chapters previous"title="Previous chapter"aria-keyshortcuts=Left href=breere-regular-expressions.html rel=prev> <i class="fa fa-angle-left"></i> </a><a aria-label="Next chapter"class="nav-chapters next"title="Next chapter"aria-keyshortcuts=Right href=recursive-search.html rel=next> <i class="fa fa-angle-right"></i> </a></nav></div><script>window.playground_copyable = true;</script><script charset=utf-8 src=elasticlunr.min.js></script><script charset=utf-8 src=mark.min.js></script><script charset=utf-8 src=searcher.js></script><script charset=utf-8 src=clipboard.min.js></script><script charset=utf-8 src=highlight.js></script><script charset=utf-8 src=book.js></script><script src=sidebar.js></script>

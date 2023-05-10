@@ -1,8 +1,5 @@
-<!DOCTYPE HTML><html lang=en class="sidebar-visible no-js light"><head><meta charset=UTF-8><title>Exercise Solutions - GNU GREP and RIPGREP</title><meta content="text/html; charset=utf-8"http-equiv=Content-Type><meta name=description content="Example based guide to mastering GNU GREP and RIPGREP"><meta name=viewport content="width=device-width, initial-scale=1"><meta name=theme-color content=#ffffff><link rel=icon href=favicon.svg><link rel="shortcut icon"href=favicon.png><link rel=stylesheet href=css/variables.css><link rel=stylesheet href=css/general.css><link rel=stylesheet href=css/chrome.css><link rel=stylesheet href=FontAwesome/css/font-awesome.css><link rel=stylesheet href=fonts/fonts.css><link rel=stylesheet href=highlight.css><link rel=stylesheet href=tomorrow-night.css><link rel=stylesheet href=ayu-highlight.css><link rel=stylesheet href=style.css><body><script>
-            var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script><script>
-            try {
+<!doctypehtml><html class="sidebar-visible no-js light"lang=en><head><meta charset=UTF-8><title>Exercise Solutions - CLI text processing with GNU grep and ripgrep</title><meta content="text/html; charset=utf-8"http-equiv=Content-Type><meta content="Example based guide to mastering GNU grep and ripgrep"name=description><meta content=width=device-width,initial-scale=1 name=viewport><meta content=#ffffff name=theme-color><meta content="CLI text processing with GNU grep and ripgrep"property=og:title><meta content=website property=og:type><meta content="Example based guide to mastering GNU grep and ripgrep"property=og:description><meta content=https://learnbyexample.github.io/learn_gnugrep_ripgrep/ property=og:url><meta content=https://raw.githubusercontent.com/learnbyexample/learn_gnugrep_ripgrep/master/images/grep_ls.png property=og:image><meta content=1280 property=og:image:width><meta content=720 property=og:image:height><meta content=summary_large_image property=twitter:card><meta content=@learn_byexample property=twitter:site><link href=favicon.svg rel=icon><link rel="shortcut icon"href=favicon.png><link href=css/variables.css rel=stylesheet><link href=css/general.css rel=stylesheet><link href=css/chrome.css rel=stylesheet><link href=FontAwesome/css/font-awesome.css rel=stylesheet><link href=fonts/fonts.css rel=stylesheet><link href=highlight.css rel=stylesheet><link href=tomorrow-night.css rel=stylesheet><link href=ayu-highlight.css rel=stylesheet><link href=style.css rel=stylesheet><body><script>var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";</script><script>try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
 
@@ -13,288 +10,520 @@
                 if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
                     localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
                 }
-            } catch (e) { }
-        </script><script>
-            var theme;
+            } catch (e) { }</script><script>var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
             html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
-        </script><script>
-            var html = document.querySelector('html');
+            html.classList.add('js');</script><script>var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             }
             html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
-        </script><nav id=sidebar class=sidebar aria-label="Table of contents"><div class=sidebar-scrollbox><ol class=chapter><li class="chapter-item expanded affix"><a href=cover.html>Cover</a><li class="chapter-item expanded affix"><a href=buy.html>Buy PDF/EPUB versions</a><li class="chapter-item expanded"><a href=preface.html><strong aria-hidden=true>1.</strong> Preface</a><li class="chapter-item expanded"><a href=introduction.html><strong aria-hidden=true>2.</strong> Introduction</a><li class="chapter-item expanded"><a href=frequently-used-options.html><strong aria-hidden=true>3.</strong> Frequently used options</a><li class="chapter-item expanded"><a href=breere-regular-expressions.html><strong aria-hidden=true>4.</strong> BRE/ERE Regular Expressions</a><li class="chapter-item expanded"><a href=context-matching.html><strong aria-hidden=true>5.</strong> Context matching</a><li class="chapter-item expanded"><a href=recursive-search.html><strong aria-hidden=true>6.</strong> Recursive search</a><li class="chapter-item expanded"><a href=miscellaneous-options.html><strong aria-hidden=true>7.</strong> Miscellaneous options</a><li class="chapter-item expanded"><a href=perl-compatible-regular-expressions.html><strong aria-hidden=true>8.</strong> Perl Compatible Regular Expressions</a><li class="chapter-item expanded"><a href=gotchas-and-tricks.html><strong aria-hidden=true>9.</strong> Gotchas and Tricks</a><li class="chapter-item expanded"><a href=ripgrep.html><strong aria-hidden=true>10.</strong> ripgrep</a><li class="chapter-item expanded"><a href=further-reading.html><strong aria-hidden=true>11.</strong> Further Reading</a><li class="chapter-item expanded"><a href=Exercise_solutions.html class=active><strong aria-hidden=true>12.</strong> Exercise Solutions</a></li><br><hr><li class="chapter-item expanded"><i id=git-repository-button class="fa fa-github"></i><a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep>   Source code</a><li class="chapter-item expanded"><i id=home-button class="fa fa-home"></i><a href=https://learnbyexample.github.io/>   My Blog</a><li class="chapter-item expanded"><i id=book-button class="fa fa-book"></i><a href=https://learnbyexample.github.io/books/>   My Books</a><li class="chapter-item expanded"><i id=mail-button class="fa fa-envelope"></i><a href=https://learnbyexample.gumroad.com/l/learnbyexample-weekly>   learnbyexample weekly</a></ol></div><div id=sidebar-resize-handle class=sidebar-resize-handle></div></nav><div id=page-wrapper class=page-wrapper><div class=page><div id=menu-bar-hover-placeholder></div><div id=menu-bar class="menu-bar sticky bordered"><div class=left-buttons><button id=sidebar-toggle class=icon-button type=button title="Toggle Table of Contents"aria-label="Toggle Table of Contents"aria-controls=sidebar><i class="fa fa-bars"></i></button><button id=theme-toggle class=icon-button type=button title="Change theme"aria-label="Change theme"aria-haspopup=true aria-expanded=false aria-controls=theme-list><i class="fa fa-paint-brush"></i></button><ul id=theme-list class=theme-popup aria-label=Themes role=menu><li role=none><button role=menuitem class=theme id=light>Light (default)</button><li role=none><button role=menuitem class=theme id=rust>Rust</button><li role=none><button role=menuitem class=theme id=coal>Coal</button><li role=none><button role=menuitem class=theme id=navy>Navy</button><li role=none><button role=menuitem class=theme id=ayu>Ayu</button></ul><button id=search-toggle class=icon-button type=button title="Search. (Shortkey: s)"aria-label="Toggle Searchbar"aria-expanded=false aria-keyshortcuts=S aria-controls=searchbar><i class="fa fa-search"></i></button></div><h1 class=menu-title>GNU GREP and RIPGREP</h1><div class=right-buttons><a href=https://learnbyexample.github.io title=Blog aria-label=Blog> <i id=home-button class="fa fa-home"></i> </a><a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep title="Git repository"aria-label="Git repository"> <i id=git-repository-button class="fa fa-github"></i> </a></div></div><div id=search-wrapper class=hidden><form id=searchbar-outer class=searchbar-outer><input type=search id=searchbar name=searchbar placeholder="Search this book ..."aria-controls=searchresults-outer aria-describedby=searchresults-header></form><div id=searchresults-outer class="searchresults-outer hidden"><div id=searchresults-header class=searchresults-header></div><ul id=searchresults></ul></div></div><script>
-                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+            html.classList.add("sidebar-" + sidebar);</script><nav aria-label="Table of contents"class=sidebar id=sidebar><div class=sidebar-scrollbox><ol class=chapter><li class="chapter-item expanded affix"><a href=cover.html>Cover</a><li class="chapter-item expanded affix"><a href=buy.html>Buy PDF/EPUB versions</a><li class="chapter-item expanded"><a href=preface.html><strong aria-hidden=true>1.</strong> Preface</a><li class="chapter-item expanded"><a href=introduction.html><strong aria-hidden=true>2.</strong> Introduction</a><li class="chapter-item expanded"><a href=frequently-used-options.html><strong aria-hidden=true>3.</strong> Frequently used options</a><li class="chapter-item expanded"><a href=breere-regular-expressions.html><strong aria-hidden=true>4.</strong> BRE/ERE Regular Expressions</a><li class="chapter-item expanded"><a href=context-matching.html><strong aria-hidden=true>5.</strong> Context matching</a><li class="chapter-item expanded"><a href=recursive-search.html><strong aria-hidden=true>6.</strong> Recursive search</a><li class="chapter-item expanded"><a href=miscellaneous-options.html><strong aria-hidden=true>7.</strong> Miscellaneous options</a><li class="chapter-item expanded"><a href=perl-compatible-regular-expressions.html><strong aria-hidden=true>8.</strong> Perl Compatible Regular Expressions</a><li class="chapter-item expanded"><a href=gotchas-and-tricks.html><strong aria-hidden=true>9.</strong> Gotchas and Tricks</a><li class="chapter-item expanded"><a href=ripgrep.html><strong aria-hidden=true>10.</strong> ripgrep</a><li class="chapter-item expanded"><a href=further-reading.html><strong aria-hidden=true>11.</strong> Further Reading</a><li class="chapter-item expanded"><a class=active href=Exercise_solutions.html><strong aria-hidden=true>12.</strong> Exercise Solutions</a></li><br><hr><li class="chapter-item expanded"><i class="fa fa-github"id=git-repository-button></i><a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep>   Source code</a><li class="chapter-item expanded"><i class="fa fa-home"id=home-button></i><a href=https://learnbyexample.github.io/>   My Blog</a><li class="chapter-item expanded"><i class="fa fa-book"id=book-button></i><a href=https://learnbyexample.github.io/books/>   My Books</a><li class="chapter-item expanded"><i class="fa fa-envelope"id=mail-button></i><a href=https://learnbyexample.gumroad.com/l/learnbyexample-weekly>   learnbyexample weekly</a><li class="chapter-item expanded"><i class="fa fa-twitter"id=twitter-button></i><a href=https://twitter.com/learn_byexample>   Twitter</a></ol></div><div class=sidebar-resize-handle id=sidebar-resize-handle></div></nav><div class=page-wrapper id=page-wrapper><div class=page><div id=menu-bar-hover-placeholder></div><div class="menu-bar sticky bordered"id=menu-bar><div class=left-buttons><button aria-label="Toggle Table of Contents"title="Toggle Table of Contents"aria-controls=sidebar class=icon-button id=sidebar-toggle type=button><i class="fa fa-bars"></i></button><button aria-label="Change theme"title="Change theme"aria-controls=theme-list aria-expanded=false aria-haspopup=true class=icon-button id=theme-toggle type=button><i class="fa fa-paint-brush"></i></button><ul aria-label=Themes class=theme-popup id=theme-list role=menu><li role=none><button class=theme id=light role=menuitem>Light (default)</button><li role=none><button class=theme id=rust role=menuitem>Rust</button><li role=none><button class=theme id=coal role=menuitem>Coal</button><li role=none><button class=theme id=navy role=menuitem>Navy</button><li role=none><button class=theme id=ayu role=menuitem>Ayu</button></ul><button aria-label="Toggle Searchbar"title="Search. (Shortkey: s)"aria-controls=searchbar aria-expanded=false aria-keyshortcuts=S class=icon-button id=search-toggle type=button><i class="fa fa-search"></i></button></div><h1 class=menu-title>CLI text processing with GNU grep and ripgrep</h1><div class=right-buttons><a aria-label=Blog href=https://learnbyexample.github.io title=Blog> <i class="fa fa-home"id=home-button></i> </a><a aria-label=Twitter href=https://twitter.com/learn_byexample title=Twitter> <i class="fa fa-twitter"id=twitter-button></i> </a><a aria-label="Git repository"title="Git repository"href=https://github.com/learnbyexample/learn_gnugrep_ripgrep> <i class="fa fa-github"id=git-repository-button></i> </a></div></div><div class=hidden id=search-wrapper><form class=searchbar-outer id=searchbar-outer><input placeholder="Search this book ..."aria-controls=searchresults-outer aria-describedby=searchresults-header id=searchbar name=searchbar type=search></form><div class="searchresults-outer hidden"id=searchresults-outer><div class=searchresults-header id=searchresults-header></div><ul id=searchresults></ul></div></div><script>document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
-                    });
-                </script><div id=content class=content><main><div class=sidetoc><nav class=pagetoc></nav></div><h1 id=exercise-solutions><a class=header href=#exercise-solutions>Exercise solutions</a></h1><br><h1 id=frequently-used-options><a class=header href=#frequently-used-options>Frequently used options</a></h1><p>First create <code>exercises</code> directory and then within it, create another directory for this chapter, say <code>freq_options</code> or <code>chapter_2</code>. Input is a file downloaded from internet — https://www.gutenberg.org/files/345/old/345.txt saved as <code>dracula.txt</code>.<p><strong>a)</strong> Display all lines containing <code>ablaze</code><pre><code class=language-bash>$ mkdir -p exercises/freq_options && cd $_
-$ wget https://www.gutenberg.org/files/345/old/345.txt -O dracula.txt
+                    });</script><div class=content id=content><main><div class=sidetoc><nav class=pagetoc></nav></div><h1 id=exercise-solutions><a class=header href=#exercise-solutions>Exercise solutions</a></h1><br><h1 id=frequently-used-options><a class=header href=#frequently-used-options>Frequently used options</a></h1><p><strong>1)</strong> Display lines containing <code>an</code> from the <code>sample.txt</code> input file.<pre><code class=language-bash>$ grep 'an' sample.txt
+banana
+mango
+</code></pre><p><strong>2)</strong> Display lines containing <code>do</code> as a whole word from the <code>sample.txt</code> input file.<pre><code class=language-bash>$ grep -w 'do' sample.txt
+Just do-it
+</code></pre><p><strong>3)</strong> Display lines from <code>sample.txt</code> that satisfy both of these conditions:<ul><li><code>he</code> matched irrespective of case<li>either <code>World</code> or <code>Hi</code> matched case sensitively</ul><pre><code class=language-bash>$ grep -i 'he' sample.txt | grep -e 'World' -e 'Hi'
+Hello World
+Hi there
+</code></pre><p><strong>4)</strong> Display lines from <code>code.txt</code> containing <code>fruit[0]</code> literally.<pre><code class=language-bash>$ grep -F 'fruit[0]' code.txt
+fruit[0] = 'apple'
+</code></pre><p><strong>5)</strong> Display only the first two matching lines containing <code>t</code> from the <code>sample.txt</code> input file.<pre><code class=language-bash>$ grep -m2 't' sample.txt
+Hi there
+Just do-it
+</code></pre><p><strong>6)</strong> Display only the first three matching lines that do <em>not</em> contain <code>he</code> from the <code>sample.txt</code> input file.<pre><code class=language-bash>$ grep -m3 -v 'he' sample.txt
+Hello World
 
-$ grep 'ablaze' dracula.txt
-the room, his face all ablaze with excitement. He rushed up to me and
-</code></pre><p><strong>b)</strong> Display all lines containing <code>abandon</code> as a whole word.<pre><code class=language-bash>$ grep -w 'abandon' dracula.txt
-inheritors, being remote, would not be likely to abandon their just
-</code></pre><p><strong>c)</strong> Display all lines that satisfies both of these conditions:<ul><li><code>professor</code> matched irrespective of case<li>either <code>quip</code> or <code>sleep</code> matched case sensitively</ul><pre><code class=language-bash>$ grep -i 'professor' dracula.txt | grep -e 'quip' -e 'sleep'
-equipment of a professor of the healing craft. When we were shown in,
-its potency; and she fell into a deep sleep. When the Professor was
-sleeping, and the Professor seemingly had not moved from his seat at her
-to sleep, and something weaker when she woke from it. The Professor and
-</code></pre><p><strong>d)</strong> Display first three lines containing <code>Count</code><pre><code class=language-bash>$ grep -m3 'Count' dracula.txt
-town named by Count Dracula, is a fairly well-known place. I shall enter
-must ask the Count all about them.)
-Count Dracula had directed me to go to the Golden Krone Hotel, which I
-</code></pre><p><strong>e)</strong> Display first six lines containing <code>Harker</code> but not either of <code>Journal</code> or <code>Letter</code><pre><code class=language-bash>$ grep -v -e 'Journal' -e 'Letter' dracula.txt | grep -m6 'Harker'
-said, "The Herr Englishman?" "Yes," I said, "Jonathan Harker." She
-"I am Dracula; and I bid you welcome, Mr. Harker, to my house. Come in;
-I shall be all alone, and my friend Harker Jonathan--nay, pardon me, I
-Jonathan Harker will not be by my side to correct and aid me. He will be
-"I write by desire of Mr. Jonathan Harker, who is himself not strong
-junior partner of the important firm Hawkins & Harker; and so, as you
-</code></pre><p><strong>f)</strong> Display lines containing <code>Zooelogical Gardens</code> along with line number prefix.<pre><code class=language-bash>$ grep -n 'Zooelogical Gardens' dracula.txt
-5597:         _Interview with the Keeper in the Zooelogical Gardens._
-5601:the keeper of the section of the Zooelogical Gardens in which the wolf
-8042:the Zooelogical Gardens a young one may have got loose, or one be bred
-</code></pre><p><strong>g)</strong> Find total count of whole word <code>the</code> (irrespective of case).<pre><code class=language-bash>$ grep -iow 'the' dracula.txt | wc -l
-8090
-</code></pre><p><strong>h)</strong> The below code snippet tries to get number of empty lines, but apparently shows wrong result, why?<pre><code class=language-bash>$ grep -cx '' dracula.txt
+How are you
+</code></pre><p><strong>7)</strong> Display lines from <code>sample.txt</code> that contain <code>do</code> along with line number prefix.<pre><code class=language-bash>$ grep -n 'do' sample.txt
+6:Just do-it
+13:Much ado about nothing
+</code></pre><p><strong>8)</strong> For the input file <code>sample.txt</code>, count the number of times the string <code>he</code> is present, irrespective of case.<pre><code class=language-bash>$ grep -io 'he' sample.txt | wc -l
+5
+</code></pre><p><strong>9)</strong> For the input file <code>sample.txt</code>, count the number of empty lines.<pre><code class=language-bash>$ grep -cx '' sample.txt
+4
+</code></pre><p><strong>10)</strong> For the input files <code>sample.txt</code> and <code>code.txt</code>, display matching lines based on the search terms (one per line) present in the <code>terms.txt</code> file. Results should be prefixed with the corresponding input filename.<pre><code class=language-bash>$ cat terms.txt
+are
+not
+go
+fruit[0]
+
+$ grep -Ff terms.txt sample.txt code.txt
+sample.txt:How are you
+sample.txt:mango
+sample.txt:Much ado about nothing
+sample.txt:Adios amigo
+code.txt:fruit[0] = 'apple'
+</code></pre><p><strong>11)</strong> For the input file <code>sample.txt</code>, display lines containing <code>amigo</code> prefixed by the input filename as well as the line number.<pre><code class=language-bash>$ grep -Hn 'amigo' sample.txt
+sample.txt:15:Adios amigo
+</code></pre><p><strong>12)</strong> For the input files <code>sample.txt</code> and <code>code.txt</code>, display only the filename if it contains <code>apple</code>.<pre><code class=language-bash>$ grep -l 'apple' sample.txt code.txt
+code.txt
+</code></pre><p><strong>13)</strong> For the input files <code>sample.txt</code> and <code>code.txt</code>, display only whole matching lines based on the search terms (one per line) present in the <code>lines.txt</code> file. Results should be prefixed with the corresponding input filename as well as the line number.<pre><code class=language-bash>$ cat lines.txt
+banana
+fruit = []
+
+$ grep -Fnxf lines.txt sample.txt code.txt
+sample.txt:9:banana
+code.txt:1:fruit = []
+</code></pre><p><strong>14)</strong> For the input files <code>sample.txt</code> and <code>code.txt</code>, count the number of lines that do <em>not</em> match any of the search terms (one per line) present in the <code>terms.txt</code> file.<pre><code class=language-bash>$ grep -vcFf terms.txt sample.txt code.txt
+sample.txt:11
+code.txt:3
+</code></pre><p><strong>15)</strong> Count the total number of lines containing <code>banana</code> in the input files <code>sample.txt</code> and <code>code.txt</code>.<pre><code class=language-bash>$ cat sample.txt code.txt | grep -c 'banana'
+2
+</code></pre><p><strong>16)</strong> Which two conditions are necessary for the output of the <code>grep</code> command to be suitable for the <code>vim -q</code> quickfix mode?<p>Filename and line number prefix. Using <code>grep -Hn</code> would ensure that these conditions are met.<p><strong>17)</strong> What's the default setting for the <code>--color</code> option? Give an example where the <code>always</code> setting would be useful.<ul><li><code>auto</code> will result in color highlighting when results are displayed on terminal, but not when the output is redirected to another command, file, etc. This is the default setting<li><code>always</code> will result in color highlighting when results are displayed on terminal as well as when the output is redirected to another command, file, etc</ul><p>Using <code>--color=always</code> is handy if you want to retain color information even when the output is redirected. For example, piping the results to <code>less -R</code>, to <code>grep --color</code> and so on.<p><strong>18)</strong> The command shown below tries to get the number of empty lines, but apparently shows the wrong result, why?<pre><code class=language-bash>$ grep -cx '' dos.txt
 0
-</code></pre><p>If you use the <code>file</code> command, you'll see that the input file has dos-style line endings. So, there are no empty lines because there's at least <code>\r</code> character in every line other than the newline character.<pre><code class=language-bash>$ file dracula.txt 
-dracula.txt: ASCII text, with CRLF line terminators
+</code></pre><p>If you use the <code>file</code> command, you'll see that the input file has dos-style line endings. So, there are no empty lines because the <code>\r</code> character is present in every line in addition to the newline character.<pre><code class=language-bash>$ file dos.txt
+dos.txt: ASCII text, with CRLF line terminators
 
-$ grep -cx $'\r' dracula.txt
-2559
-</code></pre><br><h1 id=breere-regular-expressions><a class=header href=#breere-regular-expressions>BRE/ERE Regular Expressions</a></h1><p><strong>a)</strong> Extract all pairs of <code>()</code> with/without text inside them, provided they do not contain <code>()</code> characters inside.<pre><code class=language-bash>$ echo 'I got (12) apples' | grep -o '([^()]*)'
-(12)
-
-$ echo '((2 +3)*5)=25 and (4.3/2*()' | grep -o '([^()]*)'
-(2 +3)
+$ grep -cx $'\r' dos.txt
+4
+</code></pre><br><h1 id=breere-regular-expressions><a class=header href=#breere-regular-expressions>BRE/ERE Regular Expressions</a></h1><p><strong>1)</strong> For the input file <code>patterns.txt</code>, extract from <code>(</code> to the next occurrence of <code>)</code> unless they contain parentheses characters in between.<pre><code class=language-bash>$ grep -o '([^()]*)' patterns.txt
+(division)
+(#modulo)
+(9-2)
 ()
-</code></pre><p><strong>b)</strong> For the given input, match all lines that start with <code>den</code> or end with <code>ly</code><pre><code class=language-bash>$ lines='lovely\n1 dentist\n2 lonely\neden\nfly away\ndent'
-$ printf '%b' "$lines" | grep -E '^den|ly$'
-lovely
+(j/k-3)
+(greeting)
+(b)
+</code></pre><p><strong>2)</strong> For the input file <code>patterns.txt</code>, match all lines that start with <code>den</code> or end with <code>ly</code>.<pre><code class=language-bash>$ grep -E '^den|ly$' patterns.txt
 2 lonely
 dent
-</code></pre><p><strong>c)</strong> Extract all whole words that contains <code>42</code> but not at edge of word. Assume a word cannot contain <code>42</code> more than once.<pre><code class=language-bash>$ echo 'hi42bye nice1423 bad42 cool_42a 42fake' | grep -oE '\w+42\w+'
-hi42bye
+lovely
+</code></pre><p><strong>3)</strong> For the input file <code>patterns.txt</code>, extract all whole words containing <code>42</code> surrounded by word characters on both sides.<pre><code class=language-bash>$ grep -oE '\w+42\w+' patterns.txt
+Hi42Bye
 nice1423
 cool_42a
-</code></pre><p><strong>d)</strong> Each line in given input contains a single word. Match all lines containing <code>car</code> but not as a whole word.<pre><code class=language-bash>$ printf 'car\nscar\ncare\npot\nscare\n' | grep -E '\Bcar|car\B'
+_42_
+</code></pre><p><strong>4)</strong> For the input file <code>patterns.txt</code>, match all lines containing <code>car</code> but not as a whole word.<pre><code class=language-bash>$ grep -E '\Bcar|car\B' patterns.txt
 scar
 care
+a huge discarded pile of books
 scare
-</code></pre><p><strong>e)</strong> For <code>dracula.txt</code> file, count the total number of lines that contain <code>removed</code> or <code>rested</code> or <code>received</code> or <code>replied</code> or <code>refused</code> or <code>retired</code> as whole words.<pre><code class=language-bash>$ grep -wcE 're(mov|st|ceiv|pli|fus|tir)ed' freq_options/dracula.txt
-73
-</code></pre><p><strong>f)</strong> Extract words starting with <code>s</code> and containing <code>e</code> and <code>t</code> in any order.<pre><code class=language-bash>$ words='sequoia subtle exhibit sets tests sit'
-$ echo "$words" | grep -ow 's\w*t\w*' | grep 'e'
-subtle
-sets
-</code></pre><p><strong>g)</strong> Extract all whole words having the same first and last character.<pre><code class=language-bash>$ echo 'oreo not a pip roar took 22' | grep -owE '\w|(\w)\w*\1'
-oreo
-a
-pip
-roar
-22
-</code></pre><p><strong>h)</strong> Match all lines containing <code>*[5]</code><pre><code class=language-bash>$ printf '4*5]\n(9-2)*[5]\n[5]*3\nr*[5\n' | grep -F '*[5]'
+part cart mart
+</code></pre><p><strong>5)</strong> Count the total number of times the whole words <code>removed</code> or <code>rested</code> or <code>received</code> or <code>replied</code> or <code>refused</code> or <code>retired</code> are present in the <code>patterns.txt</code> file.<pre><code class=language-bash>$ grep -owE 're(ceiv|mov|pli|fus|tir|st)ed' patterns.txt | wc -l
+9
+</code></pre><p><strong>6)</strong> For the input file <code>patterns.txt</code>, match lines starting with <code>s</code> and containing <code>e</code> and <code>t</code> in any order.<pre><code class=language-bash># can also use: grep '^s.*t' patterns.txt | grep 'e'
+$ grep -E '^s.*(e.*t|t.*e)' patterns.txt
+sets tests
+site cite kite bite
+subtle sequoia
+</code></pre><p><strong>7)</strong> From the input file <code>patterns.txt</code>, extract all whole lines having the same first and last word character.<pre><code class=language-bash># can also use: grep -xE '\w|(\w).*\1' patterns.txt
+$ grep -xE '(\w)(.*\1)?' patterns.txt
+sets tests
+Not a pip DOWN
+y
+1 dentist 1
+_42_
+</code></pre><p><strong>8)</strong> For the input file <code>patterns.txt</code>, match all lines containing <code>*[5]</code> literally.<pre><code class=language-bash>$ grep -F '*[5]' patterns.txt
 (9-2)*[5]
-</code></pre><p><strong>i)</strong> For the given quantifiers, what would be the equivalent form using <code>{m,n}</code> representation?<ul><li><code>?</code> is same as <code>{,1}</code><li><code>*</code> is same as <code>{0,}</code><li><code>+</code> is same as <code>{1,}</code></ul><p><strong>j)</strong> In ERE, <code>(a*|b*)</code> is same as <code>(a|b)*</code> — True or False?<p>False. Because <code>(a*|b*)</code> will match only sequences like <code>a</code>, <code>aaa</code>, <code>bb</code>, <code>bbbbbbbb</code>. But <code>(a|b)*</code> can match a mixed sequence like <code>ababbba</code> too.<p><strong>k)</strong> <code>grep -wE '[a-z](on|no)[a-z]'</code> is same as <code>grep -wE '[a-z][on]{2}[a-z]'</code>. True or False? Sample input shown below might help to understand the differences, if any.<p>False. <code>[on]{2}</code> will also match <code>oo</code> and <code>nn</code>.<pre><code class=language-bash>$ printf 'known\nmood\nknow\npony\ninns\n'
+</code></pre><p><strong>9)</strong> For the given quantifiers, what would be the equivalent form using the <code>{m,n}</code> representation?<ul><li><code>?</code> is same as <code>{,1}</code><li><code>*</code> is same as <code>{0,}</code><li><code>+</code> is same as <code>{1,}</code></ul><p><strong>10)</strong> In ERE, <code>(a*|b*)</code> is same as <code>(a|b)*</code> — True or False?<p>False. Because <code>(a*|b*)</code> will match only sequences like <code>a</code>, <code>aaa</code>, <code>bb</code>, <code>bbbbbbbb</code>. But <code>(a|b)*</code> can match a mixed sequence like <code>ababbba</code> too.<p><strong>11)</strong> <code>grep -wE '[a-z](on|no)[a-z]'</code> is same as <code>grep -wE '[a-z][on]{2}[a-z]'</code>. True or False? Sample input shown below might help to understand the differences, if any.<p>False. <code>[on]{2}</code> will also match <code>oo</code> and <code>nn</code>.<pre><code class=language-bash>$ printf 'known\nmood\nknow\npony\ninns\n'
 known
 mood
 know
 pony
 inns
-</code></pre><p><strong>l)</strong> Display all lines that start with <code>hand</code> and ends with no further character or <code>s</code> or <code>y</code> or <code>le</code>.<pre><code class=language-bash>$ lines='handed\nhand\nhandy\nunhand\nhands\nhandle\n'
-$ printf '%b' "$lines" | grep -xE 'hand([sy]|le)?'
-hand
+</code></pre><p><strong>12)</strong> For the input file <code>patterns.txt</code>, display all lines starting with <code>hand</code> and ending immediately with <code>s</code> or <code>y</code> or <code>le</code> or no further characters.<pre><code class=language-bash>$ grep -xE 'hand([sy]|le)?' patterns.txt
+handle
 handy
 hands
-handle
-</code></pre><br><h1 id=context-matching><a class=header href=#context-matching>Context matching</a></h1><p><strong>a)</strong> For this question, create <code>exercises/context_matching</code> directory and then save <a href=https://raw.githubusercontent.com/learnbyexample/learn_gnugrep_ripgrep/master/exercises/palindrome.py>this file from learn_gnugrep_ripgrep repo</a> as <code>palindrome.py</code>. For this input file, display all lines matching <code>raise</code> and one line before it.<pre><code class=language-bash>$ # assumes 'exercises/context_matching' as CWD
-$ grep -B1 'raise' palindrome.py
-    if re.search(r'[^a-zA-Z]', ip_str):
-        raise ValueError("Characters other than alphabets and punctuations")
-    elif len(ip_str) < 3:
-        raise ValueError("Less than 3 alphabets")
-</code></pre><p><strong>b)</strong> Input has group of lines with single empty line in between. Change it to double empty lines between groups.<pre><code class=language-bash>$ lines='rat\ndog\nbat\n\n42\n3.14\n\nhi there\nhave a nice day'
-$ printf '%b' "$lines" | grep --group-separator=$'\n' -A0 '.'
-rat
-dog
-bat
+hand
+</code></pre><p><strong>13)</strong> For the input files <code>patterns.txt</code>, display matching lines based on the patterns (one per line) present in the <code>regex_terms.txt</code> file.<pre><code class=language-bash>$ cat regex_terms.txt
+^[c-k].*\W$
+ly.
+[A-Z].*[0-9]
+
+$ grep -f regex_terms.txt patterns.txt
+Hi42Bye nice1423 bad42
+fly away
+def factorial()
+hand 
+</code></pre><p><strong>14)</strong> Will the ERE pattern <code>^a\w+([0-9]+:fig)?</code> match the same characters for the input <code>apple42:banana314</code> and <code>apple42:fig100</code>? If not, why not?<pre><code class=language-bash>$ echo 'apple42:banana314' | grep -oE '^a\w+([0-9]+:fig)?'
+apple42
+
+$ echo 'apple42:fig100' | grep -oE '^a\w+([0-9]+:fig)?'
+apple42:fig
+</code></pre><p>For patterns matching from the same starting location, longest match wins in case of BRE/ERE flavors. So, <code>\w+</code> will give up characters to allow <code>([0-9]+:fig)?</code> to also match in the second case. In other flavors like PCRE, the output would be <code>apple42</code> for both the cases.<p><strong>15)</strong> For the input file <code>patterns.txt</code>, match all lines starting with <code>[5]</code>.<pre><code class=language-bash>$ grep '^\[5]' patterns.txt
+[5]*3
+</code></pre><p><strong>16)</strong> What characters will the pattern <code>\t</code> match? A tab character or <code>\</code> followed by a <code>t</code> or something else? Does the behavior change inside a character class? What alternatives are there to match a tab character?<p><code>\t</code> will match <code>t</code>, however newer versions of <code>GNU grep</code> will also issue a warning for undefined escape sequences (and may become an error in future versions).<p>Within a character class, <code>\t</code> represents <code>\</code> and <code>t</code> as two separate characters.<p>To match a tab character, it can be specified literally (by pressing <code>Ctrl+v</code> followed by the Tab key). You can also use <a href=https://www.gnu.org/software/bash/manual/bash.html#ANSI_002dC-Quoting>ANSI-C quoting</a> provided by the shell or switch to PCRE using the <code>-P</code> option.<p><strong>17)</strong> From the input file <code>patterns.txt</code>, extract all hexadecimal sequences with a minimum of four characters. Match <code>0x</code> as an optional prefix, but shouldn't be counted for determining the length. Match the characters case insensitively, and the sequences shouldn't be surrounded by other word characters.<pre><code class=language-bash># can also use: grep -iowE '(0x)?[[:xdigit:]]{4,}'
+$ grep -iowE '(0x)?[0-9a-f]{4,}' patterns.txt
+0XdeadBEEF
+bad42
+0x0ff1ce
+</code></pre><p><strong>18)</strong> From the input file <code>patterns.txt</code>, extract from <code>-</code> till the end of the line, provided the characters after the hyphen are all word characters only.<pre><code class=language-bash># can also use: grep -o -- '-\w*$'
+$ grep -o '\-\w*$' patterns.txt
+-handy
+-icy
+</code></pre><p><strong>19)</strong> For the input file <code>patterns.txt</code>, count the total number of lines containing <code>e</code> or <code>i</code> followed by <code>l</code> or <code>n</code> and vice versa.<pre><code class=language-bash>$ grep -cE '[ei].*[ln]|[ln].*[ei]' patterns.txt
+18
+</code></pre><p><strong>20)</strong> For the input file <code>patterns.txt</code>, match lines starting with <code>4</code> or <code>-</code> or <code>u</code> or <code>sub</code> or <code>care</code>.<pre><code class=language-bash>$ grep -E '^([4u-]|sub|care)' patterns.txt
+care
+4*5]
+-handy
+subtle sequoia
+unhand
+</code></pre><br><h1 id=context-matching><a class=header href=#context-matching>Context matching</a></h1><p><strong>1)</strong> For the input file <code>sample.txt</code>, filter lines containing <code>do</code> and also display the line that comes after such a matching line.<pre><code class=language-bash>$ grep -A1 'do' sample.txt
+Just do-it
+Believe it
+--
+Much ado about nothing
+He he he
+</code></pre><p><strong>2)</strong> For the input file <code>sample.txt</code>, filter lines containing <code>o</code> followed by zero or more characters and then <code>m</code> or <code>r</code>. Also, display the line that comes before such a matching line.<pre><code class=language-bash>$ grep -B1 'o.*[mr]' sample.txt
+Hello World
+--
+Hi there
+How are you
+--
+He he he
+Adios amigo
+</code></pre><p><strong>3)</strong> Will you get an error if there are no lines to satisfy the context specified? For example, <code>Hello</code> matches only the first line of the <code>sample.txt</code> file. If you try <code>grep -B5 'Hello' sample.txt</code> will you get the first line in the output or an error?<p>You won't get any error or even a warning if sufficient number of context lines aren't found. For the example in the question, you'll get only the first line of the input file.<p><strong>4)</strong> For the input file <code>sample.txt</code>, filter lines containing <code>pay</code> and also display the line that comes before and after such a matching line.<pre><code class=language-bash># can also use: grep -1 'pay'
+$ grep -C1 'pay' sample.txt
+banana
+papaya
+mango
+</code></pre><p><strong>5)</strong> For the input file <code>sample.txt</code>, filter lines containing <code>lie</code> and also display the line that comes before and two lines after such a matching line.<pre><code class=language-bash>$ grep -B1 -A2 'lie' sample.txt
+Just do-it
+Believe it
+
+banana
+</code></pre><p><strong>6)</strong> Will the <code>-v</code> option work as expected when combined with the context based options?<p>No.<p><strong>7)</strong> Under what conditions will the separator <code>--</code> be absent even when there are multiple context matches?<p>The separator won't be added if two or more groups of matching lines:<ul><li>have overlapping lines<li>are next to each other</ul><p><strong>8)</strong> For the input file <code>sample.txt</code>, filter lines containing <code>are</code> or <code>he</code> as whole words as well as the line that comes before such a matching line. There should be no separator between the groups of matching lines in the output.<pre><code class=language-bash>$ grep --no-group-separator -B1 -wE 'are|he' sample.txt
+Hi there
+How are you
+Much ado about nothing
+He he he
+</code></pre><p><strong>9)</strong> For the input file <code>sample.txt</code>, filter lines containing <code>pay</code> or <code>the</code> as well as the line that comes after/before such a matching line. Show <code>=====</code> as the separator between the groups of matching lines in the output.<pre><code class=language-bash>$ grep --group-separator='=====' -EC1 'pay|the' sample.txt
+
+Hi there
+How are you
+=====
+banana
+papaya
+mango
+</code></pre><p><strong>10)</strong> The input file <code>sample.txt</code> has an empty line between group of lines. Change it to double empty lines between the groups.<pre><code class=language-bash>$ grep --group-separator=$'\n' -A0 '.' sample.txt
+Hello World
 
 
-42
-3.14
+Hi there
+How are you
 
 
-hi there
-have a nice day
-</code></pre><br><h1 id=recursive-search><a class=header href=#recursive-search>Recursive search</a></h1><p>For sample directory, a particular version of one of my GitHub repo is used. All the exercises will assume recursive searching, unless otherwise specified. There are no symbolic links.<pre><code class=language-bash>$ # assumes 'exercises' as CWD
-$ mkdir recursive_searching && cd $_
-$ repo='https://github.com/learnbyexample/Command-line-text-processing.git'
-$ git clone -b apr19 "$repo"
-$ cd Command-line-text-processing
-</code></pre><p><strong>a)</strong> List all files containing <code>xargs</code> or <code>python3</code><pre><code class=language-bash>$ grep -rlE 'xargs|python3'
-gnu_grep.md
-miscellaneous.md
-wheres_my_file.md
-exercises/GNU_grep/ex07_recursive_search/progs/hello.py
-README.md
-</code></pre><p><strong>b)</strong> List all files containing <code>grep</code> but do not list if they are from <code>.git</code> or <code>exercises</code> directories.<pre><code class=language-bash>$ grep --exclude-dir='.git' --exclude-dir='exercises' -rl 'grep'
-gnu_grep.md
-sorting_stuff.md
-file_attributes.md
-whats_the_difference.md
-wheres_my_file.md
-gnu_sed.md
-gnu_awk.md
-tail_less_cat_head.md
-README.md
-ruby_one_liners.md
-perl_the_swiss_knife.md
-</code></pre><p><strong>c)</strong> List all files containing <code>baz</code> if the filename ends with <code>.txt</code> but do not search hidden directories.<pre><code class=language-bash>$ grep --include='*.txt' --exclude-dir='.*' -rl 'baz'
-exercises/GNU_grep/ex12_regex_character_class_part1/sample_words.txt
-exercises/GNU_grep/ex16_misc_and_extras/sample.txt
-exercises/GNU_grep/ex08_search_pattern_from_file.txt
-</code></pre><p><strong>d)</strong> Search files ending with <code>.md</code> only in current directory (i.e. no recursive searching) and count the total number of occurrences of whole words <code>grep</code> or <code>sed</code> or <code>awk</code>.<pre><code class=language-bash>$ grep -owE 'grep|sed|awk' *.md | wc -l
-1532
-</code></pre><p><strong>e)</strong> List all files containing <code>Hello</code> unless the filename ends with <code>.txt</code> or <code>.sh</code><pre><code class=language-bash>$ grep --exclude='*.txt' --exclude='*.sh' -rl 'Hello'
-gnu_grep.md
-miscellaneous.md
-file_attributes.md
-whats_the_difference.md
-gnu_sed.md
-gnu_awk.md
-tail_less_cat_head.md
-exercises/GNU_grep/ex07_recursive_search/progs/hello.py
-ruby_one_liners.md
-perl_the_swiss_knife.md
-</code></pre><p><strong>f)</strong> List all files containing whole words <code>awk</code> and <code>perl</code> but not <code>basename</code>. Although not the case here, assume that filenames can contain shell special characters like space, semicolon, newline, etc.<pre><code class=language-bash>$ grep -rlwZ 'awk' | xargs -0 grep -lwZ 'perl' | xargs -0 grep -Lw 'basename'
-sorting_stuff.md
-gnu_sed.md
-gnu_awk.md
-ruby_one_liners.md
-perl_the_swiss_knife.md
-</code></pre><br><h1 id=miscellaneous-options><a class=header href=#miscellaneous-options>Miscellaneous options</a></h1><p><strong>a)</strong> Use the correct binary option to get output for second command shown below:<pre><code class=language-bash>$ printf 'hi there\0good day\n' | grep 'good'
-Binary file (standard input) matches
+Just do-it
+Believe it
 
-$ printf 'hi there\0good day\n' | grep -a 'good'
-hi theregood day
-</code></pre><p><strong>b)</strong> Read about <code>--line-buffered</code> from the manual (also <a href=https://stackoverflow.com/q/7161821/4082052>this link</a>) and see it in action with code below:<pre><code class=language-bash>$ for i in {1..5}; do seq 12; sleep 1; done | grep '[1-489]' | grep -v '0'
 
-$ for i in {1..5}; do seq 12; sleep 1; done | grep --line-buffered '[1-489]' | grep -v '0'
-</code></pre><p><strong>c)</strong> Consider non-binary input having multiple lines of text. Display <code>Match</code> if input starts with a number and <code>Nope</code> if it doesn't.<pre><code class=language-bash>$ printf 'oh\n42' | grep -qz '^[0-9]' && echo 'Match' || echo 'Nope'
-Nope
-$ printf '2a\nhi' | grep -qz '^[0-9]' && echo 'Match' || echo 'Nope'
-Match
-</code></pre><br><h1 id=perl-compatible-regular-expressions><a class=header href=#perl-compatible-regular-expressions>Perl Compatible Regular Expressions</a></h1><p><strong>a)</strong> Filter all lines that satisfy all of these rules:<ul><li>should have at least two alphabets<li>should have at least 3 digits<li>should have at least one special character among <code>%</code> or <code>*</code> or <code>#</code> or <code>$</code><li>should not end with a whitespace character</ul><pre><code class=language-bash>$ pswds='hunter2\nF2H3u#9\n*X3Yz3.14\t\nr2_d2_42\nA $ C1234'
-$ printf "$pswds" | grep -P '(?=(.*[a-zA-Z]){2})(?=(.*\d){3})(?!.*\s$).*[%*#$]'
+banana
+papaya
+mango
+
+
+Much ado about nothing
+He he he
+Adios amigo
+</code></pre><br><h1 id=recursive-search><a class=header href=#recursive-search>Recursive search</a></h1><blockquote><p><img alt=info src=images/info.svg> Use the <code>recursive.sh</code> script from the <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/exercises>exercises</a> directory for this section. Unless otherwise mentioned, assume you need to use the <code>-r</code> option instead of the <code>-R</code> option.<pre><code class=language-bash># change to the 'exercises' directory and source the 'recursive.sh' script
+$ source recursive.sh
+
+$ tree -a
+.
+├── backups
+│   ├── color list.txt
+│   ├── dot_files
+│   │   ├── .bash_aliases
+│   │   └── .inputrc
+│   └── text
+│       └── pat.txt -> ../../../patterns.txt
+├── colors_1
+├── colors_2.txt
+├── .hidden
+├── projects
+│   ├── python
+│   │   └── hello.py
+│   └── shell
+│       └── hello.sh
+├── sample_file.txt -> ../sample.txt
+└── substitute.sh
+
+6 directories, 11 files
+</code></pre></blockquote><p><strong>1)</strong> Search recursively and display the lines containing <code>ello</code>. Output should not have filename prefix.<pre><code class=language-bash>$ grep -rh 'ello'
+    print("Hello, Python!")
+echo "Hello, Bash!"
+yellow
+yellow
+</code></pre><p><strong>2)</strong> Search recursively and list the names of files containing <code>blue</code> or <code>on</code> or a double quote character. Match all of these terms only at the end of a line.<pre><code class=language-bash>$ grep -rlE '(blue|on|")$'
+projects/shell/hello.sh
+colors_1
+colors_2.txt
+backups/dot_files/.inputrc
+backups/color list.txt
+</code></pre><p><strong>3)</strong> Search recursively and list the names of files containing <code>blue</code>, but do not search within the <code>backups</code> directory.<pre><code class=language-bash>$ grep -rl --exclude-dir='backups' 'blue'
+.hidden
+colors_1
+colors_2.txt
+</code></pre><p><strong>4)</strong> Search recursively within the <code>backups</code> directory and list the names of files containing <code>red</code>. Symbolic links found in this directory should be searched as well.<pre><code class=language-bash>$ grep -Rl 'red' backups
+backups/color list.txt
+backups/text/pat.txt
+</code></pre><p><strong>5)</strong> Search recursively and list the names of files that do <em>not</em> contain <code>greeting</code> or <code>blue</code>. Symbolic links should be searched as well.<pre><code class=language-bash>$ grep -RLE 'greeting|blue'
+projects/shell/hello.sh
+substitute.sh
+sample_file.txt
+backups/dot_files/.bash_aliases
+backups/dot_files/.inputrc
+</code></pre><p><strong>6)</strong> Search for files containing <code>red</code> or <code>ello</code> recursively, but do not list the file if it also contains <code>greeting</code>.<pre><code class=language-bash>$ grep -rlEZ 'red|ello' | xargs -r0 grep -L 'greeting'
+projects/shell/hello.sh
+colors_1
+colors_2.txt
+</code></pre><p><strong>7)</strong> Search recursively only within filenames ending with <code>.txt</code> and display the names of files containing <code>red</code>. Symbolic links should be searched as well.<pre><code class=language-bash># can also use: grep -l 'red' **/*.txt (if globstar is set)
+$ grep -Rl --include='*.txt' 'red'
+colors_2.txt
+backups/color list.txt
+backups/text/pat.txt
+</code></pre><p><strong>8)</strong> Search recursively only within filenames ending with <code>.txt</code> but not if the name has a space character. Display the names of files containing <code>red</code>. Symbolic links should be searched as well.<pre><code class=language-bash># can also use: grep -l 'red' **/*([^ ]).txt (if globstar and extglob are set)
+$ grep -Rl --include='*.txt' --exclude='* *' 'red'
+colors_2.txt
+backups/text/pat.txt
+</code></pre><p><strong>9)</strong> Which option will you use if you have a file with a list of glob patterns to identify filenames to be excluded?<blockquote><p><code>--exclude-from=FILE</code><p>Skip files whose base name matches any of the file-name globs read from FILE (using wildcard matching as described under <code>--exclude</code>).</blockquote><p><strong>10)</strong> Does the glob pattern provided to <code>include</code> and <code>exclude</code> options match only the basename or the entire file path? Assume that recursive search is active.<p>Only the basename.<p><strong>11)</strong> How would you tell <code>grep</code> to avoid treating directory arguments as input files to be searched?<p>You can use <code>-d skip</code>. As per the manual:<blockquote><p><code>-d ACTION</code>, <code>--directories=ACTION</code><p>If an input file is a directory, use ACTION to process it. By default, ACTION is <code>read</code>, i.e., read directories just as if they were ordinary files. If ACTION is <code>skip</code>, silently skip directories. If ACTION is <code>recurse</code>, read all files under each directory, recursively, following symbolic links only if they are on the command line. This is equivalent to the <code>-r</code> option.</blockquote><p><strong>12)</strong> Use a combination of <code>find</code> and <code>grep</code> commands to display lines containing a whole word <code>Hi</code> only for symbolic links.<pre><code class=language-bash>$ find -type l -exec grep -w 'Hi' {} +
+./sample_file.txt:Hi there
+./backups/text/pat.txt:Hi there(greeting). Nice day(a(b)
+</code></pre><p><strong>13)</strong> Search recursively and list the names of files that contain <code>Hello</code> or <code>blue</code>. Symbolic links should be searched as well. Do not search within <code>python</code> or <code>backups</code> directories.<pre><code class=language-bash># can also use: --exclude-dir={python,backups}
+$ grep -RlE --exclude-dir='python' --exclude-dir='backups' 'Hello|blue'
+projects/shell/hello.sh
+.hidden
+colors_1
+sample_file.txt
+colors_2.txt
+</code></pre><p><strong>14)</strong> Search recursively only within filenames ending with <code>.txt</code> and count the total number of lines containing <code>car</code> or <code>blue</code> or a digit character. Symbolic links should be searched as well.<pre><code class=language-bash># can also use: cat **/*.txt | grep -cE 'car|blue|[0-9]'
+$ grep -RE --include='*.txt' 'car|blue|[0-9]' | wc -l
+21
+</code></pre><p><strong>15)</strong> Display lines containing <code>Hello</code> or <code>red</code> only from files in the current hierarchy, i.e. don't search recursively. Symbolic links should be searched as well.<pre><code class=language-bash># can also use: find -L -maxdepth 1 -type f -exec grep 'Hello\|red' {} +
+$ grep -d skip 'Hello\|red' *
+colors_2.txt:red
+sample_file.txt:Hello World
+</code></pre><p><strong>16)</strong> Search recursively for files containing <code>blue</code> as well as <code>yellow</code> anywhere in the file, but do not list the file if it also contains <code>teal</code>.<pre><code class=language-bash>$ grep -rlZ 'blue' | xargs -r0 grep -lZ 'yellow' | xargs -r0 grep -L 'teal'
+colors_2.txt
+</code></pre><br><h1 id=miscellaneous-options><a class=header href=#miscellaneous-options>Miscellaneous options</a></h1><p><strong>1)</strong> What do the <code>-q</code> and <code>-s</code> options do?<blockquote><p><code>-q</code>, <code>--quiet</code>, <code>--silent</code><p>Quiet; do not write anything to standard output. Exit immediately with zero status if any match is found, even if an error was detected.<p><code>-s</code>, <code>--no-messages</code><p>Suppress error messages about nonexistent or unreadable files.</blockquote><p><strong>2)</strong> For the input file <code>sample.txt</code>, extract from the first occurrence of <code>Just</code> to the last occurrence of <code>it</code>. These terms can occur across different lines. Perform additional transformation to convert ASCII NUL characters, if any, to the newline character.<pre><code class=language-bash>$ grep -oz 'Just.*it' sample.txt | tr '\0' '\n'
+Just do-it
+Believe it
+</code></pre><p><strong>3)</strong> For the input file <code>nul_separated</code>, use the ASCII NUL character as the <em>line</em> separator and display lines starting with <code>a</code>. Perform additional transformation to convert ASCII NUL characters, if any, to the newline character.<pre><code class=language-bash>$ grep -z '^a' nul_separated | tr '\0' '\n'
+apple
+fig
+mango
+icecream
+</code></pre><p><strong>4)</strong> Read about the <code>--line-buffered</code> option from the manual (read <a href=https://stackoverflow.com/q/7161821/4082052>this link</a> too) and see it in action with code shown below:<pre><code class=language-bash>$ for i in {1..5}; do seq 12; sleep 1; done | grep '[1-489]' | grep -v '0'
+
+# '> ' is secondary prompt (PS2), not part of the command
+$ for i in {1..5}; do seq 12; sleep 1; done | \
+> grep --line-buffered '[1-489]' | grep -v '0'
+</code></pre><p><strong>5)</strong> Write a Bash script <code>find_digits.sh</code> that loops over filenames passed as arguments. For each file, search for the presence of a digit character and display the results in the format shown below.<pre><code class=language-bash>$ cat find_digits.sh
+for f in "$@"; do
+    if grep -q '[0-9]' "$f"; then
+        echo "$f: found digit characters"
+    else
+        echo "$f: digit characters not found"
+    fi
+done
+
+$ bash find_digits.sh sample.txt patterns.txt regex_terms.txt
+sample.txt: digit characters not found
+patterns.txt: found digit characters
+regex_terms.txt: found digit characters
+
+$ bash find_digits.sh terms.txt lines.txt
+terms.txt: found digit characters
+lines.txt: digit characters not found
+</code></pre><p><strong>6)</strong> For the input file <code>sample.txt</code>, display lines containing <code>he</code> prefixed with the byte location of the matching lines.<pre><code class=language-bash>$ grep -b 'he' sample.txt
+13:Hi there
+102:He he he
+</code></pre><p><strong>7)</strong> What does the <code>--label</code> option do?<blockquote><p><code>--label=LABEL</code><p>Display input actually coming from standard input as input coming from file LABEL. This can be useful for commands that transform a file's contents before searching, e.g., <code>gzip -cd foo.gz | grep --label=foo -H 'some pattern'</code>. See also the <code>-H</code> option.</blockquote><br><h1 id=perl-compatible-regular-expressions><a class=header href=#perl-compatible-regular-expressions>Perl Compatible Regular Expressions</a></h1><p><strong>1)</strong> From the <code>sample.txt</code> input file, extract from the start of a line to the first occurrence of <code>he</code>.<pre><code class=language-bash>$ grep -oP '^.*?he' sample.txt
+Hi the
+He he
+</code></pre><p><strong>2)</strong> For the input file <code>terms.txt</code>, display line that do <em>not</em> contain a digit character.<pre><code class=language-bash>$ grep -vP '\d' terms.txt
+are
+not
+go
+</code></pre><p><strong>3)</strong> From the <code>pcre.txt</code> input file, extract consecutive repeated occurrences of <code>abc</code> followed by <code>a</code> provided that the final <code>a</code> isn't part of <code>abc</code>. For example, <code>abcabcadef</code> should give <code>abcabca</code> as the output and <code>abcabcabcd</code> shouldn't match.<pre><code class=language-bash>$ grep -oP '(abc)++a' pcre.txt
+abcabcabca
+</code></pre><p><strong>4)</strong> What's the syntax for non-capturing group and name a use case for such a grouping.<p>The syntax is <code>(?:pattern)</code> and it helps to avoid keeping a track of groups not needed for backreferencing.<p><strong>5)</strong> What is negative backreferencing?<p>A useful approach when there are numerous capture groups is to use negative backreferences. The negative numbering starts with <code>-1</code> to refer to the capture group closest to the backreference that was defined before the backreference. In other words, the highest numbered capture group prior to the backreference will be <code>-1</code>, the second highest will be <code>-2</code> and so on.<p>The syntax is <code>\g{-N}</code> where <code>N</code> is the relevant group number. <code>{}</code> is optional if there is no ambiguity.<p><strong>6)</strong> What's the difference between backreference and subexpression calls?<p>If backreferences are like variables, then subexpression calls are like functions. Backreferences allow you to reuse the portion matched by the capture group. Subexpression calls allow you to reuse the pattern that was used inside the capture group. You can call subexpressions recursively too.<p>The syntax is <code>(?N)</code> to refer to that particular capture group by number (relative numbering is allowed as well). Named capture groups can be called in various ways as <code>(?&name)</code> or <code>(?P>name)</code> or <code>\g&LTname></code> or <code>\g'name'</code>.<p><strong>7)</strong> From the <code>pcre.txt</code> input file, extract from <code>S:</code> followed by a digit character to the very next occurrence of <code>E:</code> followed by two or more digits. For example, <code>S:12 E:5 fig S:4 and E:123</code> should give <code>S:4 and E:123</code> as the output and <code>S:1 - E:2</code> shouldn't match.<pre><code class=language-bash>$ grep -oP '(?>S:\d+.*?E:)\d{2,}' pcre.txt
+S:4 and E:123
+S:42 E:43
+S:100 & E:10
+</code></pre><p><strong>8)</strong> From the <code>sample.txt</code> input file, extract all sequences made up of lowercase letters except those that start with <code>a</code> or <code>h</code> or <code>i</code> or <code>t</code>. Such sequences should not be surrounded by other word characters.<pre><code class=language-bash>$ grep -woP '(?![ahit])[a-z]+' sample.txt
+you
+do
+banana
+papaya
+mango
+nothing
+</code></pre><p><strong>9)</strong> From the <code>sample.txt</code> input file, extract all sequences made up of lowercase letters except those that end with letters from <code>g</code> to <code>z</code>. Such sequences should not be surrounded by other word characters.<pre><code class=language-bash># can also use: grep -woP '[a-z]+(?<=[a-f])' or grep -wo '[a-z]*[a-f]'
+$ grep -woP '[a-z]+(?&LT![g-z])' sample.txt
+there
+are
+banana
+papaya
+he
+he
+</code></pre><p><strong>10)</strong> From the <code>pcre.txt</code> input file, extract integer portion of floating-point numbers. Integers and numbers ending with <code>.</code> and no further digits should not be considered. For example, output for <code>ab32.4</code> should be <code>32</code> and numbers like <code>2.</code> and <code>456</code> should not be matched.<pre><code class=language-bash>$ grep -oP '\d+\.\d+' pcre.txt
+32.4
+46.42
+
+$ grep -oP '\d+(?=\.\d)' pcre.txt
+32
+46
+</code></pre><p><strong>11)</strong> For the input file <code>pcre.txt</code>, filter lines that satisfy all of these rules:<ul><li>at least 2 alphabets<li>at least 3 digits<li>at least 1 special character among <code>%</code> or <code>*</code> or <code>#</code> or <code>$</code><li>should <em>not</em> contain <code>Yz</code> or <code>if</code></ul><pre><code class=language-bash>$ grep -P '^(?=(.*[a-zA-Z]){2})(?=(.*\d){3})(?!.*(if|Yz)).*[%*#$]' pcre.txt
 F2H3u#9
 A $ C1234
-</code></pre><p><strong>b)</strong> Extract all fields from second to second last from the given rows having <code>,</code> as delimiter. There shouldn't be empty lines in output.<pre><code class=language-bash>$ printf 'foo,abc\ncat,x,dog' | grep -oP ',\K.+(?=,)'
-x
-$ echo 'foo,42,baz,3.14,abc' | grep -oP ',\K.+(?=,)'
-42,baz,3.14
-</code></pre><p><strong>c)</strong> Create <code>exercises/pcre</code> directory and then save <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/raw/master/exercises/price.txt>this file from learn_gnugrep_ripgrep repo</a> as <code>price.txt</code>. For this input file, match lines if it contains <code>qty</code> followed by <code>price</code> but not if there is <strong>whitespace</strong> or the string <strong>error</strong> between them.<pre><code class=language-bash>$ # assumes 'exercises/pcre' as CWD
-$ cat price.txt
+</code></pre><p><strong>12)</strong> From the <code>pcre.txt</code> input file, extract from the second field to the second last field from rows having at least two columns considering <code>;</code> as the delimiter. For example, <code>b;c</code> should be extracted from <code>a;b;c;d</code> and a line containing less than two <code>;</code> characters shouldn't produce any output.<pre><code class=language-bash>$ grep -oP ';\K.+(?=;)' pcre.txt
+in;awe;b2b;3list
+be;he;0;a;b
+</code></pre><p><strong>13)</strong> For the input file <code>pcre.txt</code>, match lines if it contains <code>qty</code> followed by <code>price</code> but not if there is any <strong>whitespace</strong> character or the string <code>error</code> between them.<pre><code class=language-bash>$ grep -P 'qty((?!\s|error).)*price' pcre.txt
 23,qty,price,42
-qty price,oh
-3.14,qty,6,errors,9,price,3
-42 qty-6,apple-56,price-234,error
-4,price,3.14,qty,4
-4,qtyprice,3
+(qtyprice) (hi-there)
+42\nqty-6,apple-56,price-234,error
+</code></pre><p><strong>14)</strong> From the <code>pcre.txt</code> input file, extract <code>if</code> followed by content within any number of nested parentheses.<pre><code class=language-bash>$ grep -oP 'if(\((?:[^()]++|(?1))++\))' pcre.txt
+if(3-(k*3+4)/12-(r+2/3))
+if(a(b)c(d(e(f)1)2)3)
+</code></pre><p><strong>15)</strong> What does the <code>\G</code> anchor do?<p>The <code>\G</code> anchor matches the start of the input string, just like the <code>\A</code> anchor. In addition, it will also match at the end of the previous match. This helps you to mark a particular location in the input string and continue from there instead of having the pattern to always check for the specific location.<p><strong>16)</strong> From the <code>patterns.txt</code> input file, extract from <code>car</code> at the start of a line to the very next occurrence of <code>book</code> or <code>lie</code> in the file. Perform additional transformation to convert ASCII NUL characters, if any, to the newline character.<pre><code class=language-bash>$ grep -zoP '(?ms)^car.*?(book|lie)' patterns.txt | tr '\0' '\n'
+care
+4*5]
+a huge discarded pile of book
+car
+eden
+rested replie
+</code></pre><p><strong>17)</strong> For the input file <code>patterns.txt</code>, match lines having the content present in the <code>p</code> shell variable literally at the end of lines. For example, if <code>p='*[5]'</code>, then <code>(9-2)*[5]</code> would be a valid match, but not <code>[4]*[5]+[6]</code>.<pre><code class=language-bash>$ p='*[5]'
+$ grep -P '\Q'"$p"'\E$' patterns.txt
+(9-2)*[5]
 
-$ grep -P 'qty((?!\s|error).)*price' price.txt
-23,qty,price,42
-42 qty-6,apple-56,price-234,error
-4,qtyprice,3
-</code></pre><p><strong>d)</strong> Correct the command to get output as shown below. Problem statement is to find sequence of duplicate word characters, with the second occurrence matching just before a newline character.<pre><code class=language-bash>$ # no output
-$ printf '2\nice\nwater\nNice\n42' | grep -zoP '(\w+).*\1\n'
+$ p='*4)'
+$ grep -P '\Q'"$p"'\E$' patterns.txt
+12- (e+(j/k-3)*4)
 
-$ # correct the command to get expected output as shown
-$ printf '2\nice\nwater\nNice\n42' | grep -zoP '(?s)(\w+).*\1\n'
-ice
-water
-Nice
-</code></pre><p><strong>e)</strong> Extract all whole words except those that start with <code>p</code> or <code>e</code> or <code>n</code><pre><code class=language-bash>$ echo 'a pip at tea top earn row nice' | grep -woP '\b[^pen]\w*'
-a
-at
-tea
-top
-row
-</code></pre><br><h1 id=ripgrep><a class=header href=#ripgrep>ripgrep</a></h1><p>Would be a good idea to first redo all the exercises using <code>rg</code> from all the previous chapters. Some exercises will require reading the manual, as those options aren't covered in the chapter.<p><strong>a)</strong> Go through the manual and find an option that will change the line separator from <code>\n</code> to <code>\r\n</code>. See <a href=#frequently-used-options>Frequently used options</a> section for details about the input file used here.<pre><code class=language-bash>$ # assumes 'exercises/freq_options' as CWD
+$ p='42'
+$ grep -P '\Q'"$p"'\E$' patterns.txt
+Hi42Bye nice1423 bad42
+</code></pre><p><strong>18)</strong> From the <code>patterns.txt</code> input file, extract all whole words if a line also contains <code>car</code>. But, any word occupying the first five characters in the line shouldn't be part of the output. For example, <code>no scar</code> shouldn't produce any output since both words have all/some characters within the first five characters in the line. <code>part cart mart</code> should produce <code>cart</code> and <code>mart</code> as output. <code>two sets tests</code> would fail the <code>car</code> condition, and thus shouldn't produce any output.<pre><code class=language-bash>$ grep 'car' patterns.txt
+scar
+par car tar far Cart
+care
+a huge discarded pile of books
+scare
+car
+part cart mart
 
-$ # no output
-$ rg -cx '' dracula.txt
+$ grep 'car' patterns.txt | grep -woP '^.{1,5}(*SKIP)(*F)|\w+'
+tar
+far
+Cart
+discarded
+pile
+of
+books
+cart
+mart
+</code></pre><p><strong>19)</strong> What do the following unicode character sets match?<ul><li><code>\p{L}</code> — any letter<li><code>\P{L}</code> — other than letters, can also use <code>\p{^L}</code><li><code>\p{Greek}</code> — Greek letters<li><code>\p{Xwd}</code> — word characters<li><code>\p{P}</code> — punctuation characters</ul><p><strong>20)</strong> What do the following escape sequences do?<ul><li><code>\A</code> — restricts the match to the start of string<li><code>\z</code> — restricts the match to the end of string<li><code>\Z</code> — similar to <code>\z</code> but if newline is the last character, <code>\Z</code> will also match just before this newline character</ul><br><h1 id=ripgrep><a class=header href=#ripgrep>ripgrep</a></h1><p>Would be a good idea to first redo all the exercises using <code>rg</code> from all the previous chapters. Some exercises will require reading the manual, as those options aren't covered in this book.<p><strong>1)</strong> Which option will change the line separator from <code>\n</code> to <code>\r\n</code>?<pre><code class=language-bash># no output
+$ rg -cx '' dos.txt
 
-$ rg --crlf -cx '' dracula.txt
-2559
-</code></pre><p><strong>b)</strong> Commands like <code>sed</code> and <code>perl</code> require special care if you need to search and replace a text literally. <code>rg</code> provides an easier alternative, which can be seen with these exercises.<pre><code class=language-bash>$ # replace [4]* with 2
-$ printf '2.3/[4]*6\nfoo\n5.3-[4]*9\n' | rg --passthru -F '[4]*' -r '2'
-2.3/26
-foo
-5.3-29
+$ rg --crlf -cx '' dos.txt
+4
+</code></pre><blockquote><p><code>--crlf</code><p>When enabled, ripgrep will treat CRLF (<code>\r\n</code>) as a line terminator instead of just <code>\n</code></blockquote><p><strong>2)</strong> Default behavior of <code>ripgrep</code> changes depending on whether the output is redirected or not. Use appropriate option(s) to filter lines containing <code>are</code> from the <code>sample.txt</code> and <code>patterns.txt</code> input files and pipe the output to <code>tr 'a-z' 'A-Z'</code> to get results as shown below.<pre><code class=language-bash>$ rg -n --heading 'are' sample.txt patterns.txt | tr 'a-z' 'A-Z'
+PATTERNS.TXT
+12:CARE
+15:SCARE
 
-$ # replace '3$a with &
-$ printf "a'3\$a\nb'3\$a6\nc\n" | rg --passthru -F \''3$a' -r '&'
-a&
-b&6
-c
-</code></pre><p><strong>c)</strong> Create <code>exercises/ripgrep</code> directory and then save <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/raw/master/exercises/sample.md>this file from learn_gnugrep_ripgrep repo</a> as <code>sample.md</code>. For this input file, match all lines containing <code>ruby</code> irrespective of case, but not if it is part of code blocks that are bounded by triple backticks.<pre><code class=language-bash>$ # assumes 'exercises' as CWD
-$ mkdir ripgrep && cd $_
-
-$ rg -iPU '(?s)^```.*?^```(*SKIP)(*F)|ruby' sample.md
-3:REPL is a good way to learn RUBY for beginners.
-16:ruby comes loaded with awesome methods. Enjoy learning RuBy.
-</code></pre><p><strong>d)</strong> Sum all integer numbers (floating-point numbers should be ignored) if the file also contains the string <code>is</code><pre><code class=language-bash>$ # assumes 'exercises/ripgrep' as CWD
-$ # which already has one file named 'sample.md'
-
-$ # create two more files with these commands
-$ echo 'hi,31,3.14,bye' > 'space in filename.txt'
-$ echo 'This is 2 good' > $'weird \n symbols'
-
-$ # all three files should be considered as input
-$ # use awk '{s+=$1} END{print s}' if datamash is not available
-$ rg -0 -l 'is' | xargs -0 rg -oIP '\d++\.\d++(*SKIP)(*F)|\d++' | datamash sum 1
-61
-</code></pre><p><strong>e)</strong> Default behavior changes depending upon output is intended for terminal or not. Use appropriate option(s) to get the output as shown below. Search for <code>good way</code> or <code>bye</code> in all the files in the given directory and save the output in <code>out.txt</code> file.<pre><code class=language-bash>$ # assumes 'exercises/ripgrep' as CWD
-
-$ rg -n --heading 'good way|bye' > out.txt
-$ cat out.txt
-space in filename.txt
-1:hi,31,3.14,bye
-
-sample.md
-3:REPL is a good way to learn RUBY for beginners.
-</code></pre><p><strong>f)</strong> Which option will show both line number and 1-based byte offset of first matching portion for matching lines?<pre><code class=language-bash>$ # assumes 'exercises/ripgrep' as CWD
-
-$ # normal output
-$ rg 'good' sample.md
-3:REPL is a good way to learn RUBY for beginners.
-
-$ # expected output
-$ rg -I --vimgrep 'good' sample.md
-3:11:REPL is a good way to learn RUBY for beginners.
-</code></pre><p><strong>g)</strong> By default, <code>ripgrep</code> uses <code>\n</code> as the line separator. Use appropriate option to change the separator to <code>NUL</code> and display all lines containing <code>red</code> for the given input.<pre><code class=language-bash>$ printf 'dark red\nteal\n\0brown\n\0spared' | rg --null-data 'red'
-dark red
-teal
-spared
-</code></pre><p><strong>h)</strong> Use appropriate options to replace all <code>NUL</code> characters with <code>---</code> and a newline character as shown below.<pre><code class=language-bash>$ printf 'dark red\nteal\n\0brown\n\0spared' | rg -a --passthru '\x00' -r $'---\n'
-dark red
-teal
+SAMPLE.TXT
+4:HOW ARE YOU
+</code></pre><p><strong>3)</strong> Replace all occurrences of <code>].*[</code> with <code>_</code> for the input file <code>regex_terms.txt</code>.<pre><code class=language-bash>$ rg --passthru -NF '].*[' -r '_' regex_terms.txt
+^[c-k].*\W$
+ly.
+[A-Z_0-9]
+</code></pre><p><strong>4)</strong> For the input file <code>nul_separated</code>, use the ASCII NUL character as the <em>line</em> separator and display lines containing <code>fig</code>. Perform additional transformation to convert ASCII NUL characters, if any, to the newline character.<pre><code class=language-bash>$ rg --null-data 'fig' nul_separated | tr '\0' '\n'
+apple
+fig
+mango
+icecream
+</code></pre><p><strong>5)</strong> For the input file <code>nul_separated</code>, replace the ASCII NUL character with a newline character, followed by <code>---</code> and another newline character.<pre><code class=language-bash>$ rg -aN --passthru '\x00' -r $'\n---\n' nul_separated
+apple
+fig
+mango
+icecream
 ---
-brown
+how are you
+have a nice day
 ---
-spared
-</code></pre></main><nav class=nav-wrapper aria-label="Page navigation"><a rel=prev href=further-reading.html class="mobile-nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><div style="clear: both"></div></nav></div></div><nav class=nav-wide-wrapper aria-label="Page navigation"><a rel=prev href=further-reading.html class="nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a></nav></div><script>
-            window.playground_copyable = true;
-        </script><script src=elasticlunr.min.js charset=utf-8></script><script src=mark.min.js charset=utf-8></script><script src=searcher.js charset=utf-8></script><script src=clipboard.min.js charset=utf-8></script><script src=highlight.js charset=utf-8></script><script src=book.js charset=utf-8></script><script src=sidebar.js></script>
+dragon unicorn centaur
+</code></pre><p><strong>6)</strong> Extract all whole words from the <code>sample.txt</code> input file. However, do not extract words if they contain any character present in the <code>ignore</code> shell variable.<pre><code class=language-bash>$ ignore='aety'
+# can also use: rg -No '\w+' sample.txt | rg -v "[$ignore]"
+$ rg -No '\b[\w--['"$ignore"']]+\b' sample.txt
+World
+Hi
+How
+do
+Much
+Adios
+
+$ ignore='eosW'
+$ rg -No '\b[\w--['"$ignore"']]+\b' sample.txt
+Hi
+it
+it
+banana
+papaya
+Much
+</code></pre><p><strong>7)</strong> How would you represent a <code>$</code> character literally when using the <code>-r</code> option?<p><code>$$</code><p><strong>8)</strong> From the <code>patterns.txt</code> input file, extract from <code>car</code> at the start of a line to the very next occurrence of <code>book</code> or <code>lie</code> in the file.<pre><code class=language-bash>$ rg -NUo '(?s)^car.*?(book|lie)' patterns.txt
+care
+4*5]
+a huge discarded pile of book
+car
+eden
+rested replie
+</code></pre><p><strong>9)</strong> From the <code>pcre.txt</code> input file, extract from the second field to the second last field from rows having at least two columns considering <code>;</code> as the delimiter. For example, <code>b;c</code> should be extracted from <code>a;b;c;d</code> and a line containing less than two <code>;</code> characters shouldn't produce any output.<pre><code class=language-bash># can also use: rg -oNP ';\K.+(?=;)' pcre.txt
+$ rg -oN ';(.+);' -r '$1' pcre.txt
+in;awe;b2b;3list
+be;he;0;a;b
+</code></pre><p><strong>10)</strong> For the input file <code>python.md</code>, match all lines containing <code>python</code> irrespective of case, but not if it is part of code blocks that are bounded by triple backticks.<pre><code class=language-bash>$ rg -iNPU '(?s)^```.*?^```(*SKIP)(*F)|python' python.md
+REPL is a good way to learn PYTHON for beginners.
+python comes loaded with awesome methods. Enjoy learning pYtHoN.
+</code></pre><blockquote><p><img alt=info src=images/info.svg> For the rest of the exercises, use the <code>recursive_matching</code> directory that was created in an earlier chapter. Source the <code>recursive.sh</code> script if you haven't created this directory yet.<pre><code class=language-bash># the 'recursive.sh' script is present in the 'exercises' directory
+$ source recursive.sh
+</code></pre></blockquote><p><strong>11)</strong> List all files not containing <code>blue</code>. Hidden files should also be considered.<pre><code class=language-bash>$ rg --hidden --files-without-match 'blue'
+substitute.sh
+backups/dot_files/.bash_aliases
+backups/dot_files/.inputrc
+projects/shell/hello.sh
+projects/python/hello.py
+</code></pre><p><strong>12)</strong> List all the files in the <code>backups</code> directory, including links and hidden files.<pre><code class=language-bash>$ rg -L --hidden --files backups/
+backups/text/pat.txt
+backups/color list.txt
+backups/dot_files/.inputrc
+backups/dot_files/.bash_aliases
+</code></pre><p><strong>13)</strong> What does the <code>-uuu</code> option mean?<ul><li><code>-u</code> indicates <code>--no-ignore</code><li><code>-uu</code> indicates <code>--no-ignore --hidden</code><li><code>-uuu</code> indicates <code>--no-ignore --hidden --binary</code></ul><p>With <code>rg -uuu</code> you can match the default behavior of the <code>grep -r</code> command.<p><strong>14)</strong> Display lines containing a word ending with <code>e</code>. Search only among the <code>sh</code> file type and the output should not have line number or filename prefixes.<pre><code class=language-bash>$ rg -NI -t 'sh' 'e\b'
+sed -i 's/search/replace/g' **/*.txt
+</code></pre><p><strong>15)</strong> List files other than hidden files and file types <code>sh</code> and <code>py</code>. Links should be considered for listing.<pre><code class=language-bash>$ rg -L -T 'sh' -T 'py' --files
+backups/text/pat.txt
+backups/color list.txt
+colors_2.txt
+sample_file.txt
+colors_1
+</code></pre><p><strong>16)</strong> List all files not containing a <code>.</code> character in their names. Ignore links.<pre><code class=language-bash>$ rg -g '!*.*' --files
+colors_1
+</code></pre><p><strong>17)</strong> What does <code>**</code> mean when used with the <code>-g</code> option?<p>The <code>**</code> pattern serves as a placeholder for zero or more levels of directories. See <a href=https://git-scm.com/docs/gitignore#_pattern_format>git documentation: gitignore pattern format</a> for more details.<p><strong>18)</strong> Search recursively and list the names of files that contain <code>Hello</code> or <code>blue</code>. Symbolic links should be searched as well. Do not search within <code>python</code> or <code>backups</code> directories.<pre><code class=language-bash>$ rg -lL -g '!{python,backups}' 'Hello|blue'
+colors_2.txt
+sample_file.txt
+colors_1
+projects/shell/hello.sh
+</code></pre><p><strong>19)</strong> Match lines containing <code>Hello</code> or <code>red</code> only from files in the current hierarchy, i.e. don't search recursively. Symbolic links should be searched as well.<pre><code class=language-bash># can also use: rg -Lg '!*/' 'Hello|red'
+$ rg -L --max-depth 1 'Hello|red'
+colors_2.txt
+5:red
+
+sample_file.txt
+1:Hello World
+</code></pre><p><strong>20)</strong> Search recursively for files containing <code>blue</code>, <code>yellow</code> and <code>teal</code> anywhere in the file.<pre><code class=language-bash>$ rg -l0 'blue' | xargs -r0 rg -l0 'yellow' | xargs -r0 rg -l 'teal'
+colors_1
+</code></pre></main><nav aria-label="Page navigation"class=nav-wrapper><a aria-label="Previous chapter"class="mobile-nav-chapters previous"title="Previous chapter"aria-keyshortcuts=Left href=further-reading.html rel=prev> <i class="fa fa-angle-left"></i> </a><div style="clear: both"></div></nav></div></div><nav aria-label="Page navigation"class=nav-wide-wrapper><a aria-label="Previous chapter"class="nav-chapters previous"title="Previous chapter"aria-keyshortcuts=Left href=further-reading.html rel=prev> <i class="fa fa-angle-left"></i> </a></nav></div><script>window.playground_copyable = true;</script><script charset=utf-8 src=elasticlunr.min.js></script><script charset=utf-8 src=mark.min.js></script><script charset=utf-8 src=searcher.js></script><script charset=utf-8 src=clipboard.min.js></script><script charset=utf-8 src=highlight.js></script><script charset=utf-8 src=book.js></script><script src=sidebar.js></script>
