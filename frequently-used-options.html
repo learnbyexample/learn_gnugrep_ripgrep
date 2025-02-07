@@ -82,7 +82,7 @@ grep: Unmatched [, [^, [:, [., or [=
 # use the -F option to match strings literally
 $ echo 'int a[5]' | grep -F 'a[5]'
 int a[5]
-</code></pre><blockquote><p><img alt=info src=images/info.svg> If the search string doesn't have any regular expression metacharacters, <code>GNU grep</code> will try a literal search even if the <code>-F</code> option isn't used.</blockquote><h2 id=case-insensitive-search><a class=header href=#case-insensitive-search>Case insensitive search</a></h2><p>Sometimes, you don't know if a log file contains case variable search terms, such as <code>error</code>, <code>Error</code>, or <code>ERROR</code>. In such cases, you can use the <code>-i</code> option to ignore case.<pre><code class=language-bash>$ grep -i 'the' ip.txt
+</code></pre><blockquote><p><img alt=info src=images/info.svg> If the search string doesn't have any regular expression metacharacters, <code>GNU grep</code> will try a literal search even if the <code>-F</code> option isn't used.</blockquote><h2 id=case-insensitive-search><a class=header href=#case-insensitive-search>Case insensitive search</a></h2><p>Sometimes, you don't know if a log file contains search terms, such as <code>error</code>, <code>Error</code>, or <code>ERROR</code>. In such cases, you can use the <code>-i</code> option to ignore case.<pre><code class=language-bash>$ grep -i 'the' ip.txt
 go play in the park
 come back before the sky turns dark
 There are so many delights to cherish
@@ -121,7 +121,7 @@ ip.txt:4
 # useful application of the cat command
 $ cat <(printf 'this\nis\ncool\n') ip.txt | grep -c 'is'
 6
-</code></pre><blockquote><p><img alt=warning src=images/warning.svg> The output given by the <code>-c</code> option is the total number of <strong>lines</strong> matching the given patterns, not the total number of matches. Use the <code>-o</code> option, and pipe the output to <code>wc -l</code> to count every occurrence (example shown later).</blockquote><h2 id=limiting-output-lines><a class=header href=#limiting-output-lines>Limiting output lines</a></h2><p>Sometimes, there are too many results, in which case you could pipe the output to a <strong>pager</strong> tool like <code>less</code>. Or use the <code>-m</code> option to limit how many matching lines should be displayed for each input file. <code>grep</code> will stop processing an input file as soon as the condition specified by <code>-m</code> is satisfied. Note that just like the <code>-c</code> option, <code>-m</code> works by line count and not based on the total number of matches.<pre><code class=language-bash>$ grep -m2 'is' ip.txt
+</code></pre><blockquote><p><img alt=warning src=images/warning.svg> The output given by the <code>-c</code> option is the total number of <strong>lines</strong> matching the given patterns, not the total number of matches. Use the <code>-o</code> option, and pipe the output to <code>wc -l</code> to count every occurrence (example will be shown later).</blockquote><h2 id=limiting-output-lines><a class=header href=#limiting-output-lines>Limiting output lines</a></h2><p>Sometimes, there are too many results, in which case you could pipe the output to a <strong>pager</strong> tool like <code>less</code>. Or use the <code>-m</code> option to limit how many matching lines should be displayed for each input file. <code>grep</code> will stop processing an input file as soon as the condition specified by <code>-m</code> is satisfied. Note that just like the <code>-c</code> option, <code>-m</code> works by line count and not based on the total number of matches.<pre><code class=language-bash>$ grep -m2 'is' ip.txt
 it is a warm and cozy day
 listen to what I say
 
@@ -173,7 +173,7 @@ search.txt
 </code></pre><h2 id=filename-prefix-for-matching-lines><a class=header href=#filename-prefix-for-matching-lines>Filename prefix for matching lines</a></h2><p>If there are multiple input files, <code>grep</code> will automatically prefix the filename when displaying the matching lines. You can also control whether or not to add the prefix using the following options:<ul><li><code>-h</code> option will prevent filename prefix in the output (default for single input file)<li><code>-H</code> option will always show filename prefix (default for multiple input files)</ul><pre><code class=language-bash># -h is on by default for single input file
 $ grep 'say' ip.txt
 listen to what I say
-# using -h to suppress filename prefix for multiple input files
+# use -h to suppress filename prefix for multiple input files
 $ printf 'say\nyou\n' | grep -h 'say' - ip.txt
 say
 listen to what I say
@@ -191,8 +191,8 @@ $ grep -Hn 'say' ip.txt search.txt
 ip.txt:2:listen to what I say
 search.txt:1:say
 
-# use :cn and :cp to navigate to next/previous occurrences
-# command-line area at the bottom will show number of matches and filenames
+# use :cn and :cp to navigate to the next/previous occurrences
+# command-line area at the bottom will show the number of matches and filenames
 # you can also save the grep output and pass that filename instead of <()
 $ vim -q <(grep -Hn 'say' ip.txt search.txt)
 </code></pre><h2 id=colored-output><a class=header href=#colored-output>Colored output</a></h2><p>When working from the terminal, having the <code>--color</code> option enabled makes it easier to spot the matching portions in the output. Especially useful when you are experimenting to find the correct regular expression. Modern terminals will usually have color support, see <a href=https://unix.stackexchange.com/q/9957/109046>unix.stackexchange: How to check if bash can print colors?</a> for details.<p>The <code>--color</code> (or <code>--colour</code>) option will highlight matching patterns, line numbers, filenames, etc. There are three different settings:<ul><li><code>auto</code> will result in color highlighting when results are displayed on terminal, but not when the output is redirected to another command, file, etc. This is the default setting<li><code>always</code> will result in color highlighting when results are displayed on terminal as well as when the output is redirected to another command, file, etc<li><code>never</code> explicitly disables color highlighting</ul><p>Here are couple of examples with the <code>--color</code> option enabled (default is <code>auto</code>).<p align=center><img alt="grep color output"src=./images/color_output.png><p>It is typical to alias both the <code>ls</code> and <code>grep</code> commands to include <code>--color=auto</code>.<pre><code class=language-bash># aliases are usually saved in ~/.bashrc or ~/.bash_aliases
@@ -241,13 +241,13 @@ $ grep -Fvxf colors_2 colors_1
 teal
 light blue
 brown
-</code></pre><p>See also <a href=https://stackoverflow.com/q/42239179/4082052>stackoverflow: Fastest way to find lines of a text file from another larger text file</a> — go through all the answers.<h2 id=extract-only-matching-portion><a class=header href=#extract-only-matching-portion>Extract only matching portion</a></h2><p>If the total number of matches is required, use the <code>-o</code> option to display only the matching portions (one per line), and then use <code>wc</code> to count them. This option is more commonly used with regular expressions.<pre><code class=language-bash>$ grep -oi 'the' ip.txt
+</code></pre><p>See also <a href=https://stackoverflow.com/q/42239179/4082052>stackoverflow: Fastest way to find lines of a text file from another larger text file</a> — go through all the answers.<h2 id=extract-only-the-matching-portions><a class=header href=#extract-only-the-matching-portions>Extract only the matching portions</a></h2><p>If the total number of matches is required, use the <code>-o</code> option to display only the matching portions (one per line), and then use <code>wc</code> to count them. This option is more commonly used with regular expressions.<pre><code class=language-bash>$ grep -oi 'the' ip.txt
 the
 the
 The
 the
 
-# -c only gives count of matching lines
+# -c only gives the count of matching lines
 $ grep -c 'an' ip.txt
 4
 # use -o to get each match on a separate line

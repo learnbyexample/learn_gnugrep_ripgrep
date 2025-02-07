@@ -28,7 +28,7 @@
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
-                    });</script><div class=content id=content><main><div class=sidetoc><nav class=pagetoc></nav></div><h1 id=breere-regular-expressions><a class=header href=#breere-regular-expressions>BRE/ERE Regular Expressions</a></h1><p>This chapter covers Basic and Extended Regular Expressions as implemented in <code>GNU grep</code>. Unless otherwise indicated, examples and descriptions will assume ASCII input. <code>GNU grep</code> also supports Perl Compatible Regular Expressions, which will be discussed in a <a href=./perl-compatible-regular-expressions.html#perl-compatible-regular-expressions>later chapter</a>.<p>By default, <code>grep</code> treats the search pattern as Basic Regular Expression (BRE). Here are the various options available to choose a particular flavor:<ul><li><code>-G</code> option can be used to specify explicitly that BRE is needed<li><code>-E</code> option will enable Extended Regular Expression (ERE) <ul><li>in <code>GNU grep</code>, BRE and ERE only differ in how metacharacters are specified, no difference in features</ul><li><code>-F</code> option will cause the search patterns to be treated literally<li><code>-P</code> if available, this option will enable Perl Compatible Regular Expression (PCRE)</ul><blockquote><p><img alt=info src=images/info.svg> The <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/example_files>example_files</a> directory has all the files used in the examples.</blockquote><blockquote><p><img alt=info src=./images/info.svg> See <a href=https://www.gnu.org/software/grep/manual/grep.html#Problematic-Regular-Expressions>grep manual: Problematic Regular Expressions</a> if you are working on portable scripts. See also <a href=https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap09.html>POSIX specification for BRE and ERE</a>.</blockquote><h2 id=line-anchors><a class=header href=#line-anchors>Line Anchors</a></h2><p>Instead of matching anywhere in the line, restrictions can be specified. For now, you'll see the ones that are already part of BRE/ERE. In later sections and chapters, you'll get to know how to define your own rules for restriction. These restrictions are made possible by assigning special meaning to certain characters and escape sequences.<p>The characters with special meaning are known as <strong>metacharacters</strong> in regular expressions parlance. In case you need to match those characters literally, you need to escape them with a <code>\</code> (discussed in the <a href=./breere-regular-expressions.html#escaping-metacharacters>Escaping metacharacters</a> section).<p>There are two line anchors:<ul><li><code>^</code> metacharacter restricts the matching to the start of the line<li><code>$</code> metacharacter restricts the matching to the end of the line</ul><p>Here are some examples:<pre><code class=language-bash>$ cat anchors.txt
+                    });</script><div class=content id=content><main><div class=sidetoc><nav class=pagetoc></nav></div><h1 id=breere-regular-expressions><a class=header href=#breere-regular-expressions>BRE/ERE Regular Expressions</a></h1><p>This chapter covers Basic and Extended Regular Expressions as implemented in <code>GNU grep</code>. Unless otherwise indicated, examples and descriptions will assume ASCII input. <code>GNU grep</code> also supports Perl Compatible Regular Expressions, which will be discussed in a <a href=./perl-compatible-regular-expressions.html#perl-compatible-regular-expressions>later chapter</a>.<p>By default, <code>grep</code> treats the search pattern as Basic Regular Expression (BRE). Here are the various options available to choose a particular flavor:<ul><li><code>-G</code> option can be used to specify explicitly that BRE is needed<li><code>-E</code> option will enable Extended Regular Expression (ERE) <ul><li>in <code>GNU grep</code>, BRE and ERE only differ in how metacharacters are specified, no difference in features</ul><li><code>-F</code> option will cause the search patterns to be treated literally<li><code>-P</code> if available, this option will enable Perl Compatible Regular Expression (PCRE)</ul><blockquote><p><img alt=info src=images/info.svg> The <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/example_files>example_files</a> directory has all the files used in the examples.</blockquote><blockquote><p><img alt=info src=./images/info.svg> See <a href=https://www.gnu.org/software/grep/manual/grep.html#Problematic-Regular-Expressions>grep manual: Problematic Regular Expressions</a> if you are working on portable scripts. See also <a href=https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap09.html>POSIX specification for BRE and ERE</a>.</blockquote><h2 id=line-anchors><a class=header href=#line-anchors>Line Anchors</a></h2><p>Instead of matching anywhere in the line, restrictions can be specified. For now, you'll see the ones that are already part of BRE/ERE. In later sections and chapters, you'll get to know how to define your own rules for restriction. These restrictions are made possible by assigning special meaning to certain characters and escape sequences.<p>The characters with special meaning are known as <strong>metacharacters</strong> in regular expressions parlance. In case you need to match those characters literally, you need to escape them with a <code>\</code> (discussed in the <a href=./breere-regular-expressions.html#escaping-metacharacters>Escaping metacharacters</a> section).<p>There are two line anchors:<ul><li><code>^</code> metacharacter restricts the matching to the start of the line<li><code>$</code> metacharacter restricts the matching to the end of the line</ul><p>Here are some examples:<pre><code class=language-bash>$ cat anchors.txt
 sub par
 spar
 apparent effort
@@ -65,7 +65,7 @@ $ grep 'par\b' anchors.txt
 sub par
 spar
 
-# match only whole word 'par'
+# match only the whole word 'par'
 $ grep '\bpar\b' anchors.txt
 sub par
 $ grep -w 'par' anchors.txt
@@ -75,13 +75,13 @@ $ grep '\Bpar\B' anchors.txt
 apparent effort
 two spare computers
 
-# match 'par' but not as start of word
+# match 'par' but not as the start of word
 $ grep '\Bpar' anchors.txt
 spar
 apparent effort
 two spare computers
 
-# match 'par' but not as end of word
+# match 'par' but not as the end of word
 $ grep 'par\B' anchors.txt
 apparent effort
 two spare computers
@@ -116,7 +116,7 @@ two spare computers
 spared
 $ echo 'car spared spar' | grep -oE 'spared|are'
 spared
-</code></pre><p>In case of matches starting from same location, for example <code>party</code> and <code>par</code>, the longest matching portion gets precedence. See <a href=./breere-regular-expressions.html#longest-match-wins>Longest match wins</a> section for more examples. See <a href=https://www.regular-expressions.info/alternation.html>regular-expressions: alternation</a> for more information on this topic.<pre><code class=language-bash># same output irrespective of alternation order
+</code></pre><p>In case of matches starting from same location, for example <code>party</code> and <code>par</code>, the longest matching portion gets precedence. See the <a href=./breere-regular-expressions.html#longest-match-wins>Longest match wins</a> section for more examples. See <a href=https://www.regular-expressions.info/alternation.html>regular-expressions: alternation</a> for more information on this topic.<pre><code class=language-bash># same output irrespective of alternation order
 $ echo 'pool party 2' | grep -oE 'party|par'
 party
 $ echo 'pool party 2' | grep -oE 'par|party'
@@ -143,7 +143,7 @@ $ grep -E '\b(par|part)\b' anchors.txt
 sub par
 cart part tart mart
 # taking out common characters as well
-# you'll later learn a better technique instead of using empty alternate
+# you'll later learn a better technique instead of using an empty alternate
 $ grep -E '\bpar(|t)\b' anchors.txt
 sub par
 cart part tart mart
@@ -309,7 +309,7 @@ car bat cod map scat
 # here 'm*' will match 'm' zero times as that gives the longest match
 $ echo 'car bat cod map scat dot abacus' | grep -o 'b.*m*'
 bat cod map scat dot abacus
-</code></pre><h2 id=character-classes><a class=header href=#character-classes>Character classes</a></h2><p>To create a custom placeholder for limited set of characters, enclose them inside <code>[]</code> metacharacters. It is similar to using single character alternations inside a grouping, but with added flexibility and features. Character classes have their own versions of metacharacters and provide special predefined sets for common use cases. Quantifiers are also applicable to character classes.<pre><code class=language-bash># same as: grep -E 'cot|cut' or grep -E 'c(o|u)t'
+</code></pre><h2 id=character-classes><a class=header href=#character-classes>Character classes</a></h2><p>To create a custom placeholder for a limited set of characters, enclose them inside <code>[]</code> metacharacters. It is similar to using single character alternations inside a grouping, but with added flexibility and features. Character classes have their own versions of metacharacters and provide special predefined sets for common use cases. Quantifiers are also applicable to character classes.<pre><code class=language-bash># same as: grep -E 'cot|cut' or grep -E 'c(o|u)t'
 $ printf 'cute\ncat\ncot\ncoat\ncost\nscuttle' | grep 'c[ou]t'
 cute
 cot
@@ -384,7 +384,7 @@ numbers
 $ echo 'apple:123:banana:cherry' | grep -o '^[^:]*'
 apple
 
-# extract last two columns based on a delimiter
+# extract the last two columns based on a delimiter
 $ echo 'apple:123:banana:cherry' | grep -oE '(:[^:]+){2}$'
 :banana:cherry
 
@@ -404,7 +404,7 @@ $ printf 'tryst\nfun\nglyph\npity\nwhy' | grep -v '[aeiou]'
 tryst
 glyph
 why
-</code></pre><h2 id=escape-sequence-sets><a class=header href=#escape-sequence-sets>Escape sequence sets</a></h2><p>Some commonly used character sets have predefined escape sequences:<ul><li><code>\w</code> matches all <strong>word</strong> characters <code>[a-zA-Z0-9_]</code> (recall <code>-w</code> definition)<li><code>\W</code> matches all non-word characters (recall duality seen earlier, like <code>\b</code> and <code>\B</code>)<li><code>\s</code> matches all <strong>whitespace</strong> characters: tab, newline, vertical tab, form feed, carriage return and space<li><code>\S</code> matches all non-whitespace characters</ul><p>These escape sequences cannot be used inside character classes (unlike PCRE). Also, as mentioned earlier, these definitions assume ASCII input.<pre><code class=language-bash># extract all word character sequences
+</code></pre><h2 id=escape-sequence-sets><a class=header href=#escape-sequence-sets>Escape sequence sets</a></h2><p>Some commonly used character sets have predefined escape sequences:<ul><li><code>\w</code> matches all <strong>word</strong> characters <code>[a-zA-Z0-9_]</code> (recall the definition for <code>-w</code>)<li><code>\W</code> matches all non-word characters (recall duality seen earlier, like <code>\b</code> and <code>\B</code>)<li><code>\s</code> matches all <strong>whitespace</strong> characters: tab, newline, vertical tab, form feed, carriage return and space<li><code>\S</code> matches all non-whitespace characters</ul><p>These escape sequences cannot be used inside character classes (unlike PCRE). Also, as mentioned earlier, these definitions assume ASCII input.<pre><code class=language-bash># extract all word character sequences
 $ printf 'load;err_msg--\nant,r2..not\n' | grep -o '\w*'
 load
 err_msg
@@ -445,7 +445,7 @@ pie tie
 ink
 eat
 42
-</code></pre><h2 id=matching-character-class-metacharacters-literally><a class=header href=#matching-character-class-metacharacters-literally>Matching character class metacharacters literally</a></h2><p>Specific placement is needed to match the character class metacharacters literally.<p><code>-</code> should be the first or the last character.<pre><code class=language-bash># same as: grep -owE '[-a-z]{2,}'
+</code></pre><h2 id=matching-character-class-metacharacters-literally><a class=header href=#matching-character-class-metacharacters-literally>Matching character class metacharacters literally</a></h2><p>Specific placement is needed to match the character class metacharacters literally.<p><code>-</code> should be the first or last character.<pre><code class=language-bash># same as: grep -owE '[-a-z]{2,}'
 $ echo 'ab-cd gh-c 12-423' | grep -owE '[a-z-]{2,}'
 ab-cd
 gh-c
@@ -466,7 +466,7 @@ a^b
 a+b
 </code></pre><p>Characters like <code>\</code> and <code>$</code> are not special.<pre><code class=language-bash>$ echo '5ba\babc2' | grep -o '[a\b]*'
 ba\bab
-</code></pre><blockquote><p><img alt=warning src=images/warning.svg> As seen in the examples above, combinations like <code>[.</code> or <code>[:</code> cannot be used together to mean two individual characters, as they have special meaning within <code>[]</code>. See <a href=https://www.gnu.org/software/grep/manual/grep.html#Character-Classes-and-Bracket-Expressions>Character Classes and Bracket Expressions</a> section in <code>info grep</code> for more details.</blockquote><h2 id=backreferences><a class=header href=#backreferences>Backreferences</a></h2><p>The grouping metacharacters <code>()</code> are also known as <strong>capture groups</strong>. Similar to variables in programming languages, the portion captured by <code>()</code> can be referred later using backreferences. The syntax is <code>\N</code> where <code>N</code> is the capture group you want. Leftmost <code>(</code> in the regular expression is <code>\1</code>, next one is <code>\2</code> and so on up to <code>\9</code>.<pre><code class=language-bash># 8 character lines having same 3 lowercase letters at the start and end
+</code></pre><blockquote><p><img alt=warning src=images/warning.svg> As seen in the examples above, combinations like <code>[.</code> or <code>[:</code> cannot be used together to mean two individual characters, as they have special meaning within <code>[]</code>. See <a href=https://www.gnu.org/software/grep/manual/grep.html#Character-Classes-and-Bracket-Expressions>Character Classes and Bracket Expressions</a> section in <code>info grep</code> for more details.</blockquote><h2 id=backreferences><a class=header href=#backreferences>Backreferences</a></h2><p>The grouping metacharacters <code>()</code> are also known as <strong>capture groups</strong>. Similar to variables in programming languages, the portion captured by <code>()</code> can be referred later using backreferences. The syntax is <code>\N</code> where <code>N</code> is the capture group you want. Leftmost <code>(</code> in the regular expression is <code>\1</code>, next one is <code>\2</code> and so on up to <code>\9</code>.<pre><code class=language-bash># 8 character lines having the same 3 lowercase letters at the start and end
 $ grep -xE '([a-z]{3})..\1' words.txt
 mesdames
 respires
@@ -489,7 +489,7 @@ tool
 # use \s instead of \W if only whitespaces are allowed between words
 $ printf 'spot the the error\nno issues here' | grep -wE '(\w+)\W+\1'
 spot the the error
-</code></pre><blockquote><p><img alt=warning src=images/warning.svg> Backreference will provide the string that was matched, not the pattern that was inside the capture group. For example, if <code>([0-9][a-f])</code> matches <code>3b</code>, then backreferencing will give <code>3b</code> and not any other valid match like <code>8f</code>, <code>0a</code> etc. This is akin to how variables behave in programming, only the result of expression stays after variable assignment, not the expression itself.</blockquote><h2 id=known-bugs><a class=header href=#known-bugs>Known Bugs</a></h2><p>Visit <a href=https://debbugs.gnu.org/cgi/pkgreport.cgi?package=grep>grep bug list</a> for a list of known issues. See <a href=https://www.gnu.org/software/grep/manual/grep.html#Known-Bugs>GNU grep manual: Known Bugs</a> for a list of backreference related bugs.<blockquote><p>Large repetition counts in the <code>{n,m}</code> construct may cause grep to use lots of memory. In addition, certain other obscure regular expressions require exponential time and space, and may cause grep to run out of memory.<p>Back-references can greatly slow down matching, as they can generate exponentially many matching possibilities that can consume both time and memory to explore. Also, the POSIX specification for back-references is at times unclear. Furthermore, many regular expression implementations have back-reference bugs that can cause programs to return incorrect answers or even crash, and fixing these bugs has often been low-priority</blockquote><p>Here's an <a href=https://debbugs.gnu.org/cgi/bugreport.cgi?bug=26864>issue for certain usage of backreferences and quantifier</a> that was filed by yours truly.<pre><code class=language-bash># takes some time and results in no output
+</code></pre><blockquote><p><img alt=warning src=images/warning.svg> Backreference will provide the string that was matched, not the pattern that was inside the capture group. For example, if <code>([0-9][a-f])</code> matches <code>3b</code>, then backreferencing will give <code>3b</code> and not any other valid match like <code>8f</code>, <code>0a</code> etc. This is akin to how variables behave in programming, only the result of an expression stays after variable assignment, not the expression itself.</blockquote><h2 id=known-bugs><a class=header href=#known-bugs>Known Bugs</a></h2><p>Visit <a href=https://debbugs.gnu.org/cgi/pkgreport.cgi?package=grep>grep bug list</a> for a list of known issues. See <a href=https://www.gnu.org/software/grep/manual/grep.html#Known-Bugs>GNU grep manual: Known Bugs</a> for a list of backreference related bugs.<blockquote><p>Large repetition counts in the <code>{n,m}</code> construct may cause grep to use lots of memory. In addition, certain other obscure regular expressions require exponential time and space, and may cause grep to run out of memory.<p>Back-references can greatly slow down matching, as they can generate exponentially many matching possibilities that can consume both time and memory to explore. Also, the POSIX specification for back-references is at times unclear. Furthermore, many regular expression implementations have back-reference bugs that can cause programs to return incorrect answers or even crash, and fixing these bugs has often been low-priority</blockquote><p>Here's an <a href=https://debbugs.gnu.org/cgi/bugreport.cgi?bug=26864>issue for certain usage of backreferences and quantifier</a> that was filed by yours truly.<pre><code class=language-bash># takes some time and results in no output
 # aim is to get words having two occurrences of repeated characters
 $ grep -m5 -xiE '([a-z]*([a-z])\2[a-z]*){2}' words.txt
 # works when the nesting is unrolled
@@ -531,7 +531,7 @@ $ echo 'it line with it here it too sit' | grep -oE 'with(.*\&LTit\>){2}'
 # correct behavior
 $ echo 'it line with it here it too sit' | grep -oP 'with(.*\bit\b){2}'
 with it here it
-</code></pre><h2 id=summary><a class=header href=#summary>Summary</a></h2><p>Mastering regular expressions is not only important for using <code>grep</code> effectively, but also comes in handy for text processing with other CLI tools like <code>sed</code> and <code>awk</code> and programming languages like <code>Python</code> and <code>Ruby</code>. These days, some of the GUI applications also support regular expressions. One main thing to remember is that syntax and features will vary. This book itself discusses four variations — BRE, ERE, PCRE and <code>ripgrep</code> regex. However, core concepts are likely to be same and having a handy reference sheet would go a long way in reducing misuse.<h2 id=exercises><a class=header href=#exercises>Exercises</a></h2><blockquote><p><img alt=info src=images/info.svg> The <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/exercises>exercises</a> directory has all the files used in this section.</blockquote><p><strong>1)</strong> For the input file <code>patterns.txt</code>, extract from <code>(</code> to the next occurrence of <code>)</code> unless they contain parentheses characters in between.<pre><code class=language-bash>##### add your solution here
+</code></pre><h2 id=summary><a class=header href=#summary>Summary</a></h2><p>Mastering regular expressions is not only important for using <code>grep</code> effectively, but also comes in handy for text processing with other CLI tools like <code>sed</code> and <code>awk</code> and programming languages like <code>Python</code>, <code>Ruby</code> and <code>JavaScript</code>. These days, some of the GUI applications also support regular expressions. One main thing to remember is that syntax and features will vary. This book itself discusses four variations — BRE, ERE, PCRE and <code>ripgrep</code> regex. However, core concepts are likely to be same and having a handy reference sheet would go a long way in reducing misuse.<h2 id=exercises><a class=header href=#exercises>Exercises</a></h2><blockquote><p><img alt=info src=images/info.svg> The <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/exercises>exercises</a> directory has all the files used in this section.</blockquote><p><strong>1)</strong> For the input file <code>patterns.txt</code>, extract from <code>(</code> to the next occurrence of <code>)</code> unless they contain parentheses characters in between.<pre><code class=language-bash>##### add your solution here
 (division)
 (#modulo)
 (9-2)

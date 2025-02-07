@@ -72,12 +72,12 @@ $ echo '5*3-2=13' | grep -- '-2'
 $ printf -- '-2+3=1\n'
 -2+3=1
 </code></pre><p>As a corollary, you can use options even after filename arguments. This is useful if you forgot some option(s) and want to edit the previous command from the history.<pre><code class=language-bash># no output since + is not a metacharacter with default BRE
-$ printf 'boat\nsite\nfoot' | grep '[aeo]+t'
+$ printf 'boat\nsite\nfoot' | grep -o '[aeo]+t'
 
 # use up arrow to bring the previous command and add -E at the end
-$ printf 'boat\nsite\nfoot' | grep '[aeo]+t' -E
-boat
-foot
+$ printf 'boat\nsite\nfoot' | grep -o '[aeo]+t' -E
+oat
+oot
 </code></pre><h2 id=word-boundary-differences><a class=header href=#word-boundary-differences>Word boundary differences</a></h2><p>The <code>-w</code> option is not exactly the same as using word boundaries in regular expressions. The <code>\b</code> anchor by definition requires word characters to be present, but this is not the case with <code>-w</code> as described in the manual:<blockquote><p><strong>-w, --word-regexp</strong> Select only those lines containing matches that form whole words. The test is that the matching substring must either be at the beginning of the line, or preceded by a non-word constituent character. Similarly, it must be either at the end of the line or followed by a non-word constituent character. Word-constituent characters are letters, digits, and the underscore. This option has no effect if -x is also specified.</blockquote><pre><code class=language-bash># no output because there are no word characters
 $ echo '*$' | grep '\b\$\b'
 
@@ -108,26 +108,26 @@ he
 </code></pre><h2 id=faster-execution-for-ascii-input><a class=header href=#faster-execution-for-ascii-input>Faster execution for ASCII input</a></h2><p>Changing locale to ASCII (assuming that the default is not ASCII) can give a significant speed boost.<pre><code class=language-bash># time shown is best result from multiple runs
 # speed benefit will vary depending on computing resources, input, etc
 $ time grep -xE '([a-d][r-z]){3}' words.txt > f1
-real    0m0.032s
+real    0m0.036s
 
 # LC_ALL=C will give ASCII locale, active only for this command
 $ time LC_ALL=C grep -xE '([a-d][r-z]){3}' words.txt > f2
-real    0m0.007s
+real    0m0.008s
 
 # check that results are same for both versions of the command
 $ diff -s f1 f2
 Files f1 and f2 are identical
 </code></pre><p>Here's another example.<pre><code class=language-bash>$ time grep -xE '([a-z]..)\1' words.txt > f1
-real    0m0.126s
+real    0m0.139s
 $ time LC_ALL=C grep -xE '([a-z]..)\1' words.txt > f2
-real    0m0.074s
+real    0m0.082s
 
 # clean up temporary files
 $ rm f[12]
 </code></pre><blockquote><p><img alt=info src=images/info.svg> There has been plenty of speed improvements in recent versions, see <a href=https://savannah.gnu.org/news/?group_id=67>release notes</a> for details. See also <a href=https://www.kurokatta.org/grumble/2019/03/grep-c-locale-speed>this article</a> on <code>LC_ALL=C</code> usage, especially when it is not suitable.</blockquote><h2 id=speed-benefits-with-pcre><a class=header href=#speed-benefits-with-pcre>Speed benefits with PCRE</a></h2><p>Usually, BRE/ERE will perform better than PCRE. But if the search pattern has backreferences, PCRE can turn out to be faster. As mentioned earlier, from <code>man grep</code> under <strong>Known Bugs</strong> section (applies to BRE/ERE):<blockquote><p>Large repetition counts in the {n,m} construct may cause grep to use lots of memory. In addition, certain other obscure regular expressions require exponential time and space, and may cause grep to run out of memory. Back-references are very slow, and may require exponential time.</blockquote><pre><code class=language-bash>$ time LC_ALL=C grep -xE '([a-z]..)\1' words.txt > f1
-real    0m0.074s
+real    0m0.082s
 $ time grep -xP '([a-z]..)\1' words.txt > f2
-real    0m0.010s
+real    0m0.011s
 
 # clean up
 $ rm f[12]
@@ -139,21 +139,21 @@ $ du -sh linux-4.19
 </code></pre><p>Here's a comparison between <code>grep -r</code> and using <code>xargs</code> for parallel processing. Also, this illustration assumes that the order of output lines do not matter. Note that this just a single sample, results will vary wildly depending on the search term, processing power available and so on. You can use the <code>nproc</code> command to find out how many processes you can run in parallel (which is four on my machine).<pre><code class=language-bash>$ cd linux-4.19
 
 # note that the time is significantly different from the first run to next
-# due to caching, in this case 0m36.506s to 0m0.287s
+# due to caching, in this case 0m36.385s to 0m0.301s
 $ time grep -rl 'include' . > ../f1
-real    0m0.287s
+real    0m0.301s
 # sometimes find+grep may be faster than grep -r, so try that first
 # turns out not the case here though
 # also note the use of -print0 and -0 to handle filenames correctly
 $ time find -type f -print0 | xargs -r0 grep -l 'include' > ../f2
-real    0m0.306s
+real    0m0.325s
 # much better performance as xargs will use as many processes as possible
 # --line-buffered will prevent output mangling
 $ time find -type f -print0 | \
 > xargs -r0 -P0 grep -l --line-buffered 'include' > ../f3
-real    0m0.175s
+real    0m0.180s
 
-# check if the output are identical
+# check if the outputs are identical
 $ diff -sq <(sort ../f1) <(sort ../f2)
 Files /dev/fd/63 and /dev/fd/62 are identical
 $ diff -sq <(sort ../f1) <(sort ../f3)

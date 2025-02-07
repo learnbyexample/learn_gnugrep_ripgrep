@@ -28,19 +28,23 @@
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
-                    });</script><div class=content id=content><main><div class=sidetoc><nav class=pagetoc></nav></div><h1 id=ripgrep><a class=header href=#ripgrep>ripgrep</a></h1><p><code>ripgrep</code> is a very popular alternative to the <code>grep</code> command. Editors like <em>Visual Studio Code</em> are using <code>ripgrep</code> to power their search and replace features. The major selling point is its default behavior for recursive search, parallel processing and speed. <code>ripgrep</code> doesn't aim to be compatible with POSIX or <code>GNU grep</code> and there are various differences in terms of features, option names, output style, regular expressions and so on.<h2 id=project-links><a class=header href=#project-links>Project links</a></h2><ul><li><a href=https://github.com/BurntSushi/ripgrep>GitHub: ripgrep</a><li><a href=https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md>User guide</a><li><a href=https://github.com/BurntSushi/ripgrep/issues>Issue manager</a><li><a href=https://github.com/BurntSushi/ripgrep/discussions>Discussions</a><li><a href=https://github.com/BurntSushi/ripgrep/blob/master/FAQ.md>FAQ</a></ul><blockquote><p><img alt=info src=images/info.svg> See <a href=https://beyondgrep.com/feature-comparison/>Feature comparison of ack, ag, git-grep, GNU grep and ripgrep</a> for an overview of features among various <code>grep</code> implementations. See also <a href=https://blog.burntsushi.net/ripgrep/>benchmark among grep implementations</a>.</blockquote><h2 id=installation><a class=header href=#installation>Installation</a></h2><p>See <a href=https://github.com/BurntSushi/ripgrep/blob/master/README.md#installation>ripgrep: installation</a> for details on various methods and platforms. Instructions shown below is for Debian-like distributions.<pre><code class=language-bash># link shown here on two lines as it is too long
+                    });</script><div class=content id=content><main><div class=sidetoc><nav class=pagetoc></nav></div><h1 id=ripgrep><a class=header href=#ripgrep>ripgrep</a></h1><p><code>ripgrep</code> is a very popular alternative to the <code>grep</code> command. Editors like <em>Visual Studio Code</em> are using <code>ripgrep</code> to power their search and replace features. The major selling point is its default behavior for recursive search, parallel processing and speed. <code>ripgrep</code> doesn't aim to be compatible with POSIX or <code>GNU grep</code> and there are various differences in terms of features, option names, output style, regular expressions and so on.<p>Previous versions of this book discussed <code>ripgrep</code> from the basics. That led to repetitive details that were very similar to the discussion for <code>GNU grep</code>. This chapter will now cover only notable features and differences. You can view the earlier version <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/blob/15648b844a9af730222300163f6d34b6b3cc1858/gnu_grep.md#ripgrep>here</a>.<h2 id=project-links><a class=header href=#project-links>Project links</a></h2><ul><li><a href=https://github.com/BurntSushi/ripgrep>GitHub: ripgrep</a><li><a href=https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md>User guide</a><li><a href=https://github.com/BurntSushi/ripgrep/issues>Issue manager</a><li><a href=https://github.com/BurntSushi/ripgrep/discussions>Discussions</a><li><a href=https://github.com/BurntSushi/ripgrep/blob/master/FAQ.md>FAQ</a><li><a href=https://blog.burntsushi.net/ripgrep/>Benchmark among grep implementations</a></ul><h2 id=installation><a class=header href=#installation>Installation</a></h2><p>See <a href=https://github.com/BurntSushi/ripgrep/blob/master/README.md#installation>ripgrep: installation</a> for details on various methods and platforms. Instructions shown below is for Debian-like distributions.<pre><code class=language-bash># link shown here on two lines as it is too long
 # visit using the first part to get latest version
 $ link='https://github.com/BurntSushi/ripgrep/releases/'
-$ link="$link"'download/13.0.0/ripgrep_13.0.0_amd64.deb'
+$ link="$link"'download/14.1.1/ripgrep_14.1.1-1_amd64.deb'
 $ wget "$link"
-$ sudo gdebi ripgrep_13.0.0_amd64.deb
+$ sudo gdebi ripgrep_14.1.1-1_amd64.deb
 
 # note that the installed command name is rg, not ripgrep
 $ rg --version
-ripgrep 13.0.0 (rev 7ec2fd51ba)
--SIMD -AVX (compiled)
-+SIMD -AVX (runtime)
-</code></pre><h2 id=command-line-text-processing-with-rust-tools><a class=header href=#command-line-text-processing-with-rust-tools>Command line text processing with Rust tools</a></h2><p>Earlier versions of this book discussed <code>ripgrep</code> from the basics, just like <code>GNU grep</code>. That led to a lot of repetitive details that were very similar to <code>GNU grep</code>. This chapter will now cover only notable features and differences.<p>You can still access the earlier version from my work-in-progress <a href=https://learnbyexample.github.io/cli_text_processing_rust/>Command line text processing with Rust tools</a> ebook.<h2 id=default-behavior-differences><a class=header href=#default-behavior-differences>Default behavior differences</a></h2><p>Here are some notable differences in behavior between <code>ripgrep</code> and <code>GNU grep</code> when they are invoked without any options:<ul><li>Regular expressions flavor is provided by the <a href=https://docs.rs/regex/latest/regex/>regex crate</a> <ul><li>to put it roughly, this provides more features compared to BRE/ERE but less compared to PCRE</ul><li>Line number prefix and color options are enabled by default<li>Blank line separates matching lines from different files<li>Filename is added as a prefix line above the matching lines instead of a prefix for each matching line<li>Recursive search is on by default for directories provided as an argument (current directory if input source is not specified). In addition, <ul><li>files and directories that match rules specified by ignore files like <code>.gitignore</code> are not searched<li>hidden files and directories are ignored<li>binary files (determined by the presence of the ASCII NUL character) are ignored, but a matching line is displayed if found before encountering the NUL character along with a warning</ul></ul><h2 id=options-overview><a class=header href=#options-overview>Options overview</a></h2><p>It is always a good idea to know where to find the documentation. From command line, you can use <code>man rg</code> for the manual and <code>rg -h</code> for a list of all the options. See also <a href=https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md>ripgrep: User guide</a>.<p>This section will cover some of the options provided by <code>ripgrep</code> with examples. As mentioned earlier, the focus will be on differences compared to <code>GNU grep</code>. So, options like <code>-F</code>, <code>-f</code>, <code>-i</code>, <code>-o</code>, <code>-v</code>, <code>-w</code>, <code>-x</code>, <code>-m</code>, <code>-q</code>, <code>-b</code>, <code>-A</code>, <code>-B</code> and <code>-C</code> won't be discussed as they behave the same as <code>GNU grep</code>. Regular expressions will be covered in a later section.<blockquote><p><img alt=info src=images/info.svg> The <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/example_files>example_files</a> directory has all the files used in the examples.</blockquote><h3 id=line-number><a class=header href=#line-number>Line number</a></h3><p>As mentioned earlier, line number prefix is enabled by default. However, if the output is redirected or if the input is being read from <code>stdin</code>, this option won't be on by default. You can override the default behavior by using <code>-n</code> to always add the line number prefix and <code>-N</code> to turn off the numbering.<pre><code class=language-bash># default behavior
+ripgrep 14.1.1 (rev 4649aa9700)
+
+features:+pcre2
+simd(compile):+SSE2,-SSSE3,-AVX2
+simd(runtime):+SSE2,+SSSE3,-AVX2
+
+PCRE2 10.43 is available (JIT is available)
+</code></pre><h2 id=default-behavior-differences><a class=header href=#default-behavior-differences>Default behavior differences</a></h2><p>Here are some notable differences in behavior between <code>ripgrep</code> and <code>GNU grep</code> when they are invoked without any options:<ul><li>Regular expressions flavor is provided by the <a href=https://docs.rs/regex/latest/regex/>regex crate</a> <ul><li>to put it roughly, this provides more features compared to BRE/ERE but less compared to PCRE</ul><li>Line number prefix and color options are enabled by default<li>Blank line separates matching lines from different files<li>Filename prefix is added as a line above the matching lines instead of a prefix for each matching line<li>Recursive search is on by default for directories provided as an argument (current directory if input source is not specified). In addition, <ul><li>files and directories that match rules specified by ignore files like <code>.gitignore</code> are not searched<li>hidden files and directories are ignored<li>binary files (determined by the presence of the ASCII NUL character) are ignored, but a matching line is displayed if found before encountering the NUL character along with a warning</ul></ul><h2 id=options-overview><a class=header href=#options-overview>Options overview</a></h2><p>It is always a good idea to know where to find the documentation. From command line, you can use <code>man rg</code> for the manual and <code>rg -h</code> for a list of all the options. See also <a href=https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md>ripgrep: User guide</a>.<p>This section will cover some of the options provided by <code>ripgrep</code> with examples. As mentioned earlier, the focus will be on differences compared to <code>GNU grep</code>. So, options like <code>-F</code>, <code>-f</code>, <code>-i</code>, <code>-o</code>, <code>-v</code>, <code>-w</code>, <code>-x</code>, <code>-m</code>, <code>-q</code>, <code>-b</code>, <code>-A</code>, <code>-B</code> and <code>-C</code> won't be discussed as they behave the same as <code>GNU grep</code>. Regular expressions will be covered in a later section.<blockquote><p><img alt=info src=images/info.svg> The <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/example_files>example_files</a> directory has all the files used in the examples.</blockquote><h3 id=line-number><a class=header href=#line-number>Line number</a></h3><p>As mentioned earlier, line number prefix is enabled by default. However, if the output is redirected or if the input is being read from <code>stdin</code>, this option won't be on by default. You can override the default behavior by using <code>-n</code> to always add the line number prefix and <code>-N</code> to turn off the numbering.<pre><code class=language-bash># default behavior
 $ rg 'day' ip.txt
 1:it is a warm and cozy day
 $ printf 'apple\nbanana\ncherry' | rg 'an'
@@ -96,7 +100,7 @@ go play in the park
 $ rg -NH 'play' ip.txt
 ip.txt
 go play in the park
-</code></pre><p>Use the <code>--no-heading</code> option to get filename prefix for each matching line. This will also remove the newline separation between multiple files. When output is redirected, <code>--no-heading</code> option will be automatically active.<pre><code class=language-bash>$ rg -N --no-heading 'say' ip.txt search.txt
+</code></pre><p>Use the <code>--no-heading</code> option to get filename prefix for each matching line. This will also remove the newline separation between multiple files. When the output is redirected, <code>--no-heading</code> option will be automatically active.<pre><code class=language-bash>$ rg -N --no-heading 'say' ip.txt search.txt
 search.txt:say
 ip.txt:listen to what I say
 
@@ -108,7 +112,14 @@ ip.txt:listen to what I say
 $ rg -NI --no-heading 'say' ip.txt search.txt
 say
 listen to what I say
-</code></pre><h3 id=field-separator><a class=header href=#field-separator>Field separator</a></h3><p>By default, <code>:</code> is used to separate prefixes like filename and line numbers. You can use the <code>--field-match-separator</code> option to customize this separator.<pre><code class=language-bash>$ rg --field-match-separator ')' 'the' ip.txt
+</code></pre><h3 id=hyperlink><a class=header href=#hyperlink>Hyperlink</a></h3><p>This option allows you to create clickable links for filenames in the output (provided such a feature is supported by your terminal emulator). The format can be customized, or you can use one of the supported aliases — <code>default</code>, <code>file</code>, <code>grep+</code>, <code>kitty</code>, <code>macvim</code>, <code>none</code>, <code>textmate</code>, <code>vscode</code>, <code>vscode-insiders</code> and <code>vscodium</code>.<pre><code class=language-bash># default format is file://{host}{path}
+$ rg --hyperlink-format=default 'say' ip.txt search.txt
+ip.txt
+2:listen to what I say
+
+search.txt
+1:say
+</code></pre><p>The filenames in the above output will be clickable. On my terminal emulator, hovering over the filename shows the format and performing <strong>Ctrl+mouse click</strong> opens the file using my default text editor.<h3 id=field-separator><a class=header href=#field-separator>Field separator</a></h3><p>By default, <code>:</code> is used to separate prefixes like filename and line numbers. You can use the <code>--field-match-separator</code> option to customize this separator.<pre><code class=language-bash>$ rg --field-match-separator ')' 'the' ip.txt
 3)go play in the park
 4)come back before the sky turns dark
 9)Try them all before you perish
@@ -142,6 +153,7 @@ ip.txt:3:go play in the park
 ip.txt)4)come back before the sky turns dark
 </code></pre><h3 id=scripting-options><a class=header href=#scripting-options>Scripting options</a></h3><p>You can use the <code>-q</code> option to suppress <code>stdout</code> and <code>--no-messages</code> to suppress <code>stderr</code>.<pre><code class=language-bash># when file doesn't exist
 $ rg 'in' xyz.txt
+rg: xyz.txt: IO error for operation on
 xyz.txt: No such file or directory (os error 2)
 $ rg --no-messages 'in' xyz.txt
 $ echo $?
@@ -149,14 +161,14 @@ $ echo $?
 
 # some errors will require explicit redirection
 $ rg --no-messages 'a(' ip.txt
-regex parse error:
+rg: regex parse error:
     a(
      ^
 error: unclosed group
 $ rg --no-messages 'a(' ip.txt 2> /dev/null
 $ echo $?
 2
-</code></pre><h3 id=substitution><a class=header href=#substitution>Substitution</a></h3><p>The <code>-r</code> option will help you perform substitution operations. Here's an example:<pre><code class=language-bash># 'day' is the search pattern
+</code></pre><blockquote><p><img alt=info src=images/info.svg> Note that you might get <code>(?:a()</code> instead of <code>a(</code> as part of the error message in the above illustration. See <a href=https://github.com/BurntSushi/ripgrep/issues/2677>this issue</a> for more details.</blockquote><h3 id=substitution><a class=header href=#substitution>Substitution</a></h3><p>The <code>-r</code> option will help you perform substitution operations. Here's an example:<pre><code class=language-bash># 'day' is the search pattern
 # 'morning' is the replacement string
 $ rg 'day' -r 'morning' ip.txt
 1:it is a warm and cozy morning
@@ -224,7 +236,7 @@ abbc
 abbbc
 
 $ echo 'abc ac adc abbc xabbbcz bbb bc abbbbbc' | rg -o 'ab{,4}c'
-regex parse error:
+rg: regex parse error:
     ab{,4}c
        ^
 error: repetition quantifier expects a valid decimal
@@ -282,7 +294,7 @@ ${a} b ${a}
 $ echo '100' | rg '^' -r '$'
 $100
 </code></pre><blockquote><p><img alt=warning src=images/warning.svg> Backreferences aren't allowed in the search pattern. Use PCRE flavor if needed.<pre><code class=language-bash>$ echo 'fort effort' | rg -ow '\w*(\w)\1\w*'
-regex parse error:
+rg: regex parse error:
     \w*(\w)\1\w*
            ^^
 error: backreferences are not supported
@@ -322,7 +334,7 @@ catastrophic
 </code></pre><h3 id=modifiers><a class=header href=#modifiers>Modifiers</a></h3><div class=table-wrapper><table><thead><tr><th>Modifier<th>Description<tbody><tr><td><code>i</code><td>case sensitivity<tr><td><code>m</code><td>multiline for line anchors (enabled by default for <code>-U</code> option)<tr><td><code>s</code><td>matching newline with <code>.</code> metacharacter<tr><td><code>x</code><td>readable pattern with whitespace and comments<tr><td><code>u</code><td>unicode</table></div><p>To apply modifiers selectively, specify them inside a special grouping syntax. This will override the modifiers applied to entire pattern, if any. The syntax variations are:<ul><li><code>(?modifiers:pattern)</code> will apply modifiers only for this portion<li><code>(?-modifiers:pattern)</code> will negate modifiers only for this portion<li><code>(?modifiers-modifiers:pattern)</code> will apply and negate particular modifiers only for this portion<li><code>(?modifiers)</code> when pattern is not given, modifiers (including negation) will be applied from this point onwards</ul><pre><code class=language-bash># same as: rg -i 'cat' -r '[$0]'
 $ echo 'Cat cOnCaT scatter cut' | rg '(?i)cat' -r '[$0]'
 [Cat] cOn[CaT] s[cat]ter cut
-# override -i option
+# override the -i CLI option
 $ printf 'Cat\ncOnCaT\nscatter\ncut' | rg -i '(?-i)cat'
 scatter
 # same as: rg -i '(?-i:Cat)[a-z]*\b' or rg 'Cat(?i)[a-z]*\b'
@@ -330,7 +342,7 @@ $ echo 'Cat SCatTeR CATER cAts' | rg 'Cat(?i:[a-z]*)\b' -r '[$0]'
 [Cat] S[CatTeR] CATER cAts
 
 # multiple modifiers can be used together
-# 'm' is on by default for -U option
+# 'm' is on by default when the -U option is used
 $ printf 'Cat\ncOnCaT\nscatter\nCater' | rg -Uo '(?is)on.*^cat'
 OnCaT
 scatter
@@ -343,11 +355,11 @@ $ echo 'a cat and a dog' | rg '(?x)t a'
 $ echo 'a cat and a dog' | rg '(?x)t\ a'
 a cat and a dog
 
-$ echo 'foo a#b 123' | rg -o '(?x)a#.'
+$ echo 'fig a#b 123' | rg -o '(?x)a#.'
 a
-$ echo 'foo a#b 123' | rg -o '(?x)a\#.'
+$ echo 'fig a#b 123' | rg -o '(?x)a\#.'
 a#b
-</code></pre><h3 id=unicode><a class=header href=#unicode>Unicode</a></h3><p>Similar to named character classes and escapes, the <code>\p{}</code> construct offers various predefined sets to work with Unicode strings. See <a href=https://www.regular-expressions.info/unicode.html>regular-expressions: Unicode</a> for more details. See <code>-E</code> option regarding encoding support.<pre><code class=language-bash># all consecutive letters
+</code></pre><blockquote><p><img alt=info src=images/info.svg> Note that you might get "unclosed group" error for some of the commands shown above. See <a href=https://github.com/BurntSushi/ripgrep/issues/2677>this issue</a> for more details.</blockquote><h3 id=unicode><a class=header href=#unicode>Unicode</a></h3><p>Similar to named character classes and escapes, the <code>\p{}</code> construct offers various predefined sets to work with Unicode strings. See <a href=https://www.regular-expressions.info/unicode.html>regular-expressions: Unicode</a> for more details. See the <code>-E</code> option regarding encoding support.<pre><code class=language-bash># all consecutive letters
 # note that {} can be omitted for single characters
 $ echo 'fox:αλεπού,eagle:αετός' | rg '\p{L}+' -r '($0)'
 (fox):(αλεπού),(eagle):(αετός)
@@ -379,7 +391,7 @@ eagle
 $ echo 'fox:αλεπού,eagle:αετός' | rg -o '[\x{3b1}-\x{3bb}]+'
 αλε
 αε
-</code></pre><h2 id=perl-compatible-regular-expressions><a class=header href=#perl-compatible-regular-expressions>Perl Compatible Regular Expressions</a></h2><p>Use <code>-P</code> option to enable Perl Compatible Regular Expressions (PCRE) instead of the default regex. Both <code>GNU grep</code> and <code>ripgrep</code> use the PCRE2 version of the library, so most of the pattern matching features will work the same way.<p>One significant difference is that <code>ripgrep</code> provides substitution via the <code>-r</code> option. And there are a few subtle differences, like the <code>-f</code> and <code>-e</code> options, empty matches, etc.<pre><code class=language-bash># empty match handling
+</code></pre><h2 id=perl-compatible-regular-expressions><a class=header href=#perl-compatible-regular-expressions>Perl Compatible Regular Expressions</a></h2><p>Use the <code>-P</code> option to enable Perl Compatible Regular Expressions (PCRE) instead of the default regex. Both <code>GNU grep</code> and <code>ripgrep</code> use the PCRE2 version of the library, so most of the pattern matching features will work the same way.<p>One significant difference is that <code>ripgrep</code> provides substitution via the <code>-r</code> option. And there are a few subtle differences, like the <code>-f</code> and <code>-e</code> options, empty matches, etc.<pre><code class=language-bash># empty match handling
 $ echo '1a42z' | grep -oP '[a-z]*'
 a
 z
@@ -427,7 +439,7 @@ $ echo 'f*(2-a/b) - 3*(a^b)-42' | rg -oP '\S*\Q'"$expr"'\E\S*'
 3*(a^b)-42
 </code></pre><p>If you wish to use default regex and switch to PCRE when needed, use the <code>--engine=auto</code> option.<pre><code class=language-bash># using a feature not present normally
 $ echo '123-87-593 42 apple-12-345' | rg -o '\G\d+-?'
-regex parse error:
+rg: regex parse error:
     \G\d+-?
     ^^
 error: unrecognized escape sequence
@@ -516,8 +528,8 @@ projects/dot_files/.bash_aliases
 backups/dot_files/.bash_aliases
 </code></pre><h3 id=nul-separator-for-filenames><a class=header href=#nul-separator-for-filenames>NUL separator for filenames</a></h3><p>The <code>-0</code> option will use the ASCII NUL character as the separator for file paths in the output. This is helpful to avoid issues due to shell metacharacters in the filenames.<pre><code class=language-bash># error due to 'backups/color list.txt' having a shell metacharacter
 $ rg -l 'blue' | xargs rg -l 'teal'
-backups/color: No such file or directory (os error 2)
-list.txt: No such file or directory (os error 2)
+rg: backups/color: No such file or directory (os error 2)
+rg: list.txt: No such file or directory (os error 2)
 colors_1
 
 # NUL separator to the rescue
@@ -525,8 +537,8 @@ $ rg -l0 'blue' | xargs -r0 rg -l 'teal'
 colors_1
 </code></pre><h3 id=predefined-file-types><a class=header href=#predefined-file-types>Predefined file types</a></h3><p>The <code>-t</code> option provides a handy way to search files based on their extension. Use <code>rg --type-list</code> to see all the available types and their glob patterns.<pre><code class=language-bash># both 'md' and 'markdown' match the same file types
 $ rg --type-list | rg 'markdown'
-markdown: *.markdown, *.md, *.mdown, *.mkdn
-md: *.markdown, *.md, *.mdown, *.mkdn
+markdown: *.markdown, *.md, *.mdown, *.mdwn, *.mdx, *.mkd, *.mkdn
+md: *.markdown, *.md, *.mdown, *.mdwn, *.mdx, *.mkd, *.mkdn
 
 $ rg --type-list | rg '^c:'
 c: *.[chH], *.[chH].in, *.cats
@@ -579,22 +591,20 @@ projects/python/hello.py
 $ rg -g '**/*[by]*/*' --files
 backups/color list.txt
 projects/python/hello.py
-</code></pre><blockquote><p><img alt=info src=images/info.svg> Use the <code>-iglob</code> option to match filenames case insensitively.</blockquote><h3 id=limit-traversal-levels><a class=header href=#limit-traversal-levels>Limit traversal levels</a></h3><p>The <code>--max-depth</code> option will help you limit the recursion depth. For example, with <code>1</code> as the value, the search won't descend into sub-directories.<pre><code class=language-bash># exclude all sub-directories
+</code></pre><blockquote><p><img alt=info src=images/info.svg> Use the <code>-iglob</code> option to match filenames case insensitively.</blockquote><h3 id=limit-traversal-levels><a class=header href=#limit-traversal-levels>Limit traversal levels</a></h3><p>The <code>--max-depth</code> (or <code>-d</code>) option will help you limit the recursion depth. For example, with <code>1</code> as the value, the search won't descend into sub-directories.<pre><code class=language-bash># exclude all sub-directories
 # same as: rg -g '!*/' --files
 $ rg --max-depth 1 --files
 colors_2
 colors_1
-</code></pre><h3 id=debug-and-other-options><a class=header href=#debug-and-other-options>Debug and other options</a></h3><p>The <code>--debug</code> and <code>--trace</code> (more detailed debug) options can be used for debugging purposes, for example to know why a file is being ignored.<p>There are many more options to customize the search experience. For example, the <code>--type-add</code> option allows you to define your own type, the <code>--max-depth</code> option controls the depth of traversal and so on.<p>See <a href=https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file>ripgrep user guide: configuration</a> for examples and details on how to maintain them in a file.<h2 id=speed-comparison><a class=header href=#speed-comparison>Speed comparison</a></h2><p><code>ripgrep</code> automatically makes use of parallel resources to provide quicker results. <code>GNU grep</code> would need external tools like <code>xargs</code> and <code>parallel</code> for such cases.<p>A sample comparison is shown below using the directory that was previously mentioned in the <a href=./gotchas-and-tricks.html#parallel-execution>Parallel execution</a> section.<pre><code class=language-bash># assumes 'linux-4.19' as the current working directory
+</code></pre><h3 id=debug-and-other-options><a class=header href=#debug-and-other-options>Debug and other options</a></h3><p>The <code>--debug</code> and <code>--trace</code> (more detailed debug) options can be used for debugging purposes, for example to know why a file is being ignored.<p>There are many more options to customize the search experience. For example, the <code>--type-add</code> option allows you to define your own type, the <code>--max-depth</code> option controls the depth of traversal and so on.<p>See <a href=https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file>ripgrep user guide: configuration</a> for details on how to maintain them in a file.<h2 id=speed-comparison><a class=header href=#speed-comparison>Speed comparison</a></h2><p><code>ripgrep</code> automatically uses parallel resources to provide quicker results. <code>GNU grep</code> would need external tools like <code>xargs</code> and <code>parallel</code> for such cases. A sample comparison is shown below using the directory that was previously mentioned in the <a href=./gotchas-and-tricks.html#parallel-execution>Parallel execution</a> section.<pre><code class=language-bash># assumes 'linux-4.19' as the current working directory
 # my machine can run four processes in parallel
-
 $ time grep -rw 'user' > ../f1
-real    0m0.886s
+real    0m0.845s
 $ time rg -uuu -w 'user' > ../f2
-real    0m0.287s
+real    0m0.202s
 
 $ diff -sq <(sort ../f1) <(sort ../f2)
 Files /dev/fd/63 and /dev/fd/62 are identical
-
 # clean up
 $ rm ../f[12]
 </code></pre><p>Lot of factors like file size, file encoding, line size, sparse or dense matches, hardware features, etc will affect the performance. <code>ripgrep</code> provides options like <code>-j</code>, <code>--dfa-size-limit</code> and <code>--mmap</code> for tuning performance related settings.<blockquote><p><img alt=info src=images/info.svg> See <a href=https://blog.burntsushi.net/ripgrep/>Benchmark with other grep implementations</a> by the author of <code>ripgrep</code> command for a methodological analysis and insights.</blockquote><h2 id=ripgrep-all><a class=header href=#ripgrep-all>ripgrep-all</a></h2><p>Quoting from the <a href=https://github.com/phiresky/ripgrep-all>GitHub repo</a>:<blockquote><p><code>rga</code> is a line-oriented search tool that allows you to look for a regex in a multitude of file types. <code>rga</code> wraps the awesome <code>ripgrep</code> and enables it to search in pdf, docx, sqlite, jpg, movie subtitles (mkv, mp4), etc.</blockquote><p>The main attraction is pairing file types and relevant tools to enable text searching. <code>rga</code> also has a handy caching feature that speeds up the search for subsequent usages on the same input.<h2 id=summary><a class=header href=#summary>Summary</a></h2><p><code>ripgrep</code> is an excellent alternative to <code>GNU grep</code>. If you are working with large code bases, I'd definitely recommend <code>ripgrep</code> for its performance and customization options. There are interesting features in the pipeline too, for example <a href=https://github.com/BurntSushi/ripgrep/issues/1497>ngram indexing support</a>.<h2 id=exercises><a class=header href=#exercises>Exercises</a></h2><p>Would be a good idea to first redo all the exercises using <code>rg</code> from all the previous chapters. Some exercises will require reading the manual, as those options aren't covered in this book.<blockquote><p><img alt=info src=images/info.svg> The <a href=https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/exercises>exercises</a> directory has all the files used in this section.</blockquote><p><strong>1)</strong> Which option will change the line separator from <code>\n</code> to <code>\r\n</code>?<pre><code class=language-bash># no output

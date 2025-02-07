@@ -74,7 +74,7 @@ teal brown
 # by default dot metacharacter won't match newline characters
 $ printf 'blue green\nteal brown' | grep -ozP 'g.*n'
 green
-# can be changed using (?s) modifier (covered later)
+# can be changed using the (?s) modifier (discussed later)
 $ printf 'blue green\nteal brown' | grep -ozP '(?s)g.*n'
 green
 teal brown
@@ -131,7 +131,7 @@ $ printf 'sub\nbit' | grep -P -f- five_words.txt
 grep: the -P option only supports a single pattern
 $ grep -P -e 'sub' -e 'bit' five_words.txt
 grep: the -P option only supports a single pattern
-</code></pre><h2 id=string-anchors><a class=header href=#string-anchors>String anchors</a></h2><p>This restriction is about qualifying a pattern to match only at the start or end of an input string. A string can contain zero or more newline characters. This is helpful if you want to distinguish between start/end of string and start/end of line (see <a href=./perl-compatible-regular-expressions.html#modifiers>Modifiers</a> section for examples).<p><code>\A</code> restricts the match to the start of string and <code>\z</code> restricts the match to the end of string. There is another end of string anchor <code>\Z</code> which is similar to <code>\z</code> but if newline is the last character, then <code>\Z</code> allows matching just before this newline character.<pre><code class=language-bash># start of string
+</code></pre><h2 id=string-anchors><a class=header href=#string-anchors>String anchors</a></h2><p>This restriction is about qualifying a pattern to match only at the start or end of an input string. A string can contain zero or more newline characters. This is helpful if you want to distinguish between start/end of string and start/end of line (see the <a href=./perl-compatible-regular-expressions.html#modifiers>Modifiers</a> section for examples).<p><code>\A</code> restricts the match to the start of string and <code>\z</code> restricts the match to the end of string. There is another end of string anchor <code>\Z</code> which is similar to <code>\z</code> but if newline is the last character, then <code>\Z</code> allows matching just before this newline character.<pre><code class=language-bash># start of string
 $ echo 'hi-hello;top-spot' | grep -oP '\A\w+'
 hi
 # end of string
@@ -259,7 +259,7 @@ cat_5
 catcat
 
 # extract whole words only if NOT preceded by : or -
-# and not followed by - or end of line
+# and not followed by - or the end of line
 $ echo 'fig:cart&LTapple-rest;tea' | grep -woP '(?&LT![:-])\w+(?!-|$)'
 fig
 </code></pre><p>And here are some examples for positive lookarounds:<pre><code class=language-bash># extract digits only if it is followed by ,
@@ -325,7 +325,7 @@ $ echo "$s" | grep -oP '(?<=\b[a-z]{1,3})\d+'
 grep: lookbehind assertion is not fixed length
 $ echo 'cat scatter cater scat' | grep -oP '(?<=(cat.*?){2})cat[a-z]*'
 grep: lookbehind assertion is not fixed length
-</code></pre><h2 id=set-start-of-matching-portion-with-k><a class=header href=#set-start-of-matching-portion-with-k>Set start of matching portion with \K</a></h2><p>Some of the positive lookbehind cases can be solved by adding <code>\K</code> as a suffix to the pattern to be asserted. The text consumed until <code>\K</code> won't be part of the matching portion. In other words, <code>\K</code> determines the starting point. The pattern before <code>\K</code> can be variable length too.<pre><code class=language-bash># extract digits that follow =
+</code></pre><h2 id=set-the-start-of-matching-portion-with-k><a class=header href=#set-the-start-of-matching-portion-with-k>Set the start of matching portion with \K</a></h2><p>Some of the positive lookbehind cases can be solved by adding <code>\K</code> as a suffix to the pattern to be asserted. The text consumed until <code>\K</code> won't be part of the matching portion. In other words, <code>\K</code> determines the starting point. The pattern before <code>\K</code> can be variable length too.<pre><code class=language-bash># extract digits that follow =
 # same as: grep -oP '(?<==)\d+'
 $ echo 'apple=42, fig=314' | grep -oP '=\K\d+'
 42
@@ -358,7 +358,7 @@ match found
 # match if 'go' is not there between 'at' and 'par'
 $ echo "$s" | grep -qP 'at((?!go).)*par' && echo 'match found'
 match found
-</code></pre><p>You can extract the matched portion to understand negated grouping better:<pre><code class=language-bash>$ s='fox,cat,dog,parrot'
+</code></pre><p>You can extract the matched portion to understand negated groupings better:<pre><code class=language-bash>$ s='fox,cat,dog,parrot'
 
 $ echo "$s" | grep -oP '^((?!cat).)*'
 fox,
@@ -393,7 +393,7 @@ Cat
 cOnCaT
 scatter
 
-# override -i option
+# override the -i CLI option
 $ printf 'Cat\ncOnCaT\nscatter\ncut' | grep -iP '(?-i)cat'
 scatter
 
@@ -402,11 +402,11 @@ $ echo 'Cat SCatTeR CATER cAts' | grep -oP 'Cat(?i:[a-z]*)\b'
 Cat
 CatTeR
 
-# allow . metacharacter to match newline character as well
+# allow the . metacharacter to match newline characters as well
 $ printf 'Hi there\nHave a Nice Day' | grep -zoP '(?s)the.*ice'
 there
 Have a Nice
-</code></pre><p>Here's an example with multiple modifiers used together:<pre><code class=language-bash># whole word 'python3' in 1st line and a line starting with 'import'
+</code></pre><p>Here's an example with multiple modifiers used together:<pre><code class=language-bash># whole word 'python3' in the first line and a line starting with 'import'
 # note the use of string anchor \A to match only the start of file
 # \N is used instead of . to match non-newline characters as 's' flag is active
 $ grep -zlP '(?ms)\A\N*\bpython3\b.*^import' five_words.txt script
