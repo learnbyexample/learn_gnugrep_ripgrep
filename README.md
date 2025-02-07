@@ -1,10 +1,10 @@
 # CLI text processing with GNU grep and ripgrep
 
-Example based guide to mastering GNU grep and ripgrep. Visit https://youtu.be/MSbGokwHm-A for a short video about the book.
+Learn GNU grep and ripgrep with hundreds of examples and exercises. Visit https://youtu.be/MSbGokwHm-A for a short video about the book.
 
 <p align="center"><img src="./images/grep_ls.png" alt="CLI text processing with GNU grep and ripgrep ebook cover image" /></p>
 
-The book also includes exercises to test your understanding, which are presented together as a single file in this repo — [Exercises.md](./exercises/Exercises.md)
+The book also includes exercises to test your understanding, which are presented together as a single file in this repo — [Exercises.md](./exercises/Exercises.md).
 
 For solutions to the exercises, see [Exercise_solutions.md](./exercises/Exercise_solutions.md).
 
@@ -20,15 +20,14 @@ See [Version_changes.md](./Version_changes.md) to keep track of changes made to 
     * https://learnbyexample.gumroad.com/l/gnugrep_ripgrep
     * https://leanpub.com/gnugrep_ripgrep
 * You can also get the book as part of these bundles:
-    * **All books bundle** bundle from https://learnbyexample.gumroad.com/l/all-books
-        * Includes all my programming books
-    * **Magical one-liners** bundle from https://learnbyexample.gumroad.com/l/oneliners or https://leanpub.com/b/oneliners
-    * **Awesome Regex** bundle from https://learnbyexample.gumroad.com/l/regex or https://leanpub.com/b/regex
+    * **All books bundle** bundle from https://leanpub.com/b/learnbyexample-all-books or https://learnbyexample.gumroad.com/l/all-books
+    * **Magical one-liners** bundle from https://leanpub.com/b/oneliners or https://learnbyexample.gumroad.com/l/oneliners
+    * **Awesome Regex** bundle from https://leanpub.com/b/regex or https://learnbyexample.gumroad.com/l/regex
 * See https://learnbyexample.github.io/books/ for a list of other books
 
 For a preview of the book, see [sample chapters](./sample_chapters/gnu_grep_sample.pdf).
 
-The book can also be [viewed as a single markdown file in this repo](./gnu_grep.md). See my blogpost on [generating pdfs from markdown using pandoc](https://learnbyexample.github.io/customizing-pandoc/) if you are interested in the ebook creation process.
+The book can also be [viewed as a single markdown file in this repo](./gnu_grep.md). See my blogpost on [generating pdf/epub from markdown using pandoc](https://learnbyexample.github.io/customizing-pandoc/) if you are interested in the ebook creation process.
 
 For the web version of the book, visit https://learnbyexample.github.io/learn_gnugrep_ripgrep/
 
@@ -38,7 +37,7 @@ For the web version of the book, visit https://learnbyexample.github.io/learn_gn
 
 ⚠️ ⚠️ Please DO NOT submit pull requests. Main reason being any modification requires changes in multiple places.
 
-I would highly appreciate if you'd let me know how you felt about this book. It could be anything from a simple thank you, pointing out a typo, mistakes in code snippets, which aspects of the book worked for you (or didn't!) and so on. Reader feedback is essential and especially so for self-published authors.
+I would highly appreciate it if you'd let me know how you felt about this book. It could be anything from a simple thank you, pointing out a typo, mistakes in code snippets, which aspects of the book worked for you (or didn't!) and so on. Reader feedback is essential and especially so for self-published authors.
 
 You can reach me via:
 

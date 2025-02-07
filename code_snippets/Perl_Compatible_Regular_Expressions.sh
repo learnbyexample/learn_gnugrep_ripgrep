@@ -176,7 +176,7 @@ echo "$s" | grep -oP '(?<=\b[a-z]{1,3})\d+'
 
 echo 'cat scatter cater scat' | grep -oP '(?<=(cat.*?){2})cat[a-z]*'
 
-## Set start of matching portion with \K
+## Set the start of matching portion with \K
 
 echo 'apple=42, fig=314' | grep -oP '=\K\d+'
 

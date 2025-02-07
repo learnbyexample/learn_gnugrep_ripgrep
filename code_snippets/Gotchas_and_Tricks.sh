@@ -30,9 +30,9 @@ echo '5*3-2=13' | grep -- '-2'
 
 printf -- '-2+3=1\n'
 
-printf 'boat\nsite\nfoot' | grep '[aeo]+t'
+printf 'boat\nsite\nfoot' | grep -o '[aeo]+t'
 
-printf 'boat\nsite\nfoot' | grep '[aeo]+t' -E
+printf 'boat\nsite\nfoot' | grep -o '[aeo]+t' -E
 
 ## Word boundary differences
 

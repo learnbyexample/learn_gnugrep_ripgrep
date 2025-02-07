@@ -148,7 +148,7 @@ grep -Fvxf colors_1 colors_2
 
 grep -Fvxf colors_2 colors_1
 
-## Extract only matching portion
+## Extract only the matching portions
 
 grep -oi 'the' ip.txt
 

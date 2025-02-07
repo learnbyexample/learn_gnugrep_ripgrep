@@ -472,7 +472,7 @@ Adios amigo
 
 # Recursive search
 
->![info](../images/info.svg) Use the `recursive.sh` script from the [exercises](https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/exercises) directory for this section. Unless otherwise mentioned, assume you need to use the `-r` option instead of the `-R` option.
+>![info](../images/info.svg) Use the `recursive.sh` script from the [exercises](https://github.com/learnbyexample/learn_gnugrep_ripgrep/tree/master/exercises) directory for this section. Unless otherwise mentioned, assume you need to use the `-r` option instead of `-R`.
 >
 > ```bash
 > # change to the 'exercises' directory and source the 'recursive.sh' script

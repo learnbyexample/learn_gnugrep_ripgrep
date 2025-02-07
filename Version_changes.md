@@ -1,5 +1,13 @@
 <br>
 
+### 2.5
+
+* Command versions updated to **GNU grep 3.11** and **ripgrep 14.1.1**
+* Updated some of the examples, descriptions, external links and timing results
+* Added Hyperlink section for the `ripgrep` command
+
+<br>
+
 ### 2.0
 
 * Command versions updated to **GNU grep 3.10** and **ripgrep 13.0.0**

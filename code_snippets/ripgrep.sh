@@ -2,11 +2,11 @@
 
 link='https://github.com/BurntSushi/ripgrep/releases/'
 
-link="$link"'download/13.0.0/ripgrep_13.0.0_amd64.deb'
+link="$link"'download/14.1.1/ripgrep_14.1.1-1_amd64.deb'
 
 wget "$link"
 
-sudo gdebi ripgrep_13.0.0_amd64.deb
+sudo gdebi ripgrep_14.1.1-1_amd64.deb
 
 rg --version
 
@@ -59,6 +59,10 @@ rg -N --no-heading 'say' ip.txt search.txt
 rg 'say' ip.txt search.txt | cat -
 
 rg -NI --no-heading 'say' ip.txt search.txt
+
+## Hyperlink
+
+rg --hyperlink-format=default 'say' ip.txt search.txt
 
 ## Field separator
 
@@ -226,9 +230,9 @@ echo 'a cat and a dog' | rg '(?x)t a'
 
 echo 'a cat and a dog' | rg '(?x)t\ a'
 
-echo 'foo a#b 123' | rg -o '(?x)a#.'
+echo 'fig a#b 123' | rg -o '(?x)a#.'
 
-echo 'foo a#b 123' | rg -o '(?x)a\#.'
+echo 'fig a#b 123' | rg -o '(?x)a\#.'
 
 ## Unicode
 
